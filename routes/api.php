@@ -8,6 +8,11 @@ use App\Http\Controllers\PostController;
 Route::post('login', [ApiController::class, 'authenticate']);
 Route::post('register', [ApiController::class, 'register']);
 
+Route::get('posts/', 'PostController@index');
+Route::get('posts/getRecentPosts', 'PostController@getRecentPosts');
+Route::get('posts/getUserPosts', 'PostController@getUserPosts');
+Route::get('posts/getPostAndDecendants', 'PostController@getPostAndDecendants');
+Route::get('posts/show/{id}', 'PostController@show');
 /*
 |--------------------------------------------------------------------------
 | API Routes

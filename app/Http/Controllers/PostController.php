@@ -30,6 +30,33 @@ class PostController extends Controller
             ->get();
     }
 
+    public function getRecentPosts(Request $request)
+    {
+
+        $data = $request->all();
+        $tagsRequested = [];
+
+        if(!empty($data['tags'])){
+          foreach($data['tags'] as $row){
+            $tagObj = json_decode($row);
+            $tagsRequested[] = $tagObj->id;
+          }
+        }
+
+        $posts = Post::when(!empty($tagsRequested), function($query) use ($tagsRequested) {
+              $query->whereHas('tags', function($query2) use ($tagsRequested) {
+                $query2->whereIn('id', $tagsRequested);
+              });
+          })
+          ->where('published', '=', 1)
+          ->where('parent', '=', 1)
+          ->with('user')
+          ->limit(10)
+          ->get();
+
+        return $posts->toJson();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

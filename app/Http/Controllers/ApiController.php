@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
+    //sign up
     public function register(Request $request)
     {
         //Validate data
