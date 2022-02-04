@@ -1,93 +1,79 @@
-import React, {Component} from 'react';
-import LoginContainer from './LoginContainer';
-import {Link} from "react-router-dom";
-class Login extends Component {
+import React, { useState, useEffect } from 'react';
+import {Link, useNavigate} from "react-router-dom";
 
-    constructor(props) {
 
-        super(props);
-        this.state = {
-            isLoggedIn: false
-        };
-    }
 
-    async componentDidUpdate(prevProps, prevState) {
+export default function Login(props) {
 
-        if (prevState.isLoggedIn === false && this.props.isLoggedIn === true ) {
-            if(this.props.userRole == 'Admin'){
-                this.props.history.push('/adminDashboard');
-            } else {
-                this.props.history.push('/dashboard');
-            }
-        }
-    }
+    const [credentials , setCredentials] = useState({
+        email : "",
+        password : ""
+    })
 
-    render() {
+    const handleChange = ((e) => {
+        const {id, value} = e.target;
+        setState((prevState) => ({
+            ...prevState,
+            [id]:value
+        }));
+    });
 
-        let { handleLogin } = this.props;
+    useEffect(() => {
 
-        return (
+        // if (props.isLoggedIn === true ) {
+        //     if(this.props.userRole == 'Admin'){
+        //         this.props.history.push('/adminDashboard');
+        //     } else {
+        //         this.props.history.push('/dashboard');
+        //     }
+        // }
+
+        navigate('/dashboard');
+    }, [props.isLoggedIn]);
+
+    const navigate = useNavigate();
+
+    return (
             <div className="container">
                 <div className="container">
 
                 <div id="main">
 
-                    <form id="login-form" action="" onSubmit={(event) => handleLogin(event)} method="post">
+                    <form id="login-form" action="" onSubmit={(event) => props.handleLogin(event)} method="post">
 
                         <h3 style={{ padding: 15 }}>Login Form</h3>
 
                         <input
-
                             style={styles.input}
-
                             autoComplete="off"
-
                             id="email-input"
-
                             name="email"
-
                             type="text"
-
                             className="center-block"
-
                             placeholder="email"
 
                         />
 
                         <input
-
                             style={styles.input}
-
                             autoComplete="off"
-
-                           id="password-input"
-
+                            id="password-input"
                             name="password"
-
                             type="password"
-
                             className="center-block"
-
                             placeholder="password"
 
                         />
 
                         <button
-
                             type="submit"
-
                             style={styles.button}
-
                             className="landing-page-btn center-block text-center"
-
                             id="email-login-btn"
-
                             href="#facebook"
 
                         >
-
                             Login
-
                         </button>
 
                     </form>
@@ -96,8 +82,8 @@ class Login extends Component {
             </div>
             </div>
         )
-    } 
 }
+
 
 const styles = {
 
@@ -156,5 +142,3 @@ const styles = {
     }
 
 };
-
-export default Login

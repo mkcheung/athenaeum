@@ -66,16 +66,21 @@ class ApiController extends Controller
                 ], 400);
             }
         } catch (JWTException $e) {
-        return $credentials;
+
             return response()->json([
                     'success' => false,
                     'message' => 'Could not create token.',
                 ], 500);
         }
     
+
+        $user = $request->user();
         //Token created, return with success response and jwt token
         return response()->json([
             'success' => true,
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
             'token' => $token,
         ]);
     }

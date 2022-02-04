@@ -15,6 +15,7 @@ import {
 } from "react-router-dom";
 import Footer from './Footer';
 import Header from './Header';
+import Dashboard from './Home/Dashboard';
 import RecentBlog from './Home/RecentBlog';
 import About from './About';
 import Login from './Auth/Login';
@@ -47,7 +48,7 @@ const App = () => {
         const email = event.target.email.value;
         const password = event.target.password.value;
         setFormSubmit(true);
-        this.loginUser(email, password);
+        loginUser(email, password);
     }
 
     const loginUser = async (email, password) => {
@@ -60,32 +61,28 @@ const App = () => {
 
         if (loggedInData.status == 200) {
 
-            let { id, name, full_name, first_name, last_name, email, access_token, roles, permissions, rolesAndPermissions, userSpecificPermissions } = loggedInData.data;
-
-
+console.log('loginUser', loggedInData);
+            // let { id, name, full_name, first_name, last_name, email, token, roles, permissions, rolesAndPermissions, userSpecificPermissions } = loggedInData.data;
+        let { id, name, email, token } = loggedInData.data;
+console.log('loginUser', token);
             let userData = {
                 id,
                 name,
-                full_name,
-                first_name,
                 email,
-                access_token,
-                last_name,
-                permissions,
-                roles,
-                rolesAndPermissions: JSON.parse(rolesAndPermissions),
-                userSpecificPermissions,
+                token,
             };
             let appState = {
                 isLoggedIn: true,
                 user: userData
             };
+console.log('appState', appState);
             localStorage["appState"] = JSON.stringify(appState);
             // this.setState({
             //     isLoggedIn: appState.isLoggedIn,
             //     user: appState.user,
             //     error: ''
             // });
+            console.log('as loggedin: ', appState.isLoggedIn);
             setLoggedIn(appState.isLoggedIn);
             setUser(appState.userData);
         } else {
@@ -99,15 +96,17 @@ const App = () => {
     }
 
 
-    let role = user.roles ? user.roles[0] : '';
+    // let role = user.roles ? user.roles[0] : '';
     return (
         <BrowserRouter>
             <Header anchorEl={anchorEl} blogAuthors={blogAuthors} token={user.access_token} user={user} isLoggedIn={loggedIn} handleClick={handleClick} handleClose={handleClose} openMenu={openMenu} /> 
                 <Routes>
                     <Route exact path='/' element={<RecentBlog/>} />
-                    <Route exact path='/login' element={<Login handleLogin={handleLogin} isLoggedIn={loggedIn} userRole={role}/>}/>
+                    <Route exact path='/login' element={<Login handleLogin={handleLogin} isLoggedIn={loggedIn} />}/>
                     <Route exact path='/register' element={<Register/>}/>
                     <Route exact path='/about' element={<About/>}/>
+                    <Route exact path='/dashboard' element={<Dashboard/>}/>
+                    <Route exact path='/dashboard/:id' element={<Dashboard/>}/>
                 </Routes>       
             <Footer/>
         </BrowserRouter>
