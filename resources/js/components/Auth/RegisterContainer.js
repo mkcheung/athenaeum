@@ -42,16 +42,16 @@ export default function RegisterContainer() {
 
         let roleOptions = [];
         try {
-            let rolesRes = await axios.get('/api/roles');
-            let roles = rolesRes.data;
-            roles.forEach(function(role){
-                let temp = {};
-                temp['id'] = role.id;
-                temp['value'] = role.name;
-                roleOptions.push(temp);
-            });
+            // let rolesRes = await axios.get('/api/roles');
+            // let roles = rolesRes.data;
+            // roles.forEach(function(role){
+            //     let temp = {};
+            //     temp['id'] = role.id;
+            //     temp['value'] = role.name;
+            //     roleOptions.push(temp);
+            // });
 
-            setRoles(roleOptions);
+            // setRoles(roleOptions);
         } catch (error) {
             Swal.fire({
                 icon: 'error',

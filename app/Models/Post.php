@@ -7,9 +7,26 @@ use Illuminate\Database\Eloquent\Model;
  
 class Post extends Model
 {
+    use HasFactory;
 
-    protected $fillable = ['title','slug','content','image','published','category_id','user_id', 'project_id']; 
-    protected $appends = ["image_url", "date_formatted", "excerpt"];
+    protected $fillable = [
+        'title',
+        'slug',
+        'content',
+        'descendant_post_id',
+        'image',
+        'parent',
+        'published',
+        'category_id',
+        'user_id',
+        'project_id'
+    ]; 
+
+    protected $appends = [
+        "image_url",
+        "date_formatted",
+        "excerpt"
+    ];
  
  
     /**
@@ -34,6 +51,16 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class, 'post_id')->with('user', 'post');
     }
+
+    public function descendantPosts()
+    {
+        return $this->hasMany(Post::class, 'id', 'descendant_post_id');
+    }
+
+    public function allDescendantPosts()
+    {
+        return $this->descendantPosts()->with('allDescendantPosts');
+    }
  
  
     /**
@@ -48,6 +75,12 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
     }
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class, 'book_post', 'book_id', 'post_id');
+    }
+ 
  
     public function getDateFormattedAttribute()
     {

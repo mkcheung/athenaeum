@@ -15,7 +15,7 @@ class PostController extends Controller
  
     public function __construct()
     {
-        $this->user = JWTAuth::parseToken()->authenticate();
+        // $this->user = JWTAuth::parseToken()->authenticate();
     }
 
     /**
@@ -28,6 +28,13 @@ class PostController extends Controller
         return $this->user
             ->products()
             ->get();
+    }
+
+    public function getUserPosts(Request $request)
+    {
+        $userId = $request->query('userId');
+        $posts = Post::where('user_id', '=', $userId)->where('parent', '=', 1)->with('user')->orderBy('created_at')->get();
+        return $posts->toJson();
     }
 
     public function getRecentPosts(Request $request)
@@ -57,14 +64,71 @@ class PostController extends Controller
         return $posts->toJson();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getPostAndDecendants(Request $request)
     {
-        //
+
+        $postId = $request->query('postId');
+        $posts = Post::where('id', '=', (int)$postId)->where('parent', '=', 1)->with('user')->with('allDescendantPosts')->with('tags')->get()->all();
+
+        if(empty($posts)){
+            return json_encode($posts);
+        }
+
+        $descendantPosts = [];
+        $descendantPosts[] = [
+            'title' => $posts[0]['title'],
+            'content' => $posts[0]['content'],
+            'id' => $posts[0]['id'],
+            'slug' => $posts[0]['slug'],
+            'user' => $posts[0]['user'],
+            'published' => $posts[0]['published'],
+            'descendant_post_id' => $posts[0]['descendant_post_id'],
+            'created_at' => $posts[0]['created_at'],
+            'updated_at' => $posts[0]['updated_at'],
+            'user_id' => $posts[0]['user_id'],
+        ];
+
+        $allDescendantPosts = $posts[0]['allDescendantPosts'];
+        $allAssociatedTags = $posts[0]['tags'];
+
+        $this->processDescendants($posts[0]['allDescendantPosts'], $descendantPosts);
+
+
+        usort($descendantPosts,[$this,"compareValues"]);
+
+        return json_encode($descendantPosts);
+    }
+
+    private static function compareValues($a, $b){
+        if ($a["id"] == $b["id"]) {
+            return 0;
+        }
+        return ($a["id"] < $b["id"]) ? -1 : 1;
+    }
+
+
+    private function processDescendants($post, &$descendantPosts){
+
+        if(is_null($post->first())){
+            return;
+        } else if(!empty($post[0]) && !empty($post[0]['allDescendantPosts'])) {
+            $this->processDescendants($post[0]['allDescendantPosts'], $descendantPosts);
+        }    
+
+        $descendantPosts[] = [
+            'title' => $post[0]['title'],
+            'content' => $post[0]['content'],
+            'id' => $post[0]['id'],
+            'slug' => $post[0]['slug'],
+            'user' => $post[0]['user'],
+            'published' => $post[0]['published'],
+            'descendant_post_id' => $post[0]['descendant_post_id'],
+            'created_at' => $post[0]['created_at'],
+            'updated_at' => $post[0]['updated_at'],
+            'user_id' => $post[0]['user_id'],
+        ];
+
+        return;
     }
 
     /**

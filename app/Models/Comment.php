@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
  
 class Comment extends Model
 {
+    use HasFactory;
     protected $appends = ['date_formatted'];
  
     public function post()

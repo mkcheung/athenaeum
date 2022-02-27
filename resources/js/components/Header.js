@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { AuthContext } from './GlobalStates';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import {
     Link,
@@ -106,8 +107,7 @@ const useStyles = makeStyles((theme) => ({
     } 
 }));
 
-export default function Header(props) {
-
+const Header = (props) => {
     let {
         anchorEl,
         blogAuthors,
@@ -115,13 +115,14 @@ export default function Header(props) {
         handleClose,
         isLoggedIn,
         openMenu,
-        token,
         user
     } = props;
     const classes = useStyles();
     const navigate = useNavigate();
+    const [authState,setAuthState] = useContext(AuthContext);
 
     const handleLogOut = () => {
+        console.log('logged out');
         localStorage.clear();
         handleClose();
         navigate(`/`);
@@ -146,14 +147,14 @@ export default function Header(props) {
     }
 
     let loggedInUserName = '';
-    if(user.full_name && user.full_name.length>0){
+    if(authState.user.full_name && authState.user.full_name.length>0){
         loggedInUserName = 
             <div style={{color:'white'}}>
 
                 <IconButton style={{color:'white'}} onClick={handleClick} >
                     <PersonPinIcon /> 
                     <h6 className={ classes.welcomeMessage }>
-                        Welcome {user.full_name}!
+                        Welcome {authState.user.full_name}!
                     </h6>
                 </IconButton>
                 <Menu
@@ -169,10 +170,9 @@ export default function Header(props) {
                 </Menu>
             </div>;
     }
-console.log('logged in: ', isLoggedIn);
+
     let loggedInOutNavOps = '';
-    if(isLoggedIn) {
-console.log('logged in: A', isLoggedIn);
+    if(authState.isLoggedIn) {
         loggedInOutNavOps =
             <div style={{display:'contents'}}>
                 <div style={{color:'white', paddingTop:'20px', paddingLeft:'5%', paddingRight:'5%'}}>
@@ -277,3 +277,4 @@ console.log('logged in: A', isLoggedIn);
     </div>
   );
 }
+export default Header;

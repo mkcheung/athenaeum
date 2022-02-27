@@ -19,8 +19,11 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'is_admin'
     ];
 
     /**
@@ -29,8 +32,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password'
     ];
 
     /**
@@ -42,6 +44,11 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = [
+        'full_name'
+    ];
+ 
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -51,9 +58,30 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-
+ 
+ 
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class, 'user_id');
+    }
+ 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'user_id');
+    }
+ 
+    public function books()
+    {
+        return $this->hasMany(Book::class, 'user_id');
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return ($this->first_name.' '.$this->last_name);    
     }
 }

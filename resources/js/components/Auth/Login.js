@@ -1,14 +1,59 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useContext } from 'react';
 import {Link, useNavigate} from "react-router-dom";
+import { AuthContext } from '../GlobalStates';
 
 
-
-export default function Login(props) {
+const Login = (props) => {
 
     const [credentials , setCredentials] = useState({
         email : "",
         password : ""
     })
+
+    const [formSubmitting, setFormSubmit] = useState(false);
+    const [authState,setAuthState] = useContext(AuthContext);
+    const handleLogin = (event) => {
+    
+        event.preventDefault();
+
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        setFormSubmit(true);
+        loginUser(email, password);
+    }
+
+    const loginUser = async (email, password) => {
+
+        let userData = {
+            email,
+            password
+        };
+        let loggedInData = await axios.post("/api/login", userData);
+
+        if (loggedInData.status == 200) {
+
+            let { id, user, access_token } = loggedInData.data;
+            let userData = {
+                ...user
+            };
+            let appState = {
+                isLoggedIn: true,
+                user: userData,
+                accessToken: access_token
+            };
+
+            localStorage["appState"] = JSON.stringify(appState);
+            setAuthState(appState);
+            navigate('/dashboard');
+        } else {
+            alert(`Our System Failed To Register Your Account!`);
+            // this.setState({
+            //     error: '',
+            //     formSubmitting: false
+            // })
+            setFormSubmit(false);
+        }
+    }
 
     const handleChange = ((e) => {
         const {id, value} = e.target;
@@ -19,17 +64,8 @@ export default function Login(props) {
     });
 
     useEffect(() => {
-
-        // if (props.isLoggedIn === true ) {
-        //     if(this.props.userRole == 'Admin'){
-        //         this.props.history.push('/adminDashboard');
-        //     } else {
-        //         this.props.history.push('/dashboard');
-        //     }
-        // }
-
         navigate('/dashboard');
-    }, [props.isLoggedIn]);
+    }, [authState.isLoggedIn]);
 
     const navigate = useNavigate();
 
@@ -39,7 +75,7 @@ export default function Login(props) {
 
                 <div id="main">
 
-                    <form id="login-form" action="" onSubmit={(event) => props.handleLogin(event)} method="post">
+                    <form id="login-form" action="" onSubmit={(event) => handleLogin(event)} method="post">
 
                         <h3 style={{ padding: 15 }}>Login Form</h3>
 
@@ -142,3 +178,6 @@ const styles = {
     }
 
 };
+
+
+export default Login;

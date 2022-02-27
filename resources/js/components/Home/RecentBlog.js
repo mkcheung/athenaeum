@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function RecentBlog() {
+const RecentBlog = () => {
     const classes = useStyles();
     const [recentPosts, setPosts] = useState([]);
     const [tagOptions, setTagOptions] = useState([]);
@@ -157,3 +157,4 @@ export default function RecentBlog() {
             </div>
     )
 }
+export default RecentBlog;

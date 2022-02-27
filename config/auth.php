@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'api', // swtich from web to api
         'passwords' => 'users',
     ],
 
@@ -38,6 +38,11 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
+            'provider' => 'users',
+        ],
+    // set up authentication for api - the REST
+        'api' => [ 
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],

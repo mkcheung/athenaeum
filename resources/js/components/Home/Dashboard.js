@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Files from 'react-files'
 import { 
 	Button,
@@ -24,7 +24,8 @@ import {
 	ColorEditButton,
 	IOSSwitch 
 } from './../CustomComponents/CustomComponents';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { AuthContext } from '../GlobalStates';
 
 function useMergeState(initialState) {
     const [state, setState] = useState(initialState);
@@ -34,20 +35,21 @@ function useMergeState(initialState) {
     return [state, setMergedState];
 }
 
-export default function Dashboard(props) {
+const Dashboard = (props) => {
 
-		        console.log('db', props);
     let user = {};
-    let token = '';
+    let accessToken = '';
     let state = localStorage["appState"];
 
     if (state) {
         let appState = JSON.parse(state);
         user = appState.user;
-        token = user.access_token;
+        accessToken = appState.accessToken;
      }
 
     const navigate = useNavigate();
+    const params = useParams();
+    const [authState,setAuthState] = useContext(AuthContext);
 
     const [combined, setCombined] = useMergeState({
         loading: true,
@@ -56,55 +58,54 @@ export default function Dashboard(props) {
 
     const [loading, setLoading] = useState(true);
 
-    // useEffect( () => {
-		  //       console.log('loaddata');
-    //     async function loadData(userId=null, postId=null){
+    useEffect( () => {
 
-		  //       console.log('loaddata');
-		  //   let postData = [];
+    	// const userId = user.id;
+        if (params.id !== null && params.id !== undefined) {
+            loadData(null, params.id);
+        } else {
+            loadData(user.id);
+        }
+    }, [user.id, combined.loading]);
 
-	   //  	if(postId !== null){
 
-		  //       let postObj = await axios.get('/api/posts/getPostAndDecendants', 
-		  //       {
-		  //       	headers: {
-		  //               'Authorization': 'Bearer '+token,
-		  //               'Accept': 'application/json'
-		  //           },
-		  //           params: {
-		  //               postId: postId
-		  //           }
-		  //       });
-			 //    postData = postObj.data;
-	   //  	} else {
+    const loadData = async (userId=null, postId=null) => {
 
-		  //       let postObj = await axios.get('/api/posts/getUserPosts', 
-		  //       {
-		  //       	headers: {
-		  //               'Authorization': 'Bearer '+token,
-		  //               'Accept': 'application/json'
-		  //           },
-		  //           params: {
-		  //               userId: userId
-		  //           }
-		  //       });
-		  //       console.log('postObj', postObj);
-			 //    postData = postObj.data;
-	   //  	}
+	    let postData = [];
 
-	   //      await setCombined({
-	   //          loading: false,
-	   //          posts: postData
-	   //      });
-    //     }
+    	if(postId !== null){
 
-    // 	// const userId = user.id;
-    //     if (props.match.params.id !== null && props.match.params.id !== undefined) {
-    //         loadData(null, props.match.params.id);
-    //     } else {
-    //         loadData(user.id);
-    //     }
-    // }, [user.id, combined.loading]);
+	        let postObj = await axios.get('/api/posts/getPostAndDecendants', 
+	        {
+	        	headers: {
+	                'Authorization': 'Bearer '+accessToken,
+	                'Accept': 'application/json'
+	            },
+	            params: {
+	                postId: postId
+	            }
+	        });
+		    postData = postObj.data;
+    	} else {
+
+	        let postObj = await axios.get('/api/posts/getUserPosts', 
+	        {
+	        	headers: {
+	                'Authorization': 'Bearer '+accessToken,
+	                'Accept': 'application/json'
+	            },
+	            params: {
+	                userId: userId
+	            }
+	        });
+		    postData = postObj.data;
+    	}
+
+        await setCombined({
+            loading: false,
+            posts: postData
+        });
+    }
 
 
 	const deleteBook = async (postId) => {
@@ -123,7 +124,7 @@ export default function Dashboard(props) {
 				await axios.delete(`/api/posts/${postId}`,
 		        {   
 		        	headers: {
-		                'Authorization': 'Bearer '+token,
+		                'Authorization': 'Bearer '+accessToken,
 		                'Accept': 'application/json'
 		            },
 		        });
@@ -156,7 +157,7 @@ export default function Dashboard(props) {
                 },
                 {   
                     headers: {
-                        'Authorization': 'Bearer '+token,
+                        'Authorization': 'Bearer '+accessToken,
                         'Accept': 'application/json'
                     }
                 }
@@ -272,3 +273,4 @@ export default function Dashboard(props) {
         </Container>
     )
 }
+export default Dashboard;

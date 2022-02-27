@@ -55,6 +55,19 @@ class TagController extends Controller
         return view('tags.show', compact('post'));
     }
 
+    public function showTags(Request $request)
+    {
+        $tags = Tag::get();
+
+        return $tags->toJson();
+    }
+ 
+    public function getTagsToPosts()
+    {
+        $tagsToPosts = Tag::with('posts')->get();
+        return $tagsToPosts->toJson();
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
