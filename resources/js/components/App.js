@@ -23,6 +23,7 @@ import About from './About';
 import Login from './Auth/Login';
 import Register from './Auth/Register';
 import NewPost from './Posts/NewPost';
+import UserBookList from './Users/UserBookList';
 
 const App = () => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -76,6 +77,7 @@ const App = () => {
                         <Route exact path='/dashboard' element={<Dashboard/>}/>
                         <Route exact path='/dashboard/:id' element={<Dashboard/>}/>
                         <Route exact path='/post' element={<NewPost/>}/>
+                        <Route exact path='/book/getUserBooks' element={<UserBookList/>} />
                     </Routes>       
                 <Footer/>
             </AuthProvider>
