@@ -313,11 +313,6 @@ const UserBookList = () => {
 
     const handleChapterSelect = async (event) => {
 
-		let { 
-			books,
-			selectedBookId
-		} = this.state;
-
 		let selectedChapterId = event.target.value;
 		let bookCitations = '';
 		let citations = [];
@@ -329,22 +324,18 @@ const UserBookList = () => {
 	    }
 	    for (let key in bookCitations) {
 
-	        if (bookCitations[key].chapter == selectedChapterId) {
+	        if (bookCitations[key].chapter ==  selectedChapterId) {
 	            citations.push(bookCitations[key]);
 	        }
 	    }
-
-        this.setState({
-			selectedChapter:selectedChapterId,
-			selectedBookCitations: citations,
-			chapterSelectionModalOpen: false
-        });
+		setSelectedChapter(selectedChapterId);
+		setSelectedBookCitations(citations)
+		setChapterSelectionModalOpen(false);
     };
 
 
     const loadData = async () => {
 
-    	console.log('loading user books', authState.user.id);
         let userBooks = await axios.get('/api/books/showUserBooks', 
         {
         	headers: {

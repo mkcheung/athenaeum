@@ -17,6 +17,7 @@ class CitationFactory extends Factory
         $book = Book::inRandomOrder()->first();
         return [
             'page' => $this->faker->numberBetween(1,300),
+            'chapter' => $book->load('chapters')->first()->id, 
             'content' => $this->faker->text(100),
             'book_id' => $book->id
         ];

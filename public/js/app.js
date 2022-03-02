@@ -31737,52 +31737,49 @@ var UserBookList = function UserBookList() {
 
   var handleChapterSelect = /*#__PURE__*/function () {
     var _ref13 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13(event) {
-      var _this$state3, books, selectedBookId, selectedChapterId, bookCitations, citations, key, _key;
+      var selectedChapterId, bookCitations, citations, key, _key;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
         while (1) {
           switch (_context13.prev = _context13.next) {
             case 0:
-              _this$state3 = _this.state, books = _this$state3.books, selectedBookId = _this$state3.selectedBookId;
               selectedChapterId = event.target.value;
               bookCitations = '';
               citations = [];
               _context13.t0 = _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().keys(books);
 
-            case 5:
+            case 4:
               if ((_context13.t1 = _context13.t0()).done) {
-                _context13.next = 12;
+                _context13.next = 11;
                 break;
               }
 
               key = _context13.t1.value;
 
               if (!(books[key].id == selectedBookId && books[key].chapters)) {
-                _context13.next = 10;
+                _context13.next = 9;
                 break;
               }
 
               bookCitations = books[key].citations;
-              return _context13.abrupt("break", 12);
+              return _context13.abrupt("break", 11);
 
-            case 10:
-              _context13.next = 5;
+            case 9:
+              _context13.next = 4;
               break;
 
-            case 12:
+            case 11:
               for (_key in bookCitations) {
                 if (bookCitations[_key].chapter == selectedChapterId) {
                   citations.push(bookCitations[_key]);
                 }
               }
 
-              _this.setState({
-                selectedChapter: selectedChapterId,
-                selectedBookCitations: citations,
-                chapterSelectionModalOpen: false
-              });
+              setSelectedChapter(selectedChapterId);
+              setSelectedBookCitations(citations);
+              setChapterSelectionModalOpen(false);
 
-            case 14:
+            case 15:
             case "end":
               return _context13.stop();
           }
@@ -31802,8 +31799,7 @@ var UserBookList = function UserBookList() {
         while (1) {
           switch (_context14.prev = _context14.next) {
             case 0:
-              console.log('loading user books', authState.user.id);
-              _context14.next = 3;
+              _context14.next = 2;
               return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/books/showUserBooks', {
                 headers: {
                   'Authorization': 'Bearer ' + authState.accessToken,
@@ -31814,7 +31810,7 @@ var UserBookList = function UserBookList() {
                 }
               });
 
-            case 3:
+            case 2:
               userBooks = _context14.sent;
               books = userBooks.data;
               (0,react_dom__WEBPACK_IMPORTED_MODULE_9__.unstable_batchedUpdates)(function () {
@@ -31824,7 +31820,7 @@ var UserBookList = function UserBookList() {
               });
               return _context14.abrupt("return", books);
 
-            case 7:
+            case 6:
             case "end":
               return _context14.stop();
           }

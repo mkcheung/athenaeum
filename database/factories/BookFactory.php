@@ -17,8 +17,11 @@ class BookFactory extends Factory
         $user = User::inRandomOrder()->first();
         return [
             'title' => $this->faker->name,
-            'author' => $user->full_name,
-            'pages' => $this->faker->numberBetween(0,550)
+            'author_first_name' => $this->faker->name,
+            'author_middle' => $this->faker->name,
+            'author_last_name' => $this->faker->name,
+            'pages' => $this->faker->numberBetween(0,550),
+            'user_id' => $user->id 
         ];
     }
 }
