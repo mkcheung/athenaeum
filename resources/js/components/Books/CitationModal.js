@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Files from 'react-files'
 import { makeStyles } from '@material-ui/core/styles';
 import { 
@@ -12,9 +12,11 @@ import {
 	Modal,
 	Paper,
 	Select,
-    TextareaAutosize,
+  TextareaAutosize,
 	TextField
 } from '@material-ui/core';
+import swal from 'sweetalert2';
+import { AuthContext } from '../GlobalStates';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -46,8 +48,63 @@ const useStyles = makeStyles((theme) => ({
 const CitationModal = (props) => {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = useState(getModalStyle);
-  const [citationModalOpen, setOpen] = useState(false);
+  const [ modalStyle ] = useState(getModalStyle);
+  const [ citationModalOpen, setOpen ] = useState(false);
+  const [ selectedChapter, setSelectedChapter ] = useState(null);
+  const [ citationPage, setCitationPage ] = useState(null);
+  const [ citation, setCitation ] = useState('');
+  const [ chapterNum, setChapterNum ] = useState(null);
+
+  const [ authState, setAuthState ] = useContext(AuthContext);
+
+  const handleChapterSelect = (e) => {
+    let chapter = e.target.value;
+    setSelectedChapter(chapter);
+  }
+
+  const handleCitationPageChange = (e) => {
+    let citationPage = e.target.value;
+    setCitationPage(citationPage);
+  }
+
+  const handleCitationChange = (e) => {
+    let theCitation = e.target.value;
+    setCitation(theCitation);
+  }
+
+  const handleCitationSubmit = () => {
+    let data = {
+      book_id: props.bookIdForChInput,
+      content: citation,
+      chapter: selectedChapter ? selectedChapter : null,
+      page: citationPage,
+    }
+
+    console.log(data);
+    axios.post('/api/citations', { 
+      data 
+    },
+    {   
+      headers: {
+            'Authorization': 'Bearer ' + authState.accessToken,
+            'Accept': 'application/json'
+        },
+    })
+    .then(async response => {
+      swal.fire("Done!", "Citation Added!", "success");
+      props.setBookTitleForChInput('');
+      props.setBookIdForChInput(null);
+      setSelectedChapter(null);
+      setCitationPage(null);
+      setCitation('');
+      setChapterNum(null)
+      props.handleClose();
+    })
+    .catch(error => {
+      console.log(error);
+      props.setErrors(error.response.data.errors);
+    });
+  }
 
   const body = (
         <Grid container spacing={3}>
@@ -57,21 +114,21 @@ const CitationModal = (props) => {
 					
 					<Grid item xs={12}>
                         <InputLabel htmlFor="page">Chapter:</InputLabel>
-                        <TextField id="selectedChapter" type="number" aria-describedby="my-helper-text" value={props.selectedChapter} onChange={props.handleFieldChange} />
+                        <TextField id="selectedChapter" type="number" aria-describedby="my-helper-text" value={selectedChapter} onChange={handleChapterSelect} />
 					</Grid>
                     <Grid item xs={12}>
                         <InputLabel htmlFor="citationPage">Page:</InputLabel>
-                        <TextField id="citationPage" aria-describedby="my-helper-text" value={props.citationPage} onChange={props.handleFieldChange} />
+                        <TextField id="citationPage" aria-describedby="my-helper-text" value={citationPage} onChange={handleCitationPageChange} />
                     </Grid>
                     <br/>
                     <Grid item xs={12}>
                         <InputLabel htmlFor="page">Citation:</InputLabel>
-                        <TextareaAutosize id="content" rows={4} style={{width:'100%'}} aria-label="minimum height" value={props.content} placeholder="Place citation here" onChange={props.handleFieldChange} />
+                        <TextareaAutosize id="content" rows={4} style={{width:'100%'}} aria-label="minimum height" value={citation} placeholder="Place citation here" onChange={handleCitationChange} />
                     </Grid>
                     <br/>
                     
                     <Grid item xs={12}>
-                        <Button variant="contained" color="primary" onClick={() => { props.handleCitationSubmit() }}>
+                        <Button variant="contained" color="primary" onClick={() => { handleCitationSubmit() }}>
                             Add Citation
                         </Button>
                     </Grid>

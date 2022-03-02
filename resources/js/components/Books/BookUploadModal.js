@@ -71,7 +71,7 @@ const BookUploadModal = (props) => {
 		author_middle:'',
 		author_last_name:''
 	});
-  const [authState,setAuthState] = useContext(AuthContext);
+  const [ authState,setAuthState ] = useContext(AuthContext);
 
 
 	const handleAddBook = (e) => {

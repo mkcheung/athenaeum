@@ -29097,17 +29097,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_files__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-files */ "./node_modules/react-files/dist/index.js");
-/* harmony import */ var react_files__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_files__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/makeStyles.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputLabel/InputLabel.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextareaAutosize/TextareaAutosize.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Button/Button.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Modal/Modal.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_files__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-files */ "./node_modules/react-files/dist/index.js");
+/* harmony import */ var react_files__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_files__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/makeStyles.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputLabel/InputLabel.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextareaAutosize/TextareaAutosize.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Button/Button.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Modal/Modal.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _GlobalStates__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../GlobalStates */ "./resources/js/components/GlobalStates.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -29119,6 +29130,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -29141,7 +29154,7 @@ function getModalStyle() {
   };
 }
 
-var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["default"])(function (theme) {
+var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__["default"])(function (theme) {
   return {
     paper: {
       position: 'absolute',
@@ -29158,87 +29171,174 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["defaul
 var CitationModal = function CitationModal(props) {
   var classes = useStyles(); // getModalStyle is not a pure function, we roll the style only on the first render
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(getModalStyle),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(getModalStyle),
       _useState2 = _slicedToArray(_useState, 1),
       modalStyle = _useState2[0];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
       citationModalOpen = _useState4[0],
       setOpen = _useState4[1];
 
-  var body = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      selectedChapter = _useState6[0],
+      setSelectedChapter = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      citationPage = _useState8[0],
+      setCitationPage = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      citation = _useState10[0],
+      setCitation = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState12 = _slicedToArray(_useState11, 2),
+      chapterNum = _useState12[0],
+      setChapterNum = _useState12[1];
+
+  var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_GlobalStates__WEBPACK_IMPORTED_MODULE_4__.AuthContext),
+      _useContext2 = _slicedToArray(_useContext, 2),
+      authState = _useContext2[0],
+      setAuthState = _useContext2[1];
+
+  var handleChapterSelect = function handleChapterSelect(e) {
+    var chapter = e.target.value;
+    setSelectedChapter(chapter);
+  };
+
+  var handleCitationPageChange = function handleCitationPageChange(e) {
+    var citationPage = e.target.value;
+    setCitationPage(citationPage);
+  };
+
+  var handleCitationChange = function handleCitationChange(e) {
+    var theCitation = e.target.value;
+    setCitation(theCitation);
+  };
+
+  var handleCitationSubmit = function handleCitationSubmit() {
+    var data = {
+      book_id: props.bookIdForChInput,
+      content: citation,
+      chapter: selectedChapter ? selectedChapter : null,
+      page: citationPage
+    };
+    console.log(data);
+    axios.post('/api/citations', {
+      data: data
+    }, {
+      headers: {
+        'Authorization': 'Bearer ' + authState.accessToken,
+        'Accept': 'application/json'
+      }
+    }).then( /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(response) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire("Done!", "Citation Added!", "success");
+                props.setBookTitleForChInput('');
+                props.setBookIdForChInput(null);
+                setSelectedChapter(null);
+                setCitationPage(null);
+                setCitation('');
+                setChapterNum(null);
+                props.handleClose();
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }())["catch"](function (error) {
+      console.log(error);
+      props.setErrors(error.response.data.errors);
+    });
+  };
+
+  var body = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
     container: true,
     spacing: 3,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       style: modalStyle,
       className: classes.paper,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h2", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("h2", {
         id: "simple-modal-title",
         children: ["Add Citation for ", props.bookTitleForChInput, ":"]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
         noValidate: true,
         autoComplete: "off",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
           item: true,
           xs: 12,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
             htmlFor: "page",
             children: "Chapter:"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__["default"], {
             id: "selectedChapter",
             type: "number",
             "aria-describedby": "my-helper-text",
-            value: props.selectedChapter,
-            onChange: props.handleFieldChange
+            value: selectedChapter,
+            onChange: handleChapterSelect
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
           item: true,
           xs: 12,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
             htmlFor: "citationPage",
             children: "Page:"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__["default"], {
             id: "citationPage",
             "aria-describedby": "my-helper-text",
-            value: props.citationPage,
-            onChange: props.handleFieldChange
+            value: citationPage,
+            onChange: handleCitationPageChange
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
           item: true,
           xs: 12,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
             htmlFor: "page",
             children: "Citation:"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
             id: "content",
             rows: 4,
             style: {
               width: '100%'
             },
             "aria-label": "minimum height",
-            value: props.content,
+            value: citation,
             placeholder: "Place citation here",
-            onChange: props.handleFieldChange
+            onChange: handleCitationChange
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
           item: true,
           xs: 12,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
             variant: "contained",
             color: "primary",
             onClick: function onClick() {
-              props.handleCitationSubmit();
+              handleCitationSubmit();
             },
             children: "Add Citation"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {})]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {})]
       })]
     })
   });
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
       open: props.citationModalOpen,
       onClose: props.handleClose,
       "aria-labelledby": "simple-modal-title",
@@ -31193,128 +31293,108 @@ var UserBookList = function UserBookList() {
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      addBookOnly = _useState4[0],
-      setAddBookOnly = _useState4[1];
+      modalLoading = _useState4[0],
+      setModalLoading = _useState4[1];
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      modalLoading = _useState6[0],
-      setModalLoading = _useState6[1];
+      deleteInProgress = _useState6[0],
+      setDeleteInProgress = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
       _useState8 = _slicedToArray(_useState7, 2),
-      deleteInProgress = _useState8[0],
-      setDeleteInProgress = _useState8[1];
+      books = _useState8[0],
+      setBooks = _useState8[1];
 
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      books = _useState10[0],
-      setBooks = _useState10[1];
+      chapters = _useState10[0],
+      setChapters = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
       _useState12 = _slicedToArray(_useState11, 2),
-      content = _useState12[0],
-      setContent = _useState12[1];
+      user = _useState12[0],
+      setUser = _useState12[1];
 
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
       _useState14 = _slicedToArray(_useState13, 2),
-      chapters = _useState14[0],
-      setChapters = _useState14[1];
+      selectedBookCitations = _useState14[0],
+      setSelectedBookCitations = _useState14[1];
 
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
       _useState16 = _slicedToArray(_useState15, 2),
-      user = _useState16[0],
-      setUser = _useState16[1];
+      selectedBookId = _useState16[0],
+      setSelectedBookId = _useState16[1];
 
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
       _useState18 = _slicedToArray(_useState17, 2),
-      selectedBookCitations = _useState18[0],
-      setSelectedBookCitations = _useState18[1];
+      selectedChapter = _useState18[0],
+      setSelectedChapter = _useState18[1];
 
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
       _useState20 = _slicedToArray(_useState19, 2),
-      selectedBookId = _useState20[0],
-      setSelectedBookId = _useState20[1];
+      modalOpen = _useState20[0],
+      setModalOpen = _useState20[1];
 
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState22 = _slicedToArray(_useState21, 2),
-      selectedChapter = _useState22[0],
-      setSelectedChapter = _useState22[1];
+      author_first_name = _useState22[0],
+      setAuthorFirstName = _useState22[1];
 
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState24 = _slicedToArray(_useState23, 2),
-      modalOpen = _useState24[0],
-      setModalOpen = _useState24[1];
+      author_middle = _useState24[0],
+      setAuthorMiddleName = _useState24[1];
 
-  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState26 = _slicedToArray(_useState25, 2),
-      citationPage = _useState26[0],
-      setCitationPage = _useState26[1];
+      author_last_name = _useState26[0],
+      setAuthorLastName = _useState26[1];
 
-  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
       _useState28 = _slicedToArray(_useState27, 2),
-      author_first_name = _useState28[0],
-      setAuthorFirstName = _useState28[1];
+      bookIdForChInput = _useState28[0],
+      setBookIdForChInput = _useState28[1];
 
   var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState30 = _slicedToArray(_useState29, 2),
-      author_middle = _useState30[0],
-      setAuthorMiddleName = _useState30[1];
+      bookTitleForChInput = _useState30[0],
+      setBookTitleForChInput = _useState30[1];
 
-  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
       _useState32 = _slicedToArray(_useState31, 2),
-      author_last_name = _useState32[0],
-      setAuthorLastName = _useState32[1];
+      chapterModalOpen = _useState32[0],
+      setChapterModalOpen = _useState32[1];
 
-  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
       _useState34 = _slicedToArray(_useState33, 2),
-      bookIdForChInput = _useState34[0],
-      setBookIdForChInput = _useState34[1];
+      citationModalOpen = _useState34[0],
+      setCitationModalOpen = _useState34[1];
 
-  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
       _useState36 = _slicedToArray(_useState35, 2),
-      bookTitleForChInput = _useState36[0],
-      setBookTitleForChInput = _useState36[1];
+      chapterSelectionModalOpen = _useState36[0],
+      setChapterSelectionModalOpen = _useState36[1];
 
-  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState38 = _slicedToArray(_useState37, 2),
-      chapterModalOpen = _useState38[0],
-      setChapterModalOpen = _useState38[1];
+      chapterTitle = _useState38[0],
+      setChapterTitle = _useState38[1];
 
-  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
       _useState40 = _slicedToArray(_useState39, 2),
-      citationModalOpen = _useState40[0],
-      setCitationModalOpen = _useState40[1];
+      chapterPageBegin = _useState40[0],
+      setChapterPageBegin = _useState40[1];
 
-  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
       _useState42 = _slicedToArray(_useState41, 2),
-      chapterSelectionModalOpen = _useState42[0],
-      setChapterSelectionModalOpen = _useState42[1];
+      chapterPageEnd = _useState42[0],
+      setChapterPageEnd = _useState42[1];
 
-  var _useState43 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState43 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState44 = _slicedToArray(_useState43, 2),
-      chapterNum = _useState44[0],
-      setChapterNum = _useState44[1];
-
-  var _useState45 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
-      _useState46 = _slicedToArray(_useState45, 2),
-      chapterTitle = _useState46[0],
-      setChapterTitle = _useState46[1];
-
-  var _useState47 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
-      _useState48 = _slicedToArray(_useState47, 2),
-      chapterPageBegin = _useState48[0],
-      setChapterPageBegin = _useState48[1];
-
-  var _useState49 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
-      _useState50 = _slicedToArray(_useState49, 2),
-      chapterPageEnd = _useState50[0],
-      setChapterPageEnd = _useState50[1];
-
-  var _useState51 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
-      _useState52 = _slicedToArray(_useState51, 2),
-      errors = _useState52[0],
-      setErrors = _useState52[1];
+      errors = _useState44[0],
+      setErrors = _useState44[1];
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_GlobalStates__WEBPACK_IMPORTED_MODULE_10__.AuthContext),
       _useContext2 = _slicedToArray(_useContext, 2),
@@ -31382,24 +31462,22 @@ var UserBookList = function UserBookList() {
 
   var handleOpenAddCitationInput = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(bookId) {
-      var books, selectedBook;
+      var selectedBook, chaptersSpecificToBook;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              books = _this.state.books;
               selectedBook = books.find(function (book) {
                 return book.id === bookId;
               });
+              chaptersSpecificToBook = selectedBook.chapters ? selectedBook.chapters : [];
+              setBookIdForChInput(selectedBook['id']);
+              setBookTitleForChInput(selectedBook['title']);
+              setCitationModalOpen(true);
+              setChapters(chaptersSpecificToBook);
+              setBookIdForChInput(bookId);
 
-              _this.setState(_defineProperty({
-                bookTitleForChInput: selectedBook['title'],
-                bookIdForChInput: selectedBook['id'],
-                citationModalOpen: true,
-                chapters: selectedBook.chapters ? selectedBook.chapters : []
-              }, "bookIdForChInput", bookId));
-
-            case 3:
+            case 7:
             case "end":
               return _context3.stop();
           }
@@ -31550,48 +31628,57 @@ var UserBookList = function UserBookList() {
 
   var onFilesError = function onFilesError(error, file) {
     console.log('error code ' + error.code + ': ' + error.message);
-  };
+  }; // const handleChapterSubmit = async () => {
+  //        const { 
+  //        	bookIdForChInput,
+  //        	chapterPageBegin,
+  //        	chapterPageEnd,
+  //        	chapterTitle,
+  //        	chapterNum,
+  //        	token
+  //        } = this.state;
+  //        let data = {
+  //        	bookIdForChInput,
+  //        	chapterPageBegin,
+  //        	chapterPageEnd,
+  //        	chapterTitle,
+  //        	chapterNum
+  //        }
+  // 	axios.post('/api/chapters', { 
+  //        	data 
+  //        },
+  //        {   
+  //        	headers: {
+  //                'Authorization': 'Bearer ' + authState.accessToken,
+  //                'Accept': 'application/json'
+  //            },
+  //        })
+  //        .then(response => {
+  // 		swal("Done!", "Chapter Added!", "success");
+  //            this.setState({
+  // 		    bookIdForChInput: null,
+  // 		    chapterPageBegin: null,
+  // 		    chapterPageEnd: null,
+  // 		    chapterTitle: '',
+  //            	chapterNum: null
+  //            });
+  // 		handleClose();
+  // 	})
+  // 	.catch(error => {
+  // 		setErrors(error.response.data.errors);
+  // 	});
+  // }
 
-  var handleChapterSubmit = /*#__PURE__*/function () {
-    var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-      var _this$state, bookIdForChInput, chapterPageBegin, chapterPageEnd, chapterTitle, chapterNum, token, data;
 
+  var handleFieldChange = /*#__PURE__*/function () {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8(event) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
-              _this$state = _this.state, bookIdForChInput = _this$state.bookIdForChInput, chapterPageBegin = _this$state.chapterPageBegin, chapterPageEnd = _this$state.chapterPageEnd, chapterTitle = _this$state.chapterTitle, chapterNum = _this$state.chapterNum, token = _this$state.token;
-              data = {
-                bookIdForChInput: bookIdForChInput,
-                chapterPageBegin: chapterPageBegin,
-                chapterPageEnd: chapterPageEnd,
-                chapterTitle: chapterTitle,
-                chapterNum: chapterNum
-              };
-              axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/chapters', {
-                data: data
-              }, {
-                headers: {
-                  'Authorization': 'Bearer ' + authState.accessToken,
-                  'Accept': 'application/json'
-                }
-              }).then(function (response) {
-                swal("Done!", "Chapter Added!", "success");
+              setState(_objectSpread(_objectSpread({}, state), {}, _defineProperty({}, event.target.id, event.target.value)));
 
-                _this.setState({
-                  bookIdForChInput: null,
-                  chapterPageBegin: null,
-                  chapterPageEnd: null,
-                  chapterTitle: '',
-                  chapterNum: null
-                });
-
-                handleClose();
-              })["catch"](function (error) {
-                setErrors(error.response.data.errors);
-              });
-
-            case 3:
+            case 1:
             case "end":
               return _context8.stop();
           }
@@ -31599,114 +31686,20 @@ var UserBookList = function UserBookList() {
       }, _callee8);
     }));
 
-    return function handleChapterSubmit() {
+    return function handleFieldChange(_x7) {
       return _ref8.apply(this, arguments);
     };
   }();
 
-  var handleCitationSubmit = /*#__PURE__*/function () {
-    var _ref9 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
-      var _this$state2, bookTitleForChInput, bookIdForChInput, selectedChapter, citationPage, content, token, data;
-
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
-        while (1) {
-          switch (_context10.prev = _context10.next) {
-            case 0:
-              _this$state2 = _this.state, bookTitleForChInput = _this$state2.bookTitleForChInput, bookIdForChInput = _this$state2.bookIdForChInput, selectedChapter = _this$state2.selectedChapter, citationPage = _this$state2.citationPage, content = _this$state2.content, token = _this$state2.token;
-              data = {
-                book_id: bookIdForChInput,
-                content: content,
-                chapter: selectedChapter ? selectedChapter : null,
-                page: citationPage
-              };
-              axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/citations', {
-                data: data
-              }, {
-                headers: {
-                  'Authorization': 'Bearer ' + authState.accessToken,
-                  'Accept': 'application/json'
-                }
-              }).then( /*#__PURE__*/function () {
-                var _ref10 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9(response) {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
-                    while (1) {
-                      switch (_context9.prev = _context9.next) {
-                        case 0:
-                          swal("Done!", "Citation Added!", "success");
-
-                          _this.setState({
-                            bookTitleForChInput: '',
-                            bookIdForChInput: null,
-                            selectedChapter: null,
-                            citationPage: null,
-                            content: '',
-                            chapterNum: null
-                          });
-
-                          _context9.next = 4;
-                          return _this.loadData();
-
-                        case 4:
-                          handleClose();
-
-                        case 5:
-                        case "end":
-                          return _context9.stop();
-                      }
-                    }
-                  }, _callee9);
-                }));
-
-                return function (_x7) {
-                  return _ref10.apply(this, arguments);
-                };
-              }())["catch"](function (error) {
-                setErrors(error.response.data.errors);
-              });
-
-            case 3:
-            case "end":
-              return _context10.stop();
-          }
-        }
-      }, _callee10);
-    }));
-
-    return function handleCitationSubmit() {
-      return _ref9.apply(this, arguments);
-    };
-  }();
-
-  var handleFieldChange = /*#__PURE__*/function () {
-    var _ref11 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11(event) {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
-        while (1) {
-          switch (_context11.prev = _context11.next) {
-            case 0:
-              setState(_objectSpread(_objectSpread({}, state), {}, _defineProperty({}, event.target.id, event.target.value)));
-
-            case 1:
-            case "end":
-              return _context11.stop();
-          }
-        }
-      }, _callee11);
-    }));
-
-    return function handleFieldChange(_x8) {
-      return _ref11.apply(this, arguments);
-    };
-  }();
-
   var handleBookListClick = /*#__PURE__*/function () {
-    var _ref12 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12(event, bookId) {
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9(event, bookId) {
       var books, selectedBook;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
         while (1) {
-          switch (_context12.prev = _context12.next) {
+          switch (_context9.prev = _context9.next) {
             case 0:
               event.preventDefault();
-              _context12.next = 3;
+              _context9.next = 3;
               return _this.setState({
                 loading: true,
                 selectedBookCitations: []
@@ -31717,55 +31710,55 @@ var UserBookList = function UserBookList() {
               selectedBook = books.find(function (book) {
                 return book.id === bookId;
               });
-              _context12.next = 7;
+              _context9.next = 7;
               return _this.setState({
                 selectedBookCitations: selectedBook.citations
               });
 
             case 7:
             case "end":
-              return _context12.stop();
+              return _context9.stop();
           }
         }
-      }, _callee12);
+      }, _callee9);
     }));
 
-    return function handleBookListClick(_x9, _x10) {
-      return _ref12.apply(this, arguments);
+    return function handleBookListClick(_x8, _x9) {
+      return _ref9.apply(this, arguments);
     };
   }();
 
   var handleChapterSelect = /*#__PURE__*/function () {
-    var _ref13 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13(event) {
+    var _ref10 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10(event) {
       var selectedChapterId, bookCitations, citations, key, _key;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
         while (1) {
-          switch (_context13.prev = _context13.next) {
+          switch (_context10.prev = _context10.next) {
             case 0:
               selectedChapterId = event.target.value;
               bookCitations = '';
               citations = [];
-              _context13.t0 = _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().keys(books);
+              _context10.t0 = _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().keys(books);
 
             case 4:
-              if ((_context13.t1 = _context13.t0()).done) {
-                _context13.next = 11;
+              if ((_context10.t1 = _context10.t0()).done) {
+                _context10.next = 11;
                 break;
               }
 
-              key = _context13.t1.value;
+              key = _context10.t1.value;
 
               if (!(books[key].id == selectedBookId && books[key].chapters)) {
-                _context13.next = 9;
+                _context10.next = 9;
                 break;
               }
 
               bookCitations = books[key].citations;
-              return _context13.abrupt("break", 11);
+              return _context10.abrupt("break", 11);
 
             case 9:
-              _context13.next = 4;
+              _context10.next = 4;
               break;
 
             case 11:
@@ -31781,25 +31774,25 @@ var UserBookList = function UserBookList() {
 
             case 15:
             case "end":
-              return _context13.stop();
+              return _context10.stop();
           }
         }
-      }, _callee13);
+      }, _callee10);
     }));
 
-    return function handleChapterSelect(_x11) {
-      return _ref13.apply(this, arguments);
+    return function handleChapterSelect(_x10) {
+      return _ref10.apply(this, arguments);
     };
   }();
 
   var loadData = /*#__PURE__*/function () {
-    var _ref14 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee14() {
+    var _ref11 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
       var userBooks, books;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee14$(_context14) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
         while (1) {
-          switch (_context14.prev = _context14.next) {
+          switch (_context11.prev = _context11.next) {
             case 0:
-              _context14.next = 2;
+              _context11.next = 2;
               return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/books/showUserBooks', {
                 headers: {
                   'Authorization': 'Bearer ' + authState.accessToken,
@@ -31811,25 +31804,25 @@ var UserBookList = function UserBookList() {
               });
 
             case 2:
-              userBooks = _context14.sent;
+              userBooks = _context11.sent;
               books = userBooks.data;
               (0,react_dom__WEBPACK_IMPORTED_MODULE_9__.unstable_batchedUpdates)(function () {
                 setLoading(false);
                 setDeleteInProgress(false);
                 setBooks(books);
               });
-              return _context14.abrupt("return", books);
+              return _context11.abrupt("return", books);
 
             case 6:
             case "end":
-              return _context14.stop();
+              return _context11.stop();
           }
         }
-      }, _callee14);
+      }, _callee11);
     }));
 
     return function loadData() {
-      return _ref14.apply(this, arguments);
+      return _ref11.apply(this, arguments);
     };
   }();
 
@@ -32022,19 +32015,7 @@ var UserBookList = function UserBookList() {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_23__["default"], {
         item: true,
-        xs: 12,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Books_AddChapterModal__WEBPACK_IMPORTED_MODULE_6__["default"], {
-          bookTitleForChInput: bookTitleForChInput,
-          bookIdForChInput: bookIdForChInput,
-          handleFieldChange: handleFieldChange,
-          chapterModalOpen: chapterModalOpen,
-          chapterNum: chapterNum,
-          chapterPageBegin: chapterPageBegin,
-          chapterPageEnd: chapterPageEnd,
-          chapterTitle: chapterTitle,
-          handleChapterSubmit: handleChapterSubmit,
-          handleClose: handleClose
-        })
+        xs: 12
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_23__["default"], {
         item: true,
         xs: 12,
@@ -32051,13 +32032,12 @@ var UserBookList = function UserBookList() {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Books_CitationModal__WEBPACK_IMPORTED_MODULE_8__["default"], {
           chapters: chapters,
           bookTitleForChInput: bookTitleForChInput,
+          setBookTitleForChInput: setBookTitleForChInput,
           citationModalOpen: citationModalOpen,
-          content: content,
-          citationPage: citationPage,
           bookIdForChInput: bookIdForChInput,
+          setBookIdForChInput: setBookIdForChInput,
           handleClose: handleClose,
-          handleFieldChange: handleFieldChange,
-          handleCitationSubmit: handleCitationSubmit
+          setErrors: setErrors
         })
       })]
     });
