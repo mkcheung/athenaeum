@@ -58,9 +58,6 @@ const UserBookList = () => {
     const [ chapterModalOpen, setChapterModalOpen ] = useState(false);
     const [ citationModalOpen, setCitationModalOpen ] = useState(false);
     const [ chapterSelectionModalOpen, setChapterSelectionModalOpen] = useState(false);
-    const [ chapterTitle, setChapterTitle ] = useState('');
-    const [ chapterPageBegin, setChapterPageBegin ] = useState(null);
-    const [ chapterPageEnd, setChapterPageEnd ] = useState(null);
     const [ errors, setErrors ] = useState('');
 
     const [authState,setAuthState] = useContext(AuthContext);
@@ -79,16 +76,11 @@ const UserBookList = () => {
 	};
 
 	const handleOpenChapterInput = async (bookId) => {
-		const { 
-			books
-		} = this.state;
 		let selectedBook = books.find(book => book.id === bookId);
 
-		this.setState({ 
-			bookTitleForChInput: selectedBook['title'],
-			bookIdForChInput: selectedBook['id'],
-			chapterModalOpen:true, 
-		});
+		setBookTitleForChInput(selectedBook['title']);
+		setBookIdForChInput(selectedBook['id']);
+		setChapterModalOpen(true);
 	};
 
 	const handleOpenAddCitationInput = async (bookId) => {
@@ -186,50 +178,6 @@ const UserBookList = () => {
     const onFilesError = (error, file) => {
         console.log('error code ' + error.code + ': ' + error.message)
     }
-
-	// const handleChapterSubmit = async () => {
- //        const { 
- //        	bookIdForChInput,
- //        	chapterPageBegin,
- //        	chapterPageEnd,
- //        	chapterTitle,
- //        	chapterNum,
- //        	token
- //        } = this.state;
-
- //        let data = {
- //        	bookIdForChInput,
- //        	chapterPageBegin,
- //        	chapterPageEnd,
- //        	chapterTitle,
- //        	chapterNum
- //        }
-
-	// 	axios.post('/api/chapters', { 
- //        	data 
- //        },
- //        {   
- //        	headers: {
- //                'Authorization': 'Bearer ' + authState.accessToken,
- //                'Accept': 'application/json'
- //            },
- //        })
- //        .then(response => {
-	// 		swal("Done!", "Chapter Added!", "success");
- //            this.setState({
-	// 		    bookIdForChInput: null,
-	// 		    chapterPageBegin: null,
-	// 		    chapterPageEnd: null,
-	// 		    chapterTitle: '',
- //            	chapterNum: null
-
- //            });
-	// 		handleClose();
-	// 	})
-	// 	.catch(error => {
-	// 		setErrors(error.response.data.errors);
-	// 	});
-	// }
 
 	const handleFieldChange = async (event) => {
 
@@ -422,23 +370,18 @@ const UserBookList = () => {
 		        		/>
 			        </Grid>
 			        <Grid item xs={12}>
-		        		{
-		        		// 	<AddChapterModal 
-		        		// 	bookTitleForChInput={bookTitleForChInput} 
-		        		// 	bookIdForChInput={bookIdForChInput} 
-		        		// 	handleFieldChange={handleFieldChange} 
-		        		// 	chapterModalOpen={chapterModalOpen} 
-		        		// 	chapterNum={chapterNum}
-		        		// 	chapterPageBegin={chapterPageBegin}
-		        		// 	chapterPageEnd={chapterPageEnd} 
-		        		// 	chapterTitle={chapterTitle} 
-		        		// 	handleChapterSubmit={handleChapterSubmit} 
-		        		// 	handleClose={handleClose} 
-		        		// />
-		        	}
+	        			<AddChapterModal 
+		        			bookTitleForChInput={bookTitleForChInput} 
+		        			bookIdForChInput={bookIdForChInput} 
+		        			setBookIdForChInput={setBookIdForChInput}
+		        			chapterModalOpen={chapterModalOpen} 
+		        			handleClose={handleClose} 
+		        			setErrors={setErrors}
+		        		/>
 			        </Grid>
 			        <Grid item xs={12}>
 		        		<ChapterSelectionModal 
+		        			bookIdForChInput={bookIdForChInput}
 		        			chapters={chapters}
 		        			chapterSelectionModalOpen={chapterSelectionModalOpen} 
 		        			selectedChapter={selectedChapter}

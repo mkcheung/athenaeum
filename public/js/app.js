@@ -28372,16 +28372,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_files__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-files */ "./node_modules/react-files/dist/index.js");
-/* harmony import */ var react_files__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_files__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/makeStyles.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputLabel/InputLabel.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Button/Button.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Modal/Modal.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_files__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-files */ "./node_modules/react-files/dist/index.js");
+/* harmony import */ var react_files__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_files__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/makeStyles.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputLabel/InputLabel.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Button/Button.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Modal/Modal.js");
+/* harmony import */ var _GlobalStates__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../GlobalStates */ "./resources/js/components/GlobalStates.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -28393,6 +28404,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -28415,7 +28428,7 @@ function getModalStyle() {
   };
 }
 
-var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["default"])(function (theme) {
+var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__["default"])(function (theme) {
   return {
     paper: {
       position: 'absolute',
@@ -28432,104 +28445,195 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["defaul
 var AddChapterModal = function AddChapterModal(props) {
   var classes = useStyles(); // getModalStyle is not a pure function, we roll the style only on the first render
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(getModalStyle),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(getModalStyle),
       _useState2 = _slicedToArray(_useState, 1),
       modalStyle = _useState2[0];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      chapterModalOpen = _useState4[0],
-      setOpen = _useState4[1];
+      chapterNum = _useState4[0],
+      setChapterNum = _useState4[1];
 
-  var body = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      chapterModalOpen = _useState6[0],
+      setOpen = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      chapterTitle = _useState8[0],
+      setChapterTitle = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState10 = _slicedToArray(_useState9, 2),
+      chapterPageBegin = _useState10[0],
+      setChapterPageBegin = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState12 = _slicedToArray(_useState11, 2),
+      chapterPageEnd = _useState12[0],
+      setChapterPageEnd = _useState12[1];
+
+  var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_GlobalStates__WEBPACK_IMPORTED_MODULE_3__.AuthContext),
+      _useContext2 = _slicedToArray(_useContext, 2),
+      authState = _useContext2[0],
+      setAuthState = _useContext2[1];
+
+  var handleChapterSubmit = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              data = {
+                book_id: props.bookIdForChInput,
+                page_begin: chapterPageBegin,
+                page_end: chapterPageEnd,
+                chapter_title: chapterTitle,
+                chapter_number: chapterNum
+              };
+              axios.post('/api/chapters', {
+                data: data
+              }, {
+                headers: {
+                  'Authorization': 'Bearer ' + authState.accessToken,
+                  'Accept': 'application/json'
+                }
+              }).then(function (response) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire("Done!", "Chapter Added!", "success");
+                props.setBookIdForChInput(null);
+                setChapterPageBegin(null);
+                setChapterPageEnd(null);
+                setChapterTitle('');
+                setChapterNum(null);
+                props.handleClose();
+              })["catch"](function (error) {
+                props.setErrors(error.response.data.errors);
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function handleChapterSubmit() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var handleChapterNumChange = function handleChapterNumChange(e) {
+    var chapterNum = e.target.value;
+    setChapterNum(chapterNum);
+  };
+
+  var handleChapterTitleChange = function handleChapterTitleChange(e) {
+    var chapterTitle = e.target.value;
+    setChapterTitle(chapterTitle);
+  };
+
+  var handleChPageBeginChange = function handleChPageBeginChange(e) {
+    var pageBegin = e.target.value;
+    setChapterPageBegin(pageBegin);
+  };
+
+  var handleChPageEndChange = function handleChPageEndChange(e) {
+    var pageEnd = e.target.value;
+    setChapterPageEnd(pageEnd);
+  };
+
+  var body = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
     container: true,
     spacing: 3,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       style: modalStyle,
       className: classes.paper,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
         id: "simple-modal-title",
         children: "Add Chapter"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
         noValidate: true,
         autoComplete: "off",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
           item: true,
           xs: 12,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
             item: true,
             xs: 12,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
               htmlFor: "title",
               children: "Title:"
             }), props.bookTitleForChInput]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
             item: true,
             xs: 12,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
               htmlFor: "chapterNum",
               children: "Chapter #:"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__["default"], {
               id: "chapterNum",
               "aria-describedby": "my-helper-text",
-              value: props.chapterNum,
-              onChange: props.handleFieldChange
+              value: chapterNum,
+              onChange: handleChapterNumChange
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
             item: true,
             xs: 12,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
               htmlFor: "chapterTitle",
               children: "Chapter Title:"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__["default"], {
               id: "chapterTitle",
               "aria-describedby": "my-helper-text",
-              value: props.chapterTitle,
-              onChange: props.handleFieldChange
+              value: chapterTitle,
+              onChange: handleChapterTitleChange
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
             item: true,
             xs: 12,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
               htmlFor: "chapterPageBegin",
               children: "Page - Begin:"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__["default"], {
               id: "chapterPageBegin",
               "aria-describedby": "my-helper-text",
-              value: props.chapterPageBegin,
-              onChange: props.handleFieldChange
+              value: chapterPageBegin,
+              onChange: handleChPageBeginChange
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
             item: true,
             xs: 12,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
               htmlFor: "chapterPageEnd",
               children: "Page - End:"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__["default"], {
               id: "chapterPageEnd",
               "aria-describedby": "my-helper-text",
-              value: props.chapterPageEnd,
-              onChange: props.handleFieldChange
+              value: chapterPageEnd,
+              onChange: handleChPageEndChange
             })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
           item: true,
           xs: 12,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
             variant: "contained",
             color: "primary",
             onClick: function onClick() {
-              props.handleChapterSubmit();
+              handleChapterSubmit();
             },
             children: "Create Chapter Entry"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {})]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {})]
       })]
     })
   });
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
       open: props.chapterModalOpen,
       onClose: props.handleClose,
       "aria-labelledby": "simple-modal-title",
@@ -31378,23 +31482,8 @@ var UserBookList = function UserBookList() {
 
   var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState38 = _slicedToArray(_useState37, 2),
-      chapterTitle = _useState38[0],
-      setChapterTitle = _useState38[1];
-
-  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
-      _useState40 = _slicedToArray(_useState39, 2),
-      chapterPageBegin = _useState40[0],
-      setChapterPageBegin = _useState40[1];
-
-  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
-      _useState42 = _slicedToArray(_useState41, 2),
-      chapterPageEnd = _useState42[0],
-      setChapterPageEnd = _useState42[1];
-
-  var _useState43 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
-      _useState44 = _slicedToArray(_useState43, 2),
-      errors = _useState44[0],
-      setErrors = _useState44[1];
+      errors = _useState38[0],
+      setErrors = _useState38[1];
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_GlobalStates__WEBPACK_IMPORTED_MODULE_10__.AuthContext),
       _useContext2 = _slicedToArray(_useContext, 2),
@@ -31431,23 +31520,19 @@ var UserBookList = function UserBookList() {
 
   var handleOpenChapterInput = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(bookId) {
-      var books, selectedBook;
+      var selectedBook;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              books = _this.state.books;
               selectedBook = books.find(function (book) {
                 return book.id === bookId;
               });
+              setBookTitleForChInput(selectedBook['title']);
+              setBookIdForChInput(selectedBook['id']);
+              setChapterModalOpen(true);
 
-              _this.setState({
-                bookTitleForChInput: selectedBook['title'],
-                bookIdForChInput: selectedBook['id'],
-                chapterModalOpen: true
-              });
-
-            case 3:
+            case 4:
             case "end":
               return _context2.stop();
           }
@@ -31628,47 +31713,7 @@ var UserBookList = function UserBookList() {
 
   var onFilesError = function onFilesError(error, file) {
     console.log('error code ' + error.code + ': ' + error.message);
-  }; // const handleChapterSubmit = async () => {
-  //        const { 
-  //        	bookIdForChInput,
-  //        	chapterPageBegin,
-  //        	chapterPageEnd,
-  //        	chapterTitle,
-  //        	chapterNum,
-  //        	token
-  //        } = this.state;
-  //        let data = {
-  //        	bookIdForChInput,
-  //        	chapterPageBegin,
-  //        	chapterPageEnd,
-  //        	chapterTitle,
-  //        	chapterNum
-  //        }
-  // 	axios.post('/api/chapters', { 
-  //        	data 
-  //        },
-  //        {   
-  //        	headers: {
-  //                'Authorization': 'Bearer ' + authState.accessToken,
-  //                'Accept': 'application/json'
-  //            },
-  //        })
-  //        .then(response => {
-  // 		swal("Done!", "Chapter Added!", "success");
-  //            this.setState({
-  // 		    bookIdForChInput: null,
-  // 		    chapterPageBegin: null,
-  // 		    chapterPageEnd: null,
-  // 		    chapterTitle: '',
-  //            	chapterNum: null
-  //            });
-  // 		handleClose();
-  // 	})
-  // 	.catch(error => {
-  // 		setErrors(error.response.data.errors);
-  // 	});
-  // }
-
+  };
 
   var handleFieldChange = /*#__PURE__*/function () {
     var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8(event) {
@@ -32015,11 +32060,20 @@ var UserBookList = function UserBookList() {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_23__["default"], {
         item: true,
-        xs: 12
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Books_AddChapterModal__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          bookTitleForChInput: bookTitleForChInput,
+          bookIdForChInput: bookIdForChInput,
+          setBookIdForChInput: setBookIdForChInput,
+          chapterModalOpen: chapterModalOpen,
+          handleClose: handleClose,
+          setErrors: setErrors
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_23__["default"], {
         item: true,
         xs: 12,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Books_ChapterSelectionModal__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          bookIdForChInput: bookIdForChInput,
           chapters: chapters,
           chapterSelectionModalOpen: chapterSelectionModalOpen,
           selectedChapter: selectedChapter,

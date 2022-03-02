@@ -27,11 +27,11 @@ class ChapterController extends Controller
     public function store(Request $request)
     {
         $chapter = Chapter::create([
-          'book_id' => $request['data']['bookIdForChInput'],
-          'page_begin' => $request['data']['chapterPageBegin'],
-          'page_end' => $request['data']['chapterPageEnd'],
-          'chapter_number' => $request['data']['chapterNum'],
-          'chapter_title' => $request['data']['chapterTitle']
+          'book_id' => $request['data']['book_id'],
+          'page_begin' => $request['data']['page_begin'],
+          'page_end' => $request['data']['page_end'],
+          'chapter_number' => $request['data']['chapter_number'],
+          'chapter_title' => $request['data']['chapter_title']
         ]);
 
         return response()->json('Chapter created!');

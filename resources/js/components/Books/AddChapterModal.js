@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Files from 'react-files'
 import { makeStyles } from '@material-ui/core/styles';
 import { 
@@ -13,6 +13,8 @@ import {
 	Paper,
 	TextField
 } from '@material-ui/core';
+import { AuthContext } from '../GlobalStates';
+import swal from 'sweetalert2';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -44,8 +46,66 @@ const useStyles = makeStyles((theme) => ({
 const AddChapterModal = (props) => {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = useState(getModalStyle);
-  const [chapterModalOpen, setOpen] = useState(false);
+  const [ modalStyle ] = useState(getModalStyle);
+  const [ chapterNum, setChapterNum ] = useState(null);
+  const [ chapterModalOpen, setOpen ] = useState(false);
+  const [ chapterTitle, setChapterTitle ] = useState('');
+  const [ chapterPageBegin, setChapterPageBegin ] = useState(null);
+  const [ chapterPageEnd, setChapterPageEnd ] = useState(null);
+
+  const [ authState, setAuthState ] = useContext(AuthContext);
+
+	const handleChapterSubmit = async () => {
+
+    let data = {
+    	book_id: props.bookIdForChInput,
+    	page_begin: chapterPageBegin,
+    	page_end: chapterPageEnd,
+    	chapter_title: chapterTitle,
+    	chapter_number: chapterNum
+    };
+
+		axios.post('/api/chapters', { 
+      	data 
+      },
+      {   
+      	headers: {
+              'Authorization': 'Bearer ' + authState.accessToken,
+              'Accept': 'application/json'
+          },
+      })
+      .then(response => {
+				swal.fire("Done!", "Chapter Added!", "success");
+				props.setBookIdForChInput(null);
+				setChapterPageBegin(null);
+				setChapterPageEnd(null);
+    		setChapterTitle('');
+    		setChapterNum(null);
+      	props.handleClose();
+		})
+		.catch(error => {
+			props.setErrors(error.response.data.errors);
+		});
+	}
+  const handleChapterNumChange = (e) => {
+    let chapterNum = e.target.value;
+    setChapterNum(chapterNum);
+  }
+
+  const handleChapterTitleChange = (e) => {
+    let chapterTitle = e.target.value;
+    setChapterTitle(chapterTitle);
+  }
+
+  const handleChPageBeginChange = (e) => {
+    let pageBegin = e.target.value;
+    setChapterPageBegin(pageBegin);
+  }
+
+  const handleChPageEndChange = (e) => {
+    let pageEnd = e.target.value;
+    setChapterPageEnd(pageEnd);
+  }
 
   const body = (
         <Grid container spacing={3}>
@@ -63,28 +123,28 @@ const AddChapterModal = (props) => {
 						
 						<Grid item xs={12}>
 							<InputLabel htmlFor="chapterNum">Chapter #:</InputLabel>
-							<TextField id="chapterNum" aria-describedby="my-helper-text" value={props.chapterNum} onChange={props.handleFieldChange} />
+							<TextField id="chapterNum" aria-describedby="my-helper-text" value={chapterNum} onChange={handleChapterNumChange} />
 						</Grid>
 
 						<Grid item xs={12}>
 							<InputLabel htmlFor="chapterTitle">Chapter Title:</InputLabel>
-							<TextField id="chapterTitle" aria-describedby="my-helper-text" value={props.chapterTitle} onChange={props.handleFieldChange} />
+							<TextField id="chapterTitle" aria-describedby="my-helper-text" value={chapterTitle} onChange={handleChapterTitleChange} />
 						</Grid>
 						
 						<Grid item xs={12}>
 							<InputLabel htmlFor="chapterPageBegin">Page - Begin:</InputLabel>
-							<TextField id="chapterPageBegin" aria-describedby="my-helper-text" value={props.chapterPageBegin} onChange={props.handleFieldChange} />
+							<TextField id="chapterPageBegin" aria-describedby="my-helper-text" value={chapterPageBegin} onChange={handleChPageBeginChange} />
 						</Grid>
 						
 						<Grid item xs={12}>
 							<InputLabel htmlFor="chapterPageEnd">Page - End:</InputLabel>
-							<TextField id="chapterPageEnd" aria-describedby="my-helper-text" value={props.chapterPageEnd} onChange={props.handleFieldChange} />
+							<TextField id="chapterPageEnd" aria-describedby="my-helper-text" value={chapterPageEnd} onChange={handleChPageEndChange} />
 						</Grid>
 					</Grid>
 					<br/>
 					
 					<Grid item xs={12}>
-						<Button variant="contained" color="primary" onClick={() => { props.handleChapterSubmit() }}>
+						<Button variant="contained" color="primary" onClick={() => { handleChapterSubmit() }}>
 							Create Chapter Entry
 						</Button>
 					</Grid>
