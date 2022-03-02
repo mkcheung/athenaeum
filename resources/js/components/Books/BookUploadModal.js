@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Files from 'react-files'
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { 
@@ -16,7 +16,10 @@ import {
 	Paper,
 	TextField
 } from '@material-ui/core';
+import { AuthContext } from '../GlobalStates';
 import { green } from '@material-ui/core/colors';
+import swal from 'sweetalert2';
+
 const GreenCheckbox = withStyles({
 	root: {
 		color: green[400],
@@ -57,8 +60,95 @@ const useStyles = makeStyles((theme) => ({
 const BookUploadModal = (props) => {
 	const classes = useStyles();
 	// getModalStyle is not a pure function, we roll the style only on the first render
-	const [modalStyle] = useState(getModalStyle);
-	const [open, setOpen] = useState(false);
+	const [ modalStyle ] = useState(getModalStyle);
+	const [ open, setOpen ] = useState(false);
+  const [ addBookOnly, setAddBookOnly ] = useState(false);
+  const [ bookTitle, setBookTitle ] = useState('');
+  const [ jsonFile, setJsonFile] = useState({});
+	const [pages, setPages] = useState(0);
+	const [author, setAuthor] = useState({
+		author_first_name:'',
+		author_middle:'',
+		author_last_name:''
+	});
+  const [authState,setAuthState] = useContext(AuthContext);
+
+
+	const handleAddBook = (e) => {
+		const checkStatus = e.target.checked;
+		setAddBookOnly(checkStatus);
+	}
+
+	const bookTitleChange = (e) => {
+		const bookTitle = e.target.value;
+		setBookTitle(bookTitle);
+	}
+
+	const handleAuthorFirstNameChange = (e) => {
+		let firstName = event.target.value;
+		setAuthor((prevState) => ({
+			...prevState,
+			author_first_name:firstName
+		}));
+	}
+
+	const handleAuthorMiddleNameChange = (e) => {
+		let middleName = event.target.value;
+		setAuthor((prevState) => ({
+			...prevState,
+			author_middle:middleName
+		}));
+	}
+
+	const handleAuthorLastNameChange = (e) => {
+		let lastName = event.target.value;
+		setAuthor((prevState) => ({
+			...prevState,
+			author_last_name: lastName
+		}));
+	}
+
+	const handlePageNumberChange = (e) => {
+		let pageNumbers = e.target.value;
+		setPages(pageNumbers);
+	}
+
+	const handleSubmit = async () => {
+
+    let data = {
+    	...author,
+    	bookTitle,
+    	jsonFile, 
+    	pages,
+    	userId: authState.user.id
+    }
+
+		axios.post('/api/books', { 
+        	data 
+        },
+        {   
+        	headers: {
+                'Authorization': 'Bearer ' + authState.accessToken,
+                'Accept': 'application/json'
+            },
+        })
+		.then(response => {
+			swal.fire("Done!", "Book Citations Uploaded!", "success");
+        setAuthor({
+			    author_first_name: '',
+			    author_middle: '',
+			    author_last_name: '',
+        });
+        setAddBookOnly(false);
+        setBookTitle('');
+        setPages(0);
+			  props.handleClose();
+		})
+		.catch(error => {
+			console.log(error);
+			props.setErrors(error.response.data.errors);
+		});
+	};
 
 	let bookLoadingDisplay = '';
 
@@ -66,11 +156,11 @@ const BookUploadModal = (props) => {
 	let fileUploadComponent = '';
 	let handleSubmitButtonTitle = '';
 
-	if(props.addBookOnly===true){
+	if(addBookOnly===true){
 		bookTitleDisplay = 
 			<Grid item xs={12}>
 				<InputLabel htmlFor="title">Title:</InputLabel>
-				<TextField id="bookTitle" aria-describedby="my-helper-text" value={props.bookTitle} onChange={props.handleFieldChange} />
+				<TextField id="bookTitle" aria-describedby="my-helper-text" value={bookTitle} onChange={bookTitleChange} />
 			</Grid>;
 		fileUploadComponent='';
 		handleSubmitButtonTitle='Add Book';
@@ -78,7 +168,7 @@ const BookUploadModal = (props) => {
 		bookTitleDisplay = 
 			<Grid item xs={12}>
 				<InputLabel htmlFor="title">Title:</InputLabel>
-				{props.bookTitle}
+				{bookTitle}
 			</Grid>;
 
 		fileUploadComponent = <div className="files">
@@ -111,7 +201,7 @@ const BookUploadModal = (props) => {
 					
 					<Grid item xs={12}>
 						<FormControlLabel
-							control={<GreenCheckbox checked={props.addBookOnly} onChange={props.handleAddBook} name="add_book_only" />}
+							control={<GreenCheckbox checked={addBookOnly} onChange={handleAddBook} name="add_book_only" />}
 							label="Add Book Only:"
 						/>
 					
@@ -120,22 +210,22 @@ const BookUploadModal = (props) => {
 						
 						<Grid item xs={12}>
 							<InputLabel htmlFor="author_first_name">Author First Name:</InputLabel>
-							<TextField id="author_first_name" aria-describedby="my-helper-text" value={props.author_first_name} onChange={props.handleFieldChange} />
+							<TextField id="author_first_name" aria-describedby="my-helper-text" value={author.author_first_name} onChange={handleAuthorFirstNameChange} />
 						</Grid>
 						
 						<Grid item xs={12}>
 							<InputLabel htmlFor="author_middle">Author Middle:</InputLabel>
-							<TextField id="author_middle" aria-describedby="my-helper-text" value={props.author_middle} onChange={props.handleFieldChange} />
+							<TextField id="author_middle" aria-describedby="my-helper-text" value={author.author_middle} onChange={handleAuthorMiddleNameChange} />
 						</Grid>
 						
 						<Grid item xs={12}>
 							<InputLabel htmlFor="author_last_name">Author Last Name:</InputLabel>
-							<TextField id="author_last_name" aria-describedby="my-helper-text" value={props.author_last_name} onChange={props.handleFieldChange} />
+							<TextField id="author_last_name" aria-describedby="my-helper-text" value={author.author_last_name} onChange={handleAuthorLastNameChange} />
 						</Grid>
 						
 						<Grid item xs={12}>
 							<InputLabel htmlFor="pages">Pages:</InputLabel>
-							<TextField id="pages" aria-describedby="my-helper-text" onChange={props.handleFieldChange} />
+							<TextField id="pages" aria-describedby="my-helper-text" onChange={handlePageNumberChange} />
 						</Grid>
 						<br/>
 				        {fileUploadComponent}
@@ -143,7 +233,7 @@ const BookUploadModal = (props) => {
 					<br/>
 					
 					<Grid item xs={12}>
-						<Button variant="contained" color="primary" onClick={() => { props.handleSubmit() }}>
+						<Button variant="contained" color="primary" onClick={() => { handleSubmit() }}>
 							{handleSubmitButtonTitle}
 						</Button>
 					</Grid>

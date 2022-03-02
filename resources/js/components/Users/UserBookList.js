@@ -52,10 +52,7 @@ const UserBookList = () => {
     const [ selectedBookId, setSelectedBookId ] = useState(null);
     const [ selectedChapter, setSelectedChapter ] = useState(null);
     const [ modalOpen, setModalOpen ] = useState(false);
-    const [ jsonFile, setJsonFile] = useState({});
     const [ citationPage, setCitationPage ] = useState(null);
-    const [ pages, setPages ] = useState(null);
-    const [ bookTitle, setBookTitle ] = useState('');
     const [ author_first_name, setAuthorFirstName ] = useState('');
     const [ author_middle, setAuthorMiddleName ] = useState('');
     const [ author_last_name, setAuthorLastName ] = useState('');
@@ -68,7 +65,7 @@ const UserBookList = () => {
     const [ chapterTitle, setChapterTitle ] = useState('');
     const [ chapterPageBegin, setChapterPageBegin ] = useState(null);
     const [ chapterPageEnd, setChapterPageEnd ] = useState(null);
-
+    const [ errors, setErrors ] = useState('');
 
     const [authState,setAuthState] = useContext(AuthContext);
 	useEffect(()=> {
@@ -77,7 +74,6 @@ const UserBookList = () => {
 
 
 	useEffect(()=> {
-		console.log('rogt');
 	    loadData();
 	},[selectedBookCitations, loading, modalLoading])
 
@@ -116,11 +112,11 @@ const UserBookList = () => {
 
 	const handleOpenChapterSelectionModal = async (bookId, chapters) => {
 
-		this.setState({ 
-			chapters: chapters,
-			chapterSelectionModalOpen:true, 
-			selectedBookId:bookId
-		});
+        unstable_batchedUpdates(() => {
+        	setChapters(chapters);
+	        setChapterSelectionModalOpen(true);
+	        setSelectedBookId(bookId);
+     	});
 	};
 
 	const assignChapters = async (bookId) => {
@@ -140,9 +136,7 @@ const UserBookList = () => {
 			this.loadData();
 		})
 		.catch(error => {
-			this.setState({
-		    	errors: error.response.data.errors
-			});
+			setErrors(error.response.data.errors);
 		});
 	};
 
@@ -187,12 +181,10 @@ const UserBookList = () => {
 	};
 
 	const handleClose = async () => {
-		this.setState({
-			modalOpen:false,
-			chapterModalOpen:false,
-			chapterSelectionModalOpen:false,
-			citationModalOpen: false
-		});
+		setModalOpen(false);
+		setChapterModalOpen(false);
+		setCitationModalOpen(false);
+		setChapterSelectionModalOpen(false);
 	};
 
     const onFilesChange = (files) => {
@@ -202,64 +194,6 @@ const UserBookList = () => {
     const onFilesError = (error, file) => {
         console.log('error code ' + error.code + ': ' + error.message)
     }
-
-	const handleSubmit = async () => {
-
-        await this.setState({
-            modalLoading: true,
-        });
-
-        const { 
-	        author_first_name,
-	        author_middle,
-	        author_last_name,
-        	bookTitle,
-        	jsonFile, 
-        	pages, 
-	        token,
-        	user
-        } = this.state;
-
-        let data = {
-        	bookTitle,
-        	jsonFile, 
-        	pages,
-        	userId: user.id, 
-	        author_first_name,
-	        author_middle,
-	        author_last_name,
-        }
-
-		axios.post('/api/books', { 
-        	data 
-        },
-        {   
-        	headers: {
-                'Authorization': 'Bearer ' + authState.accessToken,
-                'Accept': 'application/json'
-            },
-        })
-		.then(response => {
-			swal("Done!", "Book Citations Uploaded!", "success");
-            this.setState({
-                loading: true,
-                addBookOnly: false,
-                modalLoading:false,
-                jsonFile: {},
-			    author_first_name: '',
-			    author_middle: '',
-			    author_last_name: '',
-            	bookTitle: '',
-            	pages:null
-            });
-			this.handleClose();
-		})
-		.catch(error => {
-			this.setState({
-		    	errors: error.response.data.errors
-			});
-		});
-	};
 
 	const handleChapterSubmit = async () => {
         const { 
@@ -298,12 +232,10 @@ const UserBookList = () => {
             	chapterNum: null
 
             });
-			this.handleClose();
+			handleClose();
 		})
 		.catch(error => {
-			this.setState({
-		    	errors: error.response.data.errors
-			});
+			setErrors(error.response.data.errors);
 		});
 	}
 
@@ -345,24 +277,18 @@ const UserBookList = () => {
 
             });
         	await this.loadData();
-			this.handleClose();
+			handleClose();
 		})
 		.catch(error => {
-			this.setState({
-		    	errors: error.response.data.errors
-			});
+			setErrors(error.response.data.errors);
 		});
 	}
 
 	const handleFieldChange = async (event) => {
 
-		let { 
-			pages
-		} = this.state;
-		pages = event.target.value
-		this.setState({
+		setState({
+			...state,
             [event.target.id]: event.target.value,
-			pages:pages
 		});
 	}
 
@@ -438,12 +364,6 @@ const UserBookList = () => {
         return books;
 	}
 
-	const handleAddBook = (e) => {
-		this.setState({
-			addBookOnly: e.target.checked
-		});
-	}
-
 	let listOfBooks = '';
 
     if(books && books.length>0){
@@ -490,7 +410,7 @@ const UserBookList = () => {
 									<DeleteIcon />
 								</IconButton>
 							</Tooltip>
-							{ (book.chapters.length > 0) ? <Button variant="outlined" onClick={()=>this.handleOpenChapterSelectionModal(book.id, book.chapters)} >Chapters</Button> : '' }
+							{ (book.chapters.length > 0) ? <Button variant="outlined" onClick={()=> handleOpenChapterSelectionModal(book.id, book.chapters)} >Chapters</Button> : '' }
 						</div>
 						<Divider />
 					</div>
@@ -554,21 +474,13 @@ const UserBookList = () => {
 			        </Grid>
 			        <Grid item xs={12}>
 		        		<BookUploadModal 
-		        			bookTitle={bookTitle} 
-		        			addBookOnly={addBookOnly}
-		        			handleAddBook={handleAddBook}
-		        			author_first_name={author_first_name} 
-		        			author_middle={author_middle} 
-		        			author_last_name={author_last_name} 
-		        			handleFieldChange={handleFieldChange} 
-		        			pages={pages} 
 		        			modalOpen={modalOpen} 
-		        			handleSubmit={handleSubmit} 
 		        			handleClose={handleClose} 
 		        			onFilesChange={onFilesChange} 
 		        			onFilesError={onFilesError} 
 		        			handleOpen={handleOpen}
 		        			modalLoading={modalLoading} 
+		        			setErrors={setErrors}
 		        		/>
 			        </Grid>
 			        <Grid item xs={12}>

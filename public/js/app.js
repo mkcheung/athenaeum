@@ -28554,21 +28554,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_files__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-files */ "./node_modules/react-files/dist/index.js");
-/* harmony import */ var react_files__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_files__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/makeStyles.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Checkbox/Checkbox.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputLabel/InputLabel.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/CircularProgress/CircularProgress.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/FormControlLabel/FormControlLabel.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Button/Button.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Modal/Modal.js");
-/* harmony import */ var _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/colors */ "./node_modules/@material-ui/core/esm/colors/green.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_files__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-files */ "./node_modules/react-files/dist/index.js");
+/* harmony import */ var react_files__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_files__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/makeStyles.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Checkbox/Checkbox.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputLabel/InputLabel.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/CircularProgress/CircularProgress.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/FormControlLabel/FormControlLabel.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Button/Button.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Modal/Modal.js");
+/* harmony import */ var _GlobalStates__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../GlobalStates */ "./resources/js/components/GlobalStates.js");
+/* harmony import */ var _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/colors */ "./node_modules/@material-ui/core/esm/colors/green.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -28594,16 +28605,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var GreenCheckbox = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["default"])({
+
+
+var GreenCheckbox = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__["default"])({
   root: {
-    color: _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_4__["default"][400],
+    color: _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_7__["default"][400],
     '&$checked': {
-      color: _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_4__["default"][600]
+      color: _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_7__["default"][600]
     }
   },
   checked: {}
 })(function (props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"], _objectSpread({
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], _objectSpread({
     color: "default"
   }, props));
 });
@@ -28622,7 +28635,7 @@ function getModalStyle() {
   };
 }
 
-var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__["default"])(function (theme) {
+var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_9__["default"])(function (theme) {
   return {
     paper: {
       position: 'absolute',
@@ -28639,48 +28652,173 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__["defaul
 var BookUploadModal = function BookUploadModal(props) {
   var classes = useStyles(); // getModalStyle is not a pure function, we roll the style only on the first render
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(getModalStyle),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(getModalStyle),
       _useState2 = _slicedToArray(_useState, 1),
       modalStyle = _useState2[0];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
       open = _useState4[0],
       setOpen = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      addBookOnly = _useState6[0],
+      setAddBookOnly = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      bookTitle = _useState8[0],
+      setBookTitle = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+      _useState10 = _slicedToArray(_useState9, 2),
+      jsonFile = _useState10[0],
+      setJsonFile = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState12 = _slicedToArray(_useState11, 2),
+      pages = _useState12[0],
+      setPages = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    author_first_name: '',
+    author_middle: '',
+    author_last_name: ''
+  }),
+      _useState14 = _slicedToArray(_useState13, 2),
+      author = _useState14[0],
+      setAuthor = _useState14[1];
+
+  var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_GlobalStates__WEBPACK_IMPORTED_MODULE_3__.AuthContext),
+      _useContext2 = _slicedToArray(_useContext, 2),
+      authState = _useContext2[0],
+      setAuthState = _useContext2[1];
+
+  var handleAddBook = function handleAddBook(e) {
+    var checkStatus = e.target.checked;
+    setAddBookOnly(checkStatus);
+  };
+
+  var bookTitleChange = function bookTitleChange(e) {
+    var bookTitle = e.target.value;
+    setBookTitle(bookTitle);
+  };
+
+  var handleAuthorFirstNameChange = function handleAuthorFirstNameChange(e) {
+    var firstName = event.target.value;
+    setAuthor(function (prevState) {
+      return _objectSpread(_objectSpread({}, prevState), {}, {
+        author_first_name: firstName
+      });
+    });
+  };
+
+  var handleAuthorMiddleNameChange = function handleAuthorMiddleNameChange(e) {
+    var middleName = event.target.value;
+    setAuthor(function (prevState) {
+      return _objectSpread(_objectSpread({}, prevState), {}, {
+        author_middle: middleName
+      });
+    });
+  };
+
+  var handleAuthorLastNameChange = function handleAuthorLastNameChange(e) {
+    var lastName = event.target.value;
+    setAuthor(function (prevState) {
+      return _objectSpread(_objectSpread({}, prevState), {}, {
+        author_last_name: lastName
+      });
+    });
+  };
+
+  var handlePageNumberChange = function handlePageNumberChange(e) {
+    var pageNumbers = e.target.value;
+    setPages(pageNumbers);
+  };
+
+  var handleSubmit = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              data = _objectSpread(_objectSpread({}, author), {}, {
+                bookTitle: bookTitle,
+                jsonFile: jsonFile,
+                pages: pages,
+                userId: authState.user.id
+              });
+              axios.post('/api/books', {
+                data: data
+              }, {
+                headers: {
+                  'Authorization': 'Bearer ' + authState.accessToken,
+                  'Accept': 'application/json'
+                }
+              }).then(function (response) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire("Done!", "Book Citations Uploaded!", "success");
+                setAuthor({
+                  author_first_name: '',
+                  author_middle: '',
+                  author_last_name: ''
+                });
+                setAddBookOnly(false);
+                setBookTitle('');
+                setPages(0);
+                props.handleClose();
+              })["catch"](function (error) {
+                console.log(error);
+                props.setErrors(error.response.data.errors);
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function handleSubmit() {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
   var bookLoadingDisplay = '';
   var bookTitleDisplay = '';
   var fileUploadComponent = '';
   var handleSubmitButtonTitle = '';
 
-  if (props.addBookOnly === true) {
-    bookTitleDisplay = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  if (addBookOnly === true) {
+    bookTitleDisplay = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
       item: true,
       xs: 12,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
         htmlFor: "title",
         children: "Title:"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
         id: "bookTitle",
         "aria-describedby": "my-helper-text",
-        value: props.bookTitle,
-        onChange: props.handleFieldChange
+        value: bookTitle,
+        onChange: bookTitleChange
       })]
     });
     fileUploadComponent = '';
     handleSubmitButtonTitle = 'Add Book';
   } else {
-    bookTitleDisplay = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    bookTitleDisplay = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
       item: true,
       xs: 12,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
         htmlFor: "title",
         children: "Title:"
-      }), props.bookTitle]
+      }), bookTitle]
     });
-    fileUploadComponent = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    fileUploadComponent = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "files",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)((react_files__WEBPACK_IMPORTED_MODULE_1___default()), {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)((react_files__WEBPACK_IMPORTED_MODULE_2___default()), {
         className: "files-dropzone",
         onChange: function onChange(file) {
           props.fileReader.readAsText(file[0]);
@@ -28699,7 +28837,7 @@ var BookUploadModal = function BookUploadModal(props) {
   }
 
   if (props.modalLoading == true) {
-    bookLoadingDisplay = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    bookLoadingDisplay = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["default"], {
       style: {
         margin: 'auto',
         position: 'absolute',
@@ -28710,97 +28848,97 @@ var BookUploadModal = function BookUploadModal(props) {
       }
     });
   } else {
-    bookLoadingDisplay = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    bookLoadingDisplay = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       style: modalStyle,
       className: classes.paper,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
         id: "simple-modal-title",
         children: "Add New Book and Citations"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
         noValidate: true,
         autoComplete: "off",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
           item: true,
           xs: 12,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
-            control: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(GreenCheckbox, {
-              checked: props.addBookOnly,
-              onChange: props.handleAddBook,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["default"], {
+            control: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(GreenCheckbox, {
+              checked: addBookOnly,
+              onChange: handleAddBook,
               name: "add_book_only"
             }),
             label: "Add Book Only:"
-          }), bookTitleDisplay, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          }), bookTitleDisplay, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
             item: true,
             xs: 12,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
               htmlFor: "author_first_name",
               children: "Author First Name:"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__["default"], {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
               id: "author_first_name",
               "aria-describedby": "my-helper-text",
-              value: props.author_first_name,
-              onChange: props.handleFieldChange
+              value: author.author_first_name,
+              onChange: handleAuthorFirstNameChange
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
             item: true,
             xs: 12,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
               htmlFor: "author_middle",
               children: "Author Middle:"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__["default"], {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
               id: "author_middle",
               "aria-describedby": "my-helper-text",
-              value: props.author_middle,
-              onChange: props.handleFieldChange
+              value: author.author_middle,
+              onChange: handleAuthorMiddleNameChange
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
             item: true,
             xs: 12,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
               htmlFor: "author_last_name",
               children: "Author Last Name:"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__["default"], {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
               id: "author_last_name",
               "aria-describedby": "my-helper-text",
-              value: props.author_last_name,
-              onChange: props.handleFieldChange
+              value: author.author_last_name,
+              onChange: handleAuthorLastNameChange
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
             item: true,
             xs: 12,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
               htmlFor: "pages",
               children: "Pages:"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__["default"], {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
               id: "pages",
               "aria-describedby": "my-helper-text",
-              onChange: props.handleFieldChange
+              onChange: handlePageNumberChange
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), fileUploadComponent]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), fileUploadComponent]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
           item: true,
           xs: 12,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_15__["default"], {
             variant: "contained",
             color: "primary",
             onClick: function onClick() {
-              props.handleSubmit();
+              handleSubmit();
             },
             children: handleSubmitButtonTitle
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {})]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {})]
       })]
     });
   }
 
-  var body = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  var body = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
     container: true,
     spacing: 3,
     children: bookLoadingDisplay
   });
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_16__["default"], {
       open: props.modalOpen,
       onClose: props.handleClose,
       "aria-labelledby": "simple-modal-title",
@@ -31005,6 +31143,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var _this = undefined;
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -31104,85 +31246,75 @@ var UserBookList = function UserBookList() {
       modalOpen = _useState24[0],
       setModalOpen = _useState24[1];
 
-  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
       _useState26 = _slicedToArray(_useState25, 2),
-      jsonFile = _useState26[0],
-      setJsonFile = _useState26[1];
+      citationPage = _useState26[0],
+      setCitationPage = _useState26[1];
 
-  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState28 = _slicedToArray(_useState27, 2),
-      citationPage = _useState28[0],
-      setCitationPage = _useState28[1];
+      author_first_name = _useState28[0],
+      setAuthorFirstName = _useState28[1];
 
-  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState30 = _slicedToArray(_useState29, 2),
-      pages = _useState30[0],
-      setPages = _useState30[1];
+      author_middle = _useState30[0],
+      setAuthorMiddleName = _useState30[1];
 
   var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState32 = _slicedToArray(_useState31, 2),
-      bookTitle = _useState32[0],
-      setBookTitle = _useState32[1];
+      author_last_name = _useState32[0],
+      setAuthorLastName = _useState32[1];
 
-  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
       _useState34 = _slicedToArray(_useState33, 2),
-      author_first_name = _useState34[0],
-      setAuthorFirstName = _useState34[1];
+      bookIdForChInput = _useState34[0],
+      setBookIdForChInput = _useState34[1];
 
   var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState36 = _slicedToArray(_useState35, 2),
-      author_middle = _useState36[0],
-      setAuthorMiddleName = _useState36[1];
+      bookTitleForChInput = _useState36[0],
+      setBookTitleForChInput = _useState36[1];
 
-  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
+  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
       _useState38 = _slicedToArray(_useState37, 2),
-      author_last_name = _useState38[0],
-      setAuthorLastName = _useState38[1];
+      chapterModalOpen = _useState38[0],
+      setChapterModalOpen = _useState38[1];
 
-  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
       _useState40 = _slicedToArray(_useState39, 2),
-      bookIdForChInput = _useState40[0],
-      setBookIdForChInput = _useState40[1];
+      citationModalOpen = _useState40[0],
+      setCitationModalOpen = _useState40[1];
 
-  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
+  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
       _useState42 = _slicedToArray(_useState41, 2),
-      bookTitleForChInput = _useState42[0],
-      setBookTitleForChInput = _useState42[1];
+      chapterSelectionModalOpen = _useState42[0],
+      setChapterSelectionModalOpen = _useState42[1];
 
-  var _useState43 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+  var _useState43 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
       _useState44 = _slicedToArray(_useState43, 2),
-      chapterModalOpen = _useState44[0],
-      setChapterModalOpen = _useState44[1];
+      chapterNum = _useState44[0],
+      setChapterNum = _useState44[1];
 
-  var _useState45 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+  var _useState45 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState46 = _slicedToArray(_useState45, 2),
-      citationModalOpen = _useState46[0],
-      setCitationModalOpen = _useState46[1];
+      chapterTitle = _useState46[0],
+      setChapterTitle = _useState46[1];
 
-  var _useState47 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+  var _useState47 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
       _useState48 = _slicedToArray(_useState47, 2),
-      chapterSelectionModalOpen = _useState48[0],
-      setChapterSelectionModalOpen = _useState48[1];
+      chapterPageBegin = _useState48[0],
+      setChapterPageBegin = _useState48[1];
 
   var _useState49 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
       _useState50 = _slicedToArray(_useState49, 2),
-      chapterNum = _useState50[0],
-      setChapterNum = _useState50[1];
+      chapterPageEnd = _useState50[0],
+      setChapterPageEnd = _useState50[1];
 
   var _useState51 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState52 = _slicedToArray(_useState51, 2),
-      chapterTitle = _useState52[0],
-      setChapterTitle = _useState52[1];
-
-  var _useState53 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
-      _useState54 = _slicedToArray(_useState53, 2),
-      chapterPageBegin = _useState54[0],
-      setChapterPageBegin = _useState54[1];
-
-  var _useState55 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
-      _useState56 = _slicedToArray(_useState55, 2),
-      chapterPageEnd = _useState56[0],
-      setChapterPageEnd = _useState56[1];
+      errors = _useState52[0],
+      setErrors = _useState52[1];
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_GlobalStates__WEBPACK_IMPORTED_MODULE_10__.AuthContext),
       _useContext2 = _slicedToArray(_useContext, 2),
@@ -31193,7 +31325,6 @@ var UserBookList = function UserBookList() {
     loadData();
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
-    console.log('rogt');
     loadData();
   }, [selectedBookCitations, loading, modalLoading]);
 
@@ -31287,10 +31418,10 @@ var UserBookList = function UserBookList() {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              _this.setState({
-                chapters: chapters,
-                chapterSelectionModalOpen: true,
-                selectedBookId: bookId
+              (0,react_dom__WEBPACK_IMPORTED_MODULE_9__.unstable_batchedUpdates)(function () {
+                setChapters(chapters);
+                setChapterSelectionModalOpen(true);
+                setSelectedBookId(bookId);
               });
 
             case 1:
@@ -31324,9 +31455,7 @@ var UserBookList = function UserBookList() {
 
                 _this.loadData();
               })["catch"](function (error) {
-                _this.setState({
-                  errors: error.response.data.errors
-                });
+                setErrors(error.response.data.errors);
               });
 
             case 1:
@@ -31397,14 +31526,12 @@ var UserBookList = function UserBookList() {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
-              _this.setState({
-                modalOpen: false,
-                chapterModalOpen: false,
-                chapterSelectionModalOpen: false,
-                citationModalOpen: false
-              });
+              setModalOpen(false);
+              setChapterModalOpen(false);
+              setCitationModalOpen(false);
+              setChapterSelectionModalOpen(false);
 
-            case 1:
+            case 4:
             case "end":
               return _context7.stop();
           }
@@ -31425,81 +31552,15 @@ var UserBookList = function UserBookList() {
     console.log('error code ' + error.code + ': ' + error.message);
   };
 
-  var handleSubmit = /*#__PURE__*/function () {
+  var handleChapterSubmit = /*#__PURE__*/function () {
     var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-      var _this$state, author_first_name, author_middle, author_last_name, bookTitle, jsonFile, pages, token, user, data;
+      var _this$state, bookIdForChInput, chapterPageBegin, chapterPageEnd, chapterTitle, chapterNum, token, data;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
-              _context8.next = 2;
-              return _this.setState({
-                modalLoading: true
-              });
-
-            case 2:
-              _this$state = _this.state, author_first_name = _this$state.author_first_name, author_middle = _this$state.author_middle, author_last_name = _this$state.author_last_name, bookTitle = _this$state.bookTitle, jsonFile = _this$state.jsonFile, pages = _this$state.pages, token = _this$state.token, user = _this$state.user;
-              data = {
-                bookTitle: bookTitle,
-                jsonFile: jsonFile,
-                pages: pages,
-                userId: user.id,
-                author_first_name: author_first_name,
-                author_middle: author_middle,
-                author_last_name: author_last_name
-              };
-              axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/books', {
-                data: data
-              }, {
-                headers: {
-                  'Authorization': 'Bearer ' + authState.accessToken,
-                  'Accept': 'application/json'
-                }
-              }).then(function (response) {
-                swal("Done!", "Book Citations Uploaded!", "success");
-
-                _this.setState({
-                  loading: true,
-                  addBookOnly: false,
-                  modalLoading: false,
-                  jsonFile: {},
-                  author_first_name: '',
-                  author_middle: '',
-                  author_last_name: '',
-                  bookTitle: '',
-                  pages: null
-                });
-
-                _this.handleClose();
-              })["catch"](function (error) {
-                _this.setState({
-                  errors: error.response.data.errors
-                });
-              });
-
-            case 5:
-            case "end":
-              return _context8.stop();
-          }
-        }
-      }, _callee8);
-    }));
-
-    return function handleSubmit() {
-      return _ref8.apply(this, arguments);
-    };
-  }();
-
-  var handleChapterSubmit = /*#__PURE__*/function () {
-    var _ref9 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
-      var _this$state2, bookIdForChInput, chapterPageBegin, chapterPageEnd, chapterTitle, chapterNum, token, data;
-
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
-        while (1) {
-          switch (_context9.prev = _context9.next) {
-            case 0:
-              _this$state2 = _this.state, bookIdForChInput = _this$state2.bookIdForChInput, chapterPageBegin = _this$state2.chapterPageBegin, chapterPageEnd = _this$state2.chapterPageEnd, chapterTitle = _this$state2.chapterTitle, chapterNum = _this$state2.chapterNum, token = _this$state2.token;
+              _this$state = _this.state, bookIdForChInput = _this$state.bookIdForChInput, chapterPageBegin = _this$state.chapterPageBegin, chapterPageEnd = _this$state.chapterPageEnd, chapterTitle = _this$state.chapterTitle, chapterNum = _this$state.chapterNum, token = _this$state.token;
               data = {
                 bookIdForChInput: bookIdForChInput,
                 chapterPageBegin: chapterPageBegin,
@@ -31525,35 +31586,33 @@ var UserBookList = function UserBookList() {
                   chapterNum: null
                 });
 
-                _this.handleClose();
+                handleClose();
               })["catch"](function (error) {
-                _this.setState({
-                  errors: error.response.data.errors
-                });
+                setErrors(error.response.data.errors);
               });
 
             case 3:
             case "end":
-              return _context9.stop();
+              return _context8.stop();
           }
         }
-      }, _callee9);
+      }, _callee8);
     }));
 
     return function handleChapterSubmit() {
-      return _ref9.apply(this, arguments);
+      return _ref8.apply(this, arguments);
     };
   }();
 
   var handleCitationSubmit = /*#__PURE__*/function () {
-    var _ref10 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
-      var _this$state3, bookTitleForChInput, bookIdForChInput, selectedChapter, citationPage, content, token, data;
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+      var _this$state2, bookTitleForChInput, bookIdForChInput, selectedChapter, citationPage, content, token, data;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
         while (1) {
-          switch (_context11.prev = _context11.next) {
+          switch (_context10.prev = _context10.next) {
             case 0:
-              _this$state3 = _this.state, bookTitleForChInput = _this$state3.bookTitleForChInput, bookIdForChInput = _this$state3.bookIdForChInput, selectedChapter = _this$state3.selectedChapter, citationPage = _this$state3.citationPage, content = _this$state3.content, token = _this$state3.token;
+              _this$state2 = _this.state, bookTitleForChInput = _this$state2.bookTitleForChInput, bookIdForChInput = _this$state2.bookIdForChInput, selectedChapter = _this$state2.selectedChapter, citationPage = _this$state2.citationPage, content = _this$state2.content, token = _this$state2.token;
               data = {
                 book_id: bookIdForChInput,
                 content: content,
@@ -31568,10 +31627,10 @@ var UserBookList = function UserBookList() {
                   'Accept': 'application/json'
                 }
               }).then( /*#__PURE__*/function () {
-                var _ref11 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10(response) {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+                var _ref10 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9(response) {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
                     while (1) {
-                      switch (_context10.prev = _context10.next) {
+                      switch (_context9.prev = _context9.next) {
                         case 0:
                           swal("Done!", "Citation Added!", "success");
 
@@ -31584,30 +31643,49 @@ var UserBookList = function UserBookList() {
                             chapterNum: null
                           });
 
-                          _context10.next = 4;
+                          _context9.next = 4;
                           return _this.loadData();
 
                         case 4:
-                          _this.handleClose();
+                          handleClose();
 
                         case 5:
                         case "end":
-                          return _context10.stop();
+                          return _context9.stop();
                       }
                     }
-                  }, _callee10);
+                  }, _callee9);
                 }));
 
                 return function (_x7) {
-                  return _ref11.apply(this, arguments);
+                  return _ref10.apply(this, arguments);
                 };
               }())["catch"](function (error) {
-                _this.setState({
-                  errors: error.response.data.errors
-                });
+                setErrors(error.response.data.errors);
               });
 
             case 3:
+            case "end":
+              return _context10.stop();
+          }
+        }
+      }, _callee10);
+    }));
+
+    return function handleCitationSubmit() {
+      return _ref9.apply(this, arguments);
+    };
+  }();
+
+  var handleFieldChange = /*#__PURE__*/function () {
+    var _ref11 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11(event) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+        while (1) {
+          switch (_context11.prev = _context11.next) {
+            case 0:
+              setState(_objectSpread(_objectSpread({}, state), {}, _defineProperty({}, event.target.id, event.target.value)));
+
+            case 1:
             case "end":
               return _context11.stop();
           }
@@ -31615,47 +31693,20 @@ var UserBookList = function UserBookList() {
       }, _callee11);
     }));
 
-    return function handleCitationSubmit() {
-      return _ref10.apply(this, arguments);
-    };
-  }();
-
-  var handleFieldChange = /*#__PURE__*/function () {
-    var _ref12 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12(event) {
-      var _this$setState2;
-
-      var pages;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
-        while (1) {
-          switch (_context12.prev = _context12.next) {
-            case 0:
-              pages = _this.state.pages;
-              pages = event.target.value;
-
-              _this.setState((_this$setState2 = {}, _defineProperty(_this$setState2, event.target.id, event.target.value), _defineProperty(_this$setState2, "pages", pages), _this$setState2));
-
-            case 3:
-            case "end":
-              return _context12.stop();
-          }
-        }
-      }, _callee12);
-    }));
-
     return function handleFieldChange(_x8) {
-      return _ref12.apply(this, arguments);
+      return _ref11.apply(this, arguments);
     };
   }();
 
   var handleBookListClick = /*#__PURE__*/function () {
-    var _ref13 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13(event, bookId) {
+    var _ref12 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12(event, bookId) {
       var books, selectedBook;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
         while (1) {
-          switch (_context13.prev = _context13.next) {
+          switch (_context12.prev = _context12.next) {
             case 0:
               event.preventDefault();
-              _context13.next = 3;
+              _context12.next = 3;
               return _this.setState({
                 loading: true,
                 selectedBookCitations: []
@@ -31666,56 +31717,56 @@ var UserBookList = function UserBookList() {
               selectedBook = books.find(function (book) {
                 return book.id === bookId;
               });
-              _context13.next = 7;
+              _context12.next = 7;
               return _this.setState({
                 selectedBookCitations: selectedBook.citations
               });
 
             case 7:
             case "end":
-              return _context13.stop();
+              return _context12.stop();
           }
         }
-      }, _callee13);
+      }, _callee12);
     }));
 
     return function handleBookListClick(_x9, _x10) {
-      return _ref13.apply(this, arguments);
+      return _ref12.apply(this, arguments);
     };
   }();
 
   var handleChapterSelect = /*#__PURE__*/function () {
-    var _ref14 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee14(event) {
-      var _this$state4, books, selectedBookId, selectedChapterId, bookCitations, citations, key, _key;
+    var _ref13 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13(event) {
+      var _this$state3, books, selectedBookId, selectedChapterId, bookCitations, citations, key, _key;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee14$(_context14) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
         while (1) {
-          switch (_context14.prev = _context14.next) {
+          switch (_context13.prev = _context13.next) {
             case 0:
-              _this$state4 = _this.state, books = _this$state4.books, selectedBookId = _this$state4.selectedBookId;
+              _this$state3 = _this.state, books = _this$state3.books, selectedBookId = _this$state3.selectedBookId;
               selectedChapterId = event.target.value;
               bookCitations = '';
               citations = [];
-              _context14.t0 = _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().keys(books);
+              _context13.t0 = _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().keys(books);
 
             case 5:
-              if ((_context14.t1 = _context14.t0()).done) {
-                _context14.next = 12;
+              if ((_context13.t1 = _context13.t0()).done) {
+                _context13.next = 12;
                 break;
               }
 
-              key = _context14.t1.value;
+              key = _context13.t1.value;
 
               if (!(books[key].id == selectedBookId && books[key].chapters)) {
-                _context14.next = 10;
+                _context13.next = 10;
                 break;
               }
 
               bookCitations = books[key].citations;
-              return _context14.abrupt("break", 12);
+              return _context13.abrupt("break", 12);
 
             case 10:
-              _context14.next = 5;
+              _context13.next = 5;
               break;
 
             case 12:
@@ -31733,26 +31784,26 @@ var UserBookList = function UserBookList() {
 
             case 14:
             case "end":
-              return _context14.stop();
+              return _context13.stop();
           }
         }
-      }, _callee14);
+      }, _callee13);
     }));
 
     return function handleChapterSelect(_x11) {
-      return _ref14.apply(this, arguments);
+      return _ref13.apply(this, arguments);
     };
   }();
 
   var loadData = /*#__PURE__*/function () {
-    var _ref15 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee15() {
+    var _ref14 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee14() {
       var userBooks, books;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee15$(_context15) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee14$(_context14) {
         while (1) {
-          switch (_context15.prev = _context15.next) {
+          switch (_context14.prev = _context14.next) {
             case 0:
               console.log('loading user books', authState.user.id);
-              _context15.next = 3;
+              _context14.next = 3;
               return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/books/showUserBooks', {
                 headers: {
                   'Authorization': 'Bearer ' + authState.accessToken,
@@ -31764,33 +31815,27 @@ var UserBookList = function UserBookList() {
               });
 
             case 3:
-              userBooks = _context15.sent;
+              userBooks = _context14.sent;
               books = userBooks.data;
               (0,react_dom__WEBPACK_IMPORTED_MODULE_9__.unstable_batchedUpdates)(function () {
                 setLoading(false);
                 setDeleteInProgress(false);
                 setBooks(books);
               });
-              return _context15.abrupt("return", books);
+              return _context14.abrupt("return", books);
 
             case 7:
             case "end":
-              return _context15.stop();
+              return _context14.stop();
           }
         }
-      }, _callee15);
+      }, _callee14);
     }));
 
     return function loadData() {
-      return _ref15.apply(this, arguments);
+      return _ref14.apply(this, arguments);
     };
   }();
-
-  var handleAddBook = function handleAddBook(e) {
-    _this.setState({
-      addBookOnly: e.target.checked
-    });
-  };
 
   var listOfBooks = '';
 
@@ -31861,7 +31906,7 @@ var UserBookList = function UserBookList() {
             }), book.chapters.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_20__["default"], {
               variant: "outlined",
               onClick: function onClick() {
-                return _this.handleOpenChapterSelectionModal(book.id, book.chapters);
+                return handleOpenChapterSelectionModal(book.id, book.chapters);
               },
               children: "Chapters"
             }) : '']
@@ -31971,21 +32016,13 @@ var UserBookList = function UserBookList() {
         item: true,
         xs: 12,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Books_BookUploadModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          bookTitle: bookTitle,
-          addBookOnly: addBookOnly,
-          handleAddBook: handleAddBook,
-          author_first_name: author_first_name,
-          author_middle: author_middle,
-          author_last_name: author_last_name,
-          handleFieldChange: handleFieldChange,
-          pages: pages,
           modalOpen: modalOpen,
-          handleSubmit: handleSubmit,
           handleClose: handleClose,
           onFilesChange: onFilesChange,
           onFilesError: onFilesError,
           handleOpen: handleOpen,
-          modalLoading: modalLoading
+          modalLoading: modalLoading,
+          setErrors: setErrors
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_23__["default"], {
         item: true,
