@@ -29651,8 +29651,7 @@ var AuthProvider = function AuthProvider(props) {
       authState = _useState2[0],
       setAuthState = _useState2[1];
 
-  var data = JSON.parse(localStorage["appState"]);
-  console.log(data); // data NEEDS to be reloaded from localStorage whenever browser is reset
+  var data = localStorage["appState"] ? JSON.parse(localStorage["appState"]) : null; // data NEEDS to be reloaded from localStorage whenever browser is reset
   // Async-Await must be used here. This Promise needs to be fulfilled
   // BEFORE we move forward or we lose the user session
 
@@ -29845,8 +29844,12 @@ var Header = function Header(props) {
       setAuthState = _useContext2[1];
 
   var handleLogOut = function handleLogOut() {
-    console.log('logged out');
     localStorage.clear();
+    setAuthState({
+      isLoggedIn: false,
+      user: {},
+      accessToken: ''
+    });
     handleClose();
     navigate("/");
   };

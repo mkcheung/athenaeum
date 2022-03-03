@@ -122,8 +122,12 @@ const Header = (props) => {
     const [authState,setAuthState] = useContext(AuthContext);
 
     const handleLogOut = () => {
-        console.log('logged out');
         localStorage.clear();
+        setAuthState({
+            isLoggedIn:false,
+            user:{},
+            accessToken:''
+        })
         handleClose();
         navigate(`/`);
     }

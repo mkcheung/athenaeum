@@ -8,8 +8,8 @@ const AuthProvider = (props) => {
 		accessToken:''
 	});
 
-	let data = JSON.parse(localStorage["appState"]);
-console.log(data);
+	let data = localStorage["appState"] ? JSON.parse(localStorage["appState"]) : null;
+
 	// data NEEDS to be reloaded from localStorage whenever browser is reset
 	// Async-Await must be used here. This Promise needs to be fulfilled
 	// BEFORE we move forward or we lose the user session
