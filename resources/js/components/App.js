@@ -24,6 +24,7 @@ import Login from './Auth/Login';
 import Register from './Auth/Register';
 import NewPost from './Posts/NewPost';
 import UserBookList from './Users/UserBookList';
+import ProtectedRoute from './ProtectedRoute';
 
 const App = () => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -74,10 +75,34 @@ const App = () => {
                         <Route exact path='/login' element={<Login/>} />
                         <Route exact path='/register' element={<Register/>}/>
                         <Route exact path='/about' element={<About/>}/>
-                        <Route exact path='/dashboard' element={<Dashboard/>}/>
-                        <Route exact path='/dashboard/:id' element={<Dashboard/>}/>
-                        <Route exact path='/post' element={<NewPost/>}/>
-                        <Route exact path='/book/getUserBooks' element={<UserBookList/>} />
+                        <Route exact path='/dashboard' 
+                            element={
+                                <ProtectedRoute>
+                                    <Dashboard/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/dashboard/:id' 
+                            element={
+                                <ProtectedRoute>
+                                    <Dashboard/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/post' 
+                            element={
+                                <ProtectedRoute>
+                                    <NewPost/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/book/getUserBooks' 
+                            element={
+                                <ProtectedRoute>
+                                    <UserBookList/>
+                                </ProtectedRoute>
+                            }
+                        />
                     </Routes>       
                 <Footer/>
             </AuthProvider>

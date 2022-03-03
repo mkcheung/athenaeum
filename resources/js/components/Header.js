@@ -196,7 +196,7 @@ const Header = (props) => {
                 <div style={{color:'white', paddingTop:'20px', paddingLeft:'5%', paddingRight:'5%'}}>
                     <h5>
                         <Link 
-                            to='/dashboard'
+                            to='/post'
                             style={{ textDecoration: 'none', color:'white' }}
                         >
                         Posts

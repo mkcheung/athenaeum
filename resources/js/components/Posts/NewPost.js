@@ -60,9 +60,7 @@ const NewPost = () => {
     useEffect(async () => {
 
         let state = localStorage["appState"];
-        console.log(state);
         let appState = JSON.parse(state);
-        console.log('appstate', appState);
         setUser(appState.user)
 
         const postId = (params.id) ? params.id : null;
@@ -71,13 +69,9 @@ const NewPost = () => {
 
     },[]);
 
-    console.log(quill);    // undefined > Quill Object
-    console.log(quillRef); // { current: undefined } > { current: Quill Editor Reference }
-
 
     const loadData = async (postId = null, parentPostId=null) => {
         let tagOptions = [];
-console.log('loaddata user',user);
         try {
 
             let tagRes = await axios.get('/api/tags', 
