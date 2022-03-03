@@ -30,6 +30,7 @@ import {
     Search as SearchIcon,
     PersonPin as PersonPinIcon
 } from '@material-ui/icons';
+import swal from 'sweetalert2';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -122,15 +123,28 @@ const Header = (props) => {
     const [authState,setAuthState] = useContext(AuthContext);
 
     const handleLogOut = () => {
-        localStorage.clear();
-        setAuthState({
-            isLoggedIn:false,
-            user:{},
-            accessToken:''
+        axios.post('/api/logout', {},
+        {   
+            headers: {
+                'Authorization': 'Bearer ' + authState.accessToken,
+                'Accept': 'application/json'
+            },
         })
-        handleClose();
-        navigate(`/`);
-    }
+        .then(response => {
+            swal.fire('Done!', 'You have logged out!', 'success');
+            localStorage.clear();
+            setAuthState({
+                isLoggedIn:false,
+                user:{},
+                accessToken:''
+            });
+            handleClose();
+            navigate(`/`);
+        })
+        .catch(error => {
+            swal.fire('Done!', String(error), 'error');
+        });
+    };
 
     const handleInputChange = (event, value) => {
         if(value === null){
