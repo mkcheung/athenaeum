@@ -23,6 +23,7 @@ import About from './About';
 import Login from './Auth/Login';
 import Register from './Auth/Register';
 import NewPost from './Posts/NewPost';
+import PostsLists from './Posts/PostsLists';
 import UserBookList from './Users/UserBookList';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -90,6 +91,13 @@ const App = () => {
                             }
                         />
                         <Route exact path='/post' 
+                            element={
+                                <ProtectedRoute>
+                                    <PostsLists/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/post/create' 
                             element={
                                 <ProtectedRoute>
                                     <NewPost/>

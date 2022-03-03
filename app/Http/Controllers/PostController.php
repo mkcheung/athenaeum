@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -25,9 +26,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return $this->user
-            ->products()
-            ->get();
+        $postsByUser = User::with('posts')->get();
+        return $postsByUser->toJson();
     }
 
     public function getUserPosts(Request $request)
