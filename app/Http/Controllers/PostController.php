@@ -44,22 +44,22 @@ class PostController extends Controller
         $tagsRequested = [];
 
         if(!empty($data['tags'])){
-          foreach($data['tags'] as $row){
-            $tagObj = json_decode($row);
-            $tagsRequested[] = $tagObj->id;
-          }
+            foreach($data['tags'] as $row){
+                $tagObj = json_decode($row);
+                $tagsRequested[] = $tagObj->id;
+            }
         }
 
         $posts = Post::when(!empty($tagsRequested), function($query) use ($tagsRequested) {
-              $query->whereHas('tags', function($query2) use ($tagsRequested) {
+            $query->whereHas('tags', function($query2) use ($tagsRequested) {
                 $query2->whereIn('id', $tagsRequested);
-              });
-          })
-          ->where('published', '=', 1)
-          ->where('parent', '=', 1)
-          ->with('user')
-          ->limit(10)
-          ->get();
+            });
+        })
+        ->where('published', '=', 1)
+        ->where('parent', '=', 1)
+        ->with('user')
+        ->limit(10)
+        ->get();
 
         return $posts->toJson();
     }
