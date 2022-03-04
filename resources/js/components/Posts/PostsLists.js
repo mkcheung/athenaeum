@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../GlobalStates';
 
-const PostsList = () => {
+const PostsLists = () => {
 
   const [posts, setPosts] = useState([]);
   const [authState,setAuthState] = useContext(AuthContext);
@@ -30,7 +30,7 @@ const PostsList = () => {
                 {posts.map(post => (
                   <Link
                     className='list-group-item list-group-item-action d-flex justify-content-between align-items-center'
-                    to={`/${post.id}`}
+                    to={`/post/show/${post.id}`}
                     key={post.id}
                   >
                     {post.name}
@@ -59,4 +59,4 @@ const PostsList = () => {
     </div>
   );
 }
-export default PostsList;
+export default PostsLists;

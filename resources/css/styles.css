@@ -1,0 +1,46 @@
+.quillPanel {
+	height:725px;
+	maxHeight:725px;
+	overflow:scroll;
+}
+
+.newPostButton {
+	float:right;
+}
+
+.headerLink {
+	textDecoration:none;
+	color:white;
+}
+
+.blogLink {
+	textDecoration:none;
+	color:black;
+}
+
+.tagContainer {
+	margin-top:100px;
+}
+
+.about {
+	color:white;
+	padding-top:20px;
+	padding-left:5%;
+	padding-right:5%;
+}
+
+.headerDivider {
+	color:white;
+	padding-top:20px;
+	padding-left:5%;
+	padding-right:5%;
+	border-right:solid;
+}
+
+.loginDisplayColor {
+	color:white !important;
+}
+
+.logoutDisplay {
+	display: contents !important;
+}

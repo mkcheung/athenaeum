@@ -16,6 +16,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Link, Redirect } from 'react-router-dom';
 import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 import { makeStyles } from '@material-ui/core/styles';
+import '../../../css/styles.css'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -107,7 +108,7 @@ const RecentBlog = () => {
                                 <h2>
                                     <Link
                                         to={`/post/show/${post.id}`}
-                                        style={{ textDecoration: 'none', color:'black' }}
+                                        className="blogLink"
                                         key={post.id}
                                     >
                                         {post.title}
@@ -127,7 +128,7 @@ const RecentBlog = () => {
                         ))}
                     </Grid>
                     <Grid item xs={3}>
-                        <div style={{marginTop:'100px'}}>
+                        <div className="tagContainer">
                             <Autocomplete
                                 id='tags'
                                 freeSolo

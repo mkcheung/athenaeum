@@ -123,6 +123,12 @@ const Header = (props) => {
     const [authState,setAuthState] = useContext(AuthContext);
 
     const handleLogOut = () => {
+// localStorage.clear();
+// setAuthState({
+//         isLoggedIn:false,
+//         user:{},
+//         accessToken:''
+//     });
         axios.post('/api/logout', {},
         {   
             headers: {
@@ -167,9 +173,9 @@ const Header = (props) => {
     let loggedInUserName = '';
     if(authState.user.full_name && authState.user.full_name.length>0){
         loggedInUserName = 
-            <div style={{color:'white'}}>
+            <div className="loginDisplayColor">
 
-                <IconButton style={{color:'white'}} onClick={handleClick} >
+                <IconButton className="loginDisplayColor" onClick={handleClick} >
                     <PersonPinIcon /> 
                     <h6 className={ classes.welcomeMessage }>
                         Welcome {authState.user.full_name}!
@@ -192,32 +198,32 @@ const Header = (props) => {
     let loggedInOutNavOps = '';
     if(authState.isLoggedIn) {
         loggedInOutNavOps =
-            <div style={{display:'contents'}}>
-                <div style={{color:'white', paddingTop:'20px', paddingLeft:'5%', paddingRight:'5%'}}>
+            <div className="logoutDisplay">
+                <div className="about">
                     <h5>
                         <Link 
                             to='/post'
-                            style={{ textDecoration: 'none', color:'white' }}
+                            className="headerLink"
                         >
                         Posts
                         </Link>
                     </h5>
                 </div>
-                <div style={{color:'white', paddingTop:'20px', paddingLeft:'5%', paddingRight:'5%'}}>
+                <div className="about">
                     <h5>
                         <Link 
                             to='/book/getUserBooks'
-                            style={{ textDecoration: 'none', color:'white' }}
+                            className="headerLink"
                         >
                         Books
                         </Link>
                     </h5>
                 </div>
-                <div style={{color:'white', paddingTop:'20px', paddingLeft:'5%', paddingRight:'5%', borderRight:'solid'}}>
+                <div className="headerDivider">
                     <h5>
                         <Link 
                             to='/tag'
-                            style={{ textDecoration: 'none', color:'white' }}
+                            className="headerLink"
                         >
                         Tags
                         </Link>
@@ -226,22 +232,22 @@ const Header = (props) => {
             </div>;
     } else {
         loggedInOutNavOps =
-            <div style={{display:'contents'}}>
-                <div style={{color:'white', paddingTop:'20px', paddingLeft:'5%', paddingRight:'5%'}}>
+            <div className="logoutDisplay">
+                <div className="about">
                     <h5>
                         <Link 
                             to='/login'
-                            style={{ textDecoration: 'none', color:'white' }}
+                            className="headerLink"
                         >
                         Login
                         </Link>
                     </h5>
                 </div>
-                <div style={{color:'white', paddingTop:'20px', paddingLeft:'5%', paddingRight:'5%'}}>
+                <div className="about">
                     <h5>
                         <Link 
                             to='/register'
-                            style={{ textDecoration: 'none', color:'white' }}
+                            className="headerLink"
                         >
                         Register
                         </Link>
@@ -268,11 +274,11 @@ const Header = (props) => {
                     }
                 />
             </div>
-            <div style={{color:'white', paddingTop:'20px', paddingLeft:'5%', paddingRight:'5%'}}>
+            <div className="about">
                 <h5>
                     <Link 
                         to='/about' 
-                        style={{ textDecoration: 'none', color:'white' }}
+                        className="headerLink"
                     >
                     About
                     </Link>

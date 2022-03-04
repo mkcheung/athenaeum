@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 Route::get('/posts/getRecentPosts', [PostController::class, 'getRecentPosts']);
 Route::get('/tags/showTags', [TagController::class, 'showTags']);
 Route::get('users/showAuthors', [UserController::class, 'showAuthors']);
+Route::get('posts/show/{id}', [PostController::class, 'show']);
 Route::group(['middleware' => 'api'], function($router) {
     Route::post('/register', [JWTController::class, 'register']);
     Route::post('/login', [JWTController::class, 'login']);

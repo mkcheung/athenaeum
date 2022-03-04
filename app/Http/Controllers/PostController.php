@@ -170,7 +170,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = $this->user->posts()->find($id);
+        $post = Post::where('id', $id)->with('comments', 'comments.replies', 'comments.replies.user', 'tags')->first();
     
         if (!$post) {
             return response()->json([
@@ -179,7 +179,7 @@ class PostController extends Controller
             ], 400);
         }
     
-        return $post;
+        return $post->toJson();
     }
 
     /**

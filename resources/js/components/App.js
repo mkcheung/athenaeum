@@ -24,6 +24,7 @@ import Login from './Auth/Login';
 import Register from './Auth/Register';
 import NewPost from './Posts/NewPost';
 import PostsLists from './Posts/PostsLists';
+import ShowPost from './Posts/ShowPost';
 import UserBookList from './Users/UserBookList';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -97,7 +98,21 @@ const App = () => {
                                 </ProtectedRoute>
                             }
                         />
+                        <Route exact path='/post/show/:id' 
+                            element={
+                                <ProtectedRoute>
+                                    <ShowPost/>
+                                </ProtectedRoute>
+                            }
+                        />
                         <Route exact path='/post/create' 
+                            element={
+                                <ProtectedRoute>
+                                    <NewPost/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/post/edit/:id' 
                             element={
                                 <ProtectedRoute>
                                     <NewPost/>

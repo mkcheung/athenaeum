@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { Component, useState, useEffect } from 'react'
 import { useQuill } from 'react-quilljs';
 import ImageUploader from "quill-image-uploader";
-import Swal from 'sweetalert2';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { 
@@ -26,6 +25,7 @@ import {
     PlaylistAdd as PlaylistAddIcon
 } from '@material-ui/icons';
 import 'quill/dist/quill.snow.css'; // Add css for snow theme
+import '../../../css/styles.css'; // Add css for snow theme
 
 // Quill.register("modules/imageUploader", ImageUploader);
 
@@ -70,7 +70,7 @@ const NewPost = () => {
     },[]);
 
 
-    const loadData = async (postId = null, parentPostId=null) => {
+    const loadData = async (postId = null, parentPostId = null) => {
         let tagOptions = [];
         try {
 
@@ -155,12 +155,12 @@ const NewPost = () => {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <div style={{height:'725px', maxHeight:'725px', overflow:'scroll'}}>
+                        <div className="quillPanel">
                             <div ref={quillRef} />
                         </div>
                         <Grid container>
                             <Grid item xs={12}>
-                                <Button style={{float:'right'}} type="submit" variant="contained" color="primary" >
+                                <Button className="newPostButton" type="submit" variant="contained" color="primary" >
                                    {buttonTitle}
                                 </Button>
                             </Grid>

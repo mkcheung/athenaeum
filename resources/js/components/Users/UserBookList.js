@@ -6,8 +6,6 @@ import BookUploadModal from './../Books/BookUploadModal';
 import AddChapterModal from './../Books/AddChapterModal';
 import ChapterSelectionModal from './../Books/ChapterSelectionModal';
 import CitationModal from './../Books/CitationModal';
-import { Link, Redirect } from 'react-router-dom';
-import { withRouter } from "react-router";
 
 import {unstable_batchedUpdates} from 'react-dom';
 import { 
