@@ -13,9 +13,9 @@ import {
 	TextField
 } from '@material-ui/core';
 
-const BookCitationList = async (props) => {
+const BookCitationList = (props) => {
 
-	let {book_title, book_title_search_term, citations, handleClick, handleFieldChange, handleGetCitations, handleOpenChapterSelectionModal} = props; 
+	let {book_title, book_title_search_term, citations, handleClick, handleOpenChapterSelectionModal} = props; 
 
 	const body = (
         <Grid container spacing={3}>
