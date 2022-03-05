@@ -197,10 +197,10 @@ const Header = (props) => {
                 <div className="about">
                     <h5>
                         <Link 
-                            to='/post'
+                            to='/dashboard'
                             className="headerLink"
                         >
-                        Posts
+                        Home
                         </Link>
                     </h5>
                 </div>

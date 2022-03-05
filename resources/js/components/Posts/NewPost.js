@@ -65,13 +65,17 @@ const NewPost = () => {
     const params = useParams();
 
     useEffect(async () => {
-
         const postId = (params.id) ? params.id : null;
         const parentPostId = (params.parentId) ? params.parentId : null;
         await loadData(postId, parentPostId);
-
     },[]);
 
+    useEffect(() => {
+        if (quill) {
+            console.log(content);
+            quill.setText(content);
+        }
+    }, [quill,content]);
 
     const loadData = async (postId = null, parentPostId = null) => {
         let tagOptions = [];
@@ -93,15 +97,12 @@ const NewPost = () => {
                 tagOptions.push(tagIdAndTitle);
             });
 
-            let newState = {
-                loading:false,
-                tags: tagOptions,
-                user_id:user.id,
-                parentPostId:parentPostId
-            };
+            setLoading(false);
+            setTags(tagOptions);
+            setParentPostId(parentPostId);
 
             if(postId !== null){
-                let postObj = await axios.get('/api/posts/'+postId, 
+                let postObj = await axios.get('/api/posts/show/'+postId, 
                     {
                         headers: {
                             'Authorization': 'Bearer '+authState.accessToken,
@@ -117,7 +118,6 @@ const NewPost = () => {
                 setImage(postData['image']);
                 setSelectedTags(postData['tags']);
                 setPublished(postData['published'] ? true : false);
-
             }
 
             let userBooks = await axios.get('/api/books/showUserBooks', 
