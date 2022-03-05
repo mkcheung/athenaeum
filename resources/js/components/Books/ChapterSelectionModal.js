@@ -44,10 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ChapterSelectionModal = (props) => {
   const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
-  const [chapterSelectionModalOpen, setOpen] = useState(false);
-
   const body = (
         <Grid container spacing={3}>
             <div style={modalStyle} className={classes.paper}>
@@ -81,7 +78,7 @@ const ChapterSelectionModal = (props) => {
   return (
     <div>
       <Modal
-        open={props.chapterSelectionModalOpen}
+        open={props.bookSelectionModalOpen}
         onClose={props.handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"

@@ -57,6 +57,7 @@ const NewPost = () => {
     const [ bookSelectionModalOpen, setBookSelectionModalOpen ] = useState(false);
     const [ loading, setLoading ] = useState(true);
     const [ user, setUser ] = useState({});
+    const [ chapterSelectionModalOpen, setChapterSelectionModalOpen] = React.useState(false);
     const [ authState,setAuthState ] = useContext(AuthContext);
 
 
@@ -206,9 +207,11 @@ const NewPost = () => {
     }
 
     const handleOpenChapterSelectionModal = async () => {
+        setBookSelectionModalOpen(true);
+    };
 
-        const curentBookSelModalStatus = !bookSelectionModalOpen;
-        setBookSelectionModalOpen(curentBookSelModalStatus);
+    const handleClose = async () => {
+        setBookSelectionModalOpen(false);
     };
 
     const handleClick = (e) => {
@@ -231,6 +234,59 @@ const NewPost = () => {
             'italic': false
         });
     }
+
+    const handleBookChapterSelect = async (event) => {
+        let selectorName = event.target.name;
+        let bookCitations = '';
+        let chapters = [];
+        let citations = [];
+
+        if(event.target.value == 0){
+            setBookTitle('');
+            setBookSelectedId(null);
+            setChapterSelectedId(null);
+            setChapters([]);
+            setCitations([]);
+            return;
+        }
+
+        if(selectorName === 'book'){
+            bookSelectedId = event.target.value;
+
+            let selectedBook = books.find(book => book.id == bookSelectedId);
+            if(selectedBook.chapters != null && selectedBook.chapters.length > 0){
+                chapters = selectedBook.chapters;
+
+                setBookTitle(selectedBook.title);
+                setBookSelectedId(bookSelectedId);
+                setChapters(chapters);
+            } else {
+                citations = selectedBook.citations;
+                setBookTitle(selectedBook.title);
+                setBookSelectedId(bookSelectedId);
+                setChapterSelectedId(null);
+                setChapters([]);
+                setCitations(citations);
+            }
+        }
+
+
+        if(selectorName === 'chapter'){
+            let chapterSelectedId = event.target.value;
+            let selectedBook = books.find(book => book.id == bookSelectedId);
+            let bookCitations = selectedBook.citations;
+            let citations = [];
+
+            for (let key in bookCitations) {
+                if (bookCitations[key].chapter == chapterSelectedId) {
+                    citations.push(bookCitations[key]);
+                }
+            }
+            setBookTitle(selectedBook.title);
+            setChapterSelectedId(chapterSelectedId);
+            setCitations(citations);
+        }
+    };
 
     const buttonTitle = (postId) ? 'Update' : 'Create';
     const headerTitle = (postId) ? 'Update' : 'Create New';
@@ -339,6 +395,15 @@ const NewPost = () => {
                     </form>
                 </Grid>
                 <Grid item xs={12}>
+                    <BookChapterSelectionModal 
+                        books={books}
+                        chapters={chapters}
+                        bookSelectionModalOpen={bookSelectionModalOpen} 
+                        bookSelectedId={bookSelectedId}
+                        chapterSelectedId={chapterSelectedId}
+                        handleBookChapterSelect={handleBookChapterSelect}
+                        handleClose={handleClose} 
+                    />
                 </Grid>
             </Grid>
         </Container>
