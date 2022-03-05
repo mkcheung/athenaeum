@@ -5,8 +5,8 @@ import { AuthContext } from '../GlobalStates';
 
 const PostsLists = () => {
 
-    const [posts, setPosts] = useState([]);
-    const [authState,setAuthState] = useContext(AuthContext);
+    const [ posts, setPosts ] = useState([]);
+    const [ authState, setAuthState ] = useContext(AuthContext);
 
     useEffect(async () => {
         let posts = await axios.get('/api/posts', {

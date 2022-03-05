@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from './GlobalStates';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import {
@@ -123,12 +123,6 @@ const Header = (props) => {
     const [authState,setAuthState] = useContext(AuthContext);
 
     const handleLogOut = async () => {
-// localStorage.clear();
-// setAuthState({
-//         isLoggedIn:false,
-//         user:{},
-//         accessToken:''
-//     });
 
         try {
             let response = await axios.post('/api/logout', {},

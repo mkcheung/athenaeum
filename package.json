@@ -33,6 +33,7 @@
         "quill-image-uploader": "^1.2.2",
         "react-files": "*",
         "react-flash-message": "^1.0.8",
+        "react-jwt": "^1.1.4",
         "react-lines-ellipsis": "^0.15.0",
         "react-quilljs": "^1.2.17",
         "react-router-dom": "^6.2.1",
