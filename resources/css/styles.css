@@ -1,0 +1,85 @@
+.quillPanel {
+	height:725px;
+	maxHeight:725px;
+	overflow:scroll;
+}
+
+.newPostButton {
+	float:right;
+}
+
+.headerLink {
+	textDecoration:none;
+	color:white;
+}
+
+.blogLink {
+	textDecoration:none;
+	color:black;
+}
+
+.tagContainer {
+	margin-top:100px;
+    padding: 10px, 10px, 10px, 0px;
+    width: 300px; 
+}
+
+.about {
+	color:white;
+	padding-top:20px;
+	padding-left:5%;
+	padding-right:5%;
+}
+
+.headerDivider {
+	color:white;
+	padding-top:20px;
+	padding-left:5%;
+	padding-right:5%;
+	border-right:solid;
+}
+
+.loginDisplayColor {
+	color:white !important;
+}
+
+.logoutDisplay {
+	display: contents !important;
+}
+
+.root {
+    flexGrow: 1;
+}
+
+.listOfBooks, .bookCitationListItem {
+	max-height:675px;
+	overflow:scroll;
+}
+
+.listOfBooksItem {
+	height:75px;
+}
+
+.bookCitationList {
+	vertical-align: top;
+	margin-left: 3px;
+	margin-right: 3px;
+	margin-top: 50px;
+	position: relative;
+}
+
+.circularProgress {
+	margin: auto;
+	position: absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+}
+
+.citationUploadButton {
+	float: right;
+	margin-top: -6px !important;
+}
+
+
