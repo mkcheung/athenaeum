@@ -242,23 +242,23 @@ const BookUploadModal = (props) => {
 			</div>;
   }
 
-  const body = (
-        <Grid container spacing={3}>
-            {bookLoadingDisplay}
-	    </Grid>
-  );
+	const body = (
+		<Grid container spacing={3}>
+		    {bookLoadingDisplay}
+		</Grid>
+	);
 
-  return (
-    <div>
-      <Modal
-        open={props.modalOpen}
-        onClose={props.handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {body}
-      </Modal>
-    </div>
-  );
+	return (
+		<div>
+			<Modal
+				open={props.modalOpen}
+				onClose={props.handleClose}
+				aria-labelledby="simple-modal-title"
+				aria-describedby="simple-modal-description"
+			>
+				{body}
+			</Modal>
+		</div>
+	);
 }
 export default BookUploadModal;

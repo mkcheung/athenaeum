@@ -29,7 +29,6 @@ const Login = (props) => {
             password
         };
         let loggedInData = await axios.post("/api/login", userData);
-
         if (loggedInData.status == 200) {
 
             let { id, user, access_token } = loggedInData.data;

@@ -122,21 +122,22 @@ const Header = (props) => {
     const navigate = useNavigate();
     const [authState,setAuthState] = useContext(AuthContext);
 
-    const handleLogOut = () => {
+    const handleLogOut = async () => {
 // localStorage.clear();
 // setAuthState({
 //         isLoggedIn:false,
 //         user:{},
 //         accessToken:''
 //     });
-        axios.post('/api/logout', {},
-        {   
-            headers: {
-                'Authorization': 'Bearer ' + authState.accessToken,
-                'Accept': 'application/json'
-            },
-        })
-        .then(response => {
+
+        try {
+            let response = await axios.post('/api/logout', {},
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + authState.accessToken,
+                    'Accept': 'application/json'
+                }
+            });
             swal.fire('Done!', 'You have logged out!', 'success');
             localStorage.clear();
             setAuthState({
@@ -146,10 +147,10 @@ const Header = (props) => {
             });
             handleClose();
             navigate(`/`);
-        })
-        .catch(error => {
+        } catch (error) {
             swal.fire('Done!', String(error), 'error');
-        });
+        }
+
     };
 
     const handleInputChange = (event, value) => {
