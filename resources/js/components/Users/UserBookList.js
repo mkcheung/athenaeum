@@ -6,6 +6,7 @@ import BookUploadModal from './../Books/BookUploadModal';
 import AddChapterModal from './../Books/AddChapterModal';
 import ChapterSelectionModal from './../Books/ChapterSelectionModal';
 import CitationModal from './../Books/CitationModal';
+import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 
 import {unstable_batchedUpdates} from 'react-dom';
 import { 
@@ -33,7 +34,6 @@ import {
 	ExpandLess,
 	ExpandMore,
 } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/core/styles';
 import { AuthContext } from '../GlobalStates';
 
 const UserBookList = () => {
@@ -187,22 +187,17 @@ const UserBookList = () => {
 
     const handleBookListClick = async (event, bookId) => {
 		event.preventDefault();
-
-        await this.setState({
-            loading: true,
-            selectedBookCitations: []
-        });
-
-		let { 
-			books
-		} = this.state;
-
-		let selectedBook = books.find(book => book.id === bookId);
-
-        await this.setState({
-            selectedBookCitations: selectedBook.citations
-        });
+		setSelectedBookId(bookId);
     }
+
+    useEffect(()=>{
+    	if(selectedBookId){
+			setLoading(true);
+			let selectedBook = books.find(book => book.id === selectedBookId);
+			setSelectedBookCitations(selectedBook.citations);
+			setLoading(false);
+    	}
+    },[selectedBookId])
 
     const handleChapterSelect = async (event) => {
 
@@ -252,7 +247,7 @@ const UserBookList = () => {
 
     if(books && books.length>0){
 		listOfBooks = 
-			<List component="nav" style={{maxHeight:'675px', overflow:'scroll'}} aria-label="main mailbox folders">
+			<List component="nav" className="listOfBooks" aria-label="main mailbox folders">
 				{books.map(book => (
 
 					<div key={`citationSource-${book.id}`}>
@@ -261,7 +256,7 @@ const UserBookList = () => {
 								key={`book-${book.id}`}
 								button
 								onClick={(event) => handleBookListClick(event, book.id)}
-								style={{height:'75px'}}
+								className="listOfBooksItem"
 							>
 								<div>
 									<u>
@@ -306,13 +301,13 @@ const UserBookList = () => {
         if (loading === true) {
         	citationsFromBook = 
 				<List >
-					<div style={{verticalAlign: 'top', marginLeft:'3px',marginRight:'3px',marginTop:'50px',position:'relative' }} >
-						<CircularProgress style={{margin:'auto', position: 'absolute', top:0,bottom:0,left:0,right:0, }} />
+					<div className="bookCitationList" >
+						<CircularProgress className="circularProgress" />
 					</div>
 				</List>;
         } else if(loading === false && selectedBookCitations && selectedBookCitations.length>0){
 	        citationsFromBook =
-				<List component="nav" style={{maxHeight:'675px', overflow:'scroll'}} aria-label="secondary mailbox folder">
+				<List component="nav" className="bookCitationListItem" aria-label="secondary mailbox folder">
 					{selectedBookCitations.map(selectedBookCitation => (
 						<div key={`selectedBookCitation-${selectedBookCitation.id}`}>
 							<div>
@@ -336,7 +331,7 @@ const UserBookList = () => {
 			generalBookCitationDisplay = 
         		<Grid container spacing={3}>
 			        <Grid item xs={12}>
-			        	<CircularProgress style={{margin:'auto', position: 'absolute', top:0,bottom:0,left:0,right:0, }} />
+			        	<CircularProgress className="circularProgress" />
 			        </Grid>
 		        </Grid>;
         } else {
@@ -345,7 +340,7 @@ const UserBookList = () => {
 			        <Grid item xs={12}>
 						<div className='card-header'>
 							Books
-							<Button style={{float:'right', marginTop:'-6px'}} startIcon={<CloudUploadIcon />} onClick={handleOpen}>
+							<Button className="citationUploadButton" startIcon={<CloudUploadIcon />} onClick={handleOpen}>
 								Upload Citations
 							</Button>
 						</div>
