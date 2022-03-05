@@ -13,28 +13,41 @@ import {
     TextareaAutosize,
 } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 import { makeStyles } from '@material-ui/core/styles';
 import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 
-const RecentBlog = () => {
-    const [recentPosts, setPosts] = useState([]);
-    const [tagOptions, setTagOptions] = useState([]);
-    const [selectedTags, selectTags] = useState([]);
+const UserBlog = (props) => {
+
+    const [ tagOptions, setTagOptions ] = useState([]);
+    const [ selectedTags, selectTags ] = useState([]);
+    const [ posts, setPosts ] = useState([]);
+    const [ user, setUser ] = useState([]);
+
+    const params = useParams();
 
     useEffect( () => {
-        async function loadData(){
-            let recentPostRes = await axios.get('/api/posts/getRecentPosts', 
+        async function loadData(userId){
+            let userObj = await axios.get('/api/users/showUserBlogPosts', 
             {
                 headers: {
                     'Accept': 'application/json'
+                },
+                params: {
+                    userId: userId
                 }
             });
 
-            let posts = recentPostRes.data;
-            setPosts(posts);
+            let userData = userObj.data;
+            setUser(userData[0]);
+            setPosts(userData[0]['posts']);
         }
+        loadData(params.id);
+    }, [params.id]);
+
+
+    useEffect( () => {
         async function loadTagsOptions(){
             let tagOptions = [];
 
@@ -47,17 +60,15 @@ const RecentBlog = () => {
             let tags = tagRes.data;
             
             tags.forEach(function(tag){
-                let temp = {};
-                temp['id'] = tag.id;
-                temp['value'] = tag.title;
-                tagOptions.push(temp);
+                let tagIdAndTitle = {};
+                tagIdAndTitle['id'] = tag.id;
+                tagIdAndTitle['value'] = tag.title;
+                tagOptions.push(tagIdAndTitle);
                 setTagOptions(tagOptions);
             });
         }
-        loadData();
         loadTagsOptions();
     }, []);
-
 
     const handleTagSelection = async (event, values) => {
         selectTags(values);
@@ -65,20 +76,53 @@ const RecentBlog = () => {
 
     const handleTagSubmit = async () => {
 
-        let recentPostRes = await axios.get('/api/posts/getRecentPosts', 
+        let userId = params.id;
+        let userObj = await axios.get('/api/users/showUserBlogPosts', 
         {
             headers: {
                 'Accept': 'application/json'
             },
             params: {
+                userId: userId,
                 tags: selectedTags
             }
         });
 
-        let posts = recentPostRes.data;
-        setPosts(posts);
+        let userData = userObj.data;
+        setUser(userData[0]);
+        setPosts(userData[0]['posts']);
     }
 
+    let userBlogEntries = <div></div>;
+    if(posts.length > 0){
+        userBlogEntries = 
+            <div>
+                {
+                    posts.length && posts.map(post => (
+                    <div key={`userpost-${post.id}`}>
+                        <h2>
+                            <Link
+                                to={`/post/show/${post.id}`}
+                                className="blogLink"
+                                key={post.id}
+                            >
+                                {post.title}
+                            </Link>
+                        </h2>
+                            <HTMLEllipsis
+                                unsafeHTML={post.content}
+                                maxLine='3'
+                                ellipsis='...'
+                                basedOn='letters'
+                            />
+                        Author: {user.full_name}
+                        <br/>
+                        Posted: {post.created_at}
+                        <hr/>
+                    </div>
+                ))}
+            </div>
+    }
 
     return (
         <div className="root">
@@ -86,30 +130,7 @@ const RecentBlog = () => {
                 <Grid item xs={1}>
                 </Grid>
                 <Grid item xs={8}>
-                    {
-                        recentPosts && recentPosts.map(post => (
-                        <div key={`userpost-${post.id}`}>
-                            <h2>
-                                <Link
-                                    to={`/post/show/${post.id}`}
-                                    className="blogLink"
-                                    key={post.id}
-                                >
-                                    {post.title}
-                                </Link>
-                            </h2>
-                                <HTMLEllipsis
-                                    unsafeHTML={post.content}
-                                    maxLine='3'
-                                    ellipsis='...'
-                                    basedOn='letters'
-                                />
-                            Author: {post.user.full_name}
-                            <br/>
-                            Posted: {post.created_at}
-                            <hr/>
-                        </div>
-                    ))}
+                    {userBlogEntries}
                 </Grid>
                 <Grid item xs={3}>
                     <div className="tagContainer">
@@ -137,4 +158,5 @@ const RecentBlog = () => {
         </div>
     )
 }
-export default RecentBlog;
+export default UserBlog;
+

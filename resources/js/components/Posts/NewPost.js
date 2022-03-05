@@ -84,10 +84,10 @@ const NewPost = () => {
             let tags = tagRes.data;
             
             tags.forEach(function(tag){
-                let temp = {};
-                temp['id'] = tag.id;
-                temp['title'] = tag.title;
-                tagOptions.push(temp);
+                let tagIdAndTitle = {};
+                tagIdAndTitle['id'] = tag.id;
+                tagIdAndTitle['title'] = tag.title;
+                tagOptions.push(tagIdAndTitle);
             });
 
             let newState = {

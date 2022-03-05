@@ -26,6 +26,7 @@ import NewPost from './Posts/NewPost';
 import PostsLists from './Posts/PostsLists';
 import ShowPost from './Posts/ShowPost';
 import UserBookList from './Users/UserBookList';
+import UserBlog from './Users/UserBlog';
 import ProtectedRoute from './ProtectedRoute';
 
 const App = () => {
@@ -77,6 +78,7 @@ const App = () => {
                         <Route exact path='/login' element={<Login/>} />
                         <Route exact path='/register' element={<Register/>}/>
                         <Route exact path='/about' element={<About/>}/>
+                        <Route exact path='/user/getPosts/:id' element={<UserBlog/>} />
                         <Route exact path='/dashboard' 
                             element={
                                 <ProtectedRoute>

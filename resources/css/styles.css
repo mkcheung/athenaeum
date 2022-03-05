@@ -20,6 +20,8 @@
 
 .tagContainer {
 	margin-top:100px;
+    padding: 10px, 10px, 10px, 0px;
+    width: 300px; 
 }
 
 .about {
@@ -44,3 +46,8 @@
 .logoutDisplay {
 	display: contents !important;
 }
+
+.root {
+    flexGrow: 1;
+}
+
