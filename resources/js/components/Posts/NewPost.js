@@ -221,7 +221,7 @@ const NewPost = () => {
         setBookSelectionModalOpen(false);
     };
 
-    const handleClick = (e) => {
+    const handleCitationInsertion = (e) => {
         e.preventDefault();
 
         let citationBlock = e.currentTarget;
@@ -229,15 +229,15 @@ const NewPost = () => {
         const citationText = '"' + citationBlock.getElementsByClassName("citationText")[0].innerText + '", <i>' + citationBlock.getElementsByClassName("title")[0].innerText + '</i>, ' + citationBlock.getElementsByClassName("page")[0].innerText;
 
         // must focus before calling getSelection
-        this.quillRef.focus();
-        var range = this.quillRef.getSelection();
+        quill.focus();
+        let range = quill.getSelection();
         
         let position = range ? range.index : 0;
-        this.quillRef.insertText(position, citationBlock.getElementsByClassName("page")[0].innerText );
-        this.quillRef.insertText(position, citationBlock.getElementsByClassName("title")[0].innerText + ', ', {
+        quill.insertText(position, citationBlock.getElementsByClassName("page")[0].innerText );
+        quill.insertText(position, citationBlock.getElementsByClassName("title")[0].innerText + ', ', {
             'italic': true
         });
-        this.quillRef.insertText(position, '"' + citationBlock.getElementsByClassName("citationText")[0].innerText + '", ', {
+        quill.insertText(position, '"' + citationBlock.getElementsByClassName("citationText")[0].innerText + '", ', {
             'italic': false
         });
     }
@@ -438,7 +438,7 @@ const NewPost = () => {
                                         handleGetCitations={handleGetCitations}
                                         handleOpenChapterSelectionModal={handleOpenChapterSelectionModal}
                                         citations={citations}
-                                        handleClick={handleClick}
+                                        handleCitationInsertion={handleCitationInsertion}
                                     />
                                 </Grid>
                                 <div className="quillPanel">
