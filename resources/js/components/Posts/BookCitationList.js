@@ -16,7 +16,7 @@ import '../../../css/styles.css'; // TODO: apply absolute paths
 
 const BookCitationList = (props) => {
 
-	let {book_title, citations, handleClick, handleOpenChapterSelectionModal} = props; 
+	let {book_title, citations, handleCitationInsertion, handleOpenChapterSelectionModal} = props; 
 
 	const body = (
         <Grid container spacing={3}>
@@ -37,7 +37,7 @@ const BookCitationList = (props) => {
                     <ul className="citationContainerList">
                     {
                         citations && citations.map(citation => (
-                        <li key={citation.id} onClick={(e) => handleClick(e)}>
+                        <li key={citation.id} onClick={(e) => handleCitationInsertion(e)}>
                             <div className="title">
                                 {book_title}
                             </div>
