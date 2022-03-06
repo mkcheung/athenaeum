@@ -2,7 +2,11 @@ import axios from 'axios'
 import React, { useState, useContext, useEffect } from 'react'
 import { useQuill } from 'react-quilljs';
 import ImageUploader from "quill-image-uploader";
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { 
+    Link,
+    useNavigate,
+    useParams 
+} from 'react-router-dom';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import BookCitationList  from './BookCitationList';
 import BookChapterSelectionModal from '../Books/ChapterSelectionModal';
@@ -26,6 +30,7 @@ import {
 import { 
     PlaylistAdd as PlaylistAddIcon
 } from '@material-ui/icons';
+import swal from 'sweetalert2';
 import { AuthContext } from '../GlobalStates';
 import 'quill/dist/quill.snow.css'; // Add css for snow theme
 import '../../../css/styles.css'; // Add css for snow theme
@@ -58,11 +63,12 @@ const NewPost = () => {
     const [ loading, setLoading ] = useState(true);
     const [ user, setUser ] = useState({});
     const [ chapterSelectionModalOpen, setChapterSelectionModalOpen] = React.useState(false);
-    const [ authState,setAuthState ] = useContext(AuthContext);
+    const [ authState, setAuthState ] = useContext(AuthContext);
 
 
     const { quill, quillRef } = useQuill();
     const params = useParams();
+    const navigate = useNavigate();
 
     useEffect(async () => {
         const postId = (params.id) ? params.id : null;
@@ -134,7 +140,7 @@ const NewPost = () => {
             setBooks(books);
 
         } catch (error) {
-            console.log(error);
+            swal.fire('Done!', String(error), 'error');
         }
     };
 
@@ -287,6 +293,60 @@ const NewPost = () => {
         }
     };
 
+    const handleCreateUpdatePost = async (event) => {
+        event.preventDefault();
+        
+        const incomingContentFromQuill = quill.getText();
+        const post = {
+            id: postId ? postId : null,
+            title: title,
+            slug: slug,
+            published: published,
+            content: incomingContentFromQuill,
+            selectedTags: selectedTags,
+            user_id: authState.user.id,
+            parentPostId,
+            image
+        };
+
+        try {
+
+            if (postId){
+                console.log('postid', postId);
+                let results = await axios.post('/api/posts/'+postId,
+                    { 
+                        data: post,
+                        _method: 'patch'                  
+                    },
+                    {   
+                        headers: {
+                            'Authorization': 'Bearer '+authState.accessToken,
+                            'Accept': 'application/json'
+                        }
+                    }
+                );
+
+                swal.fire("Done!", "Post Updated.", "success");
+            } else {
+
+                let results = await axios.post('/api/posts/',
+                    post,
+                    {   
+                        headers: {
+                            'Authorization': 'Bearer '+authState.accessToken,
+                            'Accept': 'application/json'
+                        }
+                    }
+                );
+                swal.fire("Done!", "Post Created.", "success");
+                navigate(`/post/edit/${results.data.id}`);
+            }
+        } catch (error) {
+            swal.fire('Done!', String(error), 'error');
+        }
+    }
+
+
     const buttonTitle = (postId) ? 'Update' : 'Create';
     const headerTitle = (postId) ? 'Update' : 'Create New';
     return (
@@ -296,7 +356,7 @@ const NewPost = () => {
                     <div className='card-header'>{headerTitle} Post</div>
                 </Grid>
                 <Grid item xs={12}>
-                    <form>
+                    <form onSubmit={handleCreateUpdatePost}>
                         <Grid container>
                             <Grid item xs={6}>
                                 <Grid item xs={12}>

@@ -4,7 +4,6 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import {
     Link,
     withRouter,
-    Redirect,
     useNavigate
 } from 'react-router-dom';
 import { 
@@ -120,7 +119,7 @@ const Header = (props) => {
     } = props;
     const classes = useStyles();
     const navigate = useNavigate();
-    const [authState,setAuthState] = useContext(AuthContext);
+    const [ authState, setAuthState ] = useContext(AuthContext);
 
     const handleLogOut = async () => {
 
