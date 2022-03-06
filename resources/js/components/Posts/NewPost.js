@@ -72,7 +72,6 @@ const NewPost = () => {
 
     useEffect(() => {
         if (quill) {
-            console.log(content);
             quill.setText(content);
         }
     }, [quill,content]);
