@@ -83,4 +83,16 @@
 	margin-top: -6px !important;
 }
 
+.citationBookTitle {
+	text-align: center;
+}
+
+.citationContainer {
+	height:750px;
+}
+
+.citationContainerList {
+	max-height:640px;
+	overflow: scroll;
+}
 

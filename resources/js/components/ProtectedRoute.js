@@ -25,6 +25,9 @@ const ProtectedRoute = ({
         return <Navigate to={redirectPath} replace />;
     }
 
+    // when adding roles and permission, include redirect to dashboard
+    // for attempts to access unauthorized routes.
+
     return children;
 }
 export default ProtectedRoute;
