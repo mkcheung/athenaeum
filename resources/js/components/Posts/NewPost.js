@@ -33,7 +33,7 @@ import {
 import swal from 'sweetalert2';
 import { AuthContext } from '../GlobalStates';
 import 'quill/dist/quill.snow.css'; // Add css for snow theme
-import '../../../css/styles.css'; // Add css for snow theme
+import '../../../css/styles.css'; // TODO: apply absolute paths
 
 // Quill.register("modules/imageUploader", ImageUploader);
 
@@ -132,7 +132,7 @@ const NewPost = () => {
                     'Accept': 'application/json'
                 },
                 params: {
-                    userId: user.id
+                    userId: authState.user.id
                 }
             });
 
@@ -188,27 +188,29 @@ const NewPost = () => {
         e.preventDefault();
         setLoading(true);
 
-
         const bookTitleParams ={
             bookTitle: bookTitleSearchTerm
         }
 
-        const results = await axios.get('/api/books/searchByTitle', 
-            bookTitleParams,
-            {   
-                headers: {
-                    'Authorization': 'Bearer '+authState.accessToken,
-                    'Accept': 'application/json'
+        try {
+            const results = await axios.get('/api/books/searchByTitle', 
+                bookTitleParams,
+                {   
+                    headers: {
+                        'Authorization': 'Bearer '+authState.accessToken,
+                        'Accept': 'application/json'
+                    }
                 }
-            }
-        );
+            );
 
-        let bookCitations = (res.data[0]) ? res.data[0].citations : [] ;
-        let book_title = (res.data[0]) ? res.data[0].title : [] ;
-
-        setLoading(false);
-        setBookTitle(book_title)
-        setCitations(bookCitations);
+            let bookCitations = (res.data[0]) ? res.data[0].citations : [] ;
+            let book_title = (res.data[0]) ? res.data[0].title : [] ;
+            setLoading(false);
+            setBookTitle(book_title)
+            setCitations(bookCitations);
+        } catch (error) {
+            swal.fire('Done!', String(error), 'error');
+        }
     }
 
     const handleOpenChapterSelectionModal = async () => {
@@ -256,19 +258,19 @@ const NewPost = () => {
         }
 
         if(selectorName === 'book'){
-            bookSelectedId = event.target.value;
+            let selectedBookId = event.target.value;
 
-            let selectedBook = books.find(book => book.id == bookSelectedId);
+            let selectedBook = books.find(book => book.id == selectedBookId);
             if(selectedBook.chapters != null && selectedBook.chapters.length > 0){
                 chapters = selectedBook.chapters;
 
                 setBookTitle(selectedBook.title);
-                setBookSelectedId(bookSelectedId);
+                setBookSelectedId(selectedBookId);
                 setChapters(chapters);
             } else {
                 citations = selectedBook.citations;
                 setBookTitle(selectedBook.title);
-                setBookSelectedId(bookSelectedId);
+                setBookSelectedId(selectedBookId);
                 setChapterSelectedId(null);
                 setChapters([]);
                 setCitations(citations);
@@ -312,7 +314,6 @@ const NewPost = () => {
         try {
 
             if (postId){
-                console.log('postid', postId);
                 let results = await axios.post('/api/posts/'+postId,
                     { 
                         data: post,
@@ -434,6 +435,7 @@ const NewPost = () => {
                                     <BookCitationList 
                                         book_title={bookTitle}
                                         book_title_search_term={bookTitleSearchTerm} 
+                                        handleGetCitations={handleGetCitations}
                                         handleOpenChapterSelectionModal={handleOpenChapterSelectionModal}
                                         citations={citations}
                                         handleClick={handleClick}

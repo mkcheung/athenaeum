@@ -12,10 +12,11 @@ import {
 	Paper,
 	TextField
 } from '@material-ui/core';
+import '../../../css/styles.css'; // TODO: apply absolute paths
 
 const BookCitationList = (props) => {
 
-	let {book_title, book_title_search_term, citations, handleClick, handleOpenChapterSelectionModal} = props; 
+	let {book_title, citations, handleClick, handleOpenChapterSelectionModal} = props; 
 
 	const body = (
         <Grid container spacing={3}>
@@ -27,13 +28,13 @@ const BookCitationList = (props) => {
             </Grid>
 
             <Grid item xs={12}>
-                <div style={{'textAlign':'center'}}>
+                <div className="citationBookTitle">
                     <InputLabel>{book_title}</InputLabel>
                 </div>
             </Grid>
-            <Grid container style={{height:'750px'}}>
+            <Grid container className="citationContainer">
                 <Grid item xs={12}>
-                    <ul style={{maxHeight:'640px', overflow:'scroll'}}>
+                    <ul className="citationContainerList">
                     {
                         citations && citations.map(citation => (
                         <li key={citation.id} onClick={(e) => handleClick(e)}>

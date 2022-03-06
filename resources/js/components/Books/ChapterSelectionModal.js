@@ -52,12 +52,34 @@ const ChapterSelectionModal = (props) => {
 				<form noValidate autoComplete="off">
 					
 					<Grid item xs={12}>
+            <FormControl >
+                <InputLabel htmlFor="age-native-simple">Books:</InputLabel>
+                <Select
+                    native
+                    name='book'
+                    value={props.bookSelectedId}
+                    onChange={props.handleBookChapterSelect}
+                    title='Book Select'
+                >
+                <option value='0'>None</option>
+                {
+                    Object
+                    .keys(props.books)
+                    .map(key => <option key={key} value = {props.books[key].id}>{props.books[key].title}</option>)
+                }
+                </Select>
+            </FormControl>
+					</Grid>
+					<br/>
+					
+					<Grid item xs={12}>
 	          			<FormControl >
   							<InputLabel htmlFor="age-native-simple">Chapters:</InputLabel>
 							<Select
 								native
+                name='chapter'
 								value={props.selectedChapter}
-								onChange={props.handleChapterSelect}
+								onChange={props.handleBookChapterSelect}
 								title='Chapter Select'
 							>
 								<option value='0'></option>
