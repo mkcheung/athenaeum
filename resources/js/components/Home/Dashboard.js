@@ -24,124 +24,109 @@ import {
 	ColorEditButton,
 	IOSSwitch 
 } from './../CustomComponents/CustomComponents';
+import swal from 'sweetalert2';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../GlobalStates';
 
-function useMergeState(initialState) {
-    const [state, setState] = useState(initialState);
-    const setMergedState = newState => 
-        setState(prevState => Object.assign({}, prevState, newState)
-    );
-    return [state, setMergedState];
-}
-
 const Dashboard = (props) => {
-
-    let user = {};
-    let accessToken = '';
-    let state = localStorage["appState"];
-
-    if (state) {
-        let appState = JSON.parse(state);
-        user = appState.user;
-        accessToken = appState.accessToken;
-     }
 
     const navigate = useNavigate();
     const params = useParams();
-    const [authState,setAuthState] = useContext(AuthContext);
-
-    const [combined, setCombined] = useMergeState({
-        loading: true,
-        posts: [],
-    });
-
-    const [loading, setLoading] = useState(true);
+    const [ loading, setLoading ] = useState(true);
+    const [ posts, setPosts ] = useState([]);
+    const [ authState, setAuthState ] = useContext(AuthContext);
 
     useEffect( () => {
 
-    	// const userId = user.id;
         if (params.id !== null && params.id !== undefined) {
             loadData(null, params.id);
         } else {
-            loadData(user.id);
+            loadData(authState.user.id);
         }
-    }, [user.id, combined.loading]);
+    }, [loading]);
 
 
     const loadData = async (userId=null, postId=null) => {
 
 	    let postData = [];
 
-    	if(postId !== null){
+        try {
+	    	if(postId !== null){
 
-	        let postObj = await axios.get('/api/posts/getPostAndDecendants', 
-	        {
-	        	headers: {
-	                'Authorization': 'Bearer '+accessToken,
-	                'Accept': 'application/json'
-	            },
-	            params: {
-	                postId: postId
-	            }
-	        });
-		    postData = postObj.data;
-    	} else {
+		        const postObj = await axios.get('/api/posts/getPostAndDecendants', 
+		        {
+		        	headers: {
+		                'Authorization': 'Bearer '+authState.accessToken,
+		                'Accept': 'application/json'
+		            },
+		            params: {
+		                postId: postId
+		            }
+		        });
+			    postData = postObj.data;
+	    	} else {
 
-	        let postObj = await axios.get('/api/posts/getUserPosts', 
-	        {
-	        	headers: {
-	                'Authorization': 'Bearer '+accessToken,
-	                'Accept': 'application/json'
-	            },
-	            params: {
-	                userId: userId
-	            }
-	        });
-		    postData = postObj.data;
-    	}
+		        const postObj = await axios.get('/api/posts/getUserPosts', 
+		        {
+		        	headers: {
+		                'Authorization': 'Bearer '+authState.accessToken,
+		                'Accept': 'application/json'
+		            },
+		            params: {
+		                userId: userId
+		            }
+		        });
+			    postData = postObj.data;
+	    	}
 
-        await setCombined({
-            loading: false,
-            posts: postData
-        });
+	        setLoading(false);
+	        setPosts(postData);
+
+        } catch (error) {
+            swal.fire("Error", String(error), "error");
+        }
     }
 
 
 	const deleteBook = async (postId) => {
 
-    	const userId = user.id;
+    	const userId = authState.user.id;
 
-		swal({
+		swal.fire({
 			title: "Are you sure?",
 			text: "This will delete the blog post.",
 			icon: "warning",
+  			showCancelButton: true,
+			confirmButtonText: 'Yes, please delete',
+			cancelButtonText: 'Cancel',
 			dangerMode: true,
 		})
 		.then(async willDelete => {
+			try {
+				if (willDelete) {
+					await axios.delete(`/api/posts/${postId}`,
+			        {   
+			        	headers: {
+			                'Authorization': 'Bearer '+authState.accessToken,
+			                'Accept': 'application/json'
+			            },
+			        });
 
-			if (willDelete) {
-				await axios.delete(`/api/posts/${postId}`,
-		        {   
-		        	headers: {
-		                'Authorization': 'Bearer '+accessToken,
-		                'Accept': 'application/json'
-		            },
-		        });
+					swal.fire("Deleted!", "Post deleted!", "success");
+					setLoading(true);
+				}
 
-				swal("Deleted!", "Post deleted!", "success");
-				await setCombined({
-					loading: true
-				});
-			}
+	        } catch (error) {
+	            swal.fire("Error", String(error), "error");
+	        }
 		});
 	};
 
 	const togglePublished = async (postId, published) => {
 
-    	const userId = user.id;
+    	const userId = authState.user.id;
         
-		let post = combined.posts.find(post => post.id === postId);
+		let post = posts.find(post => post.id === postId);
 		published = !published;
 		published = published ? 1 : 0 ;
 
@@ -150,22 +135,24 @@ const Dashboard = (props) => {
         let successMsg = post.published ? 'published.' : 'set to private.';
 
         if (postId){
-            let results = await axios.post('/api/posts/'+postId,
-                { 
-                    data: post,
-                    _method: 'patch'                  
-                },
-                {   
-                    headers: {
-                        'Authorization': 'Bearer '+accessToken,
-                        'Accept': 'application/json'
-                    }
-                }
-            );
-
-	        await setCombined({
-	            loading: true
-	        });
+        	
+			try {
+	            let results = await axios.post('/api/posts/'+postId,
+	                { 
+	                    data: post,
+	                    _method: 'patch'                  
+	                },
+	                {   
+	                    headers: {
+	                        'Authorization': 'Bearer '+authState.accessToken,
+	                        'Accept': 'application/json'
+	                    }
+	                }
+	            );
+				setLoading(true);
+	        } catch (error) {
+	            swal.fire("Error", String(error), "error");
+	        }
         } 
 	}
 
@@ -188,11 +175,11 @@ const Dashboard = (props) => {
     let postsOnDashboard = <div></div>;
     let showDescPosts = <div></div>;
 
-	if(combined.posts.length > 0){
+	if(posts.length > 0){
         postsOnDashboard = 
                     <div>
                         {
-                            combined.posts.length && combined.posts.map(post => (
+                            posts.length && posts.map(post => (
 	                		<div key={`post-${post.id}`}>
 			                    <h2>
 									<Link

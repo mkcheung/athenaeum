@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+
 
 class PostController extends Controller
 {
@@ -202,9 +204,25 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data = $request->all();
         $post = Post::findOrFail($id);
-        $post->name = $request->name;
-        $post->slug = str_slug($request->name, '-');
+        $post->title = $data['data']['title'];
+        $post->content = $data['data']['content'];
+        if($data['data']['image']) {
+            $post->image = $data['data']['image'];
+            $destinationPath = public_path('post_images') . '/'.$post->title;
+            file_put_contents($destinationPath, file_get_contents($post->image));
+        }
+        $selectedTagIds = [];
+        $selectedTags = $data['data']['selectedTags'];
+        foreach($selectedTags as $selectedTag){
+            $selectedTagIds[] = $selectedTag['id'];
+        }
+
+        $post->tags()->sync($selectedTagIds);
+        $post->slug = Str::slug($data['data']['title'], '-');
+        $post->published = $data['data']['published'];
+        $post->user_id = $data['data']['user_id'];
         $post->save();
 
         //Product updated, return success response

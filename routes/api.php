@@ -30,7 +30,7 @@ Route::group(['middleware' => 'api'], function($router) {
     Route::get('/posts/', [PostController::class, 'index']);
     Route::get('/posts/getUserPosts', [PostController::class, 'getUserPosts']);
     Route::get('/posts/getPostAndDecendants', [PostController::class, 'getPostAndDecendants']);
-    Route::get('/posts/show/{id}', [PostController::class, 'show']);
+    Route::resource('posts', PostController::class);
     Route::get('/books/searchByTitle', [BookController::class, 'searchByTitle']);
     Route::get('/books/showUserBooks', [BookController::class, 'showUserBooks']);
     Route::resource('books', BookController::class);
