@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from './GlobalStates';
 import { useJwt } from "react-jwt";
+import swal from 'sweetalert2';
 
 const ProtectedRoute = ({
     children,
@@ -18,6 +19,7 @@ const ProtectedRoute = ({
                 user:{},
                 accessToken:''
             });
+            swal.fire('Done!', 'Your login has expired. Please log back in.', 'success');
         }
     }, [isExpired]);
 
