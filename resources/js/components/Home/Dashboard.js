@@ -26,6 +26,7 @@ import {
 } from './../CustomComponents/CustomComponents';
 import swal from 'sweetalert2';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { formatDate } from '../Helper/Helper';
 import { AuthContext } from '../GlobalStates';
 
 const Dashboard = (props) => {
@@ -168,11 +169,6 @@ const Dashboard = (props) => {
 
     const redirectToAddChapter = async (postId) => {
 		navigate(`/post/create/chapter/${postId}`);
-	}
-
-	const formatDate = (incomingDate) => {
-		let humanReadableDate = new Date(incomingDate);
-		return humanReadableDate.toLocaleString();
 	}
 
     const showDescendantPosts = false;//props.match.params.id ? true : false;

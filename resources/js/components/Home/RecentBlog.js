@@ -16,6 +16,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Link, Redirect } from 'react-router-dom';
 import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 import { makeStyles } from '@material-ui/core/styles';
+import { formatDate } from '../Helper/Helper';
 import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 
 const RecentBlog = () => {
@@ -77,11 +78,6 @@ const RecentBlog = () => {
 
         let posts = recentPostRes.data;
         setPosts(posts);
-    }
-
-    const formatDate = (incomingDate) => {
-        let humanReadableDate = new Date(incomingDate);
-        return humanReadableDate.toLocaleString();
     }
 
     return (
