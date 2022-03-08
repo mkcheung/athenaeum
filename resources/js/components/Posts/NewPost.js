@@ -85,7 +85,6 @@ const NewPost = () => {
     const loadData = async (postId = null, parentPostId = null) => {
         let tagOptions = [];
         try {
-
             let tagRes = await axios.get('/api/tags', 
                 {
                     headers: {

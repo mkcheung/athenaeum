@@ -28,6 +28,7 @@ import ShowPost from './Posts/ShowPost';
 import UserBookList from './Users/UserBookList';
 import UserBlog from './Users/UserBlog';
 import ProtectedRoute from './ProtectedRoute';
+import TagsList from './Tags/TagsList';
 
 const App = () => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -111,6 +112,13 @@ const App = () => {
                             element={
                                 <ProtectedRoute>
                                     <NewPost/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/tag' 
+                            element={
+                                <ProtectedRoute>
+                                    <TagsList/>
                                 </ProtectedRoute>
                             }
                         />

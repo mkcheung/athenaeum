@@ -58,7 +58,7 @@ const UserBookList = () => {
     const [ chapterSelectionModalOpen, setChapterSelectionModalOpen] = useState(false);
     const [ errors, setErrors ] = useState('');
 
-    const [authState,setAuthState] = useContext(AuthContext);
+    const [ authState, setAuthState ] = useContext(AuthContext);
 	useEffect(()=> {
 	    loadData();
 	},[])

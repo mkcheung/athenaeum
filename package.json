@@ -30,6 +30,7 @@
         "@material-ui/icons": "^4.11.2",
         "@material-ui/lab": "*",
         "@mui/material": "^5.3.1",
+        "ag-grid-react": "^27.0.1",
         "quill-image-uploader": "^1.2.2",
         "react-files": "*",
         "react-flash-message": "^1.0.8",

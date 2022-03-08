@@ -23,6 +23,7 @@ Route::group(['middleware' => 'api'], function($router) {
     Route::post('/refresh', [JWTController::class, 'refresh']);
     Route::post('/profile', [JWTController::class, 'profile']);
 
+    Route::get('tags/getTagsToPosts', [TagController::class, 'getTagsToPosts']);
     Route::resource('tags', TagController::class);
     Route::resource('chapters', ChapterController::class);
     Route::post('citations/assignChapters', [PostController::class, 'getRecentPosts']);
