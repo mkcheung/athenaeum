@@ -378,7 +378,7 @@ const UserBookList = () => {
 		        			chapters={chapters}
 		        			chapterSelectionModalOpen={chapterSelectionModalOpen} 
 		        			selectedChapter={selectedChapter}
-		        			handleChapterSelect={handleChapterSelect}
+		        			handleBookChapterSelect={handleChapterSelect}
 		        			handleClose={handleClose} 
 		        		/>
 			        </Grid>

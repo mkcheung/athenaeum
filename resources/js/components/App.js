@@ -78,6 +78,7 @@ const App = () => {
                         <Route exact path='/register' element={<Register/>}/>
                         <Route exact path='/about' element={<About/>}/>
                         <Route exact path='/user/getPosts/:id' element={<UserBlog/>} />
+                        <Route exact path='/post/show/:id' element={<ShowPost/>}/>
                         <Route exact path='/dashboard' 
                             element={
                                 <ProtectedRoute>
@@ -96,13 +97,6 @@ const App = () => {
                             element={
                                 <ProtectedRoute>
                                     <PostsLists/>
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route exact path='/post/show/:id' 
-                            element={
-                                <ProtectedRoute>
-                                    <ShowPost/>
                                 </ProtectedRoute>
                             }
                         />
