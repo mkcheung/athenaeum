@@ -93,6 +93,11 @@ const UserBlog = (props) => {
         setPosts(userData[0]['posts']);
     }
 
+    const formatDate = (incomingDate) => {
+        let humanReadableDate = new Date(incomingDate);
+        return humanReadableDate.toLocaleString();
+    }
+
     let userBlogEntries = <div></div>;
     if(posts.length > 0){
         userBlogEntries = 
@@ -117,7 +122,7 @@ const UserBlog = (props) => {
                             />
                         Author: {user.full_name}
                         <br/>
-                        Posted: {post.created_at}
+                        Posted: {formatDate(post.created_at)}
                         <hr/>
                     </div>
                 ))}

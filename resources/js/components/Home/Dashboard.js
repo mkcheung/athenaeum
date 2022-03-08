@@ -170,6 +170,11 @@ const Dashboard = (props) => {
 		navigate(`/post/create/chapter/${postId}`);
 	}
 
+	const formatDate = (incomingDate) => {
+		let humanReadableDate = new Date(incomingDate);
+		return humanReadableDate.toLocaleString();
+	}
+
     const showDescendantPosts = false;//props.match.params.id ? true : false;
 
     let postsOnDashboard = <div></div>;
@@ -198,7 +203,7 @@ const Dashboard = (props) => {
 								/>
 			        			Author: {post.user.full_name}
 		        				<br/>
-		        				Posted: {post.created_at}
+		        				Posted: {formatDate(post.created_at)}
 			        			<div style={{float:'right', top:'-27px', position:'relative'}}>
 										<IOSSwitch
 											checked={post.published === 1 ? true : false}

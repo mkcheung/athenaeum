@@ -79,6 +79,10 @@ const RecentBlog = () => {
         setPosts(posts);
     }
 
+    const formatDate = (incomingDate) => {
+        let humanReadableDate = new Date(incomingDate);
+        return humanReadableDate.toLocaleString();
+    }
 
     return (
         <div className="root">
@@ -106,7 +110,7 @@ const RecentBlog = () => {
                                 />
                             Author: {post.user.full_name}
                             <br/>
-                            Posted: {post.created_at}
+                            Posted: {formatDate(post.created_at)}
                             <hr/>
                         </div>
                     ))}
