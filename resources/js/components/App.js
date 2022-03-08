@@ -27,6 +27,7 @@ import PostsLists from './Posts/PostsLists';
 import ShowPost from './Posts/ShowPost';
 import UserBookList from './Users/UserBookList';
 import UserBlog from './Users/UserBlog';
+import UserEdit from './Users/UserEdit';
 import ProtectedRoute from './ProtectedRoute';
 import TagsList from './Tags/TagsList';
 
@@ -112,6 +113,13 @@ const App = () => {
                             element={
                                 <ProtectedRoute>
                                     <NewPost/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/user/edit/:id' 
+                            element={
+                                <ProtectedRoute>
+                                    <UserEdit/>
                                 </ProtectedRoute>
                             }
                         />
