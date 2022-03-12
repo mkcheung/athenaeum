@@ -17,7 +17,7 @@ const ProtectedRoute = ({
             await setAuthState({
                 isLoggedIn:false,
                 user:{},
-                accessToken:''
+                accessToken:'',
                 permissions:[],
                 isSuperAdmin:false
             });

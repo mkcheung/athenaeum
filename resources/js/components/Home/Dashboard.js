@@ -28,6 +28,8 @@ import swal from 'sweetalert2';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { formatDate } from '../Helper/Helper';
 import { AuthContext } from '../GlobalStates';
+import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
+
 
 const Dashboard = (props) => {
 
@@ -253,12 +255,29 @@ const Dashboard = (props) => {
 	}
     return (
 
-        <Container maxWidth="lg">
-			<div className="container">
-			{postsOnDashboard}
-			</div>
-			{showDescPosts}
-        </Container>
+        <Grid container spacing={3}>
+            <Grid item xs={1}>
+            </Grid>
+        	<Grid item xs={8}>
+				{postsOnDashboard}
+				{showDescPosts}
+            </Grid>
+            <Grid item xs={1}>
+                <div className="tagContainer">
+	                <Link className='btn btn-primary btn-sm mb-3' to='/post/create'>
+	                    Create new post
+	                </Link>
+	                <br/>
+	                <Link className='btn btn-primary btn-sm mb-3' to='/category/create'>
+	                    Create new category
+	                </Link>
+	                <br/>
+	                <Link className='btn btn-primary btn-sm mb-3' to='/tag/create'>
+	                    Create new tag
+	                </Link>
+                </div>
+            </Grid>
+        </Grid>
     )
 }
 export default Dashboard;
