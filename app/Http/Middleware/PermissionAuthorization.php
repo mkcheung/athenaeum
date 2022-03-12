@@ -41,7 +41,7 @@ class PermissionAuthorization
         foreach($permissionsOfUser as $permissionOfUser){
             $userPermissions[] = $permissionOfUser['name'];
         }
-        if ($user && array_intersect($userPermissions, $permissions)) {
+        if (($user && array_intersect($userPermissions, $permissions)) || $user->hasRole('superadmin')) {
             return $next($request);
         }
 

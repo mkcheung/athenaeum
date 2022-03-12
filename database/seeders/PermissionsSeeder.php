@@ -57,6 +57,7 @@ class PermissionsSeeder extends Seeder
         Permission::insert($permissions->toArray());
 
         // create the roles and set up the permissions to be established with them
+        Role::create(["name" => "superadmin"]);
         Role::create(["name" => "admin"])->givePermissionTo(Permission::all());
         Role::create(["name" => "author"])->givePermissionTo([
            'post-list',
@@ -69,7 +70,8 @@ class PermissionsSeeder extends Seeder
            'comment-edit',
         ]);
 
-        User::find(1)->assignRole('admin');
-        User::find(2)->assignRole('author');
+        User::find(1)->assignRole('superadmin');
+        User::find(2)->assignRole('admin');
+        User::find(3)->assignRole('author');
     }   
 }
