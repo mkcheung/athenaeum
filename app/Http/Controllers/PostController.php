@@ -18,7 +18,9 @@ class PostController extends Controller
  
     public function __construct()
     {
-        // $this->user = JWTAuth::parseToken()->authenticate();
+        $this->middleware('perm.auth:post-create', ['only' => ['create','store']]);
+        $this->middleware('perm.auth:post-edit', ['only' => ['edit','update']]);
+        $this->middleware('perm.auth:post-delete', ['only' => ['destroy']]);
     }
 
     /**
@@ -142,12 +144,16 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // $validatedData = $request->validate([
-        //   'name' => 'required',
-        //   'description' => 'required',
+        //   'title' => 'required',
+        //   'slug' => 'required',
+        //   'content' => 'required',
+        //   'published' => 'required',
+        //   'category' => 'required',
+        //   'user_id' => 'required',
         // ]);
 
         $post = Post::create([
-          'title' => $request['name'],
+          'title' => $request['title'],
           'slug' => $request['slug'],
           'content' => $request['content'],
           'published' => $request['published'],
