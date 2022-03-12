@@ -70,7 +70,6 @@ const App = () => {
         setAnchorEl(null);
     };
 
-    // let role = user.roles ? user.roles[0] : '';
     return (
         <BrowserRouter>
             <AuthProvider>

@@ -18,6 +18,8 @@ const ProtectedRoute = ({
                 isLoggedIn:false,
                 user:{},
                 accessToken:''
+                permissions:[],
+                isSuperAdmin:false
             });
             swal.fire('Done!', 'Your login has expired. Please log back in.', 'success');
         }

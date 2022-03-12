@@ -178,68 +178,68 @@ const Dashboard = (props) => {
 
 	if(posts.length > 0){
         postsOnDashboard = 
-                    <div>
-                        {
-                            posts.length && posts.map(post => (
-	                		<div key={`post-${post.id}`}>
-			                    <h2>
-									<Link
-										to={`/post/show/${post.id}`}
-										key={post.id}
-										style={{ textDecoration: 'none', color:'black' }}
-									>
-										{post.title}
-									</Link>
-			        			</h2>
-								<HTMLEllipsis
-									unsafeHTML={post.content}
-									maxLine='3'
-									ellipsis='...'
-									basedOn='letters'
-								/>
-			        			Author: {post.user.full_name}
-		        				<br/>
-		        				Posted: {formatDate(post.created_at)}
-			        			<div style={{float:'right', top:'-27px', position:'relative'}}>
-										<IOSSwitch
-											checked={post.published === 1 ? true : false}
-											onChange={() => {
-												togglePublished(post.id, post.published === 1);
-											}}
-											name="published"
-											inputProps={{ 'aria-label': 'secondary checkbox' }}
-										/>
-									{
-										(showDescendantPosts === false && post.descendant_post_id !== null )&& 
+        <div>
+            {
+                posts.length && posts.map(post => (
+        		<div key={`post-${post.id}`}>
+                    <h2>
+						<Link
+							to={`/post/show/${post.id}`}
+							key={post.id}
+							style={{ textDecoration: 'none', color:'black' }}
+						>
+							{post.title}
+						</Link>
+        			</h2>
+					<HTMLEllipsis
+						unsafeHTML={post.content}
+						maxLine='3'
+						ellipsis='...'
+						basedOn='letters'
+					/>
+        			Author: {post.user.full_name}
+    				<br/>
+    				Posted: {formatDate(post.created_at)}
+        			<div style={{float:'right', top:'-27px', position:'relative'}}>
+							<IOSSwitch
+								checked={post.published === 1 ? true : false}
+								onChange={() => {
+									togglePublished(post.id, post.published === 1);
+								}}
+								name="published"
+								inputProps={{ 'aria-label': 'secondary checkbox' }}
+							/>
+						{
+							(showDescendantPosts === false && post.descendant_post_id !== null )&& 
 
-											<ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>loadPostDescendants(post.id)}>
-												<ListIcon style={{color:'white'}} />
-											</ColorEditButton>
-									}
-									{
-										(showDescendantPosts === false && post.descendant_post_id == null) &&
-								            <Tooltip title="Add Chapter" placement="bottom">
-								                <ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>redirectToAddChapter(post.id)}>
-								                    <PlaylistAddIcon style={{color:'white'}} />
-								                </ColorEditButton>
-								            </Tooltip>
-									}
-				  					<Tooltip title="Edit Post" placement="bottom">
-										<ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>redirectToEdit(post.id)}>
-											<EditIcon style={{color:'white'}} />
-										</ColorEditButton>
-									</Tooltip>
-				  					<Tooltip title="Delete Post(s)" placement="bottom">
-										<ColorDeleteButton style={{height:'47px', top:'-1px'}} variant="contained" color="secondary" onClick={()=>deleteBook(post.id)}>
-											<DeleteIcon style={{color:'white'}} />
-										</ColorDeleteButton>
-									</Tooltip>
-			            		</div>
-		            			<hr/>
-                			</div>
-                        ))}
-                    </div>
-                }
+								<ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>loadPostDescendants(post.id)}>
+									<ListIcon style={{color:'white'}} />
+								</ColorEditButton>
+						}
+						{
+							(showDescendantPosts === false && post.descendant_post_id == null) &&
+					            <Tooltip title="Add Chapter" placement="bottom">
+					                <ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>redirectToAddChapter(post.id)}>
+					                    <PlaylistAddIcon style={{color:'white'}} />
+					                </ColorEditButton>
+					            </Tooltip>
+						}
+	  					<Tooltip title="Edit Post" placement="bottom">
+							<ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>redirectToEdit(post.id)}>
+								<EditIcon style={{color:'white'}} />
+							</ColorEditButton>
+						</Tooltip>
+	  					<Tooltip title="Delete Post(s)" placement="bottom">
+							<ColorDeleteButton style={{height:'47px', top:'-1px'}} variant="contained" color="secondary" onClick={()=>deleteBook(post.id)}>
+								<DeleteIcon style={{color:'white'}} />
+							</ColorDeleteButton>
+						</Tooltip>
+            		</div>
+        			<hr/>
+    			</div>
+            ))}
+        </div>
+    }
 
 
 	if (showDescendantPosts === true) {
