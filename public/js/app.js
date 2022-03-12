@@ -83592,7 +83592,7 @@ var Login = function Login(props) {
 
   var loginUser = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(email, password) {
-      var userData, loggedInData, _loggedInData$data, id, user, access_token, _userData, appState;
+      var userData, loggedInData, _loggedInData$data, id, user, access_token, permissions, isSuperAdmin, _userData, appState;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
@@ -83609,12 +83609,14 @@ var Login = function Login(props) {
               loggedInData = _context.sent;
 
               if (loggedInData.status == 200) {
-                _loggedInData$data = loggedInData.data, id = _loggedInData$data.id, user = _loggedInData$data.user, access_token = _loggedInData$data.access_token;
+                _loggedInData$data = loggedInData.data, id = _loggedInData$data.id, user = _loggedInData$data.user, access_token = _loggedInData$data.access_token, permissions = _loggedInData$data.permissions, isSuperAdmin = _loggedInData$data.isSuperAdmin;
                 _userData = _objectSpread({}, user);
                 appState = {
                   isLoggedIn: true,
                   user: _userData,
-                  accessToken: access_token
+                  accessToken: access_token,
+                  permissions: permissions,
+                  isSuperAdmin: isSuperAdmin
                 };
                 localStorage["appState"] = JSON.stringify(appState);
                 setAuthState(appState);
@@ -85917,7 +85919,9 @@ var AuthProvider = function AuthProvider(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     isLoggedIn: false,
     user: {},
-    accessToken: ''
+    accessToken: '',
+    permissions: permissions,
+    isSuperAdmin: isSuperAdmin
   }),
       _useState2 = _slicedToArray(_useState, 2),
       authState = _useState2[0],
