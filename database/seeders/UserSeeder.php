@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
                 "name" => "Listener",
                 "first_name" => "Wise",
                 "last_name" => "Listener",
-                "email" => "listener@email.com",
+                "email" => "listener@gmail.com",
                 "password" => Hash::make(123456),
                 "is_admin" => false
             ],

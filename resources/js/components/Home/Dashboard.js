@@ -253,8 +253,50 @@ const Dashboard = (props) => {
 			</Tooltip>
 		</div>
 	}
-    return (
 
+	let postCategoryTagControls = '';
+	if (authState.isSuperAdmin){
+
+		postCategoryTagControls = 
+	        <div className="tagContainer">
+	            <Link className='btn btn-primary btn-sm mb-3' to='/post/create'>
+	                Create new post
+	            </Link>
+	            <br/>
+	            <Link className='btn btn-primary btn-sm mb-3' to='/category/create'>
+	                Create new category
+	            </Link>
+	            <br/>
+	            <Link className='btn btn-primary btn-sm mb-3' to='/tag/create'>
+	                Create new tag
+	            </Link>
+	        </div> ;
+	} else {
+		let createPostControl = 
+	            <Link className='btn btn-primary btn-sm mb-3' to='/post/create'>
+	                Create new post
+	            </Link>;
+	    let createCategoryControl = authState.permissions.includes('category-create') ? <Link className='btn btn-primary btn-sm mb-3' to='/category/create'>
+	                Create new category
+	            </Link> : '';
+	    let createTagControl = authState.permissions.includes('tag-create') ? 
+	            <Link className='btn btn-primary btn-sm mb-3' to='/tag/create'>
+	                Create new tag
+	            </Link> : '';
+
+	    postCategoryTagControls =
+	        <div className="tagContainer">
+	        	{createPostControl}
+	            <br/>
+	        	{createCategoryControl}
+	            <br/> 
+	        	{createTagControl}
+	        </div>;
+
+	    return postCategoryTagControls;
+	}
+
+    return (
         <Grid container spacing={3}>
             <Grid item xs={1}>
             </Grid>
@@ -263,19 +305,7 @@ const Dashboard = (props) => {
 				{showDescPosts}
             </Grid>
             <Grid item xs={1}>
-                <div className="tagContainer">
-	                <Link className='btn btn-primary btn-sm mb-3' to='/post/create'>
-	                    Create new post
-	                </Link>
-	                <br/>
-	                <Link className='btn btn-primary btn-sm mb-3' to='/category/create'>
-	                    Create new category
-	                </Link>
-	                <br/>
-	                <Link className='btn btn-primary btn-sm mb-3' to='/tag/create'>
-	                    Create new tag
-	                </Link>
-                </div>
+            	{postCategoryTagControls}
             </Grid>
         </Grid>
     )

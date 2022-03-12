@@ -119,7 +119,11 @@ class JWTController extends Controller
     {
         $user = auth()->user();
 
+        $userPermissions = [];
         $permissionsOfUser = $user->getAllPermissions()->toArray();
+        foreach($permissionsOfUser as $permissionOfUser){
+            $userPermissions[] = $permissionOfUser['name'];
+        }
         $userIsSuperAdmin = $user->hasRole('superadmin') ? true : false;
 
         $userData = [
@@ -136,7 +140,7 @@ class JWTController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => $userData,
-            'permissions' => $permissionsOfUser,
+            'permissions' => $userPermissions,
             'isSuperAdmin' => $userIsSuperAdmin
         ]);
     }
