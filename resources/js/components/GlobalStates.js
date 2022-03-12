@@ -6,8 +6,8 @@ const AuthProvider = (props) => {
 		isLoggedIn:false,
 		user:{},
 		accessToken:'',
-		permissions,
-		isSuperAdmin
+		permissions:[],
+		isSuperAdmin:false
 	});
 
 	let data = localStorage["appState"] ? JSON.parse(localStorage["appState"]) : null;

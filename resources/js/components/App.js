@@ -22,6 +22,7 @@ import RecentBlog from './Home/RecentBlog';
 import About from './About';
 import Login from './Auth/Login';
 import Register from './Auth/Register';
+import NotFound from './NotFound';
 import NewPost from './Posts/NewPost';
 import PostsLists from './Posts/PostsLists';
 import ShowPost from './Posts/ShowPost';
@@ -137,6 +138,7 @@ const App = () => {
                                 </ProtectedRoute>
                             }
                         />
+                        <Route path="*" element={<NotFound/>}/>
                     </Routes>       
                 <Footer/>
             </AuthProvider>
