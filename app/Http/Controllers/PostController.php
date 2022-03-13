@@ -46,12 +46,17 @@ class PostController extends Controller
 
         $data = $request->all();
         $tagsRequested = [];
+        $userId = null;
 
         if(!empty($data['tags'])){
             foreach($data['tags'] as $row){
                 $tagObj = json_decode($row);
                 $tagsRequested[] = $tagObj->id;
             }
+        }
+
+        if(!empty($data['user_id'])){
+            $userId = $data['user_id'];
         }
 
         $posts = Post::when(!empty($tagsRequested), function($query) use ($tagsRequested) {
@@ -61,7 +66,13 @@ class PostController extends Controller
         })
         ->where('published', '=', 1)
         ->where('parent', '=', 1)
+        ->when(!empty($userId), function ($query) use ($userId) {
+            $query->where('user_id', '=', $userId);
+        })
         ->with('user')
+        ->when(empty($userId), function ($query){
+            $query->orderBy('created_at');
+        })
         ->limit(10)
         ->get();
 

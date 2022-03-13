@@ -10,7 +10,6 @@ import {
     ListItemIcon,
     ListItemText,
     TextField,
-    TextareaAutosize,
 } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Link, Redirect } from 'react-router-dom';
@@ -48,17 +47,16 @@ const RecentBlog = () => {
             let tags = tagRes.data;
             
             tags.forEach(function(tag){
-                let temp = {};
-                temp['id'] = tag.id;
-                temp['value'] = tag.title;
-                tagOptions.push(temp);
+                let tagItem = {};
+                tagItem['id'] = tag.id;
+                tagItem['value'] = tag.title;
+                tagOptions.push(tagItem);
                 setTagOptions(tagOptions);
             });
         }
         loadData();
         loadTagsOptions();
     }, []);
-
 
     const handleTagSelection = async (event, values) => {
         selectTags(values);
