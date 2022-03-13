@@ -135,7 +135,7 @@ const ChapterSelectionModal = (props) => {
   return (
     <div>
       <Modal
-        open={props.bookSelectionModalOpen}
+        open={props.chapterSelectionModalOpen}
         onClose={props.handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"

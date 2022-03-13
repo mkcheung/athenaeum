@@ -27,7 +27,7 @@ Route::middleware(['api'])->group(function () {
     Route::get('tags/getTagsToPosts', [TagController::class, 'getTagsToPosts']);
     Route::resource('tags', TagController::class);
     Route::resource('chapters', ChapterController::class);
-    Route::post('citations/assignChapters', [PostController::class, 'getRecentPosts']);
+    Route::post('citations/assignChapters', [CitationController::class, 'assignChapters']);
     Route::resource('citations', CitationController::class);
     Route::get('/posts/', [PostController::class, 'index']);
     Route::get('/posts/getUserPosts', [PostController::class, 'getUserPosts']);
