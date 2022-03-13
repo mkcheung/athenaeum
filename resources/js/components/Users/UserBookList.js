@@ -34,6 +34,7 @@ import {
 	ExpandLess,
 	ExpandMore,
 } from '@material-ui/icons';
+import swal from 'sweetalert2';
 import { AuthContext } from '../GlobalStates';
 
 const UserBookList = () => {
@@ -103,62 +104,58 @@ const UserBookList = () => {
 
 	const assignChapters = async (bookId) => {
 
+        try {
 
-		axios.post('/api/citations/assignChapters', { 
-        	bookId 
-        },
-        {   
-        	headers: {
-                'Authorization': 'Bearer ' + authState.accessToken,
-                'Accept': 'application/json'
-            },
-        })
-		.then(response => {
-			swal("Done!", "Citation Chapters Assigned!", "success");
-			this.loadData();
-		})
-		.catch(error => {
-			setErrors(error.response.data.errors);
-		});
+			axios.post('/api/citations/assignChapters', { 
+	        	bookId 
+	        },
+	        {   
+	        	headers: {
+	                'Authorization': 'Bearer ' + authState.accessToken,
+	                'Accept': 'application/json'
+	            },
+	        })
+			swal.fire("Done!", "Citation Chapters Assigned!", "success");
+	        loadData();
+        } catch (error) {
+            swal.fire('Done!', String(error), 'error');
+			props.handleClose();
+        }
 	};
 
 	const deleteBook = async (bookId) => {
 
 
-		swal({
+		swal.fire({
 			title: "Are you sure?",
 			text: "This will delete the book as well as all citations and chapters.",
 			icon: "warning",
+  			showCancelButton: true,
+			confirmButtonText: 'Yes, please delete',
+			cancelButtonText: 'Cancel',
 			dangerMode: true,
 		})
-		.then(willDelete => {
+		.then(async willDelete => {
 
-			const { 
-				token
-			} = this.state;
+	        setDeleteInProgress(true);
 
-			this.setState({
-				deleteInProgress:true
-			});
+			try {
+				if (willDelete) {
+					axios.delete(`/api/books/${bookId}`,
+			        {   
+			        	headers: {
+			                'Authorization': 'Bearer ' + authState.accessToken,
+			                'Accept': 'application/json'
+			            },
+			        });
 
-			if (willDelete) {
-				axios.delete(`/api/books/${bookId}`,
-		        {   
-		        	headers: {
-		                'Authorization': 'Bearer ' + authState.accessToken,
-		                'Accept': 'application/json'
-		            },
-		        })
-				.then(response => {
-					swal("Deleted!", "Book has been deleted!", "success");
-					this.loadData();
-				})
-				.catch(error => {
-					this.setState({
-				    	errors: error.response.data.errors
-					});
-				});
-			}
+					swal.fire("Deleted!", "Post deleted!", "success");
+	        		setDeleteInProgress(false);
+	        		loadData();
+				}
+	        } catch (error) {
+	            swal.fire("Error", String(error), "error");
+	        }
 		});
 	};
 

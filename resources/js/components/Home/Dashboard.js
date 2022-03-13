@@ -162,7 +162,6 @@ const Dashboard = (props) => {
 					swal.fire("Deleted!", "Post deleted!", "success");
 					setLoading(true);
 				}
-
 	        } catch (error) {
 	            swal.fire("Error", String(error), "error");
 	        }
