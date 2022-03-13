@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('perm.auth:user-list', ['only' => ['index', 'show']]);
+        $this->middleware('perm.auth:user-create', ['only' => ['create','store']]);
+        $this->middleware('perm.auth:user-edit', ['only' => ['edit','update']]);
+        $this->middleware('perm.auth:user-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

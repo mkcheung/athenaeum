@@ -22,8 +22,8 @@ import RecentBlog from './Home/RecentBlog';
 import About from './About';
 import Login from './Auth/Login';
 import Register from './Auth/Register';
+import NotFound from './NotFound';
 import NewPost from './Posts/NewPost';
-import PostsLists from './Posts/PostsLists';
 import ShowPost from './Posts/ShowPost';
 import UserBookList from './Users/UserBookList';
 import UserBlog from './Users/UserBlog';
@@ -69,7 +69,6 @@ const App = () => {
         setAnchorEl(null);
     };
 
-    // let role = user.roles ? user.roles[0] : '';
     return (
         <BrowserRouter>
             <AuthProvider>
@@ -92,13 +91,6 @@ const App = () => {
                             element={
                                 <ProtectedRoute>
                                     <Dashboard/>
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route exact path='/post' 
-                            element={
-                                <ProtectedRoute>
-                                    <PostsLists/>
                                 </ProtectedRoute>
                             }
                         />
@@ -137,6 +129,7 @@ const App = () => {
                                 </ProtectedRoute>
                             }
                         />
+                        <Route path="*" element={<NotFound/>}/>
                     </Routes>       
                 <Footer/>
             </AuthProvider>

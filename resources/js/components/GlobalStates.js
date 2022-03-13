@@ -5,7 +5,9 @@ const AuthProvider = (props) => {
 	const [authState, setAuthState] = useState({
 		isLoggedIn:false,
 		user:{},
-		accessToken:''
+		accessToken:'',
+		permissions:[],
+		isSuperAdmin:false
 	});
 
 	let data = localStorage["appState"] ? JSON.parse(localStorage["appState"]) : null;

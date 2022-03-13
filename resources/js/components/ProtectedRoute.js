@@ -17,7 +17,9 @@ const ProtectedRoute = ({
             await setAuthState({
                 isLoggedIn:false,
                 user:{},
-                accessToken:''
+                accessToken:'',
+                permissions:[],
+                isSuperAdmin:false
             });
             swal.fire('Done!', 'Your login has expired. Please log back in.', 'success');
         }

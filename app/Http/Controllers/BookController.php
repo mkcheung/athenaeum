@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+    public function __construct()
+    {
+         $this->middleware('perm.auth:book-list', ['only' => ['index','show','showUserBooks']]);
+         $this->middleware('perm.auth:book-create', ['only' => ['create','store']]);
+         $this->middleware('perm.auth:book-edit', ['only' => ['edit','update']]);
+         $this->middleware('perm.auth:book-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

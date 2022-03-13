@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('perm.auth:category-list', ['only' => ['index','show','showUserCategories']]);
+        $this->middleware('perm.auth:category-create', ['only' => ['create','store']]);
+        $this->middleware('perm.auth:category-edit', ['only' => ['edit','update']]);
+        $this->middleware('perm.auth:category-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

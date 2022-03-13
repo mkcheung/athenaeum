@@ -16,7 +16,8 @@ Route::get('/tags/showTags', [TagController::class, 'showTags']);
 Route::get('users/showUserBlogPosts', [UserController::class, 'showUserBlogPosts']);
 Route::get('users/showAuthors', [UserController::class, 'showAuthors']);
 Route::get('posts/show/{id}', [PostController::class, 'show']);
-Route::group(['middleware' => 'api'], function($router) {
+
+Route::middleware(['api'])->group(function () {
     Route::post('/register', [JWTController::class, 'register']);
     Route::post('/login', [JWTController::class, 'login']);
     Route::post('/logout', [JWTController::class, 'logout']);
