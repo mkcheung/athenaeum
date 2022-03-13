@@ -68,7 +68,6 @@ const Dashboard = (props) => {
 		        });
 			    postData = postObj.data;
 	    	} else {
-
 		        const postObj = await axios.get('/api/posts/getUserPosts', 
 		        {
 		        	headers: {
@@ -81,7 +80,6 @@ const Dashboard = (props) => {
 		        });
 			    postData = postObj.data;
 	    	}
-
 	        setLoading(false);
 	        setPosts(postData);
 
@@ -241,6 +239,10 @@ const Dashboard = (props) => {
     			</div>
             ))}
         </div>
+    } else {
+
+        postsOnDashboard = 
+        <div>No posts yet.</div>;
     }
 
 
@@ -293,7 +295,6 @@ const Dashboard = (props) => {
 	        	{createTagControl}
 	        </div>;
 
-	    return postCategoryTagControls;
 	}
 
     return (
