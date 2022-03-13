@@ -6,10 +6,10 @@ import swal from 'sweetalert2';
 
 const ProtectedRoute = ({
     children,
-    redirectPath = '/'
+    redirectPath = '/login',
+    requiredPerm
   }) => {
     const [ authState, setAuthState ] = useContext(AuthContext);
-
     const { decodedToken, isExpired } = useJwt(authState.accessToken);
 
     useEffect(async ()=>{
@@ -27,6 +27,10 @@ const ProtectedRoute = ({
 
     if(!authState.isLoggedIn){
         return <Navigate to={redirectPath} replace />;
+    }
+
+    if(requiredPerm && !authState.isSuperAdmin && !authState.permissions.includes(requiredPerm)){
+        return <Navigate to='/dashboard' replace />;
     }
 
     // when adding roles and permission, include redirect to dashboard

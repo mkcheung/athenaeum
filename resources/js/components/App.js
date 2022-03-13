@@ -96,35 +96,35 @@ const App = () => {
                         />
                         <Route exact path='/post/create' 
                             element={
-                                <ProtectedRoute>
+                                <ProtectedRoute requiredPerm="post-create">
                                     <NewPost/>
                                 </ProtectedRoute>
                             }
                         />
                         <Route exact path='/post/edit/:id' 
                             element={
-                                <ProtectedRoute>
+                                <ProtectedRoute requiredPerm="post-edit">
                                     <NewPost/>
                                 </ProtectedRoute>
                             }
                         />
                         <Route exact path='/user/edit/:id' 
                             element={
-                                <ProtectedRoute>
+                                <ProtectedRoute requiredPerm="user-edit">
                                     <UserEdit/>
                                 </ProtectedRoute>
                             }
                         />
                         <Route exact path='/tag' 
                             element={
-                                <ProtectedRoute>
+                                <ProtectedRoute requiredPerm="tag-list">
                                     <TagsList/>
                                 </ProtectedRoute>
                             }
                         />
                         <Route exact path='/book/getUserBooks' 
                             element={
-                                <ProtectedRoute>
+                                <ProtectedRoute requiredPerm="book-list">
                                     <UserBookList/>
                                 </ProtectedRoute>
                             }
