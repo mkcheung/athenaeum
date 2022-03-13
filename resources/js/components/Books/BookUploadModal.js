@@ -30,19 +30,19 @@ const GreenCheckbox = withStyles({
 	checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
+const rand = () => {
+	return Math.round(Math.random() * 20) - 10;
 }
 
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+const getModalStyle = () => {
+	const top = 50 + rand();
+	const left = 50 + rand();
 
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
+	return {
+		top: `${top}%`,
+		left: `${left}%`,
+		transform: `translate(-${top}%, -${left}%)`,
+	};
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -62,16 +62,16 @@ const BookUploadModal = (props) => {
 	// getModalStyle is not a pure function, we roll the style only on the first render
 	const [ modalStyle ] = useState(getModalStyle);
 	const [ open, setOpen ] = useState(false);
-  const [ addBookOnly, setAddBookOnly ] = useState(false);
-  const [ bookTitle, setBookTitle ] = useState('');
-  const [ jsonFile, setJsonFile] = useState({});
-	const [pages, setPages] = useState(0);
-	const [author, setAuthor] = useState({
+	const [ addBookOnly, setAddBookOnly ] = useState(false);
+	const [ bookTitle, setBookTitle ] = useState('');
+	const [ jsonFile, setJsonFile ] = useState({});
+	const [ pages, setPages ] = useState(0);
+	const [ author, setAuthor ] = useState({
 		author_first_name:'',
 		author_middle:'',
 		author_last_name:''
 	});
-  const [ authState,setAuthState ] = useContext(AuthContext);
+	const [ authState,setAuthState ] = useContext(AuthContext);
 
 
 	const handleAddBook = (e) => {
@@ -113,41 +113,54 @@ const BookUploadModal = (props) => {
 		setPages(pageNumbers);
 	}
 
+	const onFilesChange = (files) => {
+	    const fileReader = new FileReader();
+
+	    fileReader.onload = (event) => {
+			let jsonFile = JSON.parse(event.target.result);
+			let bookTitle = jsonFile.title;
+			setJsonFile(jsonFile);
+			setBookTitle(bookTitle);
+	    };
+
+	     fileReader.readAsText(files[0]);
+	}
+
 	const handleSubmit = async () => {
 
-    let data = {
-    	...author,
-    	bookTitle,
-    	jsonFile, 
-    	pages,
-    	userId: authState.user.id
-    }
+	    let data = {
+	    	...author,
+	    	bookTitle,
+	    	jsonFile, 
+	    	pages,
+	    	userId: authState.user.id
+	    }
 
-		axios.post('/api/books', { 
-        	data 
-        },
-        {   
-        	headers: {
-                'Authorization': 'Bearer ' + authState.accessToken,
-                'Accept': 'application/json'
-            },
-        })
-		.then(response => {
-			swal.fire("Done!", "Book Citations Uploaded!", "success");
-        setAuthor({
+        try {
+			const results = await axios.post('/api/books', { 
+	        	data 
+	        },
+	        {   
+	        	headers: {
+	                'Authorization': 'Bearer ' + authState.accessToken,
+	                'Accept': 'application/json'
+	            },
+	        });
+
+	        setAuthor({
 			    author_first_name: '',
 			    author_middle: '',
 			    author_last_name: '',
-        });
-        setAddBookOnly(false);
-        setBookTitle('');
-        setPages(0);
-			  props.handleClose();
-		})
-		.catch(error => {
-			console.log(error);
-			props.setErrors(error.response.data.errors);
-		});
+	        });
+	        setAddBookOnly(false);
+	        setBookTitle('');
+	        setPages(0);
+			swal.fire("Done!", "Book Citations Uploaded!", "success");
+			props.handleClose();
+        } catch (error) {
+            swal.fire('Done!', String(error), 'error');
+			props.handleClose();
+        }
 	};
 
 	let bookLoadingDisplay = '';
@@ -174,9 +187,7 @@ const BookUploadModal = (props) => {
 		fileUploadComponent = <div className="files">
 			<Files
 				className='files-dropzone'
-				onChange={file => {
-				props.fileReader.readAsText(file[0]);
-			}}
+				onChange={onFilesChange}
 				onError={props.onFilesError}
 				accepts={['.json', '.pdf']}
 				multiple
