@@ -15,7 +15,21 @@ import '../../../css/styles.css'; // TODO: apply absolute paths
 
 const BookCitationList = (props) => {
 
-	let {book_title, citations, handleCitationInsertion, handleOpenChapterSelectionModal} = props; 
+	let {book_title, chapter_title, citations, handleCitationInsertion, handleOpenChapterSelectionModal} = props; 
+    let bookTitleDisplay = book_title ? <Grid item xs={12}>
+                <div className="citationChapterTitle">
+                    <InputLabel>Title: <u>{book_title}</u></InputLabel>
+                </div>
+            </Grid> : 
+            '';
+
+    let chapterTitleDisplay = chapter_title ? <Grid item xs={12}>
+                <div className="citationChapterTitle">
+                    <InputLabel>Chapter Title: <u>{chapter_title}</u></InputLabel>
+                </div>
+            </Grid> : 
+            '';
+
 
 	const body = (
         <Grid container spacing={3}>
@@ -25,12 +39,8 @@ const BookCitationList = (props) => {
                     Search
                 </Button>
             </Grid>
-
-            <Grid item xs={12}>
-                <div className="citationBookTitle">
-                    <InputLabel>{book_title}</InputLabel>
-                </div>
-            </Grid>
+            {bookTitleDisplay}
+            {chapterTitleDisplay}
             <Grid container className="citationContainer">
                 <Grid item xs={12}>
                     <ul className="citationContainerList">
