@@ -47,6 +47,8 @@ const UserBookList = () => {
     const [ user, setUser ] = useState({});
     const [ selectedBookCitations, setSelectedBookCitations ] = useState([]);
     const [ selectedBookId, setSelectedBookId ] = useState(null);
+    const [ selectedBook, setSelectedBook ] = useState(null);
+    const [ selectedChapterId, setSelectedChapterId ] = useState(null);
     const [ selectedChapter, setSelectedChapter ] = useState(null);
     const [ modalOpen, setModalOpen ] = useState(false);
     const [ author_first_name, setAuthorFirstName ] = useState('');
@@ -184,7 +186,15 @@ const UserBookList = () => {
 
     const handleBookListClick = async (event, bookId) => {
 		event.preventDefault();
+		let theSelectedBook;
+		theSelectedBook = books.find((book)=> {
+			return book.id == bookId;
+		});
+
 		setSelectedBookId(bookId);
+		setSelectedBook(theSelectedBook);
+		setSelectedChapterId(null);
+		setSelectedChapter(null)
     }
 
     useEffect(()=>{
@@ -198,7 +208,14 @@ const UserBookList = () => {
 
     const handleChapterSelect = async (event) => {
 
-		let selectedChapterId = event.target.value;
+		let selChapterId = event.target.value;
+		let selChapter = event.target.value;
+
+		if(selChapterId != selectedChapterId){
+			setSelectedChapterId(null);
+			setSelectedChapter(null)
+		}
+
 		let bookCitations = '';
 		let citations = [];
 	    for (let key in books) {
@@ -209,11 +226,24 @@ const UserBookList = () => {
 	    }
 	    for (let key in bookCitations) {
 
-	        if (bookCitations[key].chapter ==  selectedChapterId) {
+	        if (bookCitations[key].chapter ==  selChapterId) {
 	            citations.push(bookCitations[key]);
 	        }
 	    }
-		setSelectedChapter(selectedChapterId);
+
+		let theSelectedBook;
+		theSelectedBook = books.find((book)=> {
+			return book.id == selectedBookId;
+		});
+
+	    selChapter = chapters.find((chapter)=>{
+	    	return chapter.chapter_number == selChapterId
+	    });
+
+		setSelectedBookId(selectedBookId);
+		setSelectedBook(theSelectedBook);
+		setSelectedChapterId(selChapterId);
+		setSelectedChapter(selChapter)
 		setSelectedBookCitations(citations)
 		setChapterSelectionModalOpen(false);
     };
@@ -297,14 +327,38 @@ const UserBookList = () => {
         let citationsFromBook = '';
         if (loading === true) {
         	citationsFromBook = 
-				<List >
+				<List>
 					<div className="bookCitationList" >
 						<CircularProgress className="circularProgress" />
 					</div>
 				</List>;
         } else if(loading === false && selectedBookCitations && selectedBookCitations.length>0){
+        	let selBookTitle = selectedBook ? selectedBook.title : '';
+        	let selBookChapterTitle = selectedChapter ? selectedChapter.chapter_title : '';
 	        citationsFromBook =
 				<List component="nav" className="bookCitationListItem" aria-label="secondary mailbox folder">
+					<ListItem
+						key={`selectedbook-${selectedBookId}`}
+					>
+						<div className="bookCitationBookTitle">
+							<u>
+								<strong>
+									{selBookTitle}
+								</strong>
+							</u><br/>
+						</div>
+					</ListItem>
+					<ListItem
+						key={`selectedbookchtitle-${selectedBookId}`}
+					>
+						<div className="bookCitationChapterTitle">
+							<u>
+								<strong>
+									{selBookChapterTitle}
+								</strong>
+							</u><br/>
+						</div>
+					</ListItem>
 					{selectedBookCitations.map(selectedBookCitation => (
 						<div key={`selectedBookCitation-${selectedBookCitation.id}`}>
 							<div>
@@ -374,7 +428,7 @@ const UserBookList = () => {
 		        			bookIdForChInput={bookIdForChInput}
 		        			chapters={chapters}
 		        			chapterSelectionModalOpen={chapterSelectionModalOpen} 
-		        			selectedChapter={selectedChapter}
+		        			selectedChapterId={selectedChapterId}
 		        			handleBookChapterSelect={handleChapterSelect}
 		        			handleClose={handleClose} 
 		        		/>

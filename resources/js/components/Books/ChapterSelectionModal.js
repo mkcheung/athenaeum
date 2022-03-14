@@ -80,7 +80,7 @@ const ChapterSelectionModal = (props) => {
 								<Select
 									native
 	                name='chapter'
-									value={props.selectedChapter}
+									value={props.selectedChapterId}
 									onChange={props.handleBookChapterSelect}
 									title='Chapter Select'
 								>
@@ -111,7 +111,7 @@ const ChapterSelectionModal = (props) => {
 								<Select
 									native
 	                name='chapter'
-									value={props.selectedChapter}
+									value={props.selectedChapterId}
 									onChange={props.handleBookChapterSelect}
 									title='Chapter Select'
 								>
