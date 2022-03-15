@@ -9,32 +9,14 @@ const ProtectedRoute = ({
     redirectPath = '/login',
     requiredPerm
   }) => {
-    const [ authState, setAuthState ] = useContext(AuthContext);
-    const { decodedToken, isExpired } = useJwt(authState.accessToken);
-
-    useEffect(async ()=>{
-        if(isExpired){
-            await setAuthState({
-                isLoggedIn:false,
-                user:{},
-                accessToken:'',
-                permissions:[],
-                isSuperAdmin:false
-            });
-            swal.fire('Done!', 'Your login has expired. Please log back in.', 'success');
-        }
-    }, [isExpired]);
-
-    if(!authState.isLoggedIn){
+    let data = localStorage["appState"] ? JSON.parse(localStorage["appState"]) : null;
+    if(!data){
         return <Navigate to={redirectPath} replace />;
     }
 
-    if(requiredPerm && !authState.isSuperAdmin && !authState.permissions.includes(requiredPerm)){
+    if(requiredPerm && !data.isSuperAdmin && !data.permissions.includes(requiredPerm)){
         return <Navigate to='/dashboard' replace />;
     }
-
-    // when adding roles and permission, include redirect to dashboard
-    // for attempts to access unauthorized routes.
 
     return children;
 }

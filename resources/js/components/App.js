@@ -30,6 +30,8 @@ import UserBlog from './Users/UserBlog';
 import UserEdit from './Users/UserEdit';
 import ProtectedRoute from './ProtectedRoute';
 import TagsList from './Tags/TagsList';
+import CategoriesList from './Categories/CategoriesList';
+import NewCategory from './Categories/NewCategory';
 
 const App = () => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -126,6 +128,20 @@ const App = () => {
                             element={
                                 <ProtectedRoute requiredPerm="book-list">
                                     <UserBookList/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/category' 
+                            element={
+                                <ProtectedRoute requiredPerm="category-list">
+                                    <CategoriesList/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/category/create' 
+                            element={
+                                <ProtectedRoute requiredPerm="category-create">
+                                    <NewCategory/>
                                 </ProtectedRoute>
                             }
                         />

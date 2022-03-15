@@ -51,7 +51,7 @@ const NewPost = () => {
     const [ parentPostId, setParentPostId ] = useState(null);
     const [ postId, setPostId ] = useState(null);
     const [ bookSelectedModalOpen, setbookSelectedModalOpen ] = useState(false);
-    const [ bookTitle, setBookTitle ] = useState('');
+    const [ bookTitle, setBookTitle ] = useState(null);
     const [ bookTitleSearchTerm, setBookTitleSearchTerm ] = useState('');
     const [ content, setContent ] = useState('');
     const [ title, setTitle ] = useState('');

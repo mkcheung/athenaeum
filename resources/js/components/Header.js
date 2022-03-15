@@ -136,7 +136,9 @@ const Header = (props) => {
             setAuthState({
                 isLoggedIn:false,
                 user:{},
-                accessToken:''
+                accessToken:'',
+                permissions:[],
+                isSuperAdmin:false
             });
             handleClose();
             navigate(`/`);
