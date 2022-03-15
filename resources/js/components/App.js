@@ -29,6 +29,7 @@ import UserBookList from './Users/UserBookList';
 import UserBlog from './Users/UserBlog';
 import UserEdit from './Users/UserEdit';
 import ProtectedRoute from './ProtectedRoute';
+import NewTag from './Tags/NewTag';
 import TagsList from './Tags/TagsList';
 import CategoriesList from './Categories/CategoriesList';
 import NewCategory from './Categories/NewCategory';
@@ -121,6 +122,13 @@ const App = () => {
                             element={
                                 <ProtectedRoute requiredPerm="tag-list">
                                     <TagsList/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/tag/create' 
+                            element={
+                                <ProtectedRoute requiredPerm="tag-create">
+                                    <NewTag/>
                                 </ProtectedRoute>
                             }
                         />

@@ -60,7 +60,7 @@ const NewCategory = () => {
                 }
             );
             swal.fire("Done!", "Category Created!", "success");
-            navigate('/')
+            navigate('/');
         } catch (error) {
             swal.fire("Error", String(error), "error");
         }
