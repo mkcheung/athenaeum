@@ -45,62 +45,97 @@ const useStyles = makeStyles((theme) => ({
 const ChapterSelectionModal = (props) => {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
-  const body = (
-        <Grid container spacing={3}>
-            <div style={modalStyle} className={classes.paper}>
-				<h2 id="simple-modal-title">Select Chapter Citations:</h2>
-				<form noValidate autoComplete="off">
-					
-					<Grid item xs={12}>
-            <FormControl >
-                <InputLabel htmlFor="age-native-simple">Books:</InputLabel>
-                <Select
-                    native
-                    name='book'
-                    value={props.bookSelectedId}
-                    onChange={props.handleBookChapterSelect}
-                    title='Book Select'
-                >
-                <option value='0'>None</option>
-                {
-                    Object
-                    .keys(props.books)
-                    .map(key => <option key={key} value = {props.books[key].id}>{props.books[key].title}</option>)
-                }
-                </Select>
-            </FormControl>
-					</Grid>
-					<br/>
-					
-					<Grid item xs={12}>
-	          			<FormControl >
-  							<InputLabel htmlFor="age-native-simple">Chapters:</InputLabel>
-							<Select
-								native
-                name='chapter'
-								value={props.selectedChapter}
-								onChange={props.handleBookChapterSelect}
-								title='Chapter Select'
-							>
-								<option value='0'></option>
-								{
-									Object
-									.keys(props.chapters)
-									.map(key => <option key={key} value = {props.chapters[key].chapter_number}>Ch.{props.chapters[key].chapter_number}-{props.chapters[key].chapter_title}</option>)
-								}
-							</Select>
-	          			</FormControl>
-					</Grid>
-					<br/>
-				</form>
-			</div>
-	    </Grid>
-  );
+  let body = '';
+  if(props.books){
+  	body = (
+	        <Grid container spacing={3}>
+	            <div style={modalStyle} className={classes.paper}>
+					<h2 id="simple-modal-title">Select Chapter Citations:</h2>
+					<form noValidate autoComplete="off">
+						
+						<Grid item xs={12}>
+	            <FormControl >
+	                <InputLabel htmlFor="age-native-simple">Books:</InputLabel>
+	                <Select
+	                    native
+	                    name='book'
+	                    value={props.bookSelectedId}
+	                    onChange={props.handleBookChapterSelect}
+	                    title='Book Select'
+	                >
+	                <option value='0'>None</option>
+	                {
+	                    Object
+	                    .keys(props.books)
+	                    .map(key => <option key={key} value = {props.books[key].id}>{props.books[key].title}</option>)
+	                }
+	                </Select>
+	            </FormControl>
+						</Grid>
+						<br/>
+						
+						<Grid item xs={12}>
+		          			<FormControl >
+	  							<InputLabel htmlFor="age-native-simple">Chapters:</InputLabel>
+								<Select
+									native
+	                name='chapter'
+									value={props.selectedChapterId}
+									onChange={props.handleBookChapterSelect}
+									title='Chapter Select'
+								>
+									<option value='0'></option>
+									{
+										Object
+										.keys(props.chapters)
+										.map(key => <option key={key} value = {props.chapters[key].chapter_number}>Ch.{props.chapters[key].chapter_number}-{props.chapters[key].chapter_title}</option>)
+									}
+								</Select>
+		          			</FormControl>
+						</Grid>
+						<br/>
+					</form>
+				</div>
+		    </Grid>
+	  );
+  } else {
+  	body = (
+	        <Grid container spacing={3}>
+	            <div style={modalStyle} className={classes.paper}>
+					<h2 id="simple-modal-title">Select Chapter Citations:</h2>
+					<form noValidate autoComplete="off">
+						
+						<Grid item xs={12}>
+		          			<FormControl >
+	  							<InputLabel htmlFor="age-native-simple">Chapters:</InputLabel>
+								<Select
+									native
+	                name='chapter'
+									value={props.selectedChapterId}
+									onChange={props.handleBookChapterSelect}
+									title='Chapter Select'
+								>
+									<option value='0'></option>
+									{
+										Object
+										.keys(props.chapters)
+										.map(key => <option key={key} value = {props.chapters[key].chapter_number}>Ch.{props.chapters[key].chapter_number}-{props.chapters[key].chapter_title}</option>)
+									}
+								</Select>
+		          			</FormControl>
+						</Grid>
+						<br/>
+					</form>
+				</div>
+		    </Grid>
+	  );
+  }
+	  
 
   return (
     <div>
       <Modal
-        open={props.bookSelectionModalOpen}
+        open={props.chapterSelectionModalOpen}
         onClose={props.handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"

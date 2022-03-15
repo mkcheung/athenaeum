@@ -31,14 +31,16 @@ const Login = (props) => {
         let loggedInData = await axios.post("/api/login", userData);
         if (loggedInData.status == 200) {
 
-            let { id, user, access_token } = loggedInData.data;
+            let { id, user, access_token, permissions, isSuperAdmin } = loggedInData.data;
             let userData = {
                 ...user
             };
             let appState = {
                 isLoggedIn: true,
                 user: userData,
-                accessToken: access_token
+                accessToken: access_token,
+                permissions: permissions,
+                isSuperAdmin: isSuperAdmin
             };
 
             localStorage["appState"] = JSON.stringify(appState);

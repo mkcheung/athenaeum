@@ -7,12 +7,22 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-      public function index()
-      {
+
+    public function __construct()
+    {
+        $this->middleware('perm.auth:tag-list', ['only' => ['index', 'show', 'getTagsToPosts']]);
+        $this->middleware('perm.auth:tag-create', ['only' => ['create','store']]);
+        $this->middleware('perm.auth:tag-edit', ['only' => ['edit','update']]);
+        $this->middleware('perm.auth:tag-delete', ['only' => ['destroy']]);
+    }
+
+    public function index()
+    {
         $tags = Tag::get();
 
         return $tags->toJson();
-      }
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

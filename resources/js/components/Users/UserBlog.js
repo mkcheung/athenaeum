@@ -16,6 +16,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Link, useParams } from 'react-router-dom';
 import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 import { makeStyles } from '@material-ui/core/styles';
+import { formatDate } from '../Helper/Helper';
 import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 
 const UserBlog = (props) => {
@@ -117,7 +118,7 @@ const UserBlog = (props) => {
                             />
                         Author: {user.full_name}
                         <br/>
-                        Posted: {post.created_at}
+                        Posted: {formatDate(post.created_at)}
                         <hr/>
                     </div>
                 ))}

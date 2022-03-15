@@ -3,11 +3,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import Files from 'react-files'
 import { 
 	Button,
+    Chip,
 	Container,
 	Grid,
 	Paper,
 	Switch,
 	Tooltip,
+    TextField,
 } from '@material-ui/core';
 import { 
 	Delete as DeleteIcon,
@@ -18,6 +20,7 @@ import {
 import { 
 	makeStyles
 } from '@material-ui/core/styles';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 import { 
 	ColorDeleteButton,
@@ -26,7 +29,10 @@ import {
 } from './../CustomComponents/CustomComponents';
 import swal from 'sweetalert2';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { formatDate } from '../Helper/Helper';
 import { AuthContext } from '../GlobalStates';
+import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
+
 
 const Dashboard = (props) => {
 
@@ -34,6 +40,8 @@ const Dashboard = (props) => {
     const params = useParams();
     const [ loading, setLoading ] = useState(true);
     const [ posts, setPosts ] = useState([]);
+    const [ tagOptions, setTagOptions ] = useState([]);
+    const [ selectedTags, selectTags ] = useState([]);
     const [ authState, setAuthState ] = useContext(AuthContext);
 
     useEffect( () => {
@@ -49,6 +57,7 @@ const Dashboard = (props) => {
     const loadData = async (userId=null, postId=null) => {
 
 	    let postData = [];
+        let tagOptions = [];
 
         try {
 	    	if(postId !== null){
@@ -65,7 +74,6 @@ const Dashboard = (props) => {
 		        });
 			    postData = postObj.data;
 	    	} else {
-
 		        const postObj = await axios.get('/api/posts/getUserPosts', 
 		        {
 		        	headers: {
@@ -79,7 +87,26 @@ const Dashboard = (props) => {
 			    postData = postObj.data;
 	    	}
 
+
+            let tagOptions = [];
+
+            let tagRes = await axios.get('/api/tags/showTags', 
+                {
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+            let tags = tagRes.data;
+            
+            tags.forEach(function(tag){
+                let tagItem = {};
+                tagItem['id'] = tag.id;
+                tagItem['value'] = tag.title;
+                tagOptions.push(tagItem);
+            });
+
 	        setLoading(false);
+            setTagOptions(tagOptions);
 	        setPosts(postData);
 
         } catch (error) {
@@ -87,6 +114,26 @@ const Dashboard = (props) => {
         }
     }
 
+    const handleTagSelection = async (event, values) => {
+        selectTags(values);
+    }
+
+    const handleTagSubmit = async () => {
+
+        let recentPostRes = await axios.get('/api/posts/getRecentPosts', 
+        {
+            headers: {
+                'Accept': 'application/json'
+            },
+            params: {
+                tags: selectedTags,
+                user_id: authState.user.id
+            }
+        });
+
+        let posts = recentPostRes.data;
+        setPosts(posts);
+    }
 
 	const deleteBook = async (postId) => {
 
@@ -115,7 +162,6 @@ const Dashboard = (props) => {
 					swal.fire("Deleted!", "Post deleted!", "success");
 					setLoading(true);
 				}
-
 	        } catch (error) {
 	            swal.fire("Error", String(error), "error");
 	        }
@@ -177,68 +223,72 @@ const Dashboard = (props) => {
 
 	if(posts.length > 0){
         postsOnDashboard = 
-                    <div>
-                        {
-                            posts.length && posts.map(post => (
-	                		<div key={`post-${post.id}`}>
-			                    <h2>
-									<Link
-										to={`/post/show/${post.id}`}
-										key={post.id}
-										style={{ textDecoration: 'none', color:'black' }}
-									>
-										{post.title}
-									</Link>
-			        			</h2>
-								<HTMLEllipsis
-									unsafeHTML={post.content}
-									maxLine='3'
-									ellipsis='...'
-									basedOn='letters'
-								/>
-			        			Author: {post.user.full_name}
-		        				<br/>
-		        				Posted: {post.created_at}
-			        			<div style={{float:'right', top:'-27px', position:'relative'}}>
-										<IOSSwitch
-											checked={post.published === 1 ? true : false}
-											onChange={() => {
-												togglePublished(post.id, post.published === 1);
-											}}
-											name="published"
-											inputProps={{ 'aria-label': 'secondary checkbox' }}
-										/>
-									{
-										(showDescendantPosts === false && post.descendant_post_id !== null )&& 
+        <div>
+            {
+                posts.length && posts.map(post => (
+        		<div key={`post-${post.id}`}>
+                    <h2>
+						<Link
+							to={`/post/show/${post.id}`}
+							key={post.id}
+							style={{ textDecoration: 'none', color:'black' }}
+						>
+							{post.title}
+						</Link>
+        			</h2>
+					<HTMLEllipsis
+						unsafeHTML={post.content}
+						maxLine='3'
+						ellipsis='...'
+						basedOn='letters'
+					/>
+        			Author: {post.user.full_name}
+    				<br/>
+    				Posted: {formatDate(post.created_at)}
+        			<div style={{float:'right', top:'-27px', position:'relative'}}>
+							<IOSSwitch
+								checked={post.published === 1 ? true : false}
+								onChange={() => {
+									togglePublished(post.id, post.published === 1);
+								}}
+								name="published"
+								inputProps={{ 'aria-label': 'secondary checkbox' }}
+							/>
+						{
+							(showDescendantPosts === false && post.descendant_post_id !== null )&& 
 
-											<ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>loadPostDescendants(post.id)}>
-												<ListIcon style={{color:'white'}} />
-											</ColorEditButton>
-									}
-									{
-										(showDescendantPosts === false && post.descendant_post_id == null) &&
-								            <Tooltip title="Add Chapter" placement="bottom">
-								                <ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>redirectToAddChapter(post.id)}>
-								                    <PlaylistAddIcon style={{color:'white'}} />
-								                </ColorEditButton>
-								            </Tooltip>
-									}
-				  					<Tooltip title="Edit Post" placement="bottom">
-										<ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>redirectToEdit(post.id)}>
-											<EditIcon style={{color:'white'}} />
-										</ColorEditButton>
-									</Tooltip>
-				  					<Tooltip title="Delete Post(s)" placement="bottom">
-										<ColorDeleteButton style={{height:'47px', top:'-1px'}} variant="contained" color="secondary" onClick={()=>deleteBook(post.id)}>
-											<DeleteIcon style={{color:'white'}} />
-										</ColorDeleteButton>
-									</Tooltip>
-			            		</div>
-		            			<hr/>
-                			</div>
-                        ))}
-                    </div>
-                }
+								<ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>loadPostDescendants(post.id)}>
+									<ListIcon style={{color:'white'}} />
+								</ColorEditButton>
+						}
+						{
+							(showDescendantPosts === false && post.descendant_post_id == null) &&
+					            <Tooltip title="Add Chapter" placement="bottom">
+					                <ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>redirectToAddChapter(post.id)}>
+					                    <PlaylistAddIcon style={{color:'white'}} />
+					                </ColorEditButton>
+					            </Tooltip>
+						}
+	  					<Tooltip title="Edit Post" placement="bottom">
+							<ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>redirectToEdit(post.id)}>
+								<EditIcon style={{color:'white'}} />
+							</ColorEditButton>
+						</Tooltip>
+	  					<Tooltip title="Delete Post(s)" placement="bottom">
+							<ColorDeleteButton style={{height:'47px', top:'-1px'}} variant="contained" color="secondary" onClick={()=>deleteBook(post.id)}>
+								<DeleteIcon style={{color:'white'}} />
+							</ColorDeleteButton>
+						</Tooltip>
+            		</div>
+        			<hr/>
+    			</div>
+            ))}
+        </div>
+    } else {
+
+        postsOnDashboard = 
+        <div>No posts yet.</div>;
+    }
 
 
 	if (showDescendantPosts === true) {
@@ -250,14 +300,80 @@ const Dashboard = (props) => {
 			</Tooltip>
 		</div>
 	}
-    return (
 
-        <Container maxWidth="lg">
-			<div className="container">
-			{postsOnDashboard}
-			</div>
-			{showDescPosts}
-        </Container>
+	let postCategoryTagControls = '';
+	if (authState.isSuperAdmin){
+
+		postCategoryTagControls = 
+	        <div className="tagContainer">
+	            <Link className='btn btn-primary btn-sm mb-3' to='/post/create'>
+	                Create new post
+	            </Link>
+	            <br/>
+	            <Link className='btn btn-primary btn-sm mb-3' to='/category/create'>
+	                Create new category
+	            </Link>
+	            <br/>
+	            <Link className='btn btn-primary btn-sm mb-3' to='/tag/create'>
+	                Create new tag
+	            </Link>
+	        </div> ;
+	} else {
+		let createPostControl = 
+	            <Link className='btn btn-primary btn-sm mb-3' to='/post/create'>
+	                Create new post
+	            </Link>;
+	    let createCategoryControl = authState.permissions.includes('category-create') ? <Link className='btn btn-primary btn-sm mb-3' to='/category/create'>
+	                Create new category
+	            </Link> : '';
+	    let createTagControl = authState.permissions.includes('tag-create') ? 
+	            <Link className='btn btn-primary btn-sm mb-3' to='/tag/create'>
+	                Create new tag
+	            </Link> : '';
+
+	    postCategoryTagControls =
+	        <div className="tagContainer">
+	        	{createPostControl}
+	            <br/>
+	        	{createCategoryControl}
+	            <br/> 
+	        	{createTagControl}
+	        </div>;
+
+	}
+
+    return (
+        <Grid container spacing={3}>
+            <Grid item xs={1}>
+            </Grid>
+        	<Grid item xs={8}>
+				{postsOnDashboard}
+				{showDescPosts}
+            </Grid>
+            <Grid item xs={1}>
+            	{postCategoryTagControls}
+                <div className="tagContainer">
+                    <Autocomplete
+                        id='tags'
+                        freeSolo
+                        multiple
+                        options={tagOptions}
+                        getOptionLabel={(tagOption) => tagOption.value}
+                        renderInput={(params) => 
+                            <TextField 
+                                {...params} 
+                                label="Search Posts With Tags:"
+                            />
+                        }
+                        onChange={handleTagSelection}
+                    />
+                </div>
+                <Chip
+                    label='Search'
+                    onClick={() => handleTagSubmit()}
+                />
+            </Grid>
+        </Grid>
     )
 }
 export default Dashboard;

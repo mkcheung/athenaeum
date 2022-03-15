@@ -47,10 +47,11 @@ const NewPost = () => {
     const [ errors, setErrors ] = useState([]);
     const [ bookSelectedId, setBookSelectedId ] = useState(null);
     const [ chapterSelectedId, setChapterSelectedId ] = useState(null);
+    const [ chapterSelectedTitle, setChapterSelectedTitle ] = useState(null);
     const [ parentPostId, setParentPostId ] = useState(null);
     const [ postId, setPostId ] = useState(null);
     const [ bookSelectedModalOpen, setbookSelectedModalOpen ] = useState(false);
-    const [ bookTitle, setBookTitle ] = useState('');
+    const [ bookTitle, setBookTitle ] = useState(null);
     const [ bookTitleSearchTerm, setBookTitleSearchTerm ] = useState('');
     const [ content, setContent ] = useState('');
     const [ title, setTitle ] = useState('');
@@ -85,7 +86,6 @@ const NewPost = () => {
     const loadData = async (postId = null, parentPostId = null) => {
         let tagOptions = [];
         try {
-
             let tagRes = await axios.get('/api/tags', 
                 {
                     headers: {
@@ -245,8 +245,6 @@ const NewPost = () => {
     const handleBookChapterSelect = async (event) => {
         let selectorName = event.target.name;
         let bookCitations = '';
-        let chapters = [];
-        let citations = [];
 
         if(event.target.value == 0){
             setBookTitle('');
@@ -262,18 +260,21 @@ const NewPost = () => {
 
             let selectedBook = books.find(book => book.id == selectedBookId);
             if(selectedBook.chapters != null && selectedBook.chapters.length > 0){
-                chapters = selectedBook.chapters;
+                const chapters = selectedBook.chapters;
 
                 setBookTitle(selectedBook.title);
                 setBookSelectedId(selectedBookId);
+                setChapterSelectedId(null);
+                setChapterSelectedTitle(null);
                 setChapters(chapters);
             } else {
-                citations = selectedBook.citations;
+                const citationsFromBook = selectedBook.citations;
                 setBookTitle(selectedBook.title);
                 setBookSelectedId(selectedBookId);
                 setChapterSelectedId(null);
+                setChapterSelectedTitle(null);
                 setChapters([]);
-                setCitations(citations);
+                setCitations(citationsFromBook);
             }
         }
 
@@ -282,16 +283,20 @@ const NewPost = () => {
             let chapterSelectedId = event.target.value;
             let selectedBook = books.find(book => book.id == bookSelectedId);
             let bookCitations = selectedBook.citations;
-            let citations = [];
+            let citationsFromChapter = [];
 
+            let selChapter = chapters.find((chapter)=>{
+                return chapter.chapter_number == chapterSelectedId
+            });
             for (let key in bookCitations) {
                 if (bookCitations[key].chapter == chapterSelectedId) {
-                    citations.push(bookCitations[key]);
+                    citationsFromChapter.push(bookCitations[key]);
                 }
             }
             setBookTitle(selectedBook.title);
+            setChapterSelectedTitle(selChapter.chapter_title);
             setChapterSelectedId(chapterSelectedId);
-            setCitations(citations);
+            setCitations(citationsFromChapter);
         }
     };
 
@@ -434,6 +439,7 @@ const NewPost = () => {
                                 <Grid item xs={4} style={{padding:'10px'}}>  
                                     <BookCitationList 
                                         book_title={bookTitle}
+                                        chapter_title={chapterSelectedTitle}
                                         book_title_search_term={bookTitleSearchTerm} 
                                         handleGetCitations={handleGetCitations}
                                         handleOpenChapterSelectionModal={handleOpenChapterSelectionModal}
@@ -459,7 +465,7 @@ const NewPost = () => {
                     <BookChapterSelectionModal 
                         books={books}
                         chapters={chapters}
-                        bookSelectionModalOpen={bookSelectionModalOpen} 
+                        chapterSelectionModalOpen={bookSelectionModalOpen} 
                         bookSelectedId={bookSelectedId}
                         chapterSelectedId={chapterSelectedId}
                         handleBookChapterSelect={handleBookChapterSelect}

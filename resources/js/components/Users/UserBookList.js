@@ -34,6 +34,7 @@ import {
 	ExpandLess,
 	ExpandMore,
 } from '@material-ui/icons';
+import swal from 'sweetalert2';
 import { AuthContext } from '../GlobalStates';
 
 const UserBookList = () => {
@@ -46,6 +47,8 @@ const UserBookList = () => {
     const [ user, setUser ] = useState({});
     const [ selectedBookCitations, setSelectedBookCitations ] = useState([]);
     const [ selectedBookId, setSelectedBookId ] = useState(null);
+    const [ selectedBook, setSelectedBook ] = useState(null);
+    const [ selectedChapterId, setSelectedChapterId ] = useState(null);
     const [ selectedChapter, setSelectedChapter ] = useState(null);
     const [ modalOpen, setModalOpen ] = useState(false);
     const [ author_first_name, setAuthorFirstName ] = useState('');
@@ -58,7 +61,7 @@ const UserBookList = () => {
     const [ chapterSelectionModalOpen, setChapterSelectionModalOpen] = useState(false);
     const [ errors, setErrors ] = useState('');
 
-    const [authState,setAuthState] = useContext(AuthContext);
+    const [ authState, setAuthState ] = useContext(AuthContext);
 	useEffect(()=> {
 	    loadData();
 	},[])
@@ -103,62 +106,58 @@ const UserBookList = () => {
 
 	const assignChapters = async (bookId) => {
 
+        try {
 
-		axios.post('/api/citations/assignChapters', { 
-        	bookId 
-        },
-        {   
-        	headers: {
-                'Authorization': 'Bearer ' + authState.accessToken,
-                'Accept': 'application/json'
-            },
-        })
-		.then(response => {
-			swal("Done!", "Citation Chapters Assigned!", "success");
-			this.loadData();
-		})
-		.catch(error => {
-			setErrors(error.response.data.errors);
-		});
+			axios.post('/api/citations/assignChapters', { 
+	        	bookId 
+	        },
+	        {   
+	        	headers: {
+	                'Authorization': 'Bearer ' + authState.accessToken,
+	                'Accept': 'application/json'
+	            },
+	        })
+			swal.fire("Done!", "Citation Chapters Assigned!", "success");
+	        loadData();
+        } catch (error) {
+            swal.fire('Done!', String(error), 'error');
+			props.handleClose();
+        }
 	};
 
 	const deleteBook = async (bookId) => {
 
 
-		swal({
+		swal.fire({
 			title: "Are you sure?",
 			text: "This will delete the book as well as all citations and chapters.",
 			icon: "warning",
+  			showCancelButton: true,
+			confirmButtonText: 'Yes, please delete',
+			cancelButtonText: 'Cancel',
 			dangerMode: true,
 		})
-		.then(willDelete => {
+		.then(async willDelete => {
 
-			const { 
-				token
-			} = this.state;
+	        setDeleteInProgress(true);
 
-			this.setState({
-				deleteInProgress:true
-			});
+			try {
+				if (willDelete) {
+					axios.delete(`/api/books/${bookId}`,
+			        {   
+			        	headers: {
+			                'Authorization': 'Bearer ' + authState.accessToken,
+			                'Accept': 'application/json'
+			            },
+			        });
 
-			if (willDelete) {
-				axios.delete(`/api/books/${bookId}`,
-		        {   
-		        	headers: {
-		                'Authorization': 'Bearer ' + authState.accessToken,
-		                'Accept': 'application/json'
-		            },
-		        })
-				.then(response => {
-					swal("Deleted!", "Book has been deleted!", "success");
-					this.loadData();
-				})
-				.catch(error => {
-					this.setState({
-				    	errors: error.response.data.errors
-					});
-				});
-			}
+					swal.fire("Deleted!", "Post deleted!", "success");
+	        		setDeleteInProgress(false);
+	        		loadData();
+				}
+	        } catch (error) {
+	            swal.fire("Error", String(error), "error");
+	        }
 		});
 	};
 
@@ -187,7 +186,15 @@ const UserBookList = () => {
 
     const handleBookListClick = async (event, bookId) => {
 		event.preventDefault();
+		let theSelectedBook;
+		theSelectedBook = books.find((book)=> {
+			return book.id == bookId;
+		});
+
 		setSelectedBookId(bookId);
+		setSelectedBook(theSelectedBook);
+		setSelectedChapterId(null);
+		setSelectedChapter(null)
     }
 
     useEffect(()=>{
@@ -201,7 +208,14 @@ const UserBookList = () => {
 
     const handleChapterSelect = async (event) => {
 
-		let selectedChapterId = event.target.value;
+		let selChapterId = event.target.value;
+		let selChapter = event.target.value;
+
+		if(selChapterId != selectedChapterId){
+			setSelectedChapterId(null);
+			setSelectedChapter(null)
+		}
+
 		let bookCitations = '';
 		let citations = [];
 	    for (let key in books) {
@@ -212,11 +226,24 @@ const UserBookList = () => {
 	    }
 	    for (let key in bookCitations) {
 
-	        if (bookCitations[key].chapter ==  selectedChapterId) {
+	        if (bookCitations[key].chapter ==  selChapterId) {
 	            citations.push(bookCitations[key]);
 	        }
 	    }
-		setSelectedChapter(selectedChapterId);
+
+		let theSelectedBook;
+		theSelectedBook = books.find((book)=> {
+			return book.id == selectedBookId;
+		});
+
+	    selChapter = chapters.find((chapter)=>{
+	    	return chapter.chapter_number == selChapterId
+	    });
+
+		setSelectedBookId(selectedBookId);
+		setSelectedBook(theSelectedBook);
+		setSelectedChapterId(selChapterId);
+		setSelectedChapter(selChapter)
 		setSelectedBookCitations(citations)
 		setChapterSelectionModalOpen(false);
     };
@@ -300,14 +327,38 @@ const UserBookList = () => {
         let citationsFromBook = '';
         if (loading === true) {
         	citationsFromBook = 
-				<List >
+				<List>
 					<div className="bookCitationList" >
 						<CircularProgress className="circularProgress" />
 					</div>
 				</List>;
         } else if(loading === false && selectedBookCitations && selectedBookCitations.length>0){
+        	let selBookTitle = selectedBook ? selectedBook.title : '';
+        	let selBookChapterTitle = selectedChapter ? selectedChapter.chapter_title : '';
 	        citationsFromBook =
 				<List component="nav" className="bookCitationListItem" aria-label="secondary mailbox folder">
+					<ListItem
+						key={`selectedbook-${selectedBookId}`}
+					>
+						<div className="bookCitationBookTitle">
+							<u>
+								<strong>
+									{selBookTitle}
+								</strong>
+							</u><br/>
+						</div>
+					</ListItem>
+					<ListItem
+						key={`selectedbookchtitle-${selectedBookId}`}
+					>
+						<div className="bookCitationChapterTitle">
+							<u>
+								<strong>
+									{selBookChapterTitle}
+								</strong>
+							</u><br/>
+						</div>
+					</ListItem>
 					{selectedBookCitations.map(selectedBookCitation => (
 						<div key={`selectedBookCitation-${selectedBookCitation.id}`}>
 							<div>
@@ -377,8 +428,8 @@ const UserBookList = () => {
 		        			bookIdForChInput={bookIdForChInput}
 		        			chapters={chapters}
 		        			chapterSelectionModalOpen={chapterSelectionModalOpen} 
-		        			selectedChapter={selectedChapter}
-		        			handleChapterSelect={handleChapterSelect}
+		        			selectedChapterId={selectedChapterId}
+		        			handleBookChapterSelect={handleChapterSelect}
 		        			handleClose={handleClose} 
 		        		/>
 			        </Grid>

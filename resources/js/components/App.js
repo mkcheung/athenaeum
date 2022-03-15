@@ -22,12 +22,17 @@ import RecentBlog from './Home/RecentBlog';
 import About from './About';
 import Login from './Auth/Login';
 import Register from './Auth/Register';
+import NotFound from './NotFound';
 import NewPost from './Posts/NewPost';
-import PostsLists from './Posts/PostsLists';
 import ShowPost from './Posts/ShowPost';
 import UserBookList from './Users/UserBookList';
 import UserBlog from './Users/UserBlog';
+import UserEdit from './Users/UserEdit';
 import ProtectedRoute from './ProtectedRoute';
+import NewTag from './Tags/NewTag';
+import TagsList from './Tags/TagsList';
+import CategoriesList from './Categories/CategoriesList';
+import NewCategory from './Categories/NewCategory';
 
 const App = () => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -67,7 +72,6 @@ const App = () => {
         setAnchorEl(null);
     };
 
-    // let role = user.roles ? user.roles[0] : '';
     return (
         <BrowserRouter>
             <AuthProvider>
@@ -78,6 +82,7 @@ const App = () => {
                         <Route exact path='/register' element={<Register/>}/>
                         <Route exact path='/about' element={<About/>}/>
                         <Route exact path='/user/getPosts/:id' element={<UserBlog/>} />
+                        <Route exact path='/post/show/:id' element={<ShowPost/>}/>
                         <Route exact path='/dashboard' 
                             element={
                                 <ProtectedRoute>
@@ -92,41 +97,63 @@ const App = () => {
                                 </ProtectedRoute>
                             }
                         />
-                        <Route exact path='/post' 
-                            element={
-                                <ProtectedRoute>
-                                    <PostsLists/>
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route exact path='/post/show/:id' 
-                            element={
-                                <ProtectedRoute>
-                                    <ShowPost/>
-                                </ProtectedRoute>
-                            }
-                        />
                         <Route exact path='/post/create' 
                             element={
-                                <ProtectedRoute>
+                                <ProtectedRoute requiredPerm="post-create">
                                     <NewPost/>
                                 </ProtectedRoute>
                             }
                         />
                         <Route exact path='/post/edit/:id' 
                             element={
-                                <ProtectedRoute>
+                                <ProtectedRoute requiredPerm="post-edit">
                                     <NewPost/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/user/edit/:id' 
+                            element={
+                                <ProtectedRoute requiredPerm="user-edit">
+                                    <UserEdit/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/tag' 
+                            element={
+                                <ProtectedRoute requiredPerm="tag-list">
+                                    <TagsList/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/tag/create' 
+                            element={
+                                <ProtectedRoute requiredPerm="tag-create">
+                                    <NewTag/>
                                 </ProtectedRoute>
                             }
                         />
                         <Route exact path='/book/getUserBooks' 
                             element={
-                                <ProtectedRoute>
+                                <ProtectedRoute requiredPerm="book-list">
                                     <UserBookList/>
                                 </ProtectedRoute>
                             }
                         />
+                        <Route exact path='/category' 
+                            element={
+                                <ProtectedRoute requiredPerm="category-list">
+                                    <CategoriesList/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/category/create' 
+                            element={
+                                <ProtectedRoute requiredPerm="category-create">
+                                    <NewCategory/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route path="*" element={<NotFound/>}/>
                     </Routes>       
                 <Footer/>
             </AuthProvider>

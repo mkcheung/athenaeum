@@ -69,6 +69,11 @@
 	position: relative;
 }
 
+.bookCitationBookTitle, .bookCitationChapterTitle {
+	margin: 0 auto;
+    font-size: 30px;
+}
+
 .circularProgress {
 	margin: auto;
 	position: absolute;
@@ -83,7 +88,7 @@
 	margin-top: -6px !important;
 }
 
-.citationBookTitle {
+.citationBookTitle, .citationChapterTitle {
 	text-align: center;
 }
 

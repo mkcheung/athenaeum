@@ -136,7 +136,9 @@ const Header = (props) => {
             setAuthState({
                 isLoggedIn:false,
                 user:{},
-                accessToken:''
+                accessToken:'',
+                permissions:[],
+                isSuperAdmin:false
             });
             handleClose();
             navigate(`/`);
@@ -161,7 +163,7 @@ const Header = (props) => {
     const handleSetUserProfile = async (event) => {
         event.preventDefault();
 
-        //history.push(`/user/edit/${user.id}`);
+        navigate(`/user/edit/${authState.user.id}`);
     }
 
     let loggedInUserName = '';

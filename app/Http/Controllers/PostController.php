@@ -18,7 +18,9 @@ class PostController extends Controller
  
     public function __construct()
     {
-        // $this->user = JWTAuth::parseToken()->authenticate();
+        $this->middleware('perm.auth:post-create', ['only' => ['create','store']]);
+        $this->middleware('perm.auth:post-edit', ['only' => ['edit','update']]);
+        $this->middleware('perm.auth:post-delete', ['only' => ['destroy']]);
     }
 
     /**
@@ -44,12 +46,17 @@ class PostController extends Controller
 
         $data = $request->all();
         $tagsRequested = [];
+        $userId = null;
 
         if(!empty($data['tags'])){
             foreach($data['tags'] as $row){
                 $tagObj = json_decode($row);
                 $tagsRequested[] = $tagObj->id;
             }
+        }
+
+        if(!empty($data['user_id'])){
+            $userId = $data['user_id'];
         }
 
         $posts = Post::when(!empty($tagsRequested), function($query) use ($tagsRequested) {
@@ -59,7 +66,13 @@ class PostController extends Controller
         })
         ->where('published', '=', 1)
         ->where('parent', '=', 1)
+        ->when(!empty($userId), function ($query) use ($userId) {
+            $query->where('user_id', '=', $userId);
+        })
         ->with('user')
+        ->when(empty($userId), function ($query){
+            $query->orderBy('created_at');
+        })
         ->limit(10)
         ->get();
 
@@ -142,12 +155,16 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // $validatedData = $request->validate([
-        //   'name' => 'required',
-        //   'description' => 'required',
+        //   'title' => 'required',
+        //   'slug' => 'required',
+        //   'content' => 'required',
+        //   'published' => 'required',
+        //   'category' => 'required',
+        //   'user_id' => 'required',
         // ]);
 
         $post = Post::create([
-          'title' => $request['name'],
+          'title' => $request['title'],
           'slug' => $request['slug'],
           'content' => $request['content'],
           'published' => $request['published'],
