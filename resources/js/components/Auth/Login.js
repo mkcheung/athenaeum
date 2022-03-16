@@ -28,31 +28,36 @@ const Login = (props) => {
             email,
             password
         };
-        let loggedInData = await axios.post("/api/login", userData);
-        if (loggedInData.status == 200) {
 
-            let { id, user, access_token, permissions, isSuperAdmin } = loggedInData.data;
-            let userData = {
-                ...user
-            };
-            let appState = {
-                isLoggedIn: true,
-                user: userData,
-                accessToken: access_token,
-                permissions: permissions,
-                isSuperAdmin: isSuperAdmin
-            };
+        try {
+            let loggedInData = await axios.post("/api/login", userData);
+            if (loggedInData.status == 200) {
 
-            localStorage["appState"] = JSON.stringify(appState);
-            setAuthState(appState);
-            navigate('/dashboard');
-        } else {
-            alert(`Our System Failed To Register Your Account!`);
-            // this.setState({
-            //     error: '',
-            //     formSubmitting: false
-            // })
-            setFormSubmit(false);
+                let { id, user, access_token, permissions, isSuperAdmin } = loggedInData.data;
+                let userData = {
+                    ...user
+                };
+                let appState = {
+                    isLoggedIn: true,
+                    user: userData,
+                    accessToken: access_token,
+                    permissions: permissions,
+                    isSuperAdmin: isSuperAdmin
+                };
+
+                localStorage["appState"] = JSON.stringify(appState);
+                setAuthState(appState);
+                if(isSuperAdmin){
+                    navigate('/admindashboard');
+                } else {
+                    navigate('/dashboard');
+                }
+            } else {
+                swal.fire("Error", `Incorrect username and/or password. Please try again.`, "error");
+                setFormSubmit(false);
+            }
+        } catch (error) {
+            swal.fire("Error", String(error), "error");
         }
     }
 

@@ -18,6 +18,7 @@ import { AuthProvider } from './GlobalStates';
 import Footer from './Footer';
 import Header from './Header';
 import Dashboard from './Home/Dashboard';
+import AdminDashboard from './Home/AdminDashboard';
 import RecentBlog from './Home/RecentBlog';
 import About from './About';
 import Login from './Auth/Login';
@@ -87,6 +88,13 @@ const App = () => {
                             element={
                                 <ProtectedRoute>
                                     <Dashboard/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route exact path='/admindashboard' 
+                            element={
+                                <ProtectedRoute>
+                                    <AdminDashboard/>
                                 </ProtectedRoute>
                             }
                         />
