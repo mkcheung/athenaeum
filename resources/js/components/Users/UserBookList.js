@@ -34,8 +34,7 @@ import {
 	ExpandLess,
 	ExpandMore,
 } from '@material-ui/icons';
-import swal from 'sweetalert2';
-import { AuthContext } from '../GlobalStates';
+import { useAuth } from '../GlobalStates';
 
 const UserBookList = () => {
 
@@ -61,7 +60,7 @@ const UserBookList = () => {
     const [ chapterSelectionModalOpen, setChapterSelectionModalOpen] = useState(false);
     const [ errors, setErrors ] = useState('');
 
-    const [ authState, setAuthState ] = useContext(AuthContext);
+    const { authState, setAuthState } = useAuth();
 	useEffect(()=> {
 	    loadData();
 	},[])

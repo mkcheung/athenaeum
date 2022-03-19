@@ -1,7 +1,6 @@
-import React, { useState, useEffect ,useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import { AuthContext } from '../GlobalStates';
-
+import { useAuth } from '../GlobalStates';
 
 const Login = (props) => {
 
@@ -11,7 +10,7 @@ const Login = (props) => {
     })
 
     const [formSubmitting, setFormSubmit] = useState(false);
-    const [authState,setAuthState] = useContext(AuthContext);
+    const {loginUser,authState,setAuthState} = useAuth();
     const handleLogin = (event) => {
     
         event.preventDefault();
@@ -20,45 +19,7 @@ const Login = (props) => {
         const password = event.target.password.value;
         setFormSubmit(true);
         loginUser(email, password);
-    }
-
-    const loginUser = async (email, password) => {
-
-        let userData = {
-            email,
-            password
-        };
-
-        try {
-            let loggedInData = await axios.post("/api/login", userData);
-            if (loggedInData.status == 200) {
-
-                let { id, user, access_token, permissions, isSuperAdmin } = loggedInData.data;
-                let userData = {
-                    ...user
-                };
-                let appState = {
-                    isLoggedIn: true,
-                    user: userData,
-                    accessToken: access_token,
-                    permissions: permissions,
-                    isSuperAdmin: isSuperAdmin
-                };
-
-                localStorage["appState"] = JSON.stringify(appState);
-                setAuthState(appState);
-                if(isSuperAdmin){
-                    navigate('/admindashboard');
-                } else {
-                    navigate('/dashboard');
-                }
-            } else {
-                swal.fire("Error", `Incorrect username and/or password. Please try again.`, "error");
-                setFormSubmit(false);
-            }
-        } catch (error) {
-            swal.fire("Error", String(error), "error");
-        }
+        setFormSubmit(false);
     }
 
     const handleChange = ((e) => {
@@ -70,7 +31,11 @@ const Login = (props) => {
     });
 
     useEffect(() => {
-        navigate('/dashboard');
+        if(authState.isSuperAdmin){
+            navigate('/admindashboard');
+        } else {
+            navigate('/dashboard');
+        }
     }, [authState.isLoggedIn]);
 
     const navigate = useNavigate();

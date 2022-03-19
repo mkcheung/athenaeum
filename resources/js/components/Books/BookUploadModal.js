@@ -16,7 +16,7 @@ import {
 	Paper,
 	TextField
 } from '@material-ui/core';
-import { AuthContext } from '../GlobalStates';
+import { useAuth } from '../GlobalStates';
 import { green } from '@material-ui/core/colors';
 import swal from 'sweetalert2';
 
@@ -71,7 +71,11 @@ const BookUploadModal = (props) => {
 		author_middle:'',
 		author_last_name:''
 	});
+<<<<<<< HEAD
 	const [ authState,setAuthState ] = useContext(AuthContext);
+=======
+  const { authState, setAuthState } = useAuth();
+>>>>>>> rolesAndPermissions
 
 
 	const handleAddBook = (e) => {

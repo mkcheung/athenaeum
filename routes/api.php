@@ -36,4 +36,5 @@ Route::middleware(['api'])->group(function () {
     Route::get('/books/searchByTitle', [BookController::class, 'searchByTitle']);
     Route::get('/books/showUserBooks', [BookController::class, 'showUserBooks']);
     Route::resource('books', BookController::class);
+    Route::resource('users', UserController::class);
 });

@@ -16,7 +16,7 @@ import {
 	TextField
 } from '@material-ui/core';
 import swal from 'sweetalert2';
-import { AuthContext } from '../GlobalStates';
+import { useAuth } from '../GlobalStates';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -55,7 +55,7 @@ const CitationModal = (props) => {
   const [ citation, setCitation ] = useState('');
   const [ chapterNum, setChapterNum ] = useState(null);
 
-  const [ authState, setAuthState ] = useContext(AuthContext);
+  const { authState, setAuthState } = useAuth();
 
   const handleChapterSelect = (e) => {
     let chapter = e.target.value;

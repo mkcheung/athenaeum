@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AuthContext } from './GlobalStates';
+import { useAuth } from './GlobalStates';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import {
     Link,
@@ -119,33 +119,13 @@ const Header = (props) => {
     } = props;
     const classes = useStyles();
     const navigate = useNavigate();
-    const [ authState, setAuthState ] = useContext(AuthContext);
+    const { logOut, authState, setAuthState } = useAuth();
+    // const [ authState, setAuthState ] = useContext(AuthContext);
 
     const handleLogOut = async () => {
-
-        try {
-            let response = await axios.post('/api/logout', {},
-            {
-                headers: {
-                    'Authorization': 'Bearer ' + authState.accessToken,
-                    'Accept': 'application/json'
-                }
-            });
-            swal.fire('Done!', 'You have logged out!', 'success');
-            localStorage.clear();
-            setAuthState({
-                isLoggedIn:false,
-                user:{},
-                accessToken:'',
-                permissions:[],
-                isSuperAdmin:false
-            });
-            handleClose();
-            navigate(`/`);
-        } catch (error) {
-            swal.fire('Done!', String(error), 'error');
-        }
-
+        logOut();
+        handleClose();
+        navigate(`/`);
     };
 
     const handleInputChange = (event, value) => {

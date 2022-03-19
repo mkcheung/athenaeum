@@ -5,11 +5,11 @@ import {
     Button,
     TextareaAutosize,
 } from '@material-ui/core';
-import { AuthContext } from '../GlobalStates';
+import { useAuth } from '../GlobalStates';
 
 const ReplyBox = (props) => {
     const [reply, setReply] = useState("");
-    const [authState,setAuthState] = useContext(AuthContext);
+    const [authState,setAuthState] = useContext(useAuth);
 
     const handleReplyChange = (e) => {
         let replyInput = e.target.value;

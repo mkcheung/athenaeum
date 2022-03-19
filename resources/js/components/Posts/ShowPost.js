@@ -25,7 +25,7 @@ import {
     Select,
     TextField
 } from '@material-ui/core';
-import { AuthContext } from '../GlobalStates';
+import { useAuth } from '../GlobalStates';
 
 
 const ShowPost = () => {
@@ -38,8 +38,7 @@ const ShowPost = () => {
     const [ open, setOpen ] = useState(false);
     const [ showCommentBox, setShowCommentBox ] = useState(false);
     const [ comments, setComments ] = useState([]);
-
-    const [authState,setAuthState] = useContext(AuthContext);
+    const [ authState,setAuthState ] = useAuth();
     const params = useParams();
 
     useEffect( async () => {
