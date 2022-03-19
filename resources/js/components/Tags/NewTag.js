@@ -6,7 +6,7 @@ import {
     useNavigate,
     useParams 
 } from 'react-router-dom';
-import { AuthContext } from '../GlobalStates';
+import { useAuth } from '../GlobalStates';
 // import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 
 // var gridOptions = {
@@ -26,7 +26,7 @@ const NewTag = () => {
 
     const [ title, setTitle ] = useState('');
     const [ errors, setErrors ] = useState([]);
-    const [ authState, setAuthState ] = useContext(AuthContext);
+    const { authState, setAuthState } = useAuth();
     const navigate = useNavigate();
 
     const handleCreateNewTag = async (event) => {
