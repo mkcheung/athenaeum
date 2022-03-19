@@ -9,6 +9,9 @@ const ProtectedRoute = ({
     redirectPath = '/login',
     requiredPerm
   }) => {
+
+    // TO DO: Find out why AuthState is not always reliable for the protected route
+    // The reload doesn't always happen prior to this.
     let data = localStorage["appState"] ? JSON.parse(localStorage["appState"]) : null;
 
     if(!data){

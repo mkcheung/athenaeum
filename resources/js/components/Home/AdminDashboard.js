@@ -31,7 +31,7 @@ const AdminDashboard = () => {
         { field: 'price' }
     ])
 
-    const userTableColumnDefinitions = () => {
+    const userTableColumnDefinitions = async () => {
         const tableDefinitions = [];
         tableDefinitions.push({
             headerName: 'Authors And Administrators',
@@ -42,13 +42,20 @@ const AdminDashboard = () => {
         });
 
         userFields.forEach((userField) => {
+
+            let headerNames = userField.replaceAll('_',' ');
+            let headerNameWords = headerNames.split(" ");
+            for (let i = 0; i < headerNameWords.length; i++) {
+                headerNameWords[i] = headerNameWords[i][0].toUpperCase() + headerNameWords[i].substr(1);
+            }
+
             const colDef = {
-                headerName: userField,
+                headerName: headerNameWords.join(' '),
                 field: userField,
                 editable: false,
                 width:100
             }
-            tableDefinitions.push[colDef];
+            tableDefinitions.push(colDef);
         });
 
         return tableDefinitions;
@@ -62,33 +69,29 @@ const AdminDashboard = () => {
     ];
 
    useEffect( () => {
-        console.log('admin dashboard loading useEffect',loading, authState)
         // TODO: Find out why this is necessary....what is causing this to authDashboard to 
         // load prematurely?? Find out why AuthState is not always reliable for the protected route
         // The reload doesn't always happen prior to this.
         if(authState.accessToken){
             loadData();
         }
-   }, [loading]);
+   }, [authState.accessToken]);
 
-   useEffect(() => {
+    useEffect(() => {
         if( userGridReady.userGrid ){
             updateUserTableColumnDefs();
         }
-   }, [updateUserTableColumnDefs])
+    }, [userGridReady.userGrid])
 
-    const updateUserTableColumnDefs = useCallback(() => {
-        const userTableColDefs = userTableColumnDefinitions();
-
+    const updateUserTableColumnDefs = useCallback(async () => {
+        const userTableColDefs = await userTableColumnDefinitions();
         if( userGridApi.current ){
             userGridApi.current.setColumnDefs(userTableColDefs);
         }
-        console.log(userGridApi);
     }, [users])
 
    const loadData = async () => {
 
-                console.log('admin dashboard loading loadData', authState)
         let userData = [];
         try {
             const userObj = await axios.get('/api/users',
@@ -100,7 +103,6 @@ const AdminDashboard = () => {
                 }
             );
             userData = userObj.data;
-            console.log(userData);
             setLoading(false);
             setUsers(userData);
         } catch (error) {
@@ -117,10 +119,10 @@ const AdminDashboard = () => {
     }
 
    return (
-       <div className="ag-theme-alpine" style={{height: 400, width: 600}}>
+       <div className="ag-theme-alpine" style={{height: 400, width: 1000}}>
            <AgGridReact
                 onGridReady={onUserGridReady}
-                rowData={rowData}
+                rowData={users}
                 columnDefs={columnDefs}>
            </AgGridReact>
        </div>
