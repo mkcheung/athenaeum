@@ -43,7 +43,6 @@ const AuthProvider = (props) => {
             	swal.fire('Done!', 'Your session has expired. Please log back in.', 'success');
             	return <Navigate to={'/login'} replace />;
 			} else {
-				console.log('global states reloaded', appStateData);
 				await setAuthState((prevState)=>({
 					...appStateData
 				}));
