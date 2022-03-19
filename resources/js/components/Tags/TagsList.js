@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react';
 import swal from 'sweetalert2';
-import  NewTagModal  from './NewTagModal';
+import NewTagModal  from './NewTagModal';
 import { 
     Box,
     CircularProgress,
@@ -21,7 +21,7 @@ import {
 } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { AuthContext } from '../GlobalStates';
+import { useAuth } from '../GlobalStates';
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -83,7 +83,7 @@ function Row(props) {
 
 const TagsList = (props) => {
 
-    const [ authState, setAuthState ] = useContext(AuthContext);
+    const { authState, setAuthState } = useAuth();
 
     const [ loading, setLoading ] = useState(true);
     const [ open, setOpenModal ] = useState(false);

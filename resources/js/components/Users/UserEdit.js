@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState, useContext, useEffect } from 'react'
 import swal from 'sweetalert2';
-import { AuthContext } from '../GlobalStates';
+import { useAuth } from '../GlobalStates';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { 
     Button,
@@ -20,8 +20,8 @@ import {
 } from '@material-ui/core';
 
 const UserEdit = () => {
-
-    const [ authState, setAuthState ] = useContext(AuthContext);
+    
+    const { authState, setAuthState } = useAuth();
 
     const [user, setUser] = useState({
         name: '',

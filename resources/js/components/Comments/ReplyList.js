@@ -7,11 +7,11 @@ import {
     TextField,
     Grid,
 } from '@material-ui/core';
-import { AuthContext } from '../GlobalStates';
+import { useAuth } from '../GlobalStates';
 import ReplyBox from '../Comments/ReplyBox';
 
 const ReplyList = (props) => {
-    const [authState,setAuthState] = useContext(AuthContext);
+    const [authState,setAuthState] = useContext(useAuth);
     const [replyBoxAppear, handleReplyBoxAppear] = useState(false);
     const [repliesToComment, setRepliesToComment] = useState('');
 

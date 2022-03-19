@@ -27,7 +27,7 @@ import {
 import swal from 'sweetalert2';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { formatDate } from '../Helper/Helper';
-import { AuthContext } from '../GlobalStates';
+import { useAuth } from '../GlobalStates';
 import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 
 
@@ -37,10 +37,11 @@ const Dashboard = (props) => {
     const params = useParams();
     const [ loading, setLoading ] = useState(true);
     const [ posts, setPosts ] = useState([]);
-    const [ authState, setAuthState ] = useContext(AuthContext);
+    const { authState, setAuthState } = useAuth();
 
     useEffect( () => {
 
+    	console.log('dashboard loading',loading, authState)
         if (params.id !== null && params.id !== undefined) {
             loadData(null, params.id);
         } else {
@@ -68,6 +69,7 @@ const Dashboard = (props) => {
 		        });
 			    postData = postObj.data;
 	    	} else {
+	    		console.log('standard dashboard loading', authState.accessToken)
 		        const postObj = await axios.get('/api/posts/getUserPosts', 
 		        {
 		        	headers: {
@@ -278,10 +280,10 @@ const Dashboard = (props) => {
 	            <Link className='btn btn-primary btn-sm mb-3' to='/post/create'>
 	                Create new post
 	            </Link>;
-	    let createCategoryControl = authState.permissions.includes('category-create') ? <Link className='btn btn-primary btn-sm mb-3' to='/category/create'>
+	    let createCategoryControl = (authState.permissions && authState.permissions.includes('category-create')) ? <Link className='btn btn-primary btn-sm mb-3' to='/category/create'>
 	                Create new category
 	            </Link> : '';
-	    let createTagControl = authState.permissions.includes('tag-create') ? 
+	    let createTagControl = (authState.permissions && authState.permissions.includes('tag-create')) ? 
 	            <Link className='btn btn-primary btn-sm mb-3' to='/tag/create'>
 	                Create new tag
 	            </Link> : '';

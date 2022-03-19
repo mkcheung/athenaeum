@@ -31,7 +31,7 @@ import {
     PlaylistAdd as PlaylistAddIcon
 } from '@material-ui/icons';
 import swal from 'sweetalert2';
-import { AuthContext } from '../GlobalStates';
+import { useAuth } from '../GlobalStates';
 import 'quill/dist/quill.snow.css'; // Add css for snow theme
 import '../../../css/styles.css'; // TODO: apply absolute paths
 
@@ -63,7 +63,7 @@ const NewPost = () => {
     const [ loading, setLoading ] = useState(true);
     const [ user, setUser ] = useState({});
     const [ chapterSelectionModalOpen, setChapterSelectionModalOpen] = React.useState(false);
-    const [ authState, setAuthState ] = useContext(AuthContext);
+    const { authState, setAuthState } = useAuth();
 
 
     const { quill, quillRef } = useQuill();

@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import FlashMessage from 'react-flash-message';
-import Swal from 'sweetalert2';
+import swal from 'sweetalert2';
     
 import { 
 	Avatar,
@@ -53,7 +53,7 @@ export default function RegisterContainer() {
 
             // setRoles(roleOptions);
         } catch (error) {
-            Swal.fire({
+            swal.fire({
                 icon: 'error',
                 title: error,
                 showConfirmButton: false,
@@ -132,7 +132,7 @@ export default function RegisterContainer() {
 					isRegistered: true,
 					user: userData
 				};
-				Swal.fire(
+				swal.fire(
 					'Alright!',
 					'User Registered!',
 					'success'
@@ -141,7 +141,7 @@ export default function RegisterContainer() {
 				setRegistered(appState.isRegistered);
 				setUser(appState.user);
 			} else {
-	            Swal.fire({
+	            swal.fire({
 	                icon: 'error',
 	                title: `Our System Failed To Register Your Account!`,
 	                showConfirmButton: false,

@@ -13,7 +13,7 @@ import {
 	Paper,
 	TextField
 } from '@material-ui/core';
-import { AuthContext } from '../GlobalStates';
+import { useAuth } from '../GlobalStates';
 import swal from 'sweetalert2';
 
 function rand() {
@@ -53,7 +53,7 @@ const AddChapterModal = (props) => {
   const [ chapterPageBegin, setChapterPageBegin ] = useState(null);
   const [ chapterPageEnd, setChapterPageEnd ] = useState(null);
 
-  const [ authState, setAuthState ] = useContext(AuthContext);
+  const { authState, setAuthState } = useAuth();
 
 	const handleChapterSubmit = async () => {
 

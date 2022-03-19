@@ -14,10 +14,11 @@ import {
     Redirect,
     __RouterContext,
 } from "react-router-dom";
-import { AuthProvider } from './GlobalStates';
+import { useAuth, AuthProvider } from './GlobalStates';
 import Footer from './Footer';
 import Header from './Header';
 import Dashboard from './Home/Dashboard';
+import AdminDashboard from './Home/AdminDashboard';
 import RecentBlog from './Home/RecentBlog';
 import About from './About';
 import Login from './Auth/Login';
@@ -37,6 +38,7 @@ const App = () => {
     const [user, setUser] = useState({});
     const [openMenu, setOpenMenu] = useState(false);
     const [blogAuthors, setBlogAuthors] = useState([]);
+    const { authState } = useAuth();
 
     useEffect(async () => {
 
@@ -71,73 +73,80 @@ const App = () => {
 
     return (
         <BrowserRouter>
-            <AuthProvider>
-                <Header anchorEl={anchorEl} blogAuthors={blogAuthors} handleClick={handleClick} handleClose={handleClose} openMenu={openMenu} /> 
-                    <Routes>
-                        <Route exact path='/' element={<RecentBlog/>} />
-                        <Route exact path='/login' element={<Login/>} />
-                        <Route exact path='/register' element={<Register/>}/>
-                        <Route exact path='/about' element={<About/>}/>
-                        <Route exact path='/user/getPosts/:id' element={<UserBlog/>} />
-                        <Route exact path='/post/show/:id' element={<ShowPost/>}/>
-                        <Route exact path='/dashboard' 
-                            element={
-                                <ProtectedRoute>
-                                    <Dashboard/>
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route exact path='/dashboard/:id' 
-                            element={
-                                <ProtectedRoute>
-                                    <Dashboard/>
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route exact path='/post/create' 
-                            element={
-                                <ProtectedRoute requiredPerm="post-create">
-                                    <NewPost/>
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route exact path='/post/edit/:id' 
-                            element={
-                                <ProtectedRoute requiredPerm="post-edit">
-                                    <NewPost/>
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route exact path='/user/edit/:id' 
-                            element={
-                                <ProtectedRoute requiredPerm="user-edit">
-                                    <UserEdit/>
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route exact path='/tag' 
-                            element={
-                                <ProtectedRoute requiredPerm="tag-list">
-                                    <TagsList/>
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route exact path='/book/getUserBooks' 
-                            element={
-                                <ProtectedRoute requiredPerm="book-list">
-                                    <UserBookList/>
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route path="*" element={<NotFound/>}/>
-                    </Routes>       
-                <Footer/>
-            </AuthProvider>
+            <Header anchorEl={anchorEl} blogAuthors={blogAuthors} handleClick={handleClick} handleClose={handleClose} openMenu={openMenu} /> 
+                <Routes>
+                    <Route exact path='/' element={<RecentBlog/>} />
+                    <Route exact path='/login' element={<Login/>} />
+                    <Route exact path='/register' element={<Register/>}/>
+                    <Route exact path='/about' element={<About/>}/>
+                    <Route exact path='/user/getPosts/:id' element={<UserBlog/>} />
+                    <Route exact path='/post/show/:id' element={<ShowPost/>}/>
+                    <Route exact path='/admindashboard' 
+                        element={
+                            <ProtectedRoute>
+                                <AdminDashboard/>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route exact path='/dashboard' 
+                        element={
+                            <ProtectedRoute>
+                                <Dashboard/>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route exact path='/dashboard/:id' 
+                        element={
+                            <ProtectedRoute>
+                                <Dashboard/>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route exact path='/post/create' 
+                        element={
+                            <ProtectedRoute requiredPerm="post-create">
+                                <NewPost/>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route exact path='/post/edit/:id' 
+                        element={
+                            <ProtectedRoute requiredPerm="post-edit">
+                                <NewPost/>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route exact path='/user/edit/:id' 
+                        element={
+                            <ProtectedRoute requiredPerm="user-edit">
+                                <UserEdit/>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route exact path='/tag' 
+                        element={
+                            <ProtectedRoute requiredPerm="tag-list">
+                                <TagsList/>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route exact path='/book/getUserBooks' 
+                        element={
+                            <ProtectedRoute requiredPerm="book-list">
+                                <UserBookList/>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route path="*" element={<NotFound/>}/>
+                </Routes>       
+            <Footer/>
         </BrowserRouter>
     );
 }
 
 ReactDOM.render(
-    <App />,
+    <AuthProvider>
+        <App />
+    </AuthProvider>,
     document.getElementById('app')
 );
