@@ -66,17 +66,32 @@ const AdminDashboard = () => {
 
         userFields.forEach((userField) => {
 
+            let colDef = '';
             let headerNames = userField.replaceAll('_',' ');
             let headerNameWords = headerNames.split(" ");
             for (let i = 0; i < headerNameWords.length; i++) {
                 headerNameWords[i] = headerNameWords[i][0].toUpperCase() + headerNameWords[i].substr(1);
             }
 
-            let colDef = {
-                headerName: headerNameWords.join(' '),
-                field: userField,
-                editable: false,
-            };
+            if(userField == 'roles'){
+                colDef = {
+                    headerName: 'Role',
+                    field: userField,
+                    editable: false,
+                    width: 160,
+                    cellRenderer: (params)=>{
+                        let roleName = params.data.roles[0].name;
+                        return roleName.charAt(0).toUpperCase() + roleName.slice(1);
+                    }
+                };
+            } else {
+                colDef = {
+                    headerName: headerNameWords.join(' '),
+                    field: userField,
+                    editable: false,
+                    width: 160
+                };
+            }
             tableDefinitions.push(colDef);
         });
 
@@ -87,7 +102,8 @@ const AdminDashboard = () => {
         'name',
         'first_name',
         'last_name',
-        'email'
+        'email',
+        'roles'
     ];
 
     useEffect( () => {
