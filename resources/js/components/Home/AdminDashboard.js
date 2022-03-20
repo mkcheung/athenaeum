@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect, useCallback, useContext, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useContext, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../GlobalStates';
 import { AgGridReact } from 'ag-grid-react';
@@ -50,6 +50,8 @@ const AdminDashboard = () => {
     }); 
     const [ loading, setLoading ] = useState(true);
 
+    const gridStyle = useMemo(() => ({ height: '100%', width: '100%' }), []);
+
     const userGridApi = useRef();
 
     const userTableColumnDefinitions = async () => {
@@ -59,7 +61,7 @@ const AdminDashboard = () => {
             field: 'full_name',
             pinned: 'left',
             editable: false,
-            width: 300,
+            width:220
         });
 
         userFields.forEach((userField) => {
@@ -74,7 +76,6 @@ const AdminDashboard = () => {
                 headerName: headerNameWords.join(' '),
                 field: userField,
                 editable: false,
-                width:100
             };
             tableDefinitions.push(colDef);
         });
@@ -185,14 +186,17 @@ const AdminDashboard = () => {
     }, []);
 
     const checkboxSelection = (params) => {
-
-        console.log(params.data.roles[0].name);
         return true;
     };
 
     const checkbox = (params) => {
         return params.node.group === true;
     };
+
+    const handleAdminToggle = () => {
+        console.log('switch role');
+    }
+
 
     const showDescendantPosts = false;
 
@@ -251,14 +255,33 @@ const AdminDashboard = () => {
     } else {
 
         postsOnDashboard = 
-        <div>No posts yet.</div>;
+        <div></div>;
+    }
+
+
+    let theUserDetails = ''
+
+    if(selectedUser){
+        theUserDetails = <div className="userDetails">
+            {selectedUser.full_name}
+            <div>
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={selectedUser.roles[0].name==='admin' ? true : false}
+                        onChange={handleAdminToggle}
+                    />
+                        Admin:
+                </label>
+            </div>
+        </div>
     }
 
     return (
         <Container maxWidth="lg">
             <Grid container spacing={3}>
-                <Grid item xs={5}>
-                    <div className="ag-theme-alpine" style={{height: 400, width: 1000}}>
+                <Grid item xs={10} style={{height: 400}}>
+                    <div className="ag-theme-alpine" style={gridStyle}>
                         <AgGridReact
                             onGridReady={onUserGridReady}
                             rowData={users}
@@ -269,7 +292,8 @@ const AdminDashboard = () => {
                     </div>
                     {postsOnDashboard}
                 </Grid>
-                <Grid item xs={7}>
+                <Grid item xs={2}>
+                    {theUserDetails}
                 </Grid>
             </Grid>
         </Container>
