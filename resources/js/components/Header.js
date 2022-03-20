@@ -171,20 +171,39 @@ const Header = (props) => {
             </div>;
     }
 
+
+    let dashboardLink = '';
+    if(authState.isSuperAdmin){
+        dashboardLink = 
+            <div className="about">
+                <h5>
+                    <Link 
+                        to='/admindashboard'
+                        className="headerLink"
+                    >
+                    Home
+                    </Link>
+                </h5>
+            </div>;
+    } else {
+        dashboardLink = 
+            <div className="about">
+                <h5>
+                    <Link 
+                        to='/dashboard'
+                        className="headerLink"
+                    >
+                    Home
+                    </Link>
+                </h5>
+            </div>;
+    }
+
     let loggedInOutNavOps = '';
     if(authState.isLoggedIn) {
         loggedInOutNavOps =
             <div className="logoutDisplay">
-                <div className="about">
-                    <h5>
-                        <Link 
-                            to='/dashboard'
-                            className="headerLink"
-                        >
-                        Home
-                        </Link>
-                    </h5>
-                </div>
+                {dashboardLink}
                 <div className="about">
                     <h5>
                         <Link 
