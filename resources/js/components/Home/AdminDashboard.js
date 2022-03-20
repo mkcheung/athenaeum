@@ -335,14 +335,16 @@ const AdminDashboard = () => {
             Number Of Published Posts: {numberPublishedPosts} <br/>
             Number Of Unpublished Posts: {numberUnpublishedPosts} <br/>
             <div>
-                <label>
+                { selectedUser.roles[0].name !== 'superadmin' &&
+                    <label>
                     Admin: &nbsp;
-                    <input
-                        type="checkbox"
-                        checked={selectedUser.roles[0].name==='admin' ? true : false}
-                        onChange={handleAdminToggle}
-                    />
-                </label>
+                        <input
+                            type="checkbox"
+                            checked={selectedUser.roles[0].name==='admin' ? true : false}
+                            onChange={handleAdminToggle}
+                        />
+                    </label>
+                }
             </div>
         </div>
     }
