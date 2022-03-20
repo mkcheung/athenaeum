@@ -137,7 +137,6 @@ const AdminDashboard = () => {
                 }
             );
             userData = userObj.data;
-            console.log('userData', userData);
             setLoading(false);
             setUsers(userData);
         } catch (error) {
@@ -195,6 +194,46 @@ const AdminDashboard = () => {
 
     const handleAdminToggle = () => {
         console.log('switch role');
+    }
+
+    const togglePublished = async (postId, published) => {
+
+        let post = selectedUserPosts.find(selectedUserPost => selectedUserPost.id === postId);
+        published = !published;
+        published = published ? 1 : 0 ;
+
+        post['published'] = published;
+
+        if (postId){
+            
+            try {
+                let results = await axios.post('/api/posts/'+postId,
+                    { 
+                        data: post,
+                        _method: 'patch'                  
+                    },
+                    {   
+                        headers: {
+                            'Authorization': 'Bearer '+authState.accessToken,
+                            'Accept': 'application/json'
+                        }
+                    }
+                );
+
+                selectedUserPosts.forEach((selectedUserPost) => {
+                    if(selectedUserPost.id === postId){
+                        selectedUserPost.published = published;
+                    }
+                });
+                setSelectedUserPosts(
+                    [
+                        ...selectedUserPosts,
+                    ]
+                );
+            } catch (error) {
+                swal.fire("Error", String(error), "error");
+            }
+        } 
     }
 
 
@@ -259,19 +298,32 @@ const AdminDashboard = () => {
     }
 
 
-    let theUserDetails = ''
+
+    let numberUnpublishedPosts = 0;
+    let numberPublishedPosts = 0;
+    let theUserDetails = '';
+
+    selectedUserPosts.forEach((selectedUserPost)=>{
+        if(selectedUserPost.published){
+            numberPublishedPosts++;
+        } else {
+            numberUnpublishedPosts++
+        }
+    });
 
     if(selectedUser){
         theUserDetails = <div className="userDetails">
-            {selectedUser.full_name}
+            User: {selectedUser.full_name} <br/>
+            Number Of Published Posts: {numberPublishedPosts} <br/>
+            Number Of Unpublished Posts: {numberUnpublishedPosts} <br/>
             <div>
                 <label>
+                    Admin: &nbsp;
                     <input
                         type="checkbox"
                         checked={selectedUser.roles[0].name==='admin' ? true : false}
                         onChange={handleAdminToggle}
                     />
-                        Admin:
                 </label>
             </div>
         </div>
@@ -280,7 +332,7 @@ const AdminDashboard = () => {
     return (
         <Container maxWidth="lg">
             <Grid container spacing={3}>
-                <Grid item xs={10} style={{height: 400}}>
+                <Grid item xs={10} style={{height: 200}}>
                     <div className="ag-theme-alpine" style={gridStyle}>
                         <AgGridReact
                             onGridReady={onUserGridReady}
@@ -289,11 +341,13 @@ const AdminDashboard = () => {
                             onSelectionChanged={onSelectionChanged}
                         >
                         </AgGridReact>
-                    </div>
+                    </div><br/>
                     {postsOnDashboard}
                 </Grid>
                 <Grid item xs={2}>
-                    {theUserDetails}
+                    <div className="userReadOut">
+                        {theUserDetails}
+                    </div>
                 </Grid>
             </Grid>
         </Container>

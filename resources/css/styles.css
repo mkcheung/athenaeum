@@ -19,10 +19,15 @@
 	color:black;
 }
 
-.tagContainer {
+.tagContainer, .userReadOut {
 	margin-top:100px;
     padding: 10px, 10px, 10px, 0px;
-    width: 300px; 
+    width: 375px; 
+}
+
+.userDetails {
+	font-size: 22px;
+    float: right;
 }
 
 .about {

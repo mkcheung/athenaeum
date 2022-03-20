@@ -230,13 +230,14 @@ class PostController extends Controller
             $destinationPath = public_path('post_images') . '/'.$post->title;
             file_put_contents($destinationPath, file_get_contents($post->image));
         }
-        $selectedTagIds = [];
-        $selectedTags = $data['data']['selectedTags'];
-        foreach($selectedTags as $selectedTag){
-            $selectedTagIds[] = $selectedTag['id'];
+        if(!empty($data['data']['selectedTags'])){
+            $selectedTagIds = [];
+            $selectedTags = $data['data']['selectedTags'];
+            foreach($selectedTags as $selectedTag){
+                $selectedTagIds[] = $selectedTag['id'];
+            }
+            $post->tags()->sync($selectedTagIds);
         }
-
-        $post->tags()->sync($selectedTagIds);
         $post->slug = Str::slug($data['data']['title'], '-');
         $post->published = $data['data']['published'];
         $post->user_id = $data['data']['user_id'];
