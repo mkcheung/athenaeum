@@ -75,7 +75,6 @@ const Dashboard = (props) => {
 		        });
 			    postData = postObj.data;
 	    	} else {
-	    		console.log('standard dashboard loading', authState.accessToken)
 		        const postObj = await axios.get('/api/posts/getUserPosts', 
 		        {
 		        	headers: {

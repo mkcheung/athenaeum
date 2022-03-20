@@ -101,3 +101,20 @@
 	overflow: scroll;
 }
 
+.ag-header-cell-text {
+	margin: 0 auto;
+}
+
+.ag-selection-checkbox {
+	margin: 0 auto !important;
+}
+
+.ag-cell-wrapper {
+	height: 100%;
+}
+
+.usersPosts {
+	max-height: 650px;
+	width: 1000px;
+	overflow: scroll;
+}
