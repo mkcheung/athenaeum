@@ -79,6 +79,7 @@ const AdminDashboard = () => {
                     field: userField,
                     editable: false,
                     width: 160,
+                    filter: 'agTextColumnFilter',
                     cellRenderer: (params)=>{
                         let roleName = params.data.roles[0].name;
                         return roleName.charAt(0).toUpperCase() + roleName.slice(1);
@@ -89,7 +90,8 @@ const AdminDashboard = () => {
                     headerName: headerNameWords.join(' '),
                     field: userField,
                     editable: false,
-                    width: 160
+                    width: 160,
+                    filter: 'agTextColumnFilter'
                 };
             }
             tableDefinitions.push(colDef);
