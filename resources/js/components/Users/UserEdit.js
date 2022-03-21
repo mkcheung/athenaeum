@@ -29,9 +29,6 @@ const UserEdit = () => {
         last_name: '',
         email: '',
         password: '',
-        password_confirm: '',
-        is_admin:false,
-        role_id:0
     });
 
     useEffect(()=>{
@@ -41,7 +38,6 @@ const UserEdit = () => {
             last_name:authState.user.last_name,
             email:authState.user.email,
             password:authState.user.password,
-            role_id:authState.user.role_id,
         });
     },[]);
 
