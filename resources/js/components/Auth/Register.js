@@ -1,7 +1,5 @@
-import React, { Component, useState, useEffect } from 'react';
-import {Link, useNavigate} from "react-router-dom";
-import ReactDOM from 'react-dom';
-import FlashMessage from 'react-flash-message';
+import React, { useState } from 'react';
+import {useNavigate} from "react-router-dom";
 import swal from 'sweetalert2';
     
 import { 
