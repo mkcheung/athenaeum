@@ -29,10 +29,11 @@ class JWTController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|min:2|max:100',
-            'username' => 'required|string|min:2|max:100',
+            'first_name' => 'required|string|min:2|max:100',
+            'last_name' => 'required|string|min:2|max:100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
-            'is_admin' => 'required|boolean',
+            'password_confirmation' => 'required',
         ]);
 
         if($validator->fails()) {
@@ -40,12 +41,14 @@ class JWTController extends Controller
         }
 
         $user = User::create([
-                'name' => $request->name,
-                'username' => $request->username,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'is_admin' => $request->username,
-            ]);
+            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $user->assignRole('author');
 
         return response()->json([
             'message' => 'User successfully registered',

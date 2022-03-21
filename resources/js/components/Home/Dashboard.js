@@ -46,7 +46,6 @@ const Dashboard = (props) => {
 
     useEffect( () => {
 
-    	console.log('dashboard loading',loading, authState)
         if (params.id !== null && params.id !== undefined) {
             loadData(null, params.id);
         } else {
