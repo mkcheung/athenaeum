@@ -103,6 +103,16 @@ class UserController extends Controller
         $user->first_name = $data['data']['first_name'];
         $user->last_name = $data['data']['last_name'];
         $user->email = $data['data']['email'];
+
+        if($data['data']['toggle_admin']){
+            $user->removeRole('author');
+            $user->assignRole('admin');
+
+        } else {
+            $user->removeRole('admin');
+            $user->assignRole('author');
+        }
+
         $user->save();
     }
 

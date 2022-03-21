@@ -202,16 +202,41 @@ const AdminDashboard = () => {
         }
     }, []);
 
-    const checkboxSelection = (params) => {
-        return true;
-    };
+    const handleAdminToggle = async (e) => {
 
-    const checkbox = (params) => {
-        return params.node.group === true;
-    };
+        let userData = {
+            name: selectedUser.name,
+            first_name: selectedUser.first_name,
+            last_name: selectedUser.last_name,
+            email: selectedUser.email,
+            toggle_admin: e.target.checked ? true : false
+        };
 
-    const handleAdminToggle = () => {
-        console.log('switch role');
+         try {
+                let results = await axios.post('/api/users/'+selectedUserId,
+                    { 
+                        data: userData,
+                        _method: 'patch'                  
+                    },
+                    {   
+                        headers: {
+                            'Authorization': 'Bearer '+authState.accessToken,
+                            'Accept': 'application/json'
+                        }
+                    }
+                );
+
+                if(selectedUser.roles[0].name === 'admin'){
+                    selectedUser.roles[0].name = 'author'
+                } else {
+                    selectedUser.roles[0].name = 'admin'
+                }
+
+                await loadData();
+                setSelectedUser(selectedUser);
+            } catch (error) {
+                swal.fire("Error", String(error), "error");
+            }
     }
 
     const togglePublished = async (postId, published) => {
