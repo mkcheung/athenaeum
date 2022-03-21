@@ -38,7 +38,7 @@ const ShowPost = () => {
     const [ open, setOpen ] = useState(false);
     const [ showCommentBox, setShowCommentBox ] = useState(false);
     const [ comments, setComments ] = useState([]);
-    const [ authState,setAuthState ] = useAuth();
+    const { authState, setAuthState } = useAuth();
     const params = useParams();
 
     useEffect( async () => {
@@ -96,7 +96,7 @@ const ShowPost = () => {
             comment,
             {   
                 headers: {
-                    'Authorization': 'Bearer '+authState.user.accessToken,
+                    'Authorization': 'Bearer '+authState.accessToken,
                     'Accept': 'application/json'
                 }
             }
