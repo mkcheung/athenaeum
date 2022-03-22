@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React, { useState, useContext, useEffect } from 'react'
 import { useQuill } from 'react-quilljs';
-import ImageUploader from "quill-image-uploader";
 import { 
     Link,
     useNavigate,
@@ -35,8 +34,6 @@ import { useAuth } from '../GlobalStates';
 import 'quill/dist/quill.snow.css'; // Add css for snow theme
 import '../../../css/styles.css'; // TODO: apply absolute paths
 
-// Quill.register("modules/imageUploader", ImageUploader);
-
 const NewPost = () => {
 
     const [ books, setBooks ] = useState([]);
@@ -55,7 +52,6 @@ const NewPost = () => {
     const [ bookTitleSearchTerm, setBookTitleSearchTerm ] = useState('');
     const [ content, setContent ] = useState('');
     const [ title, setTitle ] = useState('');
-    const [ slug, setSlug ] = useState('');
     const [ published, setPublished ] = useState(false);
     const [ open, setOpen ] = useState(false);
     const [ image, setImage ] = useState('');
@@ -307,7 +303,6 @@ const NewPost = () => {
         const post = {
             id: postId ? postId : null,
             title: title,
-            slug: slug,
             published: published,
             content: incomingContentFromQuill,
             selectedTags: selectedTags,
@@ -404,7 +399,7 @@ const NewPost = () => {
                                             )}
                                         />
                                     </FormControl>
-                                </Grid>
+                                </Grid><br/>
                                 <Grid item xs={12}>
                                     <FormControlLabel
                                         control={
@@ -417,21 +412,18 @@ const NewPost = () => {
                                         }
                                         label="Publish"
                                     />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <h2>Insert Blog Header Image</h2>
-                                    <input className="input_imagem_artigo" type="file" onChange={onChangeImage} />
-                                    <div className="imgPreview">
-                                        { 
-                                            imagePreviewUrl ?  (<img className="add_imagem" Name="add_imagem" src={imagePreviewUrl} />) : ( 'Upload image' )
-                                        }
-                                    </div>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <Grid style={{'textAlign':'center', 'marginLeft':'-85px'}} item xs={12}>
-                                        <div>
-                                            <img style={{'width':'400px'}} src={'temp'} />
-                                        </div>
+                                </Grid><br/>
+                                <Grid container style={{height:'250px'}}>
+                                    <Grid item xs={6}>
+                                        <h4>Insert Blog Header Image</h4>
+                                        <input className="input_imagem_artigo" type="file" onChange={onChangeImage} />
+                                    </Grid>
+                                    <Grid item xs={6} style={{'position': 'relative', 'left':'400px'}}>
+                                        <Grid style={{'textAlign':'center', 'marginLeft':'-85px'}} item xs={12}>
+                                            <div>
+                                                <img style={{'max-width':'75%','max-height':'75%'}} src={image} />
+                                            </div>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>

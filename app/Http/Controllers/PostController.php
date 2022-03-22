@@ -165,11 +165,12 @@ class PostController extends Controller
 
         $post = Post::create([
           'title' => $request['title'],
-          'slug' => $request['slug'],
+          'slug' => Str::slug($request['title'], '-'),
           'content' => $request['content'],
           'published' => $request['published'],
           'category' => $request['category'],
-          'user_id' => $request['user_id']
+          'user_id' => $request['user_id'],
+          'image' => $request['image'],
         ]);
 
 

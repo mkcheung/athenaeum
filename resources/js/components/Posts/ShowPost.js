@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
-import ImageUploader from "quill-image-uploader";
 import swal from 'sweetalert2';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Autocomplete from '@material-ui/lab/Autocomplete';
