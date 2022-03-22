@@ -192,6 +192,11 @@ const AdminDashboard = () => {
             ...prevState,
             userGrid:true
         }));
+        userGridApi.current.sizeColumnsToFit();
+    }
+
+    const resizeGrid = () => {
+        userGridApi.current.sizeColumnsToFit();
     }
 
     const onSelectionChanged = useCallback(() => {
@@ -384,6 +389,7 @@ const AdminDashboard = () => {
                             rowData={users}
                             rowSelection={'multiple'}
                             onSelectionChanged={onSelectionChanged}
+                            onGridSizeChanged={resizeGrid}
                         >
                         </AgGridReact>
                     </div><br/>
