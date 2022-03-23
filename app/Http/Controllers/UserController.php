@@ -99,20 +99,22 @@ class UserController extends Controller
     {
         $data = $request->all();
         $user = User::findOrFail($id);
-        $user->name = $data['data']['name'];
-        $user->first_name = $data['data']['first_name'];
-        $user->last_name = $data['data']['last_name'];
-        $user->email = $data['data']['email'];
+        if($data['data']['role']){
 
-        if($data['data']['toggle_admin']){
-            $user->removeRole('author');
-            $user->assignRole('admin');
+            if($data['data']['role'] === 'admin'){
+                $user->removeRole('author');
+                $user->assignRole('admin');
 
+            } else {
+                $user->removeRole('admin');
+                $user->assignRole('author');
+            }
         } else {
-            $user->removeRole('admin');
-            $user->assignRole('author');
+            $user->name = $data['data']['name'];
+            $user->first_name = $data['data']['first_name'];
+            $user->last_name = $data['data']['last_name'];
+            $user->email = $data['data']['email'];
         }
-
         $user->save();
     }
 
