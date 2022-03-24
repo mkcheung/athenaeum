@@ -101,7 +101,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         if($data['data']['role']){
 
-            if($data['data']['role'] === 'admin'){
+            if($data['data']['role'] === 'Admin'){
                 $user->removeRole('author');
                 $user->assignRole('admin');
 

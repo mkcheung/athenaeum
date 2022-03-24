@@ -103,17 +103,17 @@ const roleOptions = extractValues(roleMappings);
                 colDef = {
                     headerName: 'Role',
                     valueGetter: (params) => {
-                        console.log('valueGetter', users);
                         let roleName = params.data.roles[0].name;
                         return roleName.charAt(0).toUpperCase() + roleName.slice(1);
                     },
                     valueSetter: params => {
-                        console.log('valueSetter',params)
-                        console.log('pvalueSetter', users);
                         params.data.roles[0].name = params.newValue.charAt(0).toLowerCase() + params.newValue.slice(1);
                         return true;
                     },
-                    editable: true,
+                    editable: (params) => {
+                        let roleName = params.data.roles[0].name;
+                        return roleName == 'superadmin' ? false : true;
+                    },
                     width: 160,
                     filter: 'agTextColumnFilter',
                     valueFormatter: params => { 
@@ -122,11 +122,9 @@ const roleOptions = extractValues(roleMappings);
                         return roleName.charAt(0).toUpperCase() + roleName.slice(1);
                     },
                     cellRenderer: (params)=>{
-                        console.log('cellrenderer',params);
                         return params.value;
                     },
                     valueParser: function (params) {
-                        console.log('VP', params);
                         return lookupKey(roleMappings, params.value);
                     },
                     cellEditor: 'agSelectCellEditor',
@@ -135,11 +133,11 @@ const roleOptions = extractValues(roleMappings);
                     },
                     onCellValueChanged: async (e) => {
                         const { newValue, column, data } = e;
-                        console.log('onCellValueChanged newValue',newValue)
-                        console.log('onCellValueChanged column',column)
-                        console.log('onCellValueChanged data',data)
-                        console.log('prior handleRoleChange', users);
-                        await handleRoleChange(data.id, newValue)
+
+                        // TO DO: Is this a race condition? Why can't I use the token in the auth state to make 
+                        // an api call??
+                        let appStateData = localStorage["appState"] ? JSON.parse(localStorage["appState"]) : null;
+                        await handleRoleChange(data.id, newValue, appStateData.accessToken)
                     }
                 };
             } else {
@@ -166,7 +164,6 @@ const roleOptions = extractValues(roleMappings);
     ];
 
     useEffect( () => {
-        console.log('is this lost', authState.accessToken);
         // TO DO: Find out why this is necessary....what is causing this to authDashboard to 
         // load prematurely?? Find out why AuthState is not always reliable for the protected route
         // The reload doesn't always happen prior to this.
@@ -259,58 +256,13 @@ const roleOptions = extractValues(roleMappings);
         }
     }, []);
 
-    // const handleAdminToggle = async (e) => {
+    const handleRoleChange = async (userId, newRole, theToken) => {
 
-    //     let userData = {
-    //         name: selectedUser.name,
-    //         first_name: selectedUser.first_name,
-    //         last_name: selectedUser.last_name,
-    //         email: selectedUser.email,
-    //         toggle_admin: e.target.checked ? true : false
-    //     };
-
-    //      try {
-    //             let results = await axios.post('/api/users/'+selectedUserId,
-    //                 { 
-    //                     data: userData,
-    //                     _method: 'patch'                  
-    //                 },
-    //                 {   
-    //                     headers: {
-    //                         'Authorization': 'Bearer '+authState.accessToken,
-    //                         'Accept': 'application/json'
-    //                     }
-    //                 }
-    //             );
-
-    //             if(selectedUser.roles[0].name === 'admin'){
-    //                 selectedUser.roles[0].name = 'author'
-    //             } else {
-    //                 selectedUser.roles[0].name = 'admin'
-    //             }
-
-    //             // await loadData();
-    //             // setSelectedUser(selectedUser);
-    //         } catch (error) {
-    //             swal.fire("Error", String(error), "error");
-    //         }
-    // }
-
-    const handleRoleChange = async (userId, newRole) => {
-
-        // console.log('handleRikeChange users', users)
-        // let userToAdjust = users.find(user => user.id == userId);
-        // console.log('handleRikeChange userToAdjust', userToAdjust)
         let userData = {
-            // name: userToAdjust.name,
-            // first_name: userToAdjust.first_name,
-            // last_name: userToAdjust.last_name,
-            // email: userToAdjust.email,
             role: newRole
         };
 
          try {
-            console.log('handleRoleChange at', authState.accessToken);
                 let results = await axios.post('/api/users/'+userId,
                     { 
                         data: userData,
@@ -318,20 +270,11 @@ const roleOptions = extractValues(roleMappings);
                     },
                     {   
                         headers: {
-                            'Authorization': 'Bearer '+authState.accessToken,
+                            'Authorization': 'Bearer '+theToken,
                             'Accept': 'application/json'
                         }
                     }
                 );
-
-                // if(userToAdjust.roles[0].name === 'admin'){
-                //     userToAdjust.roles[0].name = 'author'
-                // } else {
-                //     userToAdjust.roles[0].name = 'admin'
-                // }
-
-                await loadData();
-                // setSelectedUser(userToAdjust);
             } catch (error) {
                 swal.fire("Error", String(error), "error");
             }
@@ -439,43 +382,10 @@ const roleOptions = extractValues(roleMappings);
     }
 
 
-
-    let numberUnpublishedPosts = 0;
-    let numberPublishedPosts = 0;
-    let theUserDetails = '';
-
-    selectedUserPosts.forEach((selectedUserPost)=>{
-        if(selectedUserPost.published){
-            numberPublishedPosts++;
-        } else {
-            numberUnpublishedPosts++
-        }
-    });
-
-    // if(selectedUser){
-    //     theUserDetails = <div className="userDetails">
-    //         User: {selectedUser.full_name} <br/>
-    //         Number Of Published Posts: {numberPublishedPosts} <br/>
-    //         Number Of Unpublished Posts: {numberUnpublishedPosts} <br/>
-    //         // <div>
-    //         //     { selectedUser.roles[0].name !== 'superadmin' &&
-    //         //         <label>
-    //         //         Admin: &nbsp;
-    //         //             <input
-    //         //                 type="checkbox"
-    //         //                 checked={selectedUser.roles[0].name==='admin' ? true : false}
-    //         //                 onChange={handleAdminToggle}
-    //         //             />
-    //         //         </label>
-    //         //     }
-    //         // </div>
-    //     </div>
-    // }
-
     return (
         <Container maxWidth="lg">
             <Grid container spacing={3}>
-                <Grid item xs={10} style={{height: 200}}>
+                <Grid item xs={12} style={{height: 200}}>
                     <div className="ag-theme-alpine" style={gridStyle}>
                         <AgGridReact
                             onGridReady={onUserGridReady}
@@ -487,11 +397,6 @@ const roleOptions = extractValues(roleMappings);
                         </AgGridReact>
                     </div><br/>
                     {postsOnDashboard}
-                </Grid>
-                <Grid item xs={2}>
-                    <div className="userReadOut">
-                        {theUserDetails}
-                    </div>
                 </Grid>
             </Grid>
         </Container>
