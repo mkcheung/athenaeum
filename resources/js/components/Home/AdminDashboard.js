@@ -117,7 +117,6 @@ const roleOptions = extractValues(roleMappings);
                     width: 160,
                     filter: 'agTextColumnFilter',
                     valueFormatter: params => { 
-                        console.log('VR', params);
                         let roleName = params.value;
                         return roleName.charAt(0).toUpperCase() + roleName.slice(1);
                     },
@@ -203,7 +202,6 @@ const roleOptions = extractValues(roleMappings);
                     }
                 }
             );
-            console.log('data loaded userObj', userObj);
             userData = userObj.data;
             setUsers(userData);
         } catch (error) {
