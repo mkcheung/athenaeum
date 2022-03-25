@@ -57,7 +57,7 @@ const NewPost = () => {
     const [ image, setImage ] = useState('');
     const [ imagePreviewUrl, setImagePreviewUrl ] = useState(false);
     const [ bookSelectionModalOpen, setBookSelectionModalOpen ] = useState(false);
-    const [ loading, setLoading ] = useState(true);
+    const [ dataLoading, setDataLoading ] = useState(true);
     const [ user, setUser ] = useState({});
     const [ chapterSelectionModalOpen, setChapterSelectionModalOpen] = React.useState(false);
     const { authState, setAuthState } = useAuth();
@@ -98,7 +98,7 @@ const NewPost = () => {
                 tagOptions.push(tagIdAndTitle);
             });
 
-            setLoading(false);
+            setDataLoading(false);
             setTags(tagOptions);
             setParentPostId(parentPostId);
 
@@ -182,7 +182,7 @@ const NewPost = () => {
     const handleGetCitations = async (e) => {
 
         e.preventDefault();
-        setLoading(true);
+        setDataLoading(true);
 
         const bookTitleParams ={
             bookTitle: bookTitleSearchTerm
@@ -201,7 +201,7 @@ const NewPost = () => {
 
             let bookCitations = (res.data[0]) ? res.data[0].citations : [] ;
             let book_title = (res.data[0]) ? res.data[0].title : [] ;
-            setLoading(false);
+            setDataLoading(false);
             setBookTitle(book_title)
             setCitations(bookCitations);
         } catch (error) {

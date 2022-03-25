@@ -14,6 +14,9 @@ const parseJwt = (token) => {
 }
 
 const AuthProvider = (props) => {
+
+	const [ loading, setLoading ] = useState(true);
+
 	const [authState, setAuthState] = useState({
 		isLoggedIn:false,
 		user:{},
@@ -22,12 +25,14 @@ const AuthProvider = (props) => {
 		isSuperAdmin:false
 	});
 
-	let appStateData = localStorage["appState"] ? JSON.parse(localStorage["appState"]) : null;
 
 	// data NEEDS to be reloaded from localStorage whenever browser is reset
 	// Async-Await must be used here. This Promise needs to be fulfilled
 	// BEFORE we move forward or we lose the user session
 	useEffect(async () => {
+		let appStateData = localStorage["appState"] ? JSON.parse(localStorage["appState"]) : null;
+
+
 		if(appStateData.isLoggedIn){
         	const decodedJwt = parseJwt(appStateData['accessToken']);
 
@@ -41,11 +46,13 @@ const AuthProvider = (props) => {
 	            });
             	localStorage.clear();
             	swal.fire('Done!', 'Your session has expired. Please log back in.', 'success');
+				await setLoading(false);
             	return <Navigate to={'/login'} replace />;
 			} else {
 				await setAuthState((prevState)=>({
 					...appStateData
 				}));
+				await setLoading(false);
 			}
 		} 
 	}, []);
@@ -73,7 +80,8 @@ const AuthProvider = (props) => {
                 isSuperAdmin: isSuperAdmin
             };
             localStorage["appState"] = JSON.stringify(appState);
-            setAuthState(appState);
+            await setAuthState(appState);
+			await setLoading(false);
         } else {
             swal.fire("Error", 'Failed to log in. Please try again.', "error");
         }
@@ -105,6 +113,7 @@ const AuthProvider = (props) => {
     };
 
 	const authContextValue = {
+		loading,
 		loginUser,
 		logOut,
 		authState,

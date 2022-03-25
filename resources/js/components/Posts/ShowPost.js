@@ -29,7 +29,7 @@ import { useAuth } from '../GlobalStates';
 
 const ShowPost = () => {
 
-    const [ loading, setLoading ] = useState(true);
+    const [ dataLoading, setDataLoading ] = useState(true);
     const [ postId, setPostId ] = useState(null);
     const [ content, setContent ] = useState('');
     const [ title, setTitle ] = useState('');
@@ -47,7 +47,7 @@ const ShowPost = () => {
 
     useEffect( async () => {
         const postId = (params.id) ? params.id : null;
-        if (loading === true) {
+        if (dataLoading === true) {
             await loadData(postId);
         }
     });
@@ -69,7 +69,7 @@ const ShowPost = () => {
                 setPostId(postData['id']);
                 setImage(postData['image']);
                 setComments(postData['comments']);
-                setLoading(false);
+                setDataLoading(false);
 
             }
         } catch (error) {
@@ -103,7 +103,7 @@ const ShowPost = () => {
         const loadedComments = results.data;
         const newShowCommentBoxStatus = !showCommentBox;
         setComments(loadedComments);
-        setLoading(true);
+        setDataLoading(true);
         setShowCommentBox(newShowCommentBoxStatus);
     };
 
@@ -128,7 +128,7 @@ const ShowPost = () => {
     }
 
     let showPostDisplay = '';
-    if (loading === true) {
+    if (dataLoading === true) {
         showPostDisplay = 
             <div style={{verticalAlign: 'top', marginLeft:'3px',marginRight:'3px',marginTop:'450px',position:'relative' }} >
                 <CircularProgress style={{margin:'auto', position: 'absolute', top:0,bottom:0,left:0,right:0, }} />

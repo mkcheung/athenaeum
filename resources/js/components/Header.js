@@ -120,7 +120,6 @@ const Header = (props) => {
     const classes = useStyles();
     const navigate = useNavigate();
     const { logOut, authState, setAuthState } = useAuth();
-    // const [ authState, setAuthState ] = useContext(AuthContext);
 
     const handleLogOut = async () => {
         logOut();
@@ -142,7 +141,6 @@ const Header = (props) => {
 
     const handleSetUserProfile = async (event) => {
         event.preventDefault();
-
         navigate(`/user/edit/${authState.user.id}`);
     }
 

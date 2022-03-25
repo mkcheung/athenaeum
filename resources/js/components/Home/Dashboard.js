@@ -38,7 +38,7 @@ const Dashboard = (props) => {
 
     const navigate = useNavigate();
     const params = useParams();
-    const [ loading, setLoading ] = useState(true);
+    const [ dataLoading, setDataLoading ] = useState(true);
     const [ posts, setPosts ] = useState([]);
     const [ tagOptions, setTagOptions ] = useState([]);
     const [ selectedTags, selectTags ] = useState([]);
@@ -51,7 +51,7 @@ const Dashboard = (props) => {
         } else {
             loadData(authState.user.id);
         }
-    }, [loading]);
+    }, [dataLoading]);
 
 
     const loadData = async (userId=null, postId=null) => {
@@ -105,7 +105,7 @@ const Dashboard = (props) => {
                 tagOptions.push(tagItem);
             });
 
-	        setLoading(false);
+	        setDataLoading(false);
             setTagOptions(tagOptions);
 	        setPosts(postData);
 
@@ -160,7 +160,7 @@ const Dashboard = (props) => {
 			        });
 
 					swal.fire("Deleted!", "Post deleted!", "success");
-					setLoading(true);
+					setDataLoading(true);
 				}
 	        } catch (error) {
 	            swal.fire("Error", String(error), "error");
@@ -195,7 +195,7 @@ const Dashboard = (props) => {
 	                    }
 	                }
 	            );
-				setLoading(true);
+				setDataLoading(true);
 	        } catch (error) {
 	            swal.fire("Error", String(error), "error");
 	        }

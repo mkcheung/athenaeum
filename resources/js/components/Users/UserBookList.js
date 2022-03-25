@@ -38,7 +38,7 @@ import { useAuth } from '../GlobalStates';
 
 const UserBookList = () => {
 
-    const [ loading, setLoading ] = useState(true);
+    const [ dataLoading, setDataLoading ] = useState(true);
     const [ modalLoading, setModalLoading ] = useState(false);
     const [ deleteInProgress, setDeleteInProgress ] = useState(false);
     const [ books, setBooks ] = useState([]);
@@ -68,7 +68,7 @@ const UserBookList = () => {
 
 	useEffect(()=> {
 	    loadData();
-	},[selectedBookCitations, loading, modalLoading])
+	},[selectedBookCitations, dataLoading, modalLoading])
 
 
 	const handleOpen = async () => {
@@ -198,10 +198,10 @@ const UserBookList = () => {
 
     useEffect(()=>{
     	if(selectedBookId){
-			setLoading(true);
+			setDataLoading(true);
 			let selectedBook = books.find(book => book.id === selectedBookId);
 			setSelectedBookCitations(selectedBook.citations);
-			setLoading(false);
+			setDataLoading(false);
     	}
     },[selectedBookId])
 
@@ -262,7 +262,7 @@ const UserBookList = () => {
         });
         const books = userBooks.data;
         unstable_batchedUpdates(() => {
-	        setLoading(false);
+	        setDataLoading(false);
 	        setDeleteInProgress(false);
 	        setBooks(books);
      	});
@@ -324,14 +324,14 @@ const UserBookList = () => {
 		}
 
         let citationsFromBook = '';
-        if (loading === true) {
+        if (dataLoading === true) {
         	citationsFromBook = 
 				<List>
 					<div className="bookCitationList" >
 						<CircularProgress className="circularProgress" />
 					</div>
 				</List>;
-        } else if(loading === false && selectedBookCitations && selectedBookCitations.length>0){
+        } else if(dataLoading === false && selectedBookCitations && selectedBookCitations.length>0){
         	let selBookTitle = selectedBook ? selectedBook.title : '';
         	let selBookChapterTitle = selectedChapter ? selectedChapter.chapter_title : '';
 	        citationsFromBook =

@@ -85,7 +85,7 @@ const TagsList = (props) => {
 
     const { authState, setAuthState } = useAuth();
 
-    const [ loading, setLoading ] = useState(true);
+    const [ dataLoading, setDataLoading ] = useState(true);
     const [ open, setOpenModal ] = useState(false);
     const [ tags, setTags ] = useState([]);
 
@@ -97,10 +97,10 @@ const TagsList = (props) => {
     const [errors, setErrors] = useState([]);
 
     useEffect( () => {
-        if(loading){
+        if(dataLoading){
             loadData();
         }
-    },[loading]);
+    },[dataLoading]);
 
     const loadData = async () => {
         try {
@@ -114,7 +114,7 @@ const TagsList = (props) => {
 
             let postsToTags = [];
             const tagData = tagObj.data;
-            setLoading(false);
+            setDataLoading(false);
             setTags(tagData);
         } catch (error) {
             swal.fire('Done!', String(error), 'error');
@@ -148,7 +148,7 @@ const TagsList = (props) => {
                 }
             );
             swal.fire("Done!", "Tag Created!", "success");
-            setLoading(true);
+            setDataLoading(true);
             handleClose();
         } catch (error) {
             swal.fire('Done!', String(error), 'error');
@@ -156,12 +156,12 @@ const TagsList = (props) => {
     };
 
 let test = <div></div>;
-    if (loading === true) {
+    if (dataLoading === true) {
         test = 
             <div style={{verticalAlign: 'top', marginLeft:'3px',marginRight:'3px',marginTop:'50px',position:'relative' }} >
                 <CircularProgress style={{margin:'auto', position: 'absolute', top:0,bottom:0,left:0,right:0, }} />
             </div>
-    } else if(loading === false && tags && tags.length>0){
+    } else if(dataLoading === false && tags && tags.length>0){
         test = <TableContainer component={Paper}>
                     <Table aria-label="collapsible table">
                         <TableHead>

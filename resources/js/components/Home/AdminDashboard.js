@@ -44,11 +44,10 @@ const AdminDashboard = () => {
     const [ selectedUserId, setSelectedUserId ] = useState(null);
     const [ selectedUser, setSelectedUser ] = useState(null);
     const [ selectedUserPosts, setSelectedUserPosts ] = useState([]); 
-    const { authState, setAuthState } = useAuth();
+    const { loading, authState, setAuthState } = useAuth();
     const [ userGridReady, setUserGridReady ] = useState({
         userGrid: false
     }); 
-    const [ loading, setLoading ] = useState(true);
 
     const gridStyle = useMemo(() => ({ height: '100%', width: '100%' }), []);
 
@@ -132,11 +131,7 @@ const roleOptions = extractValues(roleMappings);
                     },
                     onCellValueChanged: async (e) => {
                         const { newValue, column, data } = e;
-
-                        // TO DO: Is this a race condition? Why can't I use the token in the auth state to make 
-                        // an api call??
-                        let appStateData = localStorage["appState"] ? JSON.parse(localStorage["appState"]) : null;
-                        await handleRoleChange(data.id, newValue, appStateData.accessToken)
+                        await handleRoleChange(data.id, newValue, authState.accessToken)
                     }
                 };
             } else {
@@ -163,13 +158,13 @@ const roleOptions = extractValues(roleMappings);
     ];
 
     useEffect( () => {
-        // TO DO: Find out why this is necessary....what is causing this to authDashboard to 
-        // load prematurely?? Find out why AuthState is not always reliable for the protected route
-        // The reload doesn't always happen prior to this.
-        if(authState.accessToken){
+        // we should not call this until the authContext has finished loading
+        // Look at GlobalStates. Deny data load until the authcontext has finished
+        // coming back from the localstorage. 
+        if(!loading){
             loadData();
         }
-    }, [authState.accessToken]);
+    }, [loading]);
 
     useEffect(() => {
         if( userGridReady.userGrid ){

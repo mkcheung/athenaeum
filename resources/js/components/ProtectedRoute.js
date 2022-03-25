@@ -10,15 +10,21 @@ const ProtectedRoute = ({
     requiredPerm
   }) => {
 
-    // TO DO: Find out why AuthState is not always reliable for the protected route
-    // The reload doesn't always happen prior to this.
-    let data = localStorage["appState"] ? JSON.parse(localStorage["appState"]) : null;
 
-    if(!data){
+    const { loading, authState } = useAuth();
+
+    // don't load the route until the authstate has been refreshed
+    // we won't be able to load data into those components unless
+    // the bearer token has been refreshed from the localStorage
+    if (loading) {
+        return "authenticating";
+    }   
+
+    if(!authState.accessToken){
         return <Navigate to={redirectPath} replace />;
     }
 
-    if(requiredPerm && !data.isSuperAdmin && !data.permissions.includes(requiredPerm)){
+    if(requiredPerm && !authState.isSuperAdmin && !authState.permissions.includes(requiredPerm)){
         return <Navigate to='/dashboard' replace />;
     } 
 

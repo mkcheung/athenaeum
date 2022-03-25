@@ -21,7 +21,7 @@ import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 
 const CategoriesList = () => {
 
-	const [ loading, setLoading ] = useState(true);
+	const [ dataLoading, setDataLoading ] = useState(true);
 	const [ errors, setErrors ] = useState([]);
 	const [ categories, setCategories ] = useState([]);
 	const [ selectedCategoryPosts, setSelectedCategoryPosts ] = useState([]);
@@ -39,7 +39,7 @@ const CategoriesList = () => {
 
 	useEffect(()=>{
 		loadData();
-	}, [loading, categories]);
+	}, [dataLoading, categories]);
 
 
     const loadData = async () => {
@@ -56,7 +56,7 @@ const CategoriesList = () => {
 	            }
 			})
             const categoriesAndPosts = categoriesAndPostResults.data
-			setLoading(false);
+			setDataLoading(false);
 			setCategories(categoriesAndPosts);
         } catch (error) {
             swal.fire("Error", String(error), "error");
@@ -125,7 +125,7 @@ const CategoriesList = () => {
 	        }
         }
         setUpdate(false);
-        setLoading(false);
+        setDataLoading(false);
 		handleClose();
         loadData();
 
@@ -134,7 +134,7 @@ const CategoriesList = () => {
     const handleCategoryPostsClick = async (event, categoryId) => {
 		event.preventDefault();
 
-        setLoading(true);
+        setDataLoading(true);
 		setSelectedCategoryPosts([]);
 
 		let selectedCategory = categories.find(category => category.id === categoryId);
@@ -190,14 +190,14 @@ const CategoriesList = () => {
 	}
 
     let postsFromCategory = '';
-    if (loading === true) {
+    if (dataLoading === true) {
     	postsFromCategory = 
 			<List >
 				<div style={{verticalAlign: 'top', marginLeft:'3px',marginRight:'3px',marginTop:'50px',position:'relative' }} >
 					<CircularProgress style={{margin:'auto', position: 'absolute', top:0,bottom:0,left:0,right:0, }} />
 				</div>
 			</List>;
-    } else if(loading === false && selectedCategoryPosts && selectedCategoryPosts.length>0){
+    } else if(dataLoading === false && selectedCategoryPosts && selectedCategoryPosts.length>0){
         postsFromCategory =
 			<List component="nav" style={{maxHeight:'675px', overflow:'scroll'}} aria-label="secondary mailbox folder">
 				{selectedCategoryPosts.map(selectedCategoryPost => (
