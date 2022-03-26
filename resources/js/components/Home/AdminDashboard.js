@@ -165,7 +165,6 @@ const statusOptions = extractValues(statusMappings);
                         return params.value;
                     },
                     valueParser: function (params) {
-                        console.log('VP', params)
                         return lookupKey(statusMappings, params.value);
                     },
                     cellEditor: 'agSelectCellEditor',
