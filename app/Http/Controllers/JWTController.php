@@ -65,15 +65,17 @@ class JWTController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string|min:6'
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+       
+        $userCredentials = array_merge($validator->validated(), ['active' => 1]);
 
-        if (!$token = auth()->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if (!$token = auth()->attempt($userCredentials)) {
+            return response()->json(['error' => 'Incorrect credentials or access revoked. Please try again.'], 401);
         }
 
         return $this->respondWithToken($token);
