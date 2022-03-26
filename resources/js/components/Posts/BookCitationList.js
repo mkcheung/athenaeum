@@ -18,23 +18,25 @@ const BookCitationList = (props) => {
 	let {book_title, chapter_title, citations, handleCitationInsertion, handleOpenChapterSelectionModal} = props; 
     let bookTitleDisplay = book_title ? <Grid item xs={12}>
                 <div className="citationChapterTitle">
-                    <InputLabel>Title: <u>{book_title}</u></InputLabel>
+                    <InputLabel><strong>Title:</strong> <u>{book_title}</u></InputLabel>
                 </div>
             </Grid> : 
             '';
 
     let chapterTitleDisplay = chapter_title ? <Grid item xs={12}>
                 <div className="citationChapterTitle">
-                    <InputLabel>Chapter Title: <u>{chapter_title}</u></InputLabel>
+                    <InputLabel><strong>Chapter Title:</strong> <u>{chapter_title}</u></InputLabel>
                 </div>
             </Grid> : 
             '';
 
 
 	const body = (
-        <Grid container spacing={3}>
+        <Grid container spacing={3} style={{paddingRight:10}}>
             <Grid item xs={12} className='card-header'>
-                Citations:
+                <span className="citationButtonHeader">
+                    Citations:
+                </span>
                 <Button id="citationSubmit" variant="contained" color="primary" onClick={() => handleOpenChapterSelectionModal()}>
                     Search
                 </Button>
@@ -47,11 +49,8 @@ const BookCitationList = (props) => {
                     {
                         citations && citations.map(citation => (
                         <li key={citation.id} onClick={(e) => handleCitationInsertion(e)}>
-                            <div className="title">
-                                {book_title}
-                            </div>
                             <div className="page">
-                                Page: {citation.page}
+                                <u>Page: {citation.page}</u>
                             </div>
                             <p className="citationText">
                                 {citation.content}
