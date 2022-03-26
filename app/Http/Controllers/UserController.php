@@ -99,7 +99,7 @@ class UserController extends Controller
     {
         $data = $request->all();
         $user = User::findOrFail($id);
-        if($data['data']['role']){
+        if(!empty($data['data']['role'])){
 
             if($data['data']['role'] === 'Admin'){
                 $user->removeRole('author');
@@ -108,6 +108,12 @@ class UserController extends Controller
             } else {
                 $user->removeRole('admin');
                 $user->assignRole('author');
+            }
+        } else if (!empty($data['data']['active'])) {
+            if($data['data']['active'] === 'Active'){
+                $user->active = true;
+            } else {
+                $user->active = false;
             }
         } else {
             $user->name = $data['data']['name'];

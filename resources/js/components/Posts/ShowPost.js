@@ -148,7 +148,7 @@ const ShowPost = () => {
                                     <u>
                                         {title}
                                     </u><br/>
-                                    <img style={{'width':'600px'}}src={image} />
+                                    <img style={{'max-width':'75%','max-height':'75%'}} src={image} />
                                 </div>
                             </h4>
                             <div dangerouslySetInnerHTML={{__html: content}}>

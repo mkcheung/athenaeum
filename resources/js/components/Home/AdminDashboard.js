@@ -58,12 +58,18 @@ const AdminDashboard = () => {
         Author: 'Author',
     };
 
+    const statusMappings = {
+        Active: 'Active',
+        Inactive: 'Inactive',
+    };
+
 
 const extractValues = (mappings) => {
   return Object.keys(mappings);
 };
 
 const roleOptions = extractValues(roleMappings);
+const statusOptions = extractValues(statusMappings);
 
     const lookupValue = (mappings, key) => {
         return mappings[key];
@@ -131,7 +137,44 @@ const roleOptions = extractValues(roleMappings);
                     },
                     onCellValueChanged: async (e) => {
                         const { newValue, column, data } = e;
-                        await handleRoleChange(data.id, newValue, authState.accessToken)
+                        await handleRoleChange(data.id, newValue)
+                    }
+                };
+            } else if (userField == 'active') {
+
+                colDef = {
+                    headerName: 'Active Status',
+                    valueGetter: (params) => {
+                        let activeStatus = params.data.active;
+                        return activeStatus ? 'Active' : 'Inactive';
+                    },
+                    valueSetter: params => {
+                        params.data.active = params.newValue === 'Active' ? 1 : 0;
+                        return true;
+                    },
+                    editable: (params) => {
+                        let roleName = params.data.roles[0].name;
+                        return roleName == 'superadmin' ? false : true;
+                    },
+                    width: 160,
+                    filter: 'agTextColumnFilter',
+                    valueFormatter: params => { 
+                        return params.value;
+                    },
+                    cellRenderer: (params)=>{
+                        return params.value;
+                    },
+                    valueParser: function (params) {
+                        console.log('VP', params)
+                        return lookupKey(statusMappings, params.value);
+                    },
+                    cellEditor: 'agSelectCellEditor',
+                    cellEditorParams: {
+                        values: statusOptions
+                    },
+                    onCellValueChanged: async (e) => {
+                        const { newValue, column, data } = e;
+                        await handleStatusChange(data.id, newValue)
                     }
                 };
             } else {
@@ -154,7 +197,8 @@ const roleOptions = extractValues(roleMappings);
         'first_name',
         'last_name',
         'email',
-        'roles'
+        'roles',
+        'active',
     ];
 
     useEffect( () => {
@@ -249,7 +293,7 @@ const roleOptions = extractValues(roleMappings);
         }
     }, []);
 
-    const handleRoleChange = async (userId, newRole, theToken) => {
+    const handleRoleChange = async (userId, newRole) => {
 
         let userData = {
             role: newRole
@@ -263,7 +307,30 @@ const roleOptions = extractValues(roleMappings);
                     },
                     {   
                         headers: {
-                            'Authorization': 'Bearer '+theToken,
+                            'Authorization': 'Bearer '+authState.accessToken,
+                            'Accept': 'application/json'
+                        }
+                    }
+                );
+            } catch (error) {
+                swal.fire("Error", String(error), "error");
+            }
+    }
+
+    const handleStatusChange = async (userId, newStatus) => {
+
+        let userData = {
+            active: newStatus
+        };
+         try {
+                let results = await axios.post('/api/users/'+userId,
+                    { 
+                        data: userData,
+                        _method: 'patch'                  
+                    },
+                    {   
+                        headers: {
+                            'Authorization': 'Bearer '+authState.accessToken,
                             'Accept': 'application/json'
                         }
                     }
@@ -378,7 +445,7 @@ const roleOptions = extractValues(roleMappings);
     return (
         <Container maxWidth="lg">
             <Grid container spacing={3}>
-                <Grid item xs={12} style={{height: 200}}>
+                <Grid item xs={12} style={{height: 250}}>
                     <div className="ag-theme-alpine" style={gridStyle}>
                         <AgGridReact
                             onGridReady={onUserGridReady}

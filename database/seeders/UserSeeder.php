@@ -20,21 +20,24 @@ class UserSeeder extends Seeder
                 "first_name" => "Socratic",
                 "last_name" => "Epistemologist",
                 "email" => "wise@gmail.com",
-                "password" => Hash::make(123456)
+                "password" => Hash::make(123456),
+                "active" => true
             ],
             [
                 "name" => "Apprentice",
                 "first_name" => "Padawan",
                 "last_name" => "Learner",
                 "email" => "apprentice@gmail.com",
-                "password" => Hash::make(123456)
+                "password" => Hash::make(123456),
+                "active" => true
             ],
             [
                 "name" => "Listener",
                 "first_name" => "Wise",
                 "last_name" => "Listener",
                 "email" => "listener@gmail.com",
-                "password" => Hash::make(123456)
+                "password" => Hash::make(123456),
+                "active" => true
             ],
         ];
 
