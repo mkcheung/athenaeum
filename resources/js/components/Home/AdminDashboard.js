@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect, useCallback, useContext, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../GlobalStates';
+import { useUserData } from '../UserContext';
 import { AgGridReact } from 'ag-grid-react';
 import swal from 'sweetalert2';
 import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
@@ -40,7 +41,7 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 const AdminDashboard = () => {
 
-    const [ users, setUsers ] = useState([]);
+    const { users, setUsers } = useUserData();
     const [ selectedUserId, setSelectedUserId ] = useState(null);
     const [ selectedUser, setSelectedUser ] = useState(null);
     const [ selectedUserPosts, setSelectedUserPosts ] = useState([]); 
@@ -200,15 +201,6 @@ const statusOptions = extractValues(statusMappings);
         'active',
     ];
 
-    useEffect( () => {
-        // we should not call this until the authContext has finished loading
-        // Look at GlobalStates. Deny data load until the authcontext has finished
-        // coming back from the localstorage. 
-        if(!loading){
-            loadData();
-        }
-    }, [loading]);
-
     useEffect(() => {
         if( userGridReady.userGrid ){
             updateUserTableColumnDefs();
@@ -227,25 +219,6 @@ const statusOptions = extractValues(statusMappings);
             userGridApi.current.setColumnDefs(userTableColDefs);
         }
     }, [users])
-
-   const loadData = async () => {
-
-        let userData = [];
-        try {
-            const userObj = await axios.get('/api/users',
-                {   
-                    headers: {
-                        'Authorization': 'Bearer '+authState.accessToken,
-                        'Accept': 'application/json'
-                    }
-                }
-            );
-            userData = userObj.data;
-            setUsers(userData);
-        } catch (error) {
-            swal.fire("Error", String(error), "error");
-        }
-    }
 
     const loadUserDataAndPosts = async () => {
 
@@ -334,6 +307,13 @@ const statusOptions = extractValues(statusMappings);
                         }
                     }
                 );
+                let newUserArray = users.filter(function( user ) {
+                    return user.id !== userId;
+                });
+                setUsers([
+                    ...newUserArray,
+                    results.data
+                ]);
             } catch (error) {
                 swal.fire("Error", String(error), "error");
             }

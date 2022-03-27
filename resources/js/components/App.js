@@ -15,6 +15,7 @@ import {
     __RouterContext,
 } from "react-router-dom";
 import { useAuth, AuthProvider } from './GlobalStates';
+import { useUserData, UserProvider } from './UserContext';
 import Footer from './Footer';
 import Header from './Header';
 import Dashboard from './Home/Dashboard';
@@ -42,9 +43,11 @@ const App = () => {
     const [openMenu, setOpenMenu] = useState(false);
     const [blogAuthors, setBlogAuthors] = useState([]);
     const { authState } = useAuth();
+    const { users, usersLoading } = useUserData();
 
+    // when users are altered, they affect the authors.
+    // reload the authors in the dropdown accordingly.
     useEffect(async () => {
-
         let blogAuthors = [];
         let authorRes = await axios.get('/api/users/showAuthors', 
             {
@@ -54,14 +57,13 @@ const App = () => {
             });
 
         authorRes.data.forEach(function(author){
-            let temp = {};
-            temp['id'] = author.id;
-            temp['full_name'] = author.full_name;
-            blogAuthors.push(temp);
+            let authorObj = {};
+            authorObj['id'] = author.id;
+            authorObj['full_name'] = author.full_name;
+            blogAuthors.push(authorObj);
         });
-
         setBlogAuthors(blogAuthors);
-    }, []);
+    }, [users]);
 
     const handleClick = (event) => {
         event.preventDefault();
@@ -149,7 +151,9 @@ const App = () => {
 
 ReactDOM.render(
     <AuthProvider>
-        <App />
+        <UserProvider>
+            <App />
+        </UserProvider>,
     </AuthProvider>,
     document.getElementById('app')
 );

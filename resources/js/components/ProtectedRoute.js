@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from './GlobalStates';
+import { useUserData } from './UserContext';
 import { useJwt } from "react-jwt";
 import swal from 'sweetalert2';
 
@@ -12,11 +13,13 @@ const ProtectedRoute = ({
 
 
     const { loading, authState } = useAuth();
+    const { usersLoading } = useUserData();
 
-    // don't load the route until the authstate has been refreshed
+    // don't load the route until the authstate has been refreshed.
     // we won't be able to load data into those components unless
-    // the bearer token has been refreshed from the localStorage
-    if (loading) {
+    // the bearer token has been refreshed from the localStorage.
+    // ditto with the users that need to be accessed
+    if (loading || usersLoading) {
         return "authenticating";
     }   
 

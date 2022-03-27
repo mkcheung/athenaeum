@@ -57,7 +57,7 @@ class UserController extends Controller
     //TO DO: Limit To Authors Only
     public function showAuthors(Request $request)
     {
-        $users = User::with('posts')->get();
+        $users = User::with('posts')->where('active', '=', 1)->get();
         return $users->toJson();
     }
 
@@ -98,7 +98,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $user = User::findOrFail($id);
+        $user = User::with('roles')->findOrFail($id);
         if(!empty($data['data']['role'])){
 
             if($data['data']['role'] === 'Admin'){
@@ -122,6 +122,7 @@ class UserController extends Controller
             $user->email = $data['data']['email'];
         }
         $user->save();
+        return $user->toJson();
     }
 
     /**
