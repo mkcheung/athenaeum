@@ -10,6 +10,17 @@ use App\Http\Controllers\CitationController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 
+Route::get('/ping', function () {
+    $mailchimp = new \MailchimpMarketing\ApiClient();
+
+    $mailchimp->setConfig([
+        'apiKey' => config('services.mailchimp.key'),
+        'server' => 'us14'
+    ]);
+
+    $response = $mailchimp->ping->get();
+    dd($response);
+});
 
 Route::get('/posts/getRecentPosts', [PostController::class, 'getRecentPosts']);
 Route::get('/tags/showTags', [TagController::class, 'showTags']);
