@@ -203,17 +203,6 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -241,7 +230,6 @@ class PostController extends Controller
         }
         $post->slug = Str::slug($data['data']['title'], '-');
         $post->published = $data['data']['published'];
-        $post->user_id = $data['data']['user_id'];
         $post->save();
 
         //Product updated, return success response
