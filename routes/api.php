@@ -24,7 +24,7 @@ Route::get('/ping', function () {
 
 Route::get('/posts/getRecentPosts', [PostController::class, 'getRecentPosts']);
 Route::get('/tags/showTags', [TagController::class, 'showTags']);
-Route::get('users/showUserBlogPosts', [UserController::class, 'showUserBlogPosts']);
+Route::get('/users/showUserBlogPosts', [UserController::class, 'showUserBlogPosts']);
 Route::get('users/showAuthors', [UserController::class, 'showAuthors']);
 Route::get('posts/show/{id}', [PostController::class, 'show']);
 

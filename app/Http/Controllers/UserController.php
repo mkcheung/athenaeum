@@ -62,17 +62,6 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -81,11 +70,15 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        // $roles = Role::pluck('name','name')->all();
-        // $userRole = $user->roles->pluck('name','name')->all();
-
-
-        // return view('users.edit',compact('user','roles','userRole'));
+    
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, user not found.'
+            ], 400);
+        }
+    
+        return $user->toJson();
     }
 
     /**
@@ -115,12 +108,12 @@ class UserController extends Controller
             } else {
                 $user->active = false;
             }
-        } else {
-            $user->name = $data['data']['name'];
-            $user->first_name = $data['data']['first_name'];
-            $user->last_name = $data['data']['last_name'];
-            $user->email = $data['data']['email'];
         }
+        $user->name = $data['data']['name'];
+        $user->first_name = $data['data']['first_name'];
+        $user->last_name = $data['data']['last_name'];
+        $user->email = $data['data']['email'];
+    
         $user->save();
         return $user->toJson();
     }

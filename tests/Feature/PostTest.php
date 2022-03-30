@@ -32,8 +32,6 @@ class PostTest extends TestCase
 
         $response->assertStatus(200);
         \Log::info(1, [$response->getContent()]);
-
-        $decodedJson = $response->decodeResponseJson();
     }
 
     public function testGetUserPosts()
