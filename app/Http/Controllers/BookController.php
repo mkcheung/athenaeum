@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Citation;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class BookController extends Controller
 {
@@ -92,7 +93,6 @@ class BookController extends Controller
     public function searchByTitle(Request $request)
     {
         $bookTitle = $request->query('bookTitle');
-
         $bookCitations =  !empty($bookTitle) ? Book::where('title', 'like', '%' . $bookTitle . '%')->with('citations')->get()->toArray() : [];
 
         return $bookCitations;
@@ -113,11 +113,12 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Book  $book
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
+        $book = Book::findOrFail($id);
         $book->chapters->each(function($chapter){
             $chapter->delete();
         });
@@ -125,6 +126,10 @@ class BookController extends Controller
             $citation->delete();
         });
         $book->delete();
-        return;
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Book deleted successfully'
+        ], Response::HTTP_OK);
     }
 }
