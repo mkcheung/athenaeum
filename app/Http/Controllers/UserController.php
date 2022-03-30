@@ -48,6 +48,7 @@ class UserController extends Controller
                         $query3->whereIn('id', $tagsRequested);
                     });
                 });
+                $query->with('tags');
             }])
             ->get();
 

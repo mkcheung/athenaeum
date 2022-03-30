@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Models\Tag;
+use App\Models\PostTag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -111,6 +113,53 @@ class UserTest extends TestCase
         $this->assertIsString($decodedJson[0]['posts'][0]['slug']);
         $this->assertIsString($decodedJson[0]['posts'][0]['content']);
         $this->assertIsString($decodedJson[0]['posts'][0]['excerpt']);
+    }
+
+    // TO DO: set up a post/user/tag combination to be removed later for conistent unit testing with
+    // test factories
+    public function testGetUserPostsWithTags()
+    {
+
+        $tagToTest = Tag::factory([
+            'title' => 'unitTestTag',
+        ])->create();
+        $postTagUsedInTest = PostTag::factory([
+            'post_id' => 1,
+            'tag_id' => $tagToTest->id
+        ])->create();
+
+        $response = $this->json('GET', "api/users/showUserBlogPosts?userId=3&tags[]={\"id\":$tagToTest->id,\"value\":\"$tagToTest->title\"}");
+
+        $response->assertStatus(200);
+        \Log::info(1, [$response->getContent()]);
+
+        $decodedJson = $response->decodeResponseJson();
+        //cascade delete should take care of it in Post_tag table
+        $tagToTest_delete=Tag::find($tagToTest->id);
+        $tagToTest_delete->delete();
+
+        // there should always be at least one post from the superadmin
+        $this->assertIsInt($decodedJson[0]['id']);
+        $this->assertIsString($decodedJson[0]['name']);
+        $this->assertIsString($decodedJson[0]['first_name']);
+        $this->assertStringContainsString('Wise', $decodedJson[0]['first_name']);
+        $this->assertIsString($decodedJson[0]['last_name']);
+        $this->assertStringContainsString('Listener', $decodedJson[0]['last_name']);
+        $this->assertIsString($decodedJson[0]['full_name']);
+        $this->assertStringContainsString('Wise Listener', $decodedJson[0]['full_name']);
+        $this->assertMatchesRegularExpression('/^.+\@\S+\.\S+$/', $decodedJson[0]['email']);
+        $this->assertIsArray(
+            $decodedJson[0]['posts']
+        );
+
+        $this->assertIsInt($decodedJson[0]['posts'][0]['id']);
+        $this->assertIsInt($decodedJson[0]['posts'][0]['user_id']);
+        $this->assertIsInt($decodedJson[0]['posts'][0]['published']);
+        $this->assertIsString($decodedJson[0]['posts'][0]['title']);
+        $this->assertIsString($decodedJson[0]['posts'][0]['slug']);
+        $this->assertIsString($decodedJson[0]['posts'][0]['content']);
+        $this->assertIsString($decodedJson[0]['posts'][0]['excerpt']);
+        $this->assertStringContainsString('unitTestTag',$decodedJson[0]['posts'][0]['tags'][0]['title']);
     }
 
     public function testUpdateAuthor()
