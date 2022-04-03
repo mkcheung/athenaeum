@@ -20,13 +20,15 @@ const UserProvider = (props) => {
         try {
             if(!loading){
                 const userObj = await axios.get('/api/users',
-                    {   
-                        headers: {
-                            'Authorization': 'Bearer '+authState.accessToken,
-                            'Accept': 'application/json'
-                        }
+                {   
+                    headers: {
+                        'Authorization': 'Bearer '+authState.accessToken,
+                        'Accept': 'application/json'
+                    },
+                    params: {
+                        isSuperAdmin: authState.isSuperAdmin
                     }
-                );
+                });
                 userData = userObj.data;
                 setUsers(userData);
                 setUsersLoading(false);
@@ -36,9 +38,12 @@ const UserProvider = (props) => {
         }
 	}, [loading]);
 
-
+    const clearUsers = async () => {
+        setUsers([]);
+    };
 
 	const userContextValue = {
+        clearUsers,
 		usersLoading,
 		users,
 		setUsers

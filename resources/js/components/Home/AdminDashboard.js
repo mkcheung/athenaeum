@@ -88,8 +88,10 @@ const statusOptions = extractValues(statusMappings);
 
     const userTableColumnDefinitions = async () => {
         const tableDefinitions = [];
+        const authAdminHeader = authState.isSuperAdmin ? 'Authors And Administrators' : 'Authors';
+
         tableDefinitions.push({
-            headerName: 'Authors And Administrators',
+            headerName: authAdminHeader,
             field: 'full_name',
             pinned: 'left',
             editable: false,
@@ -192,14 +194,26 @@ const statusOptions = extractValues(statusMappings);
         return tableDefinitions;
     }
 
-    const userFields = [
-        'name',
-        'first_name',
-        'last_name',
-        'email',
-        'roles',
-        'active',
-    ];
+
+    let userFields = [];
+    if( authState.isSuperAdmin ){
+        userFields = [
+            'name',
+            'first_name',
+            'last_name',
+            'email',
+            'roles',
+            'active',
+        ];
+    } else {
+        userFields = [
+            'name',
+            'first_name',
+            'last_name',
+            'email',
+            'active',
+        ];
+    }
 
     useEffect(() => {
         if( userGridReady.userGrid ){

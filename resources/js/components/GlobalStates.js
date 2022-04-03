@@ -101,6 +101,7 @@ const AuthProvider = (props) => {
             });
             swal.fire('Done!', 'You have logged out!', 'success');
             localStorage.clear();
+            setLoading(true);
             setAuthState({
                 isLoggedIn:false,
                 user:{},

@@ -123,7 +123,6 @@ class JWTController extends Controller
     protected function respondWithToken($token)
     {
         $user = auth()->user();
-
         $userPermissions = [];
         $permissionsOfUser = $user->getAllPermissions()->toArray();
         foreach($permissionsOfUser as $permissionOfUser){
@@ -137,7 +136,8 @@ class JWTController extends Controller
             'full_name' => $user->full_name,
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
-            'email' => $user->email
+            'email' => $user->email,
+            'role' => !$userIsSuperAdmin && $user->hasExactRoles('admin') ? 'admin' : 'author'
         ];
 
         return response()->json([

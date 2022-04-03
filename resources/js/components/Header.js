@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useAuth } from './GlobalStates';
+import { useUserData } from './UserContext';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import {
     Link,
@@ -120,9 +121,11 @@ const Header = (props) => {
     const classes = useStyles();
     const navigate = useNavigate();
     const { logOut, authState, setAuthState } = useAuth();
+    const { clearUsers } = useUserData();
 
     const handleLogOut = async () => {
         logOut();
+        clearUsers();
         handleClose();
         navigate(`/`);
     };
@@ -171,7 +174,7 @@ const Header = (props) => {
 
 
     let dashboardLink = '';
-    if(authState.isSuperAdmin){
+    if(authState.isSuperAdmin || authState.user.role === 'admin'){
         dashboardLink = 
             <div className="about">
                 <h5>

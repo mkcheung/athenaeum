@@ -19,9 +19,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::with('roles')->get();
+        $data = $request->all();
+        if($data['isSuperAdmin'] == 'true'){
+            $users = User::with('roles')->get();
+        } else {
+            $users = User::with('roles')->role('author')->get();
+        }
         return $users->toJson();
     }
 
@@ -110,10 +115,11 @@ class UserController extends Controller
                 $user->active = false;
             }
         }
-        $user->name = $data['data']['name'];
-        $user->first_name = $data['data']['first_name'];
-        $user->last_name = $data['data']['last_name'];
-        $user->email = $data['data']['email'];
+
+        $user->name = !empty($data['data']['name']) ? $data['data']['name'] : $user->name;
+        $user->first_name = !empty($data['data']['first_name']) ? $data['data']['first_name'] : $user->first_name;
+        $user->last_name = !empty($data['data']['last_name']) ? $data['data']['last_name'] : $user->last_name;
+        $user->email = !empty($data['data']['email']) ? $data['data']['email'] : $user->email;
     
         $user->save();
         return $user->toJson();
