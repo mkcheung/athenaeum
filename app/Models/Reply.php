@@ -4,35 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
- 
-class Comment extends Model
+
+class Reply extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'approved',
-        'comment',
-        'post_id',
+        'reply',
+        'comment_id',
         'user_id',
     ]; 
-
-    protected $appends = [
-        "date_formatted",
-    ];
+    protected $appends = ['date_formatted'];
  
-    public function post()
+    public function comment()
     {
-        return $this->belongsTo(Post::class, 'post_id');
+        return $this->belongsTo(Comment::class, 'comment_id');
     }
  
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
-    }
- 
-    public function replies()
-    {
-        return $this->hasMany(Reply::class, 'comment_id');
     }
  
     public function getDateFormattedAttribute()

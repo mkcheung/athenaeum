@@ -7,13 +7,14 @@ import {
     TextField,
     Grid,
 } from '@material-ui/core';
+import { formatDate } from '../Helper/Helper';
 import { useAuth } from '../GlobalStates';
 import ReplyBox from '../Comments/ReplyBox';
 
 const ReplyList = (props) => {
-    const [authState,setAuthState] = useContext(useAuth);
-    const [replyBoxAppear, handleReplyBoxAppear] = useState(false);
-    const [repliesToComment, setRepliesToComment] = useState('');
+    const { authState, setAuthState } = useAuth();
+    const [ replyBoxAppear, handleReplyBoxAppear ] = useState(false);
+    const [ repliesToComment, setRepliesToComment ] = useState([]);
 
     const user = authState.user;
 
@@ -69,7 +70,7 @@ const ReplyList = (props) => {
                         </strong>
                     </u>
                     <span> </span>
-                    {comment.created_at}
+                    {formatDate(comment.created_at)}
                 </div>
                 <div>
                     {comment.comment}

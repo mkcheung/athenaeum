@@ -12,12 +12,12 @@ const CommentList = (props) => {
     let {
         comments,
     } = props;
-
+console.log('commentlist', comments)
     return (
         <Container maxWidth="lg">
             <Grid container spacing={3}>
                 {comments.map(comment => (
-                    <ReplyList key={`comment_replies-${comment.id}`}  comment={comment} />
+                    <ReplyList key={`comment_replies-${comment.id}`} comment={comment} />
                 ))}
             </Grid>
         </Container>

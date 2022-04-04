@@ -4,9 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JWTController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\CitationController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 
@@ -40,6 +42,8 @@ Route::middleware(['api'])->group(function () {
     Route::resource('chapters', ChapterController::class);
     Route::post('citations/assignChapters', [CitationController::class, 'assignChapters']);
     Route::resource('citations', CitationController::class);
+    Route::resource('comments', CommentController::class);
+    Route::resource('replies', ReplyController::class);
     Route::get('/posts/', [PostController::class, 'index']);
     Route::get('/posts/getUserPosts', [PostController::class, 'getUserPosts']);
     Route::get('/posts/getPostAndDecendants', [PostController::class, 'getPostAndDecendants']);
