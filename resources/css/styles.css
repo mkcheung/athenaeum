@@ -134,3 +134,9 @@
 	overflow: scroll;
 	width: 100%;
 }
+
+.chiefOpsControls {
+	text-align: center;
+	padding-bottom: 25px;
+	font-size: 18px;
+}

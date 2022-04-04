@@ -307,28 +307,32 @@ const Dashboard = (props) => {
 
 		postCategoryTagControls = 
 	        <div className="tagContainer">
-	            <Link className='btn btn-primary btn-sm mb-3' to='/post/create'>
-	                Create new post
-	            </Link>
-	            <br/>
-	            <Link className='btn btn-primary btn-sm mb-3' to='/category/create'>
-	                Create new category
-	            </Link>
-	            <br/>
-	            <Link className='btn btn-primary btn-sm mb-3' to='/tag/create'>
-	                Create new tag
-	            </Link>
+	        	<div className='chiefOpsControls'>
+		            <Link className='link-secondary' to='/post/create'>
+		                Create new post
+		            </Link>
+	        	</div>
+	        	<div className='chiefOpsControls'>
+		            <Link className='link-secondary' to='/category/create'>
+		                Create new category
+		            </Link>
+	        	</div>
+	        	<div className='chiefOpsControls'>
+		            <Link className='link-secondary' to='/tag/create'>
+		                Create new tag
+		            </Link>
+	        	</div>
 	        </div> ;
 	} else {
 		let createPostControl = 
-	            <Link className='btn btn-primary btn-sm mb-3' to='/post/create'>
+	            <Link className='link-secondary' to='/post/create'>
 	                Create new post
 	            </Link>;
-	    let createCategoryControl = (authState.permissions && authState.permissions.includes('category-create')) ? <Link className='btn btn-primary btn-sm mb-3' to='/category/create'>
+	    let createCategoryControl = (authState.permissions && authState.permissions.includes('category-create')) ? <Link className='link-secondary' to='/category/create'>
 	                Create new category
 	            </Link> : '';
 	    let createTagControl = (authState.permissions && authState.permissions.includes('tag-create')) ? 
-	            <Link className='btn btn-primary btn-sm mb-3' to='/tag/create'>
+	            <Link className='link-secondary' to='/tag/create'>
 	                Create new tag
 	            </Link> : '';
 
