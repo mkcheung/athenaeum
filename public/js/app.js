@@ -86193,7 +86193,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var CommentList = function CommentList(props) {
   var comments = props.comments;
-  console.log('commentlist', comments);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["default"], {
     maxWidth: "lg",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -86255,10 +86254,9 @@ var ReplyBox = function ReplyBox(props) {
       reply = _useState2[0],
       setReply = _useState2[1];
 
-  var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_GlobalStates__WEBPACK_IMPORTED_MODULE_2__.useAuth),
-      _useContext2 = _slicedToArray(_useContext, 2),
-      authState = _useContext2[0],
-      setAuthState = _useContext2[1];
+  var _useAuth = (0,_GlobalStates__WEBPACK_IMPORTED_MODULE_2__.useAuth)(),
+      authState = _useAuth.authState,
+      setAuthState = _useAuth.setAuthState;
 
   var handleReplyChange = function handleReplyChange(e) {
     var replyInput = e.target.value;
@@ -86743,7 +86741,7 @@ var AuthProvider = function AuthProvider(props) {
             localStorage.clear();
             sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Done!', 'Your session has expired. Please log back in.', 'success');
             _context.next = 10;
-            return setLoading(false);
+            return setLoading(true);
 
           case 10:
             return _context.abrupt("return", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Navigate, {

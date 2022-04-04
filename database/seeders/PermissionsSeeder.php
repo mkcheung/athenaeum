@@ -48,6 +48,9 @@ class PermissionsSeeder extends Seeder
            'user-create',
            'user-edit',
            'user-delete',
+           'reply-create',
+           'reply-edit',
+           'reply-delete',
         ];
         $permissions = collect($permissionNames)->map(function($permission)
         {
@@ -68,6 +71,11 @@ class PermissionsSeeder extends Seeder
            'comment-list',
            'comment-create',
            'comment-edit',
+           'reply-create',
+           'reply-edit',
+           'reply-delete',
+           'user-list',
+           'user-edit',
         ]);
 
         User::find(1)->assignRole('superadmin');

@@ -12,7 +12,7 @@ const CommentList = (props) => {
     let {
         comments,
     } = props;
-console.log('commentlist', comments)
+
     return (
         <Container maxWidth="lg">
             <Grid container spacing={3}>

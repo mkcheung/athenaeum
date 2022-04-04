@@ -9,7 +9,7 @@ import { useAuth } from '../GlobalStates';
 
 const ReplyBox = (props) => {
     const [reply, setReply] = useState("");
-    const [authState,setAuthState] = useContext(useAuth);
+    const { authState, setAuthState } = useAuth();
 
     const handleReplyChange = (e) => {
         let replyInput = e.target.value;

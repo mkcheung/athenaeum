@@ -46,7 +46,7 @@ const AuthProvider = (props) => {
 	            });
             	localStorage.clear();
             	swal.fire('Done!', 'Your session has expired. Please log back in.', 'success');
-				await setLoading(false);
+				await setLoading(true);
             	return <Navigate to={'/login'} replace />;
 			} else {
 				await setAuthState((prevState)=>({
