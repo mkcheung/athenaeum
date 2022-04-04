@@ -28,7 +28,7 @@ const ReplyBox = (props) => {
                 title='reply' 
                 onChange={handleReplyChange} 
                 value={reply}
-                style = {{ width:'1125px', marginLeft:'60px'}}
+                style = {{ width:'100%', marginLeft:'60px'}}
                 rowsMin={5}
             />
             <div style = {{marginTop:'25px'}}>

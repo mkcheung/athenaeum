@@ -86191,18 +86191,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var CommentList = function CommentList(props) {
   var comments = props.comments;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["default"], {
     maxWidth: "lg",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
       container: true,
       spacing: 3,
-      children: comments.map(function (comment) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Comments_ReplyList__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          comment: comment
-        }, "comment_replies-".concat(comment.id));
-      })
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        item: true,
+        xs: 1
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        item: true,
+        xs: 11,
+        children: comments.map(function (comment) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Comments_ReplyList__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            comment: comment
+          }, "comment_replies-".concat(comment.id));
+        })
+      })]
     })
   });
 };
@@ -86273,7 +86281,7 @@ var ReplyBox = function ReplyBox(props) {
       onChange: handleReplyChange,
       value: reply,
       style: {
-        width: '1125px',
+        width: '100%',
         marginLeft: '60px'
       },
       rowsMin: 5
@@ -86431,7 +86439,7 @@ var ReplyList = function ReplyList(props) {
         return handleReplyBoxAppear(true);
       },
       style: {
-        marginLeft: '50px',
+        "float": 'right',
         marginBottom: '25px'
       }
     });
@@ -86453,19 +86461,15 @@ var ReplyList = function ReplyList(props) {
           children: " "
         }), (0,_Helper_Helper__WEBPACK_IMPORTED_MODULE_2__.formatDate)(comment.created_at)]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        style: {
+          marginBottom: '25px'
+        },
         children: comment.comment
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        container: true,
-        spacing: 3,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
-          item: true,
-          xs: 12,
-          children: replyBox
-        })
       }), replies && replies.map(function (reply) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
           item: true,
           style: {
+            marginBottom: '15px',
             marginLeft: '60px'
           },
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -86475,11 +86479,19 @@ var ReplyList = function ReplyList(props) {
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
               children: " "
-            }), reply.created_at]
+            }), (0,_Helper_Helper__WEBPACK_IMPORTED_MODULE_2__.formatDate)(reply.created_at)]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             children: reply.reply
           })]
         }, "reply-".concat(reply.id));
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        container: true,
+        spacing: 3,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          item: true,
+          xs: 12,
+          children: replyBox
+        })
       })]
     })
   }, "comment-".concat(comment.id));
@@ -86741,7 +86753,7 @@ var AuthProvider = function AuthProvider(props) {
             localStorage.clear();
             sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Done!', 'Your session has expired. Please log back in.', 'success');
             _context.next = 10;
-            return setLoading(true);
+            return setLoading(false);
 
           case 10:
             return _context.abrupt("return", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Navigate, {

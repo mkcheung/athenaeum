@@ -56,7 +56,7 @@ const ReplyList = (props) => {
                   (Object.keys(user).length > 0) && <Chip
                     label='Reply'
                     onClick={() => handleReplyBoxAppear(true)}
-                    style={{marginLeft:'50px', marginBottom:'25px'}}
+                    style={{float:'right', marginBottom:'25px'}}
                   />
     }
 
@@ -72,16 +72,11 @@ const ReplyList = (props) => {
                     <span> </span>
                     {formatDate(comment.created_at)}
                 </div>
-                <div>
+                <div style={{marginBottom:'25px'}}>
                     {comment.comment}
                 </div>
-                <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        {replyBox}
-                    </Grid>
-                </Grid>
                 {replies && replies.map(reply => (
-                    <Grid item key={`reply-${reply.id}`} style={{marginLeft:'60px'}}>
+                    <Grid item key={`reply-${reply.id}`} style={{marginBottom:'15px', marginLeft:'60px'}}>
                         <div>
                             <u>
                                 <strong>
@@ -89,13 +84,18 @@ const ReplyList = (props) => {
                                 </strong>
                             </u>
                             <span> </span>
-                            {reply.created_at}
+                            {formatDate(reply.created_at)}
                         </div>
                         <div>
                             {reply.reply}
                         </div>
                     </Grid>
                 ))}
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        {replyBox}
+                    </Grid>
+                </Grid>
             </div>
         </Grid>
     );
