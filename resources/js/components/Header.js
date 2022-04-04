@@ -174,6 +174,7 @@ const Header = (props) => {
 
 
     let dashboardLink = '';
+    let postsLink = '';
     if(authState.isSuperAdmin || authState.user.role === 'admin'){
         dashboardLink = 
             <div className="about">
@@ -186,6 +187,17 @@ const Header = (props) => {
                     </Link>
                 </h5>
             </div>;
+        postsLink =
+            <div className="about">
+                <h5>
+                    <Link 
+                        to='/dashboard'
+                        className="headerLink"
+                    >
+                    Posts
+                    </Link>
+                </h5>
+            </div>
     } else {
         dashboardLink = 
             <div className="about">
@@ -205,6 +217,7 @@ const Header = (props) => {
         loggedInOutNavOps =
             <div className="logoutDisplay">
                 {dashboardLink}
+                {postsLink}
                 <div className="about">
                     <h5>
                         <Link 
