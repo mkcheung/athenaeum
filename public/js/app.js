@@ -83502,6 +83502,13 @@ var App = function App() {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_26__.Route, {
         exact: true,
+        path: "/post/create/chapter/:parentId/",
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_ProtectedRoute__WEBPACK_IMPORTED_MODULE_19__["default"], {
+          requiredPerm: "post-create",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_Posts_NewPost__WEBPACK_IMPORTED_MODULE_14__["default"], {})
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_26__.Route, {
+        exact: true,
         path: "/post/edit/:id",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_ProtectedRoute__WEBPACK_IMPORTED_MODULE_19__["default"], {
           requiredPerm: "post-edit",
@@ -86753,7 +86760,7 @@ var AuthProvider = function AuthProvider(props) {
             localStorage.clear();
             sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Done!', 'Your session has expired. Please log back in.', 'success');
             _context.next = 10;
-            return setLoading(false);
+            return setLoading(true);
 
           case 10:
             return _context.abrupt("return", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Navigate, {
@@ -88103,6 +88110,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var Dashboard = function Dashboard(props) {
+  var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_11__.useLocation)();
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_11__.useNavigate)();
   var params = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_11__.useParams)();
 
@@ -88136,7 +88144,7 @@ var Dashboard = function Dashboard(props) {
     } else {
       loadData(authState.user.id);
     }
-  }, [dataLoading]);
+  }, [dataLoading, location]);
 
   var loadData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -88438,9 +88446,10 @@ var Dashboard = function Dashboard(props) {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
+              setDataLoading(true);
               navigate("/dashboard/".concat(postId));
 
-            case 1:
+            case 2:
             case "end":
               return _context7.stop();
           }
@@ -89784,7 +89793,7 @@ var NewPost = function NewPost() {
             case 7:
               results = _context8.sent;
               sweetalert2__WEBPACK_IMPORTED_MODULE_6___default().fire("Done!", "Post Updated.", "success");
-              _context8.next = 16;
+              _context8.next = 17;
               break;
 
             case 11:
@@ -89799,23 +89808,24 @@ var NewPost = function NewPost() {
             case 13:
               _results = _context8.sent;
               sweetalert2__WEBPACK_IMPORTED_MODULE_6___default().fire("Done!", "Post Created.", "success");
-              navigate("/post/edit/".concat(_results.data.id));
+              setPostId(_results.data.data.id);
+              navigate("/post/edit/".concat(_results.data.data.id));
 
-            case 16:
-              _context8.next = 21;
+            case 17:
+              _context8.next = 22;
               break;
 
-            case 18:
-              _context8.prev = 18;
+            case 19:
+              _context8.prev = 19;
               _context8.t0 = _context8["catch"](3);
               sweetalert2__WEBPACK_IMPORTED_MODULE_6___default().fire('Done!', String(_context8.t0), 'error');
 
-            case 21:
+            case 22:
             case "end":
               return _context8.stop();
           }
         }
-      }, _callee8, null, [[3, 18]]);
+      }, _callee8, null, [[3, 19]]);
     }));
 
     return function handleCreateUpdatePost(_x4) {

@@ -28,7 +28,7 @@ import {
 	IOSSwitch 
 } from './../CustomComponents/CustomComponents';
 import swal from 'sweetalert2';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { formatDate } from '../Helper/Helper';
 import { useAuth } from '../GlobalStates';
 import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
@@ -36,6 +36,7 @@ import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 
 const Dashboard = (props) => {
 
+  	let location = useLocation();
     const navigate = useNavigate();
     const params = useParams();
     const [ dataLoading, setDataLoading ] = useState(true);
@@ -51,7 +52,7 @@ const Dashboard = (props) => {
         } else {
             loadData(authState.user.id);
         }
-    }, [dataLoading]);
+    }, [dataLoading, location]);
 
 
     const loadData = async (userId=null, postId=null) => {
@@ -61,7 +62,6 @@ const Dashboard = (props) => {
 
         try {
 	    	if(postId !== null){
-
 		        const postObj = await axios.get('/api/posts/getPostAndDecendants', 
 		        {
 		        	headers: {
@@ -204,6 +204,7 @@ const Dashboard = (props) => {
 
     const loadPostDescendants = async (postId) => {
     	
+        setDataLoading(true);
         navigate(`/dashboard/${postId}`);
 	}
 

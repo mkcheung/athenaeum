@@ -340,7 +340,8 @@ const NewPost = () => {
                     }
                 );
                 swal.fire("Done!", "Post Created.", "success");
-                navigate(`/post/edit/${results.data.id}`);
+                setPostId(results.data.data.id);
+                navigate(`/post/edit/${results.data.data.id}`);
             }
         } catch (error) {
             swal.fire('Done!', String(error), 'error');

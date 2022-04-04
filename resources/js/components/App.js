@@ -114,6 +114,13 @@ const App = () => {
                             </ProtectedRoute>
                         }
                     />
+                    <Route exact path='/post/create/chapter/:parentId/' 
+                        element={
+                            <ProtectedRoute requiredPerm="post-create">
+                                <NewPost/>
+                            </ProtectedRoute>
+                        }
+                    />
                     <Route exact path='/post/edit/:id' 
                         element={
                             <ProtectedRoute requiredPerm="post-edit">
