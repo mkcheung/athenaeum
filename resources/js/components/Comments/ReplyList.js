@@ -97,6 +97,7 @@ const ReplyList = (props) => {
                     </Grid>
                 </Grid>
             </div>
+            <hr/>
         </Grid>
     );
 }

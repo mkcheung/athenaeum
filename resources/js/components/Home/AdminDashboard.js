@@ -374,8 +374,6 @@ const statusOptions = extractValues(statusMappings);
     }
 
 
-    const showDescendantPosts = false;
-
     let postsOnDashboard = <div></div>;
 
     if(selectedUserPosts.length > 0){
@@ -411,13 +409,6 @@ const statusOptions = extractValues(statusMappings);
                             name="published"
                             inputProps={{ 'aria-label': 'secondary checkbox' }}
                         />
-                        {
-                            (showDescendantPosts === false && selectedUserPost.descendant_post_id !== null )&& 
-
-                                <ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>loadPostDescendants(post.id)}>
-                                    <ListIcon style={{color:'white'}} />
-                                </ColorEditButton>
-                        }
                         <Tooltip title="Delete Post(s)" placement="bottom">
                             <ColorDeleteButton style={{height:'47px', top:'-1px'}} variant="contained" color="secondary" onClick={()=>deleteBook(post.id)}>
                                 <DeleteIcon style={{color:'white'}} />
