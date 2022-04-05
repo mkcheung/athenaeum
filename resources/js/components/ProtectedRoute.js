@@ -12,14 +12,14 @@ const ProtectedRoute = ({
   }) => {
 
 
-    const { loading, authState } = useAuth();
+    const { loading, authState, signalTimeOut } = useAuth();
     const { usersLoading } = useUserData();
 
     // don't load the route until the authstate has been refreshed.
     // we won't be able to load data into those components unless
     // the bearer token has been refreshed from the localStorage.
     // ditto with the users that need to be accessed
-    if (loading || usersLoading) {
+    if (!(signalTimeOut) && (loading || usersLoading)) {
         return "authenticating";
     }   
 

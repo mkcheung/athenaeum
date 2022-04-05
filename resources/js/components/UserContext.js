@@ -18,7 +18,7 @@ const UserProvider = (props) => {
 	useEffect(async () => {
         let userData = [];
         try {
-            if(!loading){
+            if(!loading && authState.accessToken){
                 const userObj = await axios.get('/api/users',
                 {   
                     headers: {
@@ -30,9 +30,9 @@ const UserProvider = (props) => {
                     }
                 });
                 userData = userObj.data;
-                setUsers(userData);
-                setUsersLoading(false);
             }
+            setUsers(userData);
+            setUsersLoading(false);
         } catch (error) {
             swal.fire("Error", String(error), "error");
         }

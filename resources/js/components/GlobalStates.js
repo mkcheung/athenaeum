@@ -16,6 +16,7 @@ const parseJwt = (token) => {
 const AuthProvider = (props) => {
 
 	const [ loading, setLoading ] = useState(true);
+	const [ signalTimeOut, setSignalTimeOut ] = useState(false);
 
 	const [authState, setAuthState] = useState({
 		isLoggedIn:false,
@@ -37,6 +38,7 @@ const AuthProvider = (props) => {
         	const decodedJwt = parseJwt(appStateData['accessToken']);
 
 			if (decodedJwt.exp * 1000 < Date.now()) {
+            	localStorage.clear();
 	            await setAuthState({
 	                isLoggedIn:false,
 	                user:{},
@@ -44,10 +46,9 @@ const AuthProvider = (props) => {
 	                permissions:[],
 	                isSuperAdmin:false
 	            });
-            	localStorage.clear();
+				setSignalTimeOut(true)
             	swal.fire('Done!', 'Your session has expired. Please log back in.', 'success');
-				await setLoading(true);
-            	return <Navigate to={'/login'} replace />;
+        		return <Navigate to={'/login'} replace />;
 			} else {
 				await setAuthState((prevState)=>({
 					...appStateData
@@ -120,7 +121,8 @@ const AuthProvider = (props) => {
 		loginUser,
 		logOut,
 		authState,
-		setAuthState
+		setAuthState,
+		signalTimeOut
 	};
 
 	return <AuthContext.Provider value={authContextValue} {...props} />
