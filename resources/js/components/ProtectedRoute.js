@@ -19,6 +19,9 @@ const ProtectedRoute = ({
     // we won't be able to load data into those components unless
     // the bearer token has been refreshed from the localStorage.
     // ditto with the users that need to be accessed
+    // -- if it times out, we don't want to load the users.
+    // let the route just fall through by setting signalTimeOut
+    // to true
     if (!(signalTimeOut) && (loading || usersLoading)) {
         return "authenticating";
     }   
