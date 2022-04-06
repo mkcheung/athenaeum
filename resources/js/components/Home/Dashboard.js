@@ -1,13 +1,9 @@
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
-import Files from 'react-files'
 import { 
 	Button,
     Chip,
-	Container,
 	Grid,
-	Paper,
-	Switch,
 	Tooltip,
     TextField,
 } from '@material-ui/core';
@@ -17,9 +13,6 @@ import {
 	List as ListIcon,
 	PlaylistAdd as PlaylistAddIcon
 } from '@material-ui/icons';
-import { 
-	makeStyles
-} from '@material-ui/core/styles';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 import { 

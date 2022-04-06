@@ -4,14 +4,11 @@ import { useUserData } from './UserContext';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import {
     Link,
-    withRouter,
     useNavigate
 } from 'react-router-dom';
 import { 
     AppBar,
-    Button,
     IconButton,
-    InputBase,
     Link as MUILINK,
     Menu,
     MenuItem,
@@ -21,16 +18,10 @@ import {
     Fade
 } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import { 
     Search as SearchIcon,
     PersonPin as PersonPinIcon
 } from '@material-ui/icons';
-import swal from 'sweetalert2';
 
 
 const useStyles = makeStyles((theme) => ({

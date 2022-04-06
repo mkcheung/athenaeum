@@ -2,16 +2,12 @@ import React,
     { 
         useEffect,
         useState,
-        useContext
     } from 'react';
 import ReactDOM from 'react-dom';
 import { 
     BrowserRouter,
-    Link,
     Route,
     Routes,
-    HashRouter,
-    Redirect,
     __RouterContext,
 } from "react-router-dom";
 import { useAuth, AuthProvider } from './GlobalStates';
@@ -24,6 +20,7 @@ import RecentBlog from './Home/RecentBlog';
 import About from './About';
 import Login from './Auth/Login';
 import Register from './Auth/Register';
+import CitationsAndChapters from './Books/CitationsAndChapters';
 import NotFound from './NotFound';
 import NewPost from './Posts/NewPost';
 import ShowPost from './Posts/ShowPost';
@@ -31,10 +28,7 @@ import UserBookList from './Users/UserBookList';
 import UserBlog from './Users/UserBlog';
 import UserEdit from './Users/UserEdit';
 import ProtectedRoute from './ProtectedRoute';
-import NewTag from './Tags/NewTag';
 import TagsList from './Tags/TagsList';
-import CategoriesList from './Categories/CategoriesList';
-import NewCategory from './Categories/NewCategory';
 
 const App = () => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -146,6 +140,13 @@ const App = () => {
                         element={
                             <ProtectedRoute requiredPerm="book-list">
                                 <UserBookList/>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route exact path='/book/citationsAndChapters/:id' 
+                        element={
+                            <ProtectedRoute requiredPerm="book-list">
+                                <CitationsAndChapters/>
                             </ProtectedRoute>
                         }
                     />

@@ -1,10 +1,10 @@
 import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react';
-import Header from './../Header';
-import Footer from './../Footer';
+import { useNavigate } from 'react-router-dom';
 import BookUploadModal from './../Books/BookUploadModal';
 import AddChapterModal from './../Books/AddChapterModal';
 import ChapterSelectionModal from './../Books/ChapterSelectionModal';
+import CitationsAndChapters from './../Books/CitationsAndChapters';
 import CitationModal from './../Books/CitationModal';
 import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 
@@ -12,17 +12,12 @@ import {unstable_batchedUpdates} from 'react-dom';
 import { 
 	Button,
 	CircularProgress,
-	Collapse,
 	Container,
 	Divider,
 	Grid,
 	IconButton,
 	List,
 	ListItem,
-	ListItemIcon,
-	ListItemText,
-	Paper,
-	TextareaAutosize,
 	Tooltip,
 } from '@material-ui/core';
 import { 
@@ -31,8 +26,6 @@ import {
 	Bookmarks as BookmarksIcon,
 	CloudUpload as CloudUploadIcon,
 	Delete as DeleteIcon,
-	ExpandLess,
-	ExpandMore,
 } from '@material-ui/icons';
 import { useAuth } from '../GlobalStates';
 
@@ -43,16 +36,12 @@ const UserBookList = () => {
     const [ deleteInProgress, setDeleteInProgress ] = useState(false);
     const [ books, setBooks ] = useState([]);
     const [ chapters, setChapters ] = useState([]);
-    const [ user, setUser ] = useState({});
     const [ selectedBookCitations, setSelectedBookCitations ] = useState([]);
     const [ selectedBookId, setSelectedBookId ] = useState(null);
     const [ selectedBook, setSelectedBook ] = useState(null);
     const [ selectedChapterId, setSelectedChapterId ] = useState(null);
     const [ selectedChapter, setSelectedChapter ] = useState(null);
     const [ modalOpen, setModalOpen ] = useState(false);
-    const [ author_first_name, setAuthorFirstName ] = useState('');
-    const [ author_middle, setAuthorMiddleName ] = useState('');
-    const [ author_last_name, setAuthorLastName ] = useState('');
     const [ bookIdForChInput, setBookIdForChInput ] = useState(null);
     const [ bookTitleForChInput, setBookTitleForChInput ] = useState('');
     const [ chapterModalOpen, setChapterModalOpen ] = useState(false);
@@ -61,6 +50,8 @@ const UserBookList = () => {
     const [ errors, setErrors ] = useState('');
 
     const { authState, setAuthState } = useAuth();
+    const navigate = useNavigate();
+	
 	useEffect(()=> {
 	    loadData();
 	},[])
@@ -103,26 +94,26 @@ const UserBookList = () => {
      	});
 	};
 
-	const assignChapters = async (bookId) => {
+	// const assignChapters = async (bookId) => {
 
-        try {
+    //     try {
 
-			axios.post('/api/citations/assignChapters', { 
-	        	bookId 
-	        },
-	        {   
-	        	headers: {
-	                'Authorization': 'Bearer ' + authState.accessToken,
-	                'Accept': 'application/json'
-	            },
-	        })
-			swal.fire("Done!", "Citation Chapters Assigned!", "success");
-	        loadData();
-        } catch (error) {
-            swal.fire('Done!', String(error), 'error');
-			props.handleClose();
-        }
-	};
+	// 		axios.post('/api/citations/assignChapters', { 
+	//         	bookId 
+	//         },
+	//         {   
+	//         	headers: {
+	//                 'Authorization': 'Bearer ' + authState.accessToken,
+	//                 'Accept': 'application/json'
+	//             },
+	//         })
+	// 		swal.fire("Done!", "Citation Chapters Assigned!", "success");
+	//         loadData();
+    //     } catch (error) {
+    //         swal.fire('Done!', String(error), 'error');
+	// 		props.handleClose();
+    //     }
+	// };
 
 	const deleteBook = async (bookId) => {
 
@@ -306,7 +297,7 @@ const UserBookList = () => {
 								</IconButton>
 							</Tooltip>
           					<Tooltip title="Process Citations with Chapters" placement="top-start">
-								<IconButton onClick={()=>assignChapters(book.id)}>
+								<IconButton onClick={()=> navigate(`/book/citationsAndChapters/${book.id}`)}>
 									<BookmarksIcon />
 								</IconButton>
 							</Tooltip>

@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { useState, useContext, useEffect } from 'react'
 import { useQuill } from 'react-quilljs';
 import { 
-    Link,
     useNavigate,
     useParams 
 } from 'react-router-dom';
@@ -13,22 +12,13 @@ import {
     Button,
     Checkbox,
     Chip,
-    CircularProgress,
     Container,
     FormControl,
     FormControlLabel,
-    FormLabel,
     Grid,
-    Input,
     InputLabel,
-    MenuItem,
-    Select,
     TextField,
-    Tooltip,
 } from '@material-ui/core';
-import { 
-    PlaylistAdd as PlaylistAddIcon
-} from '@material-ui/icons';
 import swal from 'sweetalert2';
 import { useAuth } from '../GlobalStates';
 import 'quill/dist/quill.snow.css'; // Add css for snow theme

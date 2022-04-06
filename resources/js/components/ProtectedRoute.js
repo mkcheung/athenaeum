@@ -1,9 +1,6 @@
-import { useContext, useEffect } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAuth } from './GlobalStates';
 import { useUserData } from './UserContext';
-import { useJwt } from "react-jwt";
-import swal from 'sweetalert2';
 
 const ProtectedRoute = ({
     children,

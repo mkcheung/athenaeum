@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chapter;
+use App\Models\Citation;
 use Illuminate\Http\Request;
 
 class ChapterController extends Controller
@@ -26,15 +27,28 @@ class ChapterController extends Controller
      */
     public function store(Request $request)
     {
+        $bookId = $request['data']['book_id'];
         $chapter = Chapter::create([
-          'book_id' => $request['data']['book_id'],
+          'book_id' => $bookId,
           'page_begin' => $request['data']['page_begin'],
           'page_end' => $request['data']['page_end'],
           'chapter_number' => $request['data']['chapter_number'],
           'chapter_title' => $request['data']['chapter_title']
         ]);
 
+
+        Citation::placeCitationWithinChapter($bookId);
         return response()->json('Chapter created!');
+    }
+
+    public function clearChapters(Request $request)
+    {
+        $data = $request->all();
+        Chapter::where('book_id', '=', $data['data']['book_id'])->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Book chapters cleared successfully'
+        ], 200);
     }
 
     /**

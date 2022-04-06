@@ -79,15 +79,10 @@ class BookController extends Controller
         return response()->json([]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Book $book)
+    public function show($id)
     {
-        //
+        $book = Book::where('id', '=', $id)->with('citations')->with('chapters')->get();
+        return $book->toJson();
     }
 
     public function searchByTitle(Request $request)
