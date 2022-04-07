@@ -37,8 +37,8 @@ const UserBookList = () => {
     const [ selectedBookCitations, setSelectedBookCitations ] = useState([]);
     const [ selectedBookId, setSelectedBookId ] = useState(null);
     const [ selectedBook, setSelectedBook ] = useState(null);
-    const [ selectedChapterId, setSelectedChapterId ] = useState(null);
-    const [ selectedChapter, setSelectedChapter ] = useState(null);
+    const [ selectedChapterId, setSelectedChapterId ] = useState('');
+    const [ selectedChapter, setSelectedChapter ] = useState('');
     const [ modalOpen, setModalOpen ] = useState(false);
     const [ bookIdForChInput, setBookIdForChInput ] = useState(null);
     const [ bookTitleForChInput, setBookTitleForChInput ] = useState('');

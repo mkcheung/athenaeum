@@ -34,7 +34,7 @@ const AuthProvider = (props) => {
 		let appStateData = localStorage["appState"] ? JSON.parse(localStorage["appState"]) : null;
 
 
-		if(appStateData.isLoggedIn){
+		if(appStateData && appStateData.isLoggedIn){
         	const decodedJwt = parseJwt(appStateData['accessToken']);
 
 			if (decodedJwt.exp * 1000 < Date.now()) {

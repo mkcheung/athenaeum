@@ -44,8 +44,8 @@ const CitationModal = (props) => {
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [ modalStyle ] = useState(getModalStyle);
   const [ citationModalOpen, setOpen ] = useState(false);
-  const [ selectedChapter, setSelectedChapter ] = useState(null);
-  const [ citationPage, setCitationPage ] = useState(null);
+  const [ selectedChapter, setSelectedChapter ] = useState('');
+  const [ citationPage, setCitationPage ] = useState('');
   const [ citation, setCitation ] = useState('');
   const [ chapterNum, setChapterNum ] = useState(null);
 
@@ -121,7 +121,7 @@ const CitationModal = (props) => {
           <br/>
           <Grid item xs={12}>
               <InputLabel htmlFor="page">Citation:</InputLabel>
-              <TextareaAutosize id="content" rows={4} style={{width:'100%'}} aria-label="minimum height" value={citation} placeholder="Place citation here" onChange={handleCitationChange} />
+              <TextareaAutosize id="content" minRows={4} style={{width:'100%'}} aria-label="minimum height" value={citation} placeholder="Place citation here" onChange={handleCitationChange} />
           </Grid>
           <br/>
           

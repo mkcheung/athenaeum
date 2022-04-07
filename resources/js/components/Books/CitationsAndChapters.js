@@ -141,7 +141,7 @@ const CitationsAndChapters = () => {
     let listOfChapters = '';
     if(chapters){
         listOfChapters = chapters.map((chapter)=>{
-            return <div onClick={()=>setChapter(chapter.chapter_number)}>
+            return <div key={`selectedBookChapter-${chapter.chapter_number}`} onClick={()=>setChapter(chapter.chapter_number)}>
                 <div>
                     Chapter: {chapter.chapter_number}
                 </div>
