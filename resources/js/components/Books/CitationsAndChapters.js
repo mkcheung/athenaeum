@@ -22,6 +22,7 @@ const CitationsAndChapters = () => {
     const [ chapters, setChapters ] = useState([]);
     const [ title, setTitle ] = useState('');
     const [ author, setAuthor ] = useState('');
+    const [ chapter, setChapter ] = useState(null);
 
     const defaultFormFields = {
         bookId:null,
@@ -48,6 +49,18 @@ const CitationsAndChapters = () => {
             loadData(params.id);
         }
 	},[])
+
+    useEffect(() => {
+        let chapterCitations = null;
+        if(chapter){
+            chapterCitations = citations.filter((citation)=>{
+                return citation.chapter === chapter;
+            });
+            setCitations(chapterCitations);
+        } else {
+            loadData(params.id);
+        }
+    },[chapter]);
 
     const loadData = async (bookId) => {
 
@@ -96,7 +109,6 @@ const CitationsAndChapters = () => {
         }
 	}
 
-
 	const handleChapterClear = async (e) => {
         e.preventDefault();
         let data = {
@@ -115,15 +127,21 @@ const CitationsAndChapters = () => {
 
             swal.fire("Done!", "Chapters Cleared!", "success");
             setChapters([]);
+            setChapter(null);
         } catch (error) {
             swal.fire('Done!', String(error), 'error');
         }
 	}
 
+	const handleShowAllCitations = async (e) => {
+        e.preventDefault();
+        setChapter(null);
+	}
+
     let listOfChapters = '';
     if(chapters){
         listOfChapters = chapters.map((chapter)=>{
-            return <div>
+            return <div onClick={()=>setChapter(chapter.chapter_number)}>
                 <div>
                     Chapter: {chapter.chapter_number}
                 </div>
@@ -141,7 +159,7 @@ const CitationsAndChapters = () => {
         })
     }
 
-let listOfCitations = '';
+    let listOfCitations = '';
     if(citations){
         listOfCitations = citations.map((citation)=>{
             return (
@@ -167,6 +185,17 @@ let listOfCitations = '';
                     </div>
             );
         })
+    }
+
+    let chapterDisplay = '';
+    if(chapter){
+        chapterDisplay = <Grid item xs={12} className="chapterNumDisplay">
+            <u>
+                <h3>
+                    Chapter {chapter}
+                </h3>
+            </u>
+        </Grid>
     }
     return (
     	<Container className="chapterForm">
@@ -211,21 +240,30 @@ let listOfCitations = '';
                         </Grid>
                     </Grid>
                     <br/>
-                    <button>
-                        Submit
-                    </button>
-                    <button onClick={handleChapterClear}>
-                        Clear Chapters
-                    </button>
+                    <Grid item xs={12} className="chapterCitationButtonRow">
+                        <button className="chapterCitationButton">
+                            Submit
+                        </button>
+                        <button className="chapterCitationButton" onClick={handleChapterClear}>
+                            Clear Chapters
+                        </button>
+                        <button className="chapterCitationButton" onClick={handleShowAllCitations}>
+                            Show all Citations
+                        </button>
+                    </Grid>
+                    <br/>
                 </form>
             </Grid>
             <Grid container spacing={3}>
-                <Grid item xs={6}>
+                <Grid className="sideBorder" item xs={6}>
+                    <div className="columnTitles">Chapters</div>
                     <List component="nav" className="bookCitationListItem" aria-label="secondary mailbox folder">
                         {listOfChapters}
                     </List>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid className="sideBorder" item xs={6}>
+                    <div className="columnTitles">Citations</div>
+                    {chapterDisplay}
                     <List component="nav" className="bookCitationListItem" aria-label="secondary mailbox folder">
                         {listOfCitations}
                     </List>

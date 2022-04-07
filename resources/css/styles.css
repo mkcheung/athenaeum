@@ -155,3 +155,25 @@
 .chapterFormPageControls {
 	display: flex;
 }
+
+.chapterNumDisplay {
+	text-align: center !important;
+}
+
+.sideBorder {
+	border-top: 1px solid gray !important;
+	border-left: 1px solid gray !important;
+	border-right: 1px solid gray !important;
+}
+
+.chapterCitationButtonRow {
+    text-align: center !important;
+}
+.chapterCitationButton {
+    margin-left:10px;
+}
+
+.columnTitles {
+	font-size:25px;
+	text-align:center;
+}

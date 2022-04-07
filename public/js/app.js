@@ -85214,8 +85214,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Divider/Divider.js");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/ListItem/ListItem.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Container/Container.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Container/Container.js");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputLabel/InputLabel.js");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/List/List.js");
@@ -85287,6 +85287,11 @@ var CitationsAndChapters = function CitationsAndChapters() {
       author = _useState8[0],
       setAuthor = _useState8[1];
 
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+      _useState10 = _slicedToArray(_useState9, 2),
+      chapter = _useState10[0],
+      setChapter = _useState10[1];
+
   var defaultFormFields = {
     bookId: null,
     chapterTitle: '',
@@ -85295,10 +85300,10 @@ var CitationsAndChapters = function CitationsAndChapters() {
     chapterNum: ''
   };
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(defaultFormFields),
-      _useState10 = _slicedToArray(_useState9, 2),
-      formFields = _useState10[0],
-      setFormFields = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(defaultFormFields),
+      _useState12 = _slicedToArray(_useState11, 2),
+      formFields = _useState12[0],
+      setFormFields = _useState12[1];
 
   var chapterTitle = formFields.chapterTitle,
       chapterPageBegin = formFields.chapterPageBegin,
@@ -85321,6 +85326,18 @@ var CitationsAndChapters = function CitationsAndChapters() {
       loadData(params.id);
     }
   }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    var chapterCitations = null;
+
+    if (chapter) {
+      chapterCitations = citations.filter(function (citation) {
+        return citation.chapter === chapter;
+      });
+      setCitations(chapterCitations);
+    } else {
+      loadData(params.id);
+    }
+  }, [chapter]);
 
   var loadData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(bookId) {
@@ -85435,6 +85452,7 @@ var CitationsAndChapters = function CitationsAndChapters() {
                 });
                 sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire("Done!", "Chapters Cleared!", "success");
                 setChapters([]);
+                setChapter(null);
               } catch (error) {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Done!', String(error), 'error');
               }
@@ -85452,11 +85470,36 @@ var CitationsAndChapters = function CitationsAndChapters() {
     };
   }();
 
+  var handleShowAllCitations = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(e) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              e.preventDefault();
+              setChapter(null);
+
+            case 2:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function handleShowAllCitations(_x4) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
   var listOfChapters = '';
 
   if (chapters) {
     listOfChapters = chapters.map(function (chapter) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        onClick: function onClick() {
+          return setChapter(chapter.chapter_number);
+        },
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
           children: ["Chapter: ", chapter.chapter_number]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -85494,17 +85537,32 @@ var CitationsAndChapters = function CitationsAndChapters() {
     });
   }
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  var chapterDisplay = '';
+
+  if (chapter) {
+    chapterDisplay = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      item: true,
+      xs: 12,
+      className: "chapterNumDisplay",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("u", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h3", {
+          children: ["Chapter ", chapter]
+        })
+      })
+    });
+  }
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
     className: "chapterForm",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
       container: true,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
         className: "chapterFormHeading",
         xs: 12,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
           children: " Citations By Chapter: "
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
         className: "chapterFormHeading",
         xs: 12,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("u", {
@@ -85515,7 +85573,7 @@ var CitationsAndChapters = function CitationsAndChapters() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("form", {
         className: "chapterFormControls",
         onSubmit: handleChapterSubmit,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
           item: true,
           xs: 12,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -85529,7 +85587,7 @@ var CitationsAndChapters = function CitationsAndChapters() {
             value: chapterTitle,
             onChange: handleChange
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
           item: true,
           xs: 12,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -85543,14 +85601,14 @@ var CitationsAndChapters = function CitationsAndChapters() {
             value: chapterNum,
             onChange: handleChange
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
           item: true,
           xs: 12,
           className: "chapterFormControls chapterFormPageControls",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
             item: true,
             xs: 3
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
             item: true,
             xs: 2,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -85563,10 +85621,10 @@ var CitationsAndChapters = function CitationsAndChapters() {
               value: chapterPageBegin,
               onChange: handleChange
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
             item: true,
             xs: 2
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
             item: true,
             xs: 2,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -85579,38 +85637,57 @@ var CitationsAndChapters = function CitationsAndChapters() {
               value: chapterPageEnd,
               onChange: handleChange
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
             item: true,
             xs: 3
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-          children: "Submit"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-          onClick: handleChapterClear,
-          children: "Clear Chapters"
-        })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          item: true,
+          xs: 12,
+          className: "chapterCitationButtonRow",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+            className: "chapterCitationButton",
+            children: "Submit"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+            className: "chapterCitationButton",
+            onClick: handleChapterClear,
+            children: "Clear Chapters"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+            className: "chapterCitationButton",
+            onClick: handleShowAllCitations,
+            children: "Show all Citations"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {})]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
       container: true,
       spacing: 3,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        className: "sideBorder",
         item: true,
         xs: 6,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "columnTitles",
+          children: "Chapters"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["default"], {
           component: "nav",
           className: "bookCitationListItem",
           "aria-label": "secondary mailbox folder",
           children: listOfChapters
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        className: "sideBorder",
         item: true,
         xs: 6,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "columnTitles",
+          children: "Citations"
+        }), chapterDisplay, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["default"], {
           component: "nav",
           className: "bookCitationListItem",
           "aria-label": "secondary mailbox folder",
           children: listOfCitations
-        })
+        })]
       })]
     })]
   });
@@ -99199,7 +99276,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".quillPanel {\n\theight:725px;\n\tmax-height:725px;\n\tmax-width: 820px;\n\toverflow:scroll;\n}\n\n.newPostButton {\n\tfloat:right;\n}\n\n.headerLink {\n\ttextDecoration:none;\n\tcolor:white;\n}\n\n.blogLink {\n\ttextDecoration:none;\n\tcolor:black;\n}\n\n.tagContainer, .userReadOut {\n\tmargin-top:100px;\n    padding: 10px, 10px, 10px, 0px;\n    width: 375px; \n}\n\n.userDetails {\n\tfont-size: 22px;\n    float: right;\n}\n\n.about {\n\tcolor:white;\n\tpadding-top:20px;\n\tpadding-left:5%;\n\tpadding-right:5%;\n}\n\n.headerDivider {\n\tcolor:white;\n\tpadding-top:20px;\n\tpadding-left:5%;\n\tpadding-right:5%;\n\tborder-right:solid;\n}\n\n.loginDisplayColor {\n\tcolor:white !important;\n}\n\n.logoutDisplay {\n\tdisplay: contents !important;\n}\n\n.root {\n    flexGrow: 1;\n}\n\n.citationButtonHeader{\n\tposition: relative;\n\ttop: 5px;\n\tfont-size: 20px;\n}\n\n#citationSubmit {\n\tfloat: right;\n}\n\n.listOfBooks, .bookCitationListItem {\n\tmax-height:675px;\n\toverflow:scroll;\n}\n\n.listOfBooksItem {\n\theight:75px;\n}\n\n.bookCitationList {\n\tvertical-align: top;\n\tmargin-left: 3px;\n\tmargin-right: 3px;\n\tmargin-top: 50px;\n\tposition: relative;\n}\n\n.bookCitationBookTitle, .bookCitationChapterTitle {\n\tmargin: 0 auto;\n    font-size: 30px;\n}\n\n.circularProgress {\n\tmargin: auto;\n\tposition: absolute;\n\ttop:0;\n\tbottom:0;\n\tleft:0;\n\tright:0;\n}\n\n.citationUploadButton {\n\tfloat: right;\n\tmargin-top: -6px !important;\n}\n\n.citationBookTitle, .citationChapterTitle {\n\ttext-align: center;\n}\n\n.citationContainer {\n\theight:750px;\n}\n\n.citationContainerList {\n\tmax-height:640px;\n\toverflow: scroll;\n}\n\n.ag-header-cell-text {\n\tmargin: 0 auto;\n}\n\n.ag-selection-checkbox {\n\tmargin: 0 auto !important;\n}\n\n.ag-cell-wrapper {\n\theight: 100%;\n}\n\n.usersPosts {\n\tmax-height: 650px;\n\twidth: 1000px;\n\toverflow: scroll;\n\twidth: 100%;\n}\n\n.chiefOpsControls {\n\ttext-align: center;\n\tpadding-bottom: 25px;\n\tfont-size: 18px;\n}\n.chapterForm {\n\tmargin-top: 10px;\n}\n\n.chapterFormHeading {\n\ttext-align:center;\n\twidth:100%\n}\n\n.chapterFormControls {\n\twidth:100%;\n}\n.chapterFormPageControls {\n\tdisplay: flex;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".quillPanel {\n\theight:725px;\n\tmax-height:725px;\n\tmax-width: 820px;\n\toverflow:scroll;\n}\n\n.newPostButton {\n\tfloat:right;\n}\n\n.headerLink {\n\ttextDecoration:none;\n\tcolor:white;\n}\n\n.blogLink {\n\ttextDecoration:none;\n\tcolor:black;\n}\n\n.tagContainer, .userReadOut {\n\tmargin-top:100px;\n    padding: 10px, 10px, 10px, 0px;\n    width: 375px; \n}\n\n.userDetails {\n\tfont-size: 22px;\n    float: right;\n}\n\n.about {\n\tcolor:white;\n\tpadding-top:20px;\n\tpadding-left:5%;\n\tpadding-right:5%;\n}\n\n.headerDivider {\n\tcolor:white;\n\tpadding-top:20px;\n\tpadding-left:5%;\n\tpadding-right:5%;\n\tborder-right:solid;\n}\n\n.loginDisplayColor {\n\tcolor:white !important;\n}\n\n.logoutDisplay {\n\tdisplay: contents !important;\n}\n\n.root {\n    flexGrow: 1;\n}\n\n.citationButtonHeader{\n\tposition: relative;\n\ttop: 5px;\n\tfont-size: 20px;\n}\n\n#citationSubmit {\n\tfloat: right;\n}\n\n.listOfBooks, .bookCitationListItem {\n\tmax-height:675px;\n\toverflow:scroll;\n}\n\n.listOfBooksItem {\n\theight:75px;\n}\n\n.bookCitationList {\n\tvertical-align: top;\n\tmargin-left: 3px;\n\tmargin-right: 3px;\n\tmargin-top: 50px;\n\tposition: relative;\n}\n\n.bookCitationBookTitle, .bookCitationChapterTitle {\n\tmargin: 0 auto;\n    font-size: 30px;\n}\n\n.circularProgress {\n\tmargin: auto;\n\tposition: absolute;\n\ttop:0;\n\tbottom:0;\n\tleft:0;\n\tright:0;\n}\n\n.citationUploadButton {\n\tfloat: right;\n\tmargin-top: -6px !important;\n}\n\n.citationBookTitle, .citationChapterTitle {\n\ttext-align: center;\n}\n\n.citationContainer {\n\theight:750px;\n}\n\n.citationContainerList {\n\tmax-height:640px;\n\toverflow: scroll;\n}\n\n.ag-header-cell-text {\n\tmargin: 0 auto;\n}\n\n.ag-selection-checkbox {\n\tmargin: 0 auto !important;\n}\n\n.ag-cell-wrapper {\n\theight: 100%;\n}\n\n.usersPosts {\n\tmax-height: 650px;\n\twidth: 1000px;\n\toverflow: scroll;\n\twidth: 100%;\n}\n\n.chiefOpsControls {\n\ttext-align: center;\n\tpadding-bottom: 25px;\n\tfont-size: 18px;\n}\n.chapterForm {\n\tmargin-top: 10px;\n}\n\n.chapterFormHeading {\n\ttext-align:center;\n\twidth:100%\n}\n\n.chapterFormControls {\n\twidth:100%;\n}\n.chapterFormPageControls {\n\tdisplay: flex;\n}\n\n.chapterNumDisplay {\n\ttext-align: center !important;\n}\n\n.sideBorder {\n\tborder-top: 1px solid gray !important;\n\tborder-left: 1px solid gray !important;\n\tborder-right: 1px solid gray !important;\n}\n\n.chapterCitationButtonRow {\n    text-align: center !important;\n}\n.chapterCitationButton {\n    margin-left:10px;\n}\n\n.columnTitles {\n\tfont-size:25px;\n\ttext-align:center;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
