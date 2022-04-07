@@ -53,7 +53,7 @@ const ChapterSelectionModal = (props) => {
 					<form noValidate autoComplete="off">
 						
 						<Grid item xs={12}>
-							<FormControl >
+							<FormControl className="modalInputField">
 								<InputLabel htmlFor="age-native-simple">Books:</InputLabel>
 								<Select
 									className="modalInputField"
