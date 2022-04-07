@@ -177,3 +177,12 @@
 	font-size:25px;
 	text-align:center;
 }
+
+.modalInputField {
+	width:100%
+}
+
+.modalInputFileUploadSpace {
+	border: 1px dashed grey;
+	padding: 20px;
+}

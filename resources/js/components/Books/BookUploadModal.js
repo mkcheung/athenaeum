@@ -5,20 +5,16 @@ import {
 	Button,
 	CircularProgress,
 	Checkbox,
-	Container,
-	FormControl,
 	FormControlLabel,
-	FormHelperText,
 	Grid,
-	Input,
 	InputLabel,
 	Modal,
-	Paper,
 	TextField
 } from '@material-ui/core';
 import { useAuth } from '../GlobalStates';
 import { green } from '@material-ui/core/colors';
 import swal from 'sweetalert2';
+import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 
 const GreenCheckbox = withStyles({
 	root: {
@@ -61,7 +57,6 @@ const BookUploadModal = (props) => {
 	const classes = useStyles();
 	// getModalStyle is not a pure function, we roll the style only on the first render
 	const [ modalStyle ] = useState(getModalStyle);
-	const [ open, setOpen ] = useState(false);
 	const [ addBookOnly, setAddBookOnly ] = useState(false);
 	const [ bookTitle, setBookTitle ] = useState('');
 	const [ jsonFile, setJsonFile ] = useState({});
@@ -184,7 +179,7 @@ const BookUploadModal = (props) => {
 				{bookTitle}
 			</Grid>;
 
-		fileUploadComponent = <div className="files">
+		fileUploadComponent = <div className="files modalInputFileUploadSpace">
 			<Files
 				className='files-dropzone'
 				onChange={onFilesChange}
@@ -196,7 +191,7 @@ const BookUploadModal = (props) => {
 				minFileSize={0}
 				clickable
 			>
-			Drop json file here or click to upload
+				Drop json file here or click to upload
 			</Files>
 		</div>;
 
@@ -207,7 +202,11 @@ const BookUploadModal = (props) => {
   		bookLoadingDisplay = <CircularProgress style={{margin:'auto', position: 'absolute', top:0,bottom:0,left:0,right:0, }} />;
 	} else {
   		bookLoadingDisplay = <div style={modalStyle} className={classes.paper}>
-				<h2 id="simple-modal-title">Add New Book and Citations</h2>
+				<u>
+					<h2 id="simple-modal-title">
+						Add New Book and Citations
+					</h2>
+				</u>
 				<form noValidate autoComplete="off">
 					
 					<Grid item xs={12}>
@@ -221,22 +220,22 @@ const BookUploadModal = (props) => {
 						
 						<Grid item xs={12}>
 							<InputLabel htmlFor="author_first_name">Author First Name:</InputLabel>
-							<TextField id="author_first_name" aria-describedby="my-helper-text" value={author.author_first_name} onChange={handleAuthorFirstNameChange} />
+							<TextField className="modalInputField" id="author_first_name" aria-describedby="my-helper-text" value={author.author_first_name} onChange={handleAuthorFirstNameChange} />
 						</Grid>
 						
 						<Grid item xs={12}>
 							<InputLabel htmlFor="author_middle">Author Middle:</InputLabel>
-							<TextField id="author_middle" aria-describedby="my-helper-text" value={author.author_middle} onChange={handleAuthorMiddleNameChange} />
+							<TextField className="modalInputField" id="author_middle" aria-describedby="my-helper-text" value={author.author_middle} onChange={handleAuthorMiddleNameChange} />
 						</Grid>
 						
 						<Grid item xs={12}>
 							<InputLabel htmlFor="author_last_name">Author Last Name:</InputLabel>
-							<TextField id="author_last_name" aria-describedby="my-helper-text" value={author.author_last_name} onChange={handleAuthorLastNameChange} />
+							<TextField className="modalInputField" id="author_last_name" aria-describedby="my-helper-text" value={author.author_last_name} onChange={handleAuthorLastNameChange} />
 						</Grid>
 						
 						<Grid item xs={12}>
 							<InputLabel htmlFor="pages">Pages:</InputLabel>
-							<TextField id="pages" aria-describedby="my-helper-text" onChange={handlePageNumberChange} />
+							<TextField className="modalInputField" id="pages" aria-describedby="my-helper-text" onChange={handlePageNumberChange} />
 						</Grid>
 						<br/>
 				        {fileUploadComponent}

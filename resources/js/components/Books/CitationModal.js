@@ -1,22 +1,16 @@
 import React, { useState, useContext } from 'react';
-import Files from 'react-files'
 import { makeStyles } from '@material-ui/core/styles';
 import { 
 	Button,
-	Container,
-	FormControl,
-	FormHelperText,
 	Grid,
-	Input,
 	InputLabel,
 	Modal,
-	Paper,
-	Select,
   TextareaAutosize,
 	TextField
 } from '@material-ui/core';
 import swal from 'sweetalert2';
 import { useAuth } from '../GlobalStates';
+import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -109,30 +103,34 @@ const CitationModal = (props) => {
   const body = (
         <Grid container spacing={3}>
             <div style={modalStyle} className={classes.paper}>
-				<h2 id="simple-modal-title">Add Citation for {props.bookTitleForChInput}:</h2>
+            <u>
+              <h2 id="simple-modal-title">
+                Add Citation for {props.bookTitleForChInput}:
+              </h2>
+            </u>
 				<form noValidate autoComplete="off">
 					
 					<Grid item xs={12}>
-                        <InputLabel htmlFor="page">Chapter:</InputLabel>
-                        <TextField id="selectedChapter" type="number" aria-describedby="my-helper-text" value={selectedChapter} onChange={handleChapterSelect} />
+            <InputLabel htmlFor="page">Chapter:</InputLabel>
+            <TextField  className="modalInputField" id="selectedChapter" type="number" aria-describedby="my-helper-text" value={selectedChapter} onChange={handleChapterSelect} />
 					</Grid>
-                    <Grid item xs={12}>
-                        <InputLabel htmlFor="citationPage">Page:</InputLabel>
-                        <TextField id="citationPage" aria-describedby="my-helper-text" value={citationPage} onChange={handleCitationPageChange} />
-                    </Grid>
-                    <br/>
-                    <Grid item xs={12}>
-                        <InputLabel htmlFor="page">Citation:</InputLabel>
-                        <TextareaAutosize id="content" rows={4} style={{width:'100%'}} aria-label="minimum height" value={citation} placeholder="Place citation here" onChange={handleCitationChange} />
-                    </Grid>
-                    <br/>
-                    
-                    <Grid item xs={12}>
-                        <Button variant="contained" color="primary" onClick={() => { handleCitationSubmit() }}>
-                            Add Citation
-                        </Button>
-                    </Grid>
-                    <br/>
+          <Grid item xs={12}>
+              <InputLabel htmlFor="citationPage">Page:</InputLabel>
+              <TextField  className="modalInputField" id="citationPage" aria-describedby="my-helper-text" value={citationPage} onChange={handleCitationPageChange} />
+          </Grid>
+          <br/>
+          <Grid item xs={12}>
+              <InputLabel htmlFor="page">Citation:</InputLabel>
+              <TextareaAutosize id="content" rows={4} style={{width:'100%'}} aria-label="minimum height" value={citation} placeholder="Place citation here" onChange={handleCitationChange} />
+          </Grid>
+          <br/>
+          
+          <Grid item xs={12}>
+              <Button variant="contained" color="primary" onClick={() => { handleCitationSubmit() }}>
+                  Add Citation
+              </Button>
+          </Grid>
+          <br/>
 				</form>
 			</div>
 	    </Grid>

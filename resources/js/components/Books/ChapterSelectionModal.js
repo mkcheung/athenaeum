@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
-import Files from 'react-files'
 import { makeStyles } from '@material-ui/core/styles';
 import { 
-	Button,
-	Container,
 	FormControl,
-	FormHelperText,
 	Grid,
-	Input,
 	InputLabel,
 	Modal,
-	Paper,
 	Select,
-	TextField
 } from '@material-ui/core';
+import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -46,40 +40,47 @@ const ChapterSelectionModal = (props) => {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   let body = '';
+  
   if(props.books){
   	body = (
 	        <Grid container spacing={3}>
 	            <div style={modalStyle} className={classes.paper}>
-					<h2 id="simple-modal-title">Select Chapter Citations:</h2>
+					<u>
+						<h2 id="simple-modal-title">
+							Select Chapter Citations:
+						</h2>
+					</u>
 					<form noValidate autoComplete="off">
 						
 						<Grid item xs={12}>
-	            <FormControl >
-	                <InputLabel htmlFor="age-native-simple">Books:</InputLabel>
-	                <Select
-	                    native
-	                    name='book'
-	                    value={props.bookSelectedId}
-	                    onChange={props.handleBookChapterSelect}
-	                    title='Book Select'
-	                >
-	                <option value='0'>None</option>
-	                {
-	                    Object
-	                    .keys(props.books)
-	                    .map(key => <option key={key} value = {props.books[key].id}>{props.books[key].title}</option>)
-	                }
-	                </Select>
-	            </FormControl>
+							<FormControl >
+								<InputLabel htmlFor="age-native-simple">Books:</InputLabel>
+								<Select
+									className="modalInputField"
+									native
+									name='book'
+									value={props.bookSelectedId}
+									onChange={props.handleBookChapterSelect}
+									title='Book Select'
+								>
+								<option value='0'>None</option>
+								{
+									Object
+									.keys(props.books)
+									.map(key => <option key={key} value = {props.books[key].id}>{props.books[key].title}</option>)
+								}
+								</Select>
+							</FormControl>
 						</Grid>
 						<br/>
 						
 						<Grid item xs={12}>
-		          			<FormControl >
+		          			<FormControl className="modalInputField">
 	  							<InputLabel htmlFor="age-native-simple">Chapters:</InputLabel>
 								<Select
+									className="modalInputField"
 									native
-	                name='chapter'
+	                				name='chapter'
 									value={props.selectedChapterId}
 									onChange={props.handleBookChapterSelect}
 									title='Chapter Select'
@@ -102,15 +103,19 @@ const ChapterSelectionModal = (props) => {
   	body = (
 	        <Grid container spacing={3}>
 	            <div style={modalStyle} className={classes.paper}>
-					<h2 id="simple-modal-title">Select Chapter Citations:</h2>
+					<u>
+						<h2 id="simple-modal-title">
+							Select Chapter Citations:
+						</h2>
+					</u>
 					<form noValidate autoComplete="off">
 						
 						<Grid item xs={12}>
-		          			<FormControl >
+		          			<FormControl className="modalInputField" >
 	  							<InputLabel htmlFor="age-native-simple">Chapters:</InputLabel>
 								<Select
 									native
-	                name='chapter'
+	                				name='chapter'
 									value={props.selectedChapterId}
 									onChange={props.handleBookChapterSelect}
 									title='Chapter Select'

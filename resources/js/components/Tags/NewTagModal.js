@@ -2,16 +2,12 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { 
 	Button,
-	Container,
-	FormControl,
-	FormHelperText,
 	Grid,
-	Input,
 	InputLabel,
 	Modal,
-	Paper,
 	TextField
 } from '@material-ui/core';
+import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -48,12 +44,16 @@ const NewTagModal = (props) => {
   const body = (
         <Grid container spacing={3}>
             <div style={modalStyle} className={classes.paper}>
-				<h2 id="simple-modal-title">New Category</h2>
+            <u>
+              <h2 id="simple-modal-title">
+                New Tag
+              </h2>
+            </u>
 				<form noValidate autoComplete="off">
 					
 					<Grid item xs={12}>
 						<InputLabel htmlFor="title">Tag Name:</InputLabel>
-						<TextField id="title" aria-describedby="my-helper-text" onChange={props.handleFieldChange} />
+						<TextField className="modalInputField" id="title" aria-describedby="my-helper-text" onChange={props.handleFieldChange} />
 					</Grid>
 					<br/>
 					

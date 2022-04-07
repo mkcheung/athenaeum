@@ -2,9 +2,7 @@ import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BookUploadModal from './../Books/BookUploadModal';
-import AddChapterModal from './../Books/AddChapterModal';
 import ChapterSelectionModal from './../Books/ChapterSelectionModal';
-import CitationsAndChapters from './../Books/CitationsAndChapters';
 import CitationModal from './../Books/CitationModal';
 import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 
@@ -44,7 +42,6 @@ const UserBookList = () => {
     const [ modalOpen, setModalOpen ] = useState(false);
     const [ bookIdForChInput, setBookIdForChInput ] = useState(null);
     const [ bookTitleForChInput, setBookTitleForChInput ] = useState('');
-    const [ chapterModalOpen, setChapterModalOpen ] = useState(false);
     const [ citationModalOpen, setCitationModalOpen ] = useState(false);
     const [ chapterSelectionModalOpen, setChapterSelectionModalOpen] = useState(false);
     const [ errors, setErrors ] = useState('');
@@ -64,14 +61,6 @@ const UserBookList = () => {
 
 	const handleOpen = async () => {
 		setModalOpen(!modalOpen);
-	};
-
-	const handleOpenChapterInput = async (bookId) => {
-		let selectedBook = books.find(book => book.id === bookId);
-
-		setBookTitleForChInput(selectedBook['title']);
-		setBookIdForChInput(selectedBook['id']);
-		setChapterModalOpen(true);
 	};
 
 	const handleOpenAddCitationInput = async (bookId) => {
@@ -94,30 +83,7 @@ const UserBookList = () => {
      	});
 	};
 
-	// const assignChapters = async (bookId) => {
-
-    //     try {
-
-	// 		axios.post('/api/citations/assignChapters', { 
-	//         	bookId 
-	//         },
-	//         {   
-	//         	headers: {
-	//                 'Authorization': 'Bearer ' + authState.accessToken,
-	//                 'Accept': 'application/json'
-	//             },
-	//         })
-	// 		swal.fire("Done!", "Citation Chapters Assigned!", "success");
-	//         loadData();
-    //     } catch (error) {
-    //         swal.fire('Done!', String(error), 'error');
-	// 		props.handleClose();
-    //     }
-	// };
-
 	const deleteBook = async (bookId) => {
-
-
 		swal.fire({
 			title: "Are you sure?",
 			text: "This will delete the book as well as all citations and chapters.",
@@ -153,7 +119,6 @@ const UserBookList = () => {
 
 	const handleClose = async () => {
 		setModalOpen(false);
-		setChapterModalOpen(false);
 		setCitationModalOpen(false);
 		setChapterSelectionModalOpen(false);
 	};
@@ -291,16 +256,11 @@ const UserBookList = () => {
 									<AddCommentIcon />
 								</IconButton>
 							</Tooltip>
-          					<Tooltip title="Add Chapter" placement="top-start">
-								<IconButton onClick={()=>handleOpenChapterInput(book.id)}>
-									<AddToQueueIcon />
-								</IconButton>
-							</Tooltip>
-          					<Tooltip title="Process Citations with Chapters" placement="top-start">
-								<IconButton onClick={()=> navigate(`/book/citationsAndChapters/${book.id}`)}>
-									<BookmarksIcon />
-								</IconButton>
-							</Tooltip>
+							<Tooltip title="Process Citations with Chapters" placement="top-start">
+							  <IconButton onClick={()=> navigate(`/book/citationsAndChapters/${book.id}`)}>
+								  <BookmarksIcon />
+							  </IconButton>
+						  	</Tooltip>
           					<Tooltip title="Delete Book" placement="top-start">
 								<IconButton onClick={()=>deleteBook(book.id)}>
 									<DeleteIcon />
@@ -400,16 +360,6 @@ const UserBookList = () => {
 		        			onFilesError={onFilesError} 
 		        			handleOpen={handleOpen}
 		        			modalLoading={modalLoading} 
-		        			setErrors={setErrors}
-		        		/>
-			        </Grid>
-			        <Grid item xs={12}>
-	        			<AddChapterModal 
-		        			bookTitleForChInput={bookTitleForChInput} 
-		        			bookIdForChInput={bookIdForChInput} 
-		        			setBookIdForChInput={setBookIdForChInput}
-		        			chapterModalOpen={chapterModalOpen} 
-		        			handleClose={handleClose} 
 		        			setErrors={setErrors}
 		        		/>
 			        </Grid>
