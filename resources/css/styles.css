@@ -140,3 +140,18 @@
 	padding-bottom: 25px;
 	font-size: 18px;
 }
+.chapterForm {
+	margin-top: 10px;
+}
+
+.chapterFormHeading {
+	text-align:center;
+	width:100%
+}
+
+.chapterFormControls {
+	width:100%;
+}
+.chapterFormPageControls {
+	display: flex;
+}

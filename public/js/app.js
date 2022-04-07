@@ -85495,13 +85495,25 @@ var CitationsAndChapters = function CitationsAndChapters() {
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    maxWidth: "lg",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    className: "chapterForm",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
       container: true,
-      spacing: 3,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("form", {
-        noValidate: true,
-        autoComplete: "off",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        className: "chapterFormHeading",
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
+          children: " Citations By Chapter: "
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        className: "chapterFormHeading",
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("u", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h2", {
+            children: [" ", title, " by: ", author, " "]
+          })
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("form", {
+        className: "chapterFormControls",
         onSubmit: handleChapterSubmit,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
           item: true,
@@ -85510,58 +85522,74 @@ var CitationsAndChapters = function CitationsAndChapters() {
             htmlFor: "chapterTitle",
             children: "Chapter Title:"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["default"], {
+            className: "chapterFormControls",
             id: "chapterTitle",
             "aria-describedby": "my-helper-text",
             name: "chapterTitle",
             value: chapterTitle,
             onChange: handleChange
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
           item: true,
           xs: 12,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
             htmlFor: "chapterNum",
             children: "Chapter Number:"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["default"], {
+            className: "chapterFormControls",
             id: "chapterNum",
             "aria-describedby": "my-helper-text",
             name: "chapterNum",
             value: chapterNum,
             onChange: handleChange
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
           item: true,
           xs: 12,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
-            htmlFor: "chapterPageBegin",
-            children: "Page - Begin:"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["default"], {
-            id: "chapterPageBegin",
-            "aria-describedby": "my-helper-text",
-            name: "chapterPageBegin",
-            value: chapterPageBegin,
-            onChange: handleChange
+          className: "chapterFormControls chapterFormPageControls",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+            item: true,
+            xs: 3
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+            item: true,
+            xs: 2,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
+              htmlFor: "chapterPageBegin",
+              children: "Page - Begin:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["default"], {
+              id: "chapterPageBegin",
+              "aria-describedby": "my-helper-text",
+              name: "chapterPageBegin",
+              value: chapterPageBegin,
+              onChange: handleChange
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+            item: true,
+            xs: 2
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+            item: true,
+            xs: 2,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
+              htmlFor: "chapterPageEnd",
+              children: "Page - End:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["default"], {
+              id: "chapterPageEnd",
+              "aria-describedby": "my-helper-text",
+              name: "chapterPageEnd",
+              value: chapterPageEnd,
+              onChange: handleChange
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
+            item: true,
+            xs: 3
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
-          item: true,
-          xs: 12,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["default"], {
-            htmlFor: "chapterPageEnd",
-            children: "Page - End:"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["default"], {
-            id: "chapterPageEnd",
-            "aria-describedby": "my-helper-text",
-            name: "chapterPageEnd",
-            value: chapterPageEnd,
-            onChange: handleChange
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
           children: "Submit"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
           onClick: handleChapterClear,
           children: "Clear Chapters"
         })]
-      })
+      })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["default"], {
       container: true,
       spacing: 3,
@@ -99171,7 +99199,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".quillPanel {\n\theight:725px;\n\tmax-height:725px;\n\tmax-width: 820px;\n\toverflow:scroll;\n}\n\n.newPostButton {\n\tfloat:right;\n}\n\n.headerLink {\n\ttextDecoration:none;\n\tcolor:white;\n}\n\n.blogLink {\n\ttextDecoration:none;\n\tcolor:black;\n}\n\n.tagContainer, .userReadOut {\n\tmargin-top:100px;\n    padding: 10px, 10px, 10px, 0px;\n    width: 375px; \n}\n\n.userDetails {\n\tfont-size: 22px;\n    float: right;\n}\n\n.about {\n\tcolor:white;\n\tpadding-top:20px;\n\tpadding-left:5%;\n\tpadding-right:5%;\n}\n\n.headerDivider {\n\tcolor:white;\n\tpadding-top:20px;\n\tpadding-left:5%;\n\tpadding-right:5%;\n\tborder-right:solid;\n}\n\n.loginDisplayColor {\n\tcolor:white !important;\n}\n\n.logoutDisplay {\n\tdisplay: contents !important;\n}\n\n.root {\n    flexGrow: 1;\n}\n\n.citationButtonHeader{\n\tposition: relative;\n\ttop: 5px;\n\tfont-size: 20px;\n}\n\n#citationSubmit {\n\tfloat: right;\n}\n\n.listOfBooks, .bookCitationListItem {\n\tmax-height:675px;\n\toverflow:scroll;\n}\n\n.listOfBooksItem {\n\theight:75px;\n}\n\n.bookCitationList {\n\tvertical-align: top;\n\tmargin-left: 3px;\n\tmargin-right: 3px;\n\tmargin-top: 50px;\n\tposition: relative;\n}\n\n.bookCitationBookTitle, .bookCitationChapterTitle {\n\tmargin: 0 auto;\n    font-size: 30px;\n}\n\n.circularProgress {\n\tmargin: auto;\n\tposition: absolute;\n\ttop:0;\n\tbottom:0;\n\tleft:0;\n\tright:0;\n}\n\n.citationUploadButton {\n\tfloat: right;\n\tmargin-top: -6px !important;\n}\n\n.citationBookTitle, .citationChapterTitle {\n\ttext-align: center;\n}\n\n.citationContainer {\n\theight:750px;\n}\n\n.citationContainerList {\n\tmax-height:640px;\n\toverflow: scroll;\n}\n\n.ag-header-cell-text {\n\tmargin: 0 auto;\n}\n\n.ag-selection-checkbox {\n\tmargin: 0 auto !important;\n}\n\n.ag-cell-wrapper {\n\theight: 100%;\n}\n\n.usersPosts {\n\tmax-height: 650px;\n\twidth: 1000px;\n\toverflow: scroll;\n\twidth: 100%;\n}\n\n.chiefOpsControls {\n\ttext-align: center;\n\tpadding-bottom: 25px;\n\tfont-size: 18px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".quillPanel {\n\theight:725px;\n\tmax-height:725px;\n\tmax-width: 820px;\n\toverflow:scroll;\n}\n\n.newPostButton {\n\tfloat:right;\n}\n\n.headerLink {\n\ttextDecoration:none;\n\tcolor:white;\n}\n\n.blogLink {\n\ttextDecoration:none;\n\tcolor:black;\n}\n\n.tagContainer, .userReadOut {\n\tmargin-top:100px;\n    padding: 10px, 10px, 10px, 0px;\n    width: 375px; \n}\n\n.userDetails {\n\tfont-size: 22px;\n    float: right;\n}\n\n.about {\n\tcolor:white;\n\tpadding-top:20px;\n\tpadding-left:5%;\n\tpadding-right:5%;\n}\n\n.headerDivider {\n\tcolor:white;\n\tpadding-top:20px;\n\tpadding-left:5%;\n\tpadding-right:5%;\n\tborder-right:solid;\n}\n\n.loginDisplayColor {\n\tcolor:white !important;\n}\n\n.logoutDisplay {\n\tdisplay: contents !important;\n}\n\n.root {\n    flexGrow: 1;\n}\n\n.citationButtonHeader{\n\tposition: relative;\n\ttop: 5px;\n\tfont-size: 20px;\n}\n\n#citationSubmit {\n\tfloat: right;\n}\n\n.listOfBooks, .bookCitationListItem {\n\tmax-height:675px;\n\toverflow:scroll;\n}\n\n.listOfBooksItem {\n\theight:75px;\n}\n\n.bookCitationList {\n\tvertical-align: top;\n\tmargin-left: 3px;\n\tmargin-right: 3px;\n\tmargin-top: 50px;\n\tposition: relative;\n}\n\n.bookCitationBookTitle, .bookCitationChapterTitle {\n\tmargin: 0 auto;\n    font-size: 30px;\n}\n\n.circularProgress {\n\tmargin: auto;\n\tposition: absolute;\n\ttop:0;\n\tbottom:0;\n\tleft:0;\n\tright:0;\n}\n\n.citationUploadButton {\n\tfloat: right;\n\tmargin-top: -6px !important;\n}\n\n.citationBookTitle, .citationChapterTitle {\n\ttext-align: center;\n}\n\n.citationContainer {\n\theight:750px;\n}\n\n.citationContainerList {\n\tmax-height:640px;\n\toverflow: scroll;\n}\n\n.ag-header-cell-text {\n\tmargin: 0 auto;\n}\n\n.ag-selection-checkbox {\n\tmargin: 0 auto !important;\n}\n\n.ag-cell-wrapper {\n\theight: 100%;\n}\n\n.usersPosts {\n\tmax-height: 650px;\n\twidth: 1000px;\n\toverflow: scroll;\n\twidth: 100%;\n}\n\n.chiefOpsControls {\n\ttext-align: center;\n\tpadding-bottom: 25px;\n\tfont-size: 18px;\n}\n.chapterForm {\n\tmargin-top: 10px;\n}\n\n.chapterFormHeading {\n\ttext-align:center;\n\twidth:100%\n}\n\n.chapterFormControls {\n\twidth:100%;\n}\n.chapterFormPageControls {\n\tdisplay: flex;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

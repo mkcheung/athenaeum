@@ -169,29 +169,48 @@ let listOfCitations = '';
         })
     }
     return (
-    	<Container maxWidth="lg">
-            <Grid container spacing={3}>
-                <form noValidate autoComplete="off" onSubmit={handleChapterSubmit}>
-
+    	<Container className="chapterForm">
+            <Grid container>
+                <Grid className='chapterFormHeading' xs={12}>
+                    <h2> Citations By Chapter: </h2>
+                </Grid>
+                <br/>
+                <Grid className='chapterFormHeading' xs={12}>
+                    <u>
+                        <h2> {title} by: {author} </h2>
+                    </u>
+                </Grid>
+                <br/>
+                <form className="chapterFormControls" onSubmit={handleChapterSubmit}>
                     <Grid item xs={12}>
                         <InputLabel htmlFor="chapterTitle">Chapter Title:</InputLabel>
-                        <TextField id="chapterTitle" aria-describedby="my-helper-text" name="chapterTitle" value={chapterTitle} onChange={handleChange} />
+                        <TextField className="chapterFormControls" id="chapterTitle" aria-describedby="my-helper-text" name="chapterTitle" value={chapterTitle} onChange={handleChange} />
                     </Grid>
+                    <br/>
 
                     <Grid item xs={12}>
                         <InputLabel htmlFor="chapterNum">Chapter Number:</InputLabel>
-                        <TextField id="chapterNum" aria-describedby="my-helper-text" name="chapterNum" value={chapterNum} onChange={handleChange} />
+                        <TextField className="chapterFormControls" id="chapterNum" aria-describedby="my-helper-text" name="chapterNum" value={chapterNum} onChange={handleChange} />
                     </Grid>
+                    <br/>
                     
-                    <Grid item xs={12}>
-                        <InputLabel htmlFor="chapterPageBegin">Page - Begin:</InputLabel>
-                        <TextField id="chapterPageBegin" aria-describedby="my-helper-text" name="chapterPageBegin" value={chapterPageBegin} onChange={handleChange} />
+                    <Grid item xs={12} className="chapterFormControls chapterFormPageControls" >
+                        <Grid item xs={3}>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <InputLabel htmlFor="chapterPageBegin">Page - Begin:</InputLabel>
+                            <TextField id="chapterPageBegin" aria-describedby="my-helper-text" name="chapterPageBegin" value={chapterPageBegin} onChange={handleChange} />
+                        </Grid>
+                        <Grid item xs={2}>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <InputLabel htmlFor="chapterPageEnd">Page - End:</InputLabel>
+                            <TextField id="chapterPageEnd" aria-describedby="my-helper-text" name="chapterPageEnd" value={chapterPageEnd} onChange={handleChange} />
+                        </Grid>
+                        <Grid item xs={3}>
+                        </Grid>
                     </Grid>
-                    
-                    <Grid item xs={12}>
-                        <InputLabel htmlFor="chapterPageEnd">Page - End:</InputLabel>
-                        <TextField id="chapterPageEnd" aria-describedby="my-helper-text" name="chapterPageEnd" value={chapterPageEnd} onChange={handleChange} />
-                    </Grid>
+                    <br/>
                     <button>
                         Submit
                     </button>
