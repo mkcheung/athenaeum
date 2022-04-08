@@ -1,20 +1,13 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { 
-    Button,
     Chip,
     Grid,
-    InputLabel,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
     TextField,
 } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Link, Redirect } from 'react-router-dom';
 import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
-import { makeStyles } from '@material-ui/core/styles';
 import { formatDate } from '../Helper/Helper';
 import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 
