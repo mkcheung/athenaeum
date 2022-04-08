@@ -141,12 +141,16 @@ const UserBookList = () => {
 
     const handleBookListClick = async (event, bookId) => {
 		event.preventDefault();
+		// may be needed to mark a change in id
+		// if chapters were selected first
+		// reset it to null
+		await setSelectedBookId(null); 
 		let theSelectedBook;
 		theSelectedBook = books.find((book)=> {
 			return book.id == bookId;
 		});
 
-		setSelectedBookId(bookId);
+		await setSelectedBookId(bookId);
 		setSelectedBook(theSelectedBook);
 		setSelectedChapterId(null);
 		setSelectedChapter(null)
@@ -170,7 +174,6 @@ const UserBookList = () => {
 			setSelectedChapterId(null);
 			setSelectedChapter(null)
 		}
-
 		let bookCitations = '';
 		let citations = [];
 	    for (let key in books) {
