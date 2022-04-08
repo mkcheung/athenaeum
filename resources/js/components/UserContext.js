@@ -31,6 +31,12 @@ const UserProvider = (props) => {
                 });
                 userData = userObj.data;
             }
+
+            if(authState.isSuperAdmin && userData.length > 0){
+                userData = userData.filter((user) => {
+                    return user.roles[0].name !== 'superadmin';
+                });
+            }
             setUsers(userData);
             setUsersLoading(false);
         } catch (error) {

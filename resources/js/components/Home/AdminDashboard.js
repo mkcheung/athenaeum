@@ -7,20 +7,9 @@ import { AgGridReact } from 'ag-grid-react';
 import swal from 'sweetalert2';
 import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 import { 
-    Button,
-    Checkbox,
-    Chip,
     CircularProgress,
     Container,
-    FormControl,
-    FormControlLabel,
-    FormLabel,
     Grid,
-    Input,
-    InputLabel,
-    MenuItem,
-    Select,
-    TextField,
     Tooltip,
 } from '@material-ui/core';
 import { 
@@ -65,12 +54,12 @@ const AdminDashboard = () => {
     };
 
 
-const extractValues = (mappings) => {
-  return Object.keys(mappings);
-};
+    const extractValues = (mappings) => {
+        return Object.keys(mappings);
+    };
 
-const roleOptions = extractValues(roleMappings);
-const statusOptions = extractValues(statusMappings);
+    const roleOptions = extractValues(roleMappings);
+    const statusOptions = extractValues(statusMappings);
 
     const lookupValue = (mappings, key) => {
         return mappings[key];
