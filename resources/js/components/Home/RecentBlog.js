@@ -6,7 +6,7 @@ import {
     TextField,
 } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 import { formatDate } from '../Helper/Helper';
 import '../../../css/styles.css'; // TODO: convert to utilize absolute paths

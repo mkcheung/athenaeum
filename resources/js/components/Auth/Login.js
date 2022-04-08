@@ -4,11 +4,6 @@ import { useAuth } from '../GlobalStates';
 
 const Login = (props) => {
 
-    const [credentials , setCredentials] = useState({
-        email : "",
-        password : ""
-    })
-
     const [formSubmitting, setFormSubmit] = useState(false);
     const {loginUser,authState,setAuthState} = useAuth();
     const handleLogin = (event) => {
@@ -21,14 +16,6 @@ const Login = (props) => {
         loginUser(email, password);
         setFormSubmit(false);
     }
-
-    const handleChange = ((e) => {
-        const {id, value} = e.target;
-        setState((prevState) => ({
-            ...prevState,
-            [id]:value
-        }));
-    });
 
     useEffect(() => {
         if(authState.isSuperAdmin || authState.user.role === 'admin'){

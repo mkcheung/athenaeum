@@ -1,7 +1,6 @@
 
 import axios from 'axios';
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import {Link, Navigate} from "react-router-dom";
 import { useAuth, loading } from './GlobalStates';
 import swal from 'sweetalert2';
 const UserContext = createContext();
