@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { 
     Button,
-    TextField,
     TextareaAutosize,
 } from '@material-ui/core';
+import '../../../css/styles.css'; // TODO: convert to utilize absolute paths
 
 const CommentBox = (props) => {
     const [comment, setComment] = useState("");
@@ -19,14 +19,14 @@ const CommentBox = (props) => {
                 title='comment' 
                 onChange={e => setComment(e.target.value)} 
                 value={comment}
-                style = {{width:'1225px'}}
-                rowsMin={5}
+                className='commentTextBox'
+                minRows={5}
             />
-            <div style = {{marginTop:'50px'}}>
-                <Button style={{float:'right'}} type="submit" variant="contained" color="primary" onClick={() => {handleCommentSubmit(comment)}}>
+            <div className='commentButtonContainer'>
+                <Button className='commentAddButton' type="submit" variant="contained" color="primary" onClick={() => {handleCommentSubmit(comment)}}>
                     Add Comment
                 </Button>
-                <Button style={{float:'right', marginRight:'10px'}} type="submit" variant="contained" color="primary" onClick={handleCommentBoxAppear}>
+                <Button className='commentCancelButton' type="submit" variant="contained" color="primary" onClick={handleCommentBoxAppear}>
                     Cancel
                 </Button>
             </div>

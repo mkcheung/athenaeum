@@ -256,3 +256,21 @@
 	border: 1px dashed grey;
 	padding: 20px;
 }
+
+.commentTextBox {
+	width:1225px;
+}
+
+.commentButtonContainer {
+	margin-top:50px;
+}
+
+.commentAddButton {
+	float:right;
+}
+
+.commentCancelButton {
+	float:right;
+	margin-right:10px;
+}
+
