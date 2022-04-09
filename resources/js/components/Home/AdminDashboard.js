@@ -370,12 +370,12 @@ const AdminDashboard = () => {
         <div className="usersPosts">
             {
                 selectedUserPosts.length && selectedUserPosts.map(selectedUserPost => (
-                <div key={`post-${selectedUserPost.id}`} style={{padding:20}}>
+                <div key={`post-${selectedUserPost.id}`} className="dshBrdUsrPst">
                     <h2>
                         <Link
                             to={`/post/show/${selectedUserPost.id}`}
                             key={selectedUserPost.id}
-                            style={{ textDecoration: 'none', color:'black' }}
+                            className="dshBrdUsrPstLink"
                         >
                             {selectedUserPost.title}
                         </Link>
@@ -389,7 +389,7 @@ const AdminDashboard = () => {
                     Author: {selectedUserPost.user.full_name}
                     <br/>
                     Posted: {formatDate(selectedUserPost.created_at)}
-                    <div style={{float:'right', top:'-27px', position:'relative'}}>
+                    <div className='dshBrdUsrPubSwitch'>
                         <IOSSwitch
                             checked={selectedUserPost.published === 1 ? true : false}
                             onChange={() => {
@@ -399,8 +399,8 @@ const AdminDashboard = () => {
                             inputProps={{ 'aria-label': 'secondary checkbox' }}
                         />
                         <Tooltip title="Delete Post(s)" placement="bottom">
-                            <ColorDeleteButton style={{height:'47px', top:'-1px'}} variant="contained" color="secondary" onClick={()=>deleteBook(post.id)}>
-                                <DeleteIcon style={{color:'white'}} />
+                            <ColorDeleteButton className='dshBrdDelButton' variant="contained" color="secondary" onClick={()=>deleteBook(post.id)}>
+                                <DeleteIcon className='dshBrdDelButtonTxt' />
                             </ColorDeleteButton>
                         </Tooltip>
                     </div>
@@ -416,10 +416,10 @@ const AdminDashboard = () => {
 
 
     return (
-        <Container maxWidth="lg">
+        <Container maxWidth='lg'>
             <Grid container spacing={3}>
-                <Grid item xs={12} style={{height: 250}}>
-                    <div className="ag-theme-alpine" style={gridStyle}>
+                <Grid item xs={12} className='dshBrdGridContainer'>
+                    <div className='ag-theme-alpine' style={gridStyle}>
                         <AgGridReact
                             onGridReady={onUserGridReady}
                             rowData={users}

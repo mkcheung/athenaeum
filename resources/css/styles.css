@@ -44,6 +44,34 @@
 	color:white;
 }
 
+.dshBrdUsrPst {
+	padding:20px;
+}
+
+.dshBrdUsrPstLink {
+	text-decoration: none;
+	color:black;
+}
+
+.dshBrdUsrPubSwitch {
+	position: relative;
+	float: right;
+	top:-27px;
+}
+
+.dshBrdDelButton {
+	height: 47px;
+	top:-1px;
+}
+
+.dshBrdDelButtonTxt {
+	color:white;
+}
+
+.dshBrdGridContainer {
+	height:250px;
+}
+
 .blogLink {
 	textDecoration:none;
 	color:black;
