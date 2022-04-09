@@ -400,7 +400,7 @@ const AdminDashboard = () => {
                         />
                         <Tooltip title="Delete Post(s)" placement="bottom">
                             <ColorDeleteButton className='dshBrdDelButton' variant="contained" color="secondary" onClick={()=>deleteBook(post.id)}>
-                                <DeleteIcon className='dshBrdDelButtonTxt' />
+                                <DeleteIcon className='dshBrdButtonTxt' />
                             </ColorDeleteButton>
                         </Tooltip>
                     </div>

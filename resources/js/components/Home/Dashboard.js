@@ -225,7 +225,7 @@ const Dashboard = (props) => {
 						<Link
 							to={`/post/show/${post.id}`}
 							key={post.id}
-							style={{ textDecoration: 'none', color:'black' }}
+							className='dshBrdUsrPstLink'
 						>
 							{post.title}
 						</Link>
@@ -239,7 +239,7 @@ const Dashboard = (props) => {
         			Author: {post.user.full_name}
     				<br/>
     				Posted: {formatDate(post.created_at)}
-        			<div style={{float:'right', top:'-27px', position:'relative'}}>
+        			<div className='dshBrdUsrPubSwitch'>
 							<IOSSwitch
 								checked={post.published === 1 ? true : false}
 								onChange={() => {
@@ -251,26 +251,26 @@ const Dashboard = (props) => {
 						{
 							(showDescendantPosts === false && post.descendant_post_id !== null )&& 
 
-								<ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>loadPostDescendants(post.id)}>
-									<ListIcon style={{color:'white'}} />
+								<ColorEditButton className='dshBrdEditButton' variant="contained" color="primary" onClick={()=>loadPostDescendants(post.id)}>
+									<ListIcon className='dshBrdButtonTxt' />
 								</ColorEditButton>
 						}
 						{
 							(showDescendantPosts === false && post.descendant_post_id == null) &&
 					            <Tooltip title="Add Chapter" placement="bottom">
-					                <ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>redirectToAddChapter(post.id)}>
-					                    <PlaylistAddIcon style={{color:'white'}} />
+					                <ColorEditButton className='dshBrdEditButton' variant="contained" color="primary" onClick={()=>redirectToAddChapter(post.id)}>
+					                    <PlaylistAddIcon className='dshBrdButtonTxt' />
 					                </ColorEditButton>
 					            </Tooltip>
 						}
 	  					<Tooltip title="Edit Post" placement="bottom">
-							<ColorEditButton style={{marginRight:'10px', height:'47px', top:'-1px'}} variant="contained" color="primary" onClick={()=>redirectToEdit(post.id)}>
-								<EditIcon style={{color:'white'}} />
+							<ColorEditButton className='dshBrdEditButton' variant="contained" color="primary" onClick={()=>redirectToEdit(post.id)}>
+								<EditIcon className='dshBrdButtonTxt' />
 							</ColorEditButton>
 						</Tooltip>
 	  					<Tooltip title="Delete Post(s)" placement="bottom">
-							<ColorDeleteButton style={{height:'47px', top:'-1px'}} variant="contained" color="secondary" onClick={()=>deleteBook(post.id)}>
-								<DeleteIcon style={{color:'white'}} />
+							<ColorDeleteButton className='dshBrdDelButton' variant="contained" color="secondary" onClick={()=>deleteBook(post.id)}>
+								<DeleteIcon className='dshBrdButtonTxt' />
 							</ColorDeleteButton>
 						</Tooltip>
             		</div>
@@ -288,8 +288,8 @@ const Dashboard = (props) => {
 	if (showDescendantPosts === true) {
 		showDescPosts = <div className="container">
 				<Tooltip title="Add Chapter" placement="bottom">
-				<Button style={{height:'47px', top:'-1px', float:'right'}} variant="contained" color="primary" onClick={()=>redirectToAddChapter(props.match.params.id)}>
-					<PlaylistAddIcon style={{color:'white'}} />
+				<Button className='dshBrdAddChButton' variant="contained" color="primary" onClick={()=>redirectToAddChapter(props.match.params.id)}>
+					<PlaylistAddIcon className='dshBrdButtonTxt' />
 				</Button>
 			</Tooltip>
 		</div>

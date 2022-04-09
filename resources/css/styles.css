@@ -59,12 +59,24 @@
 	top:-27px;
 }
 
+.dshBrdAddChButton {
+	float:right;
+	height: 47px;
+	top:-1px;
+}
+
+.dshBrdEditButton {
+	margin-right:10px;
+	height: 47px;
+	top:-1px;
+}
+
 .dshBrdDelButton {
 	height: 47px;
 	top:-1px;
 }
 
-.dshBrdDelButtonTxt {
+.dshBrdButtonTxt {
 	color:white;
 }
 
