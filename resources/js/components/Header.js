@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useAuth } from './GlobalStates';
 import { useUserData } from './UserContext';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { alpha, makeStyles } from '@material-ui/core/styles';
 import {
     Link,
     useNavigate
@@ -47,9 +47,9 @@ const useStyles = makeStyles((theme) => ({
     search: {
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.15),
+        backgroundColor: alpha(theme.palette.common.white, 0.15),
         '&:hover': {
-            backgroundColor: fade(theme.palette.common.white, 0.25),
+            backgroundColor: alpha(theme.palette.common.white, 0.25),
         },
         marginRight: theme.spacing(2),
         marginLeft: 0,
@@ -150,7 +150,7 @@ const Header = (props) => {
                     </h6>
                 </IconButton>
                 <Menu
-                    id="fade-menu"
+                    id="alpha-menu"
                     anchorEl={anchorEl}
                     keepMounted
                     open={openMenu}
