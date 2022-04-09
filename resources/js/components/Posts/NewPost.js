@@ -31,25 +31,19 @@ const NewPost = () => {
     const [ citations, setCitations ] = useState([]);
     const [ tags, setTags ] = useState([]);
     const [ selectedTags, setSelectedTags ] = useState([]);
-    const [ errors, setErrors ] = useState([]);
     const [ bookSelectedId, setBookSelectedId ] = useState(null);
     const [ chapterSelectedId, setChapterSelectedId ] = useState(null);
     const [ chapterSelectedTitle, setChapterSelectedTitle ] = useState(null);
     const [ parentPostId, setParentPostId ] = useState(null);
     const [ postId, setPostId ] = useState(null);
-    const [ bookSelectedModalOpen, setbookSelectedModalOpen ] = useState(false);
     const [ bookTitle, setBookTitle ] = useState(null);
     const [ bookTitleSearchTerm, setBookTitleSearchTerm ] = useState('');
     const [ content, setContent ] = useState('');
     const [ title, setTitle ] = useState('');
     const [ published, setPublished ] = useState(false);
-    const [ open, setOpen ] = useState(false);
     const [ image, setImage ] = useState('');
-    const [ imagePreviewUrl, setImagePreviewUrl ] = useState(false);
     const [ bookSelectionModalOpen, setBookSelectionModalOpen ] = useState(false);
     const [ dataLoading, setDataLoading ] = useState(true);
-    const [ user, setUser ] = useState({});
-    const [ chapterSelectionModalOpen, setChapterSelectionModalOpen] = React.useState(false);
     const { authState, setAuthState } = useAuth();
 
 
@@ -358,12 +352,12 @@ const NewPost = () => {
                                             title='title' 
                                             onChange={handleTitleChange} 
                                             value={title}
-                                            style={{ width:'100%' }}
+                                            className='newPostInputs'
                                         />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <FormControl 
-                                        style={{ width:'100%' }}
+                                        className='newPostInputs'
                                     >
                                         <Autocomplete
                                             multiple
@@ -404,22 +398,22 @@ const NewPost = () => {
                                         label="Publish"
                                     />
                                 </Grid><br/>
-                                <Grid container style={{height:'250px'}}>
+                                <Grid container className="newPostImageContainer">
                                     <Grid item xs={6}>
                                         <h4>Insert Blog Header Image</h4>
                                         <input className="input_imagem_artigo" type="file" onChange={onChangeImage} />
                                     </Grid>
-                                    <Grid item xs={6} style={{'position': 'relative', 'left':'400px'}}>
-                                        <Grid style={{'textAlign':'center', 'marginLeft':'-85px'}} item xs={12}>
+                                    <Grid item xs={6} className="newPostImgContRtPane">
+                                        <Grid className='newPostImgContRtPaneContent' item xs={12}>
                                             <div>
-                                                <img style={{'max-width':'75%','max-height':'75%'}} src={image} />
+                                                <img className='newPostImgContRtPaneImg' src={image} />
                                             </div>
                                         </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid container style={{height:'775px'}}>
-                                <Grid item xs={4} style={{padding:'10px'}}>  
+                            <Grid container className="newPostBookCitationContainer">
+                                <Grid item xs={4} className="newPostBookCitationContent">  
                                     <BookCitationList 
                                         book_title={bookTitle}
                                         chapter_title={chapterSelectedTitle}

@@ -5,8 +5,38 @@
 	overflow:scroll;
 }
 
+.newPostImageContainer {
+	height:250px;
+}
+
+.newPostImgContRtPane {
+	position:relative;
+	left:400px;
+}
+
+.newPostImgContRtPaneContent {
+	text-align:center;
+	margin-left:-85px;
+}
+
+.newPostImgContRtPaneImg {
+	max-width:75%;
+	max-height:75%;
+}
+
 .newPostButton {
 	float:right;
+}
+
+.newPostBookCitationContainer {
+	height:775px;
+}
+.newPostBookCitationContent {
+	padding:10px;
+}
+
+.newPostInputs {
+	width:100%;
 }
 
 .headerLink {
