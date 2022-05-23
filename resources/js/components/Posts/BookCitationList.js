@@ -17,15 +17,15 @@ const BookCitationList = (props) => {
 
 	let {book_title, chapter_title, citations, handleCitationInsertion, handleOpenChapterSelectionModal} = props; 
     let bookTitleDisplay = book_title ? <Grid item xs={12}>
-                <div className="citationChapterTitle">
-                    <InputLabel><strong>Title:</strong> <u>{book_title}</u></InputLabel>
+                <div className="citationBookTitle">
+                    <InputLabel><strong>Title:</strong> <u id="bookTitle">{book_title}</u></InputLabel>
                 </div>
             </Grid> : 
             '';
 
     let chapterTitleDisplay = chapter_title ? <Grid item xs={12}>
                 <div className="citationChapterTitle">
-                    <InputLabel><strong>Chapter Title:</strong> <u>{chapter_title}</u></InputLabel>
+                    <InputLabel><strong>Chapter Title:</strong> <u id="chapterTitle">{chapter_title}</u></InputLabel>
                 </div>
             </Grid> : 
             '';

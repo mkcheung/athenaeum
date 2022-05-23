@@ -206,18 +206,27 @@ const NewPost = () => {
 
         let citationBlock = e.currentTarget;
 
-        const citationText = '"' + citationBlock.getElementsByClassName("citationText")[0].innerText + '", <i>' + citationBlock.getElementsByClassName("title")[0].innerText + '</i>, ' + citationBlock.getElementsByClassName("page")[0].innerText;
-
         // must focus before calling getSelection
         quill.focus();
         let range = quill.getSelection();
         
         let position = range ? range.index : 0;
-        quill.insertText(position, citationBlock.getElementsByClassName("page")[0].innerText );
-        quill.insertText(position, citationBlock.getElementsByClassName("title")[0].innerText + ', ', {
+        let theCitation = citationBlock.getElementsByClassName("page")[0].textContent;
+        let theBookTitle = document.getElementById("bookTitle").textContent;
+        let theBookChapterTitle = document.getElementById("chapterTitle");
+        quill.insertText(position, theCitation);
+        quill.insertText(position, theBookTitle + ', ', {
             'italic': true
         });
-        quill.insertText(position, '"' + citationBlock.getElementsByClassName("citationText")[0].innerText + '", ', {
+
+        if(theBookChapterTitle){
+            
+            quill.insertText(position, theBookChapterTitle.textContent + ', ', {
+                'italic': true
+            });
+        }
+
+        quill.insertText(position, '"' + citationBlock.getElementsByClassName("citationText")[0].textContent + '", ', {
             'italic': false
         });
     }
