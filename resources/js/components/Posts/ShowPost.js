@@ -151,8 +151,7 @@ const ShowPost = () => {
                                     <img style={{'max-width':'75%','max-height':'75%'}} src={image} />
                                 </div>
                             </h4>
-                            <div dangerouslySetInnerHTML={{__html: content}}>
-                            </div>
+                            <textarea className="quillPanel" value={content} disabled={true}></textarea>
                         </Box>
                     </Grid>
                 </Grid>
