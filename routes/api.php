@@ -18,7 +18,7 @@ Route::get('users/showAuthors', [UserController::class, 'showAuthors']);
 Route::get('posts/show/{id}', [PostController::class, 'show']);
 
 Route::middleware(['api'])->group(function () {
-    Route::post('/register', [JWTController::class, 'register']);
+    Route::post('/register', [JWTController::class, 'register'])->name('register');
     Route::post('/login', [JWTController::class, 'login']);
     Route::post('/logout', [JWTController::class, 'logout']);
     Route::post('/refresh', [JWTController::class, 'refresh']);
