@@ -64,7 +64,7 @@ class CitationTest extends TestCase
 
         Citation::placeCitationWithinChapter($book['id']);
 
-        $resultsFromBook = Citation::latest()->first();;
+        $resultsFromBook = Citation::latest()->first();
         $this->assertEquals($resultsFromBook['chapter'], 2);
     }
 }

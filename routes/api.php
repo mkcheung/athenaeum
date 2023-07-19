@@ -30,7 +30,7 @@ Route::middleware(['api'])->group(function () {
     Route::post('citations/assignChapters', [CitationController::class, 'assignChapters']);
     Route::resource('citations', CitationController::class);
     Route::get('/posts/', [PostController::class, 'index']);
-    Route::get('/posts/getUserPosts', [PostController::class, 'getUserPosts']);
+    Route::get('/posts/getUserPosts', [PostController::class, 'getUserPosts'])->name('getUserPosts');
     Route::get('/posts/getPostAndDecendants', [PostController::class, 'getPostAndDecendants']);
     Route::resource('posts', PostController::class);
     Route::get('/books/searchByTitle', [BookController::class, 'searchByTitle']);
