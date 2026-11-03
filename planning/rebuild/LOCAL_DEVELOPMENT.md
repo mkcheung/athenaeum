@@ -6,6 +6,8 @@ November 2, 2026. **DRAFT · PLANNING ONLY · NOTHING INSTALLED OR QUALIFIED.**
 
 D08/D17 now require local application development and no paid service usage until the user requests release. Build at this repository's root with the legacy tree in `retired/` (revised D08). Keep the modular Django/React design, PostgreSQL authority, Pinecone retrieval target, private object storage, background jobs and all quality/privacy requirements. No hosting account or deployment is needed now.
 
+D28 runs every backing service (PostgreSQL, S3-compatible storage, mail capture, queue broker) as one Docker Compose project named `athenaeum`, using free images only. Docker volumes live on this Mac inside Docker Desktop's disk image. Resetting or uninstalling Docker Desktop, or running `docker compose down -v`, erases them. They are not a backup and do not change D19's unverified status.
+
 “Local” describes where the application runs. Selected free cloud services remain external; D07 now permits task processing and training/product-improvement reuse where applicable terms permit. This is not blanket permission for every recipient, restricted input or account setting. Private books/drafts use checked service/data profiles and accurate disclosures. Local anonymous-browser publication tests do not publish essays on the internet.
 
 ## Proposed development components
@@ -13,10 +15,10 @@ D08/D17 now require local application development and no paid service usage unti
 | Component | Local/free approach | Evidence boundary |
 |---|---|---|
 | React + Django API | Local processes or an isolated local container environment | Real UI/API flows; no hosted availability claim |
-| PostgreSQL | Dedicated local development and test databases | Real transactions/ownership/revisions; the dropped legacy MySQL database is not reused (D27) |
-| Queue/workers | Actual local durable worker and chosen queue backend | Real persistence/restart behavior; not an inline fake |
-| Original-file storage | Real local S3-compatible object service, engine pinned after P02 compatibility checks | Accepted object architecture tested locally; no remote-provider integration claim |
-| Approval/activation mail | Local SMTP capture, such as Mailpit, with external relay disabled | Real worker/SMTP/message/link/password journey; external inbox delivery remains unverified |
+| PostgreSQL | Compose service with dedicated development and test databases and a named volume | Real transactions/ownership/revisions; the dropped legacy MySQL database is not reused (D27) |
+| Queue/workers | Actual local durable worker; queue broker as a Compose service when the chosen backend needs one | Real persistence/restart behavior; not an inline fake |
+| Original-file storage | Real local S3-compatible object service as a Compose service, engine pinned after P02 compatibility checks | Accepted object architecture tested locally; no remote-provider integration claim |
+| Approval/activation mail | Local SMTP capture, such as Mailpit, as a Compose service with external relay disabled | Real worker/SMTP/message/link/password journey; external inbox delivery remains unverified |
 | EPUB/PDF extraction | Local text extraction; no OCR in initial scope | Actual file/span/page coverage, not a mocked parser |
 | Pinecone | Confirmed free Starter account/index within isolated permitted resources | Real embeddings/index/query/freshness only when actually exercised |
 | Web research | Approved free discovery/extraction quota plus inspected public pages | Real retrieval within quota; recorded responses alone are fixtures |

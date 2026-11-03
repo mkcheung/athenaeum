@@ -2,7 +2,7 @@
 
 Accepted November 3, 2026. **DESIGN BASELINE v1 · NOT IMPLEMENTED · NOT QUALIFIED.**
 
-**Amendment v1.1, November 3 (round 13, user-directed):** build in this repository with legacy files moved to `retired/` (revised D08); start empty with no legacy import (D18); drop the legacy MySQL database without a fresh dump while keeping PostgreSQL for the new app (D27). The impact review is in [DECISIONS.md](DECISIONS.md#thirteenth-round-answers--november-3-2026-post-acceptance-amendment). Nothing else in the baseline changes.
+**Amendment v1.1, November 3 (round 13, user-directed):** build in this repository with legacy files moved to `retired/` (revised D08); start empty with no legacy import (D18); drop the legacy MySQL database without a fresh dump while keeping PostgreSQL for the new app (D27); only `journeyman` is dropped and the native MySQL server and its other databases stay. All local backing services run as one Docker Compose project, created in P02 (D28). The impact review is in [DECISIONS.md](DECISIONS.md#thirteenth-round-answers--november-3-2026-post-acceptance-amendment). Nothing else in the baseline changes.
 
 The user accepted this consolidation of the interview choices as a planning baseline only. It does not authorize application code, installation, repository creation, account changes, paid usage or deployment. Exact implementation/evaluation details are decided at the named phase gates below; material architecture changes require a recorded impact review.
 

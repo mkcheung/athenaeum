@@ -12,7 +12,7 @@ Create a local stack at the repository root with no paid services, isolated from
 ## Prerequisites and decisions
 
 - P01 retirement accepted: legacy files are in `retired/`, the legacy MySQL database is dropped, and the root holds only the agreed keep-list.
-- D00 baseline; revised D08 builds at this repository's root with hosting deferred; D18 means no legacy import; D09's local private object-storage, durable queue and mail-capture implementations still to select. Follow [LOCAL_DEVELOPMENT.md](LOCAL_DEVELOPMENT.md).
+- D00 baseline; revised D08 builds at this repository's root with hosting deferred; D18 means no legacy import; D28 runs all backing services (PostgreSQL, S3-compatible object storage, mail capture, queue broker) as one Docker Compose project; D09's exact engines/images for storage, queue and mail capture are still to select. Follow [LOCAL_DEVELOPMENT.md](LOCAL_DEVELOPMENT.md).
 - Accepted D23 selects one modular Django backend with worker processes; D24 requires Ask/Review to continue after closing the page until completion/explicit cancellation; D25 sets personal/invited use up to roughly 25 writers. Use these in the topology and record actual concurrency/rate targets under D17 before capacity testing.
 - D10 accepts Tiptap's free core; choose supported framework/editor/export/CSL runtime versions after a compatibility/license spike. Do not copy historical versions or add paid Tiptap packages/trials. Backend-owned revisions, research and exports remain our application features.
 - Decide the custom Django user model before the first authentication migrations; P03 implements its account lifecycle afterward.
@@ -22,6 +22,12 @@ Create a local stack at the repository root with no paid services, isolated from
 
 - Reproducible Django/DRF API, React/TypeScript UI and isolated Postgres development/test environments at the repository root.
 - Root tooling excludes `retired/`: test discovery, linters/type checkers, bundler and file watchers, container build contexts (`.dockerignore`) and the extended root `.gitignore`. No new code imports, builds or reads configuration from `retired/`, including `retired/.env`.
+- **Docker Compose backing services (D28).**
+  - One root Compose file with its own project name (`athenaeum`) defines PostgreSQL, the S3-compatible store, Mailpit-style mail capture and the queue broker, with pinned image versions and named volumes.
+  - Ports bind to `127.0.0.1` only and avoid host ports already used by other local projects. Observed November 3: a running project uses 443, 8080, 5433, 8025 and 8333; stopped MySQL containers bind 3306.
+  - Service credentials live in an untracked local env file.
+  - Whether Django, the workers and the React dev server run on the host or as Compose services is decided here.
+  - `docker compose down -v` deletes the volumes and therefore all local data, so it is documented as destructive and never part of routine setup/reset scripts.
 - Custom user-model foundation, migration strategy and deny-by-default API skeleton; same-origin session/CSRF is the recommended browser architecture.
 - Real local durable workers/queue, local private S3-compatible object-storage service and local SMTP capture, using isolated persistent resources. Original-file storage remains the accepted object architecture; external mail/remote-storage proof is deferred to P14.
 - Typed API/error contracts, structured sanitized logging, dependency lockfiles and environment documentation without real credentials.
@@ -40,9 +46,9 @@ Create a local stack at the repository root with no paid services, isolated from
 
 ### P02-AC02
 
-**What you should see:** A setup report shows that the documented recipe produced a fresh, separate working environment without displaying private keys or passwords.
+**What you should see:** A setup report shows that the documented recipe produced a fresh, separate working environment without displaying private keys or passwords. One command starts the new database and other support services in Docker, they don't clash with your other projects' containers, and saved test data is still there after stopping and restarting them.
 
-**Why this must work before moving on:** The project should be rebuildable rather than working only on one already-configured machine.
+**Why this must work before moving on:** The project should be rebuildable rather than working only on one already-configured machine, and restarting Docker shouldn't lose your work.
 
 ### P02-AC03
 
@@ -113,9 +119,9 @@ Create a local stack at the repository root with no paid services, isolated from
 ## Acceptance criteria
 
 - [ ] **P02-AC01 — Compatibility demonstrated:** pinned Python/Django/DRF/Postgres/Node/React/editor/CSL-runtime choices and candidate required DOCX/PDF export tools start and interoperate in a minimal spike; unsupported peer/runtime combinations are rejected or explicitly resolved with evidence. Full export/style fidelity remains P06, not a claim from this spike.
-- [ ] **P02-AC02 — Reproducible setup:** a clean isolated environment can follow documented commands to build/start the API, UI, database and worker; required configuration is validated without printing secrets.
+- [ ] **P02-AC02 — Reproducible setup:** a clean isolated environment can follow documented commands to build/start the API, UI, database and worker; required configuration is validated without printing secrets. Backing services start from the root Compose file under the `athenaeum` project name with pinned images, named volumes and `127.0.0.1` ports that don't collide with other local projects. Data survives `docker compose down`/`up` and a Docker restart.
 - [ ] **P02-AC03 — Custom user first:** the agreed custom-user model and reference pattern are present before initial auth migrations; a fresh dedicated local PostgreSQL database migrates. The dropped legacy MySQL database is not recreated or used.
-- [ ] **P02-AC04 — Test identity guards:** destructive test/setup operations verify explicit database/storage/namespace identities and refuse production, retired-legacy (MySQL or `retired/` paths), missing or unexpected targets; automated tests demonstrate refusal safely.
+- [ ] **P02-AC04 — Test identity guards:** destructive test/setup operations verify explicit database/storage/namespace identities and refuse production, retired-legacy (MySQL or `retired/` paths), missing or unexpected targets; automated tests demonstrate refusal safely. Test databases are separate from the development database inside the Compose PostgreSQL service. No setup/reset script removes Compose volumes or touches other projects' containers, volumes or networks.
 - [ ] **P02-AC05 — Server boundaries:** anonymous protected-resource requests fail; browser requests use the selected session/CSRF design, explicit login CSRF handling and environment-appropriate cookie/origin settings. No provider credentials or long-lived auth secrets are placed in client bundles.
 - [ ] **P02-AC06 — Real worker and durable identity:** a diagnostic job survives page closure, browser-session expiry and worker interruption under the agreed checkpoint/retry policy, with one stable owned job ID and recorded completion/failure. Reopening after authentication finds that same job without a duplicate active run. The actual worker executes it; inline execution or an in-memory fake cannot prove durability. Account suspension is tested separately from session expiry.
 - [ ] **P02-AC07 — Transactional dispatch:** database/job handoff uses a durable intent/outbox and recovery design. Test both a crash/provider failure after database commit but before enqueue/acknowledgement, and duplicate delivery: committed work remains recoverable and duplicate execution is idempotent, with no false success. An on-commit callback alone is not durable recovery proof.
