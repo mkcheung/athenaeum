@@ -1,0 +1,122 @@
+<div id="an-quiet-study">
+  <style>
+    #an-quiet-study { --qs-page:light-dark(#fbf9f3,#252723); --qs-panel:light-dark(#f0f2eb,#20251f); --qs-ink:light-dark(#29372d,#e0e8de); --qs-muted:light-dark(#596452,#b2bfae); --qs-line:light-dark(#d9dfd2,#424c3e); --qs-accent:light-dark(#385841,#b7d0aa); --qs-tint:light-dark(#e0e8d6,#34432e); --qs-contrast:light-dark(#ffffff,#1b291b); color:var(--qs-ink); font-family:system-ui,sans-serif; background:var(--qs-page); border:1px solid var(--qs-line); border-radius:16px; overflow:clip; }
+    #an-quiet-study * { box-sizing:border-box; }
+    #an-quiet-study [hidden] { display:none !important; }
+    #an-quiet-study button { font:inherit; color:inherit; cursor:pointer; background:none; border:1px solid transparent; border-radius:8px; padding:8px 11px; display:inline-flex; gap:7px; align-items:center; justify-content:center; }
+    #an-quiet-study button:hover { background:var(--qs-tint); }
+    #an-quiet-study button:focus-visible { outline:2px solid var(--qs-accent); outline-offset:3px; }
+    #an-quiet-study .qs-top { display:flex; align-items:center; flex-wrap:wrap; gap:12px; padding:14px 20px; border-bottom:1px solid var(--qs-line); }
+    #an-quiet-study .qs-brand { font-family:Georgia,serif; font-weight:500; display:flex; align-items:center; gap:8px; }
+    #an-quiet-study .qs-spacer { flex:1; }
+    #an-quiet-study .qs-muted { color:var(--qs-muted); }
+    #an-quiet-study .qs-research-button { background:var(--qs-accent); color:var(--qs-contrast); }
+    #an-quiet-study .qs-research-button:hover { background:var(--qs-accent); }
+    #an-quiet-study .qs-work { display:grid; grid-template-columns:minmax(0,1fr) 310px; }
+    #an-quiet-study.qs-focus .qs-work { grid-template-columns:minmax(0,1fr); }
+    #an-quiet-study .qs-paper { padding:38px clamp(20px,5%,54px) 24px; min-width:0; }
+    #an-quiet-study .qs-prose { max-width:65ch; margin:0 auto; font-family:Georgia,serif; }
+    #an-quiet-study .qs-prose h1 { font-weight:400; margin:14px 0 12px; }
+    #an-quiet-study .qs-prose h2 { font-weight:400; margin:28px 0 14px; }
+    #an-quiet-study .qs-prose p { margin:0 0 20px; }
+    #an-quiet-study .qs-kicker { font-family:system-ui,sans-serif; color:var(--qs-muted); letter-spacing:.05em; }
+    #an-quiet-study .qs-deck { color:var(--qs-muted); font-style:italic; }
+    #an-quiet-study .qs-toolbar { display:flex; align-items:center; gap:16px; flex-wrap:wrap; width:fit-content; padding:10px 14px; margin:23px 0; border:1px solid var(--qs-line); border-radius:10px; font-family:system-ui,sans-serif; background:var(--qs-page); }
+    #an-quiet-study .qs-selection { background:var(--qs-tint); border-radius:3px; padding:2px 0; }
+    #an-quiet-study .qs-research-selection { border:1px solid var(--qs-line); color:var(--qs-accent); margin-bottom:14px; }
+    #an-quiet-study .qs-side { background:var(--qs-panel); border-left:1px solid var(--qs-line); padding:20px; min-width:0; }
+    #an-quiet-study .qs-sidehead { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:16px; }
+    #an-quiet-study .qs-sidehead > span:first-child { display:inline-flex; align-items:center; gap:7px; }
+    #an-quiet-study .qs-switch { display:flex; gap:3px; padding:4px; border:1px solid var(--qs-line); border-radius:11px; margin-bottom:18px; }
+    #an-quiet-study .qs-switch button { flex:1; padding:7px 8px; }
+    #an-quiet-study .qs-switch button[aria-pressed="true"] { background:var(--qs-page); border-color:var(--qs-line); color:var(--qs-accent); }
+    #an-quiet-study .qs-context { padding:12px; border-left:2px solid var(--qs-accent); background:var(--qs-page); margin:12px 0 18px; border-radius:0 7px 7px 0; font-family:Georgia,serif; }
+    #an-quiet-study .qs-side p { margin:10px 0 14px; }
+    #an-quiet-study .qs-label { display:block; margin:14px 0 8px; }
+    #an-quiet-study textarea { font:inherit; color:var(--qs-ink); background:var(--qs-page); border:1px solid var(--qs-line); border-radius:9px; width:100%; resize:vertical; min-height:80px; padding:11px; }
+    #an-quiet-study .qs-primary { width:100%; background:var(--qs-accent); color:var(--qs-contrast); margin-top:10px; }
+    #an-quiet-study .qs-primary:hover { background:var(--qs-accent); }
+    #an-quiet-study .qs-source { background:var(--qs-page); border:1px solid var(--qs-line); border-radius:10px; padding:14px; margin:12px 0; }
+    #an-quiet-study .qs-source h3 { font:inherit; font-weight:500; margin:8px 0; }
+    #an-quiet-study .qs-source blockquote { margin:12px 0; padding-left:10px; border-left:2px solid var(--qs-line); font-family:Georgia,serif; }
+    #an-quiet-study .qs-source button { border-color:var(--qs-line); }
+    #an-quiet-study .qs-cite { color:var(--qs-accent); }
+    #an-quiet-study .qs-footer { border-top:1px solid var(--qs-line); padding:11px 20px; display:flex; flex-wrap:wrap; gap:12px; color:var(--qs-muted); }
+    #an-quiet-study .qs-footer [role="status"] { margin-left:auto; }
+    @media (max-width:760px) { #an-quiet-study .qs-work { grid-template-columns:minmax(0,1fr); } #an-quiet-study .qs-side { border-left:0; border-top:1px solid var(--qs-line); } #an-quiet-study .qs-top { padding:12px; gap:7px; } #an-quiet-study .qs-paper { padding:26px 20px; } }
+    @media (pointer:coarse) { #an-quiet-study button { min-height:44px; } #an-quiet-study textarea { font-size:16px; } }
+  </style>
+  <header class="qs-top">
+    <span class="qs-brand"><i data-lucide="feather" aria-hidden="true"></i> Athenaeum</span>
+    <span class="qs-muted">/ Essays</span><span class="qs-spacer"></span>
+    <button type="button" data-qs-focus aria-pressed="false"><i data-lucide="maximize-2" aria-hidden="true"></i> Focus</button>
+    <button type="button" class="qs-research-button" data-qs-open><i data-lucide="book-open" aria-hidden="true"></i> Research</button>
+  </header>
+  <div class="qs-work">
+    <main class="qs-paper">
+      <article class="qs-prose" aria-label="Essay design preview">
+        <div class="qs-kicker">PHILOSOPHY · PERSONAL ESSAY</div>
+        <h1>Room to think</h1>
+        <p class="qs-deck">On leaving a little space between an idea and a certainty.</p>
+        <div class="qs-toolbar" aria-label="Formatting preview"><span>Paragraph</span><span aria-hidden="true">│</span><b>B</b><em>I</em><span>Link</span><span>Quote</span></div>
+        <p>I want a place to think in public without confusing confidence with understanding. A useful essay should leave room for its own revision.</p>
+        <p><span class="qs-selection">An unfamiliar perspective can help us notice the assumptions in our own argument.</span><sup class="qs-cite" data-qs-citation hidden> [1]</sup> But what would count as evidence, and what would merely repeat something I already believe?</p>
+        <button class="qs-research-selection" type="button" data-qs-selected><i data-lucide="sparkles" aria-hidden="true"></i> Research this passage</button>
+        <h2>A more useful question</h2>
+        <p>Perhaps I should begin by asking what might change my mind. That question makes the next sentence more interesting to write.</p>
+        <p class="qs-muted"><em>Leave the question open for a moment.</em></p>
+      </article>
+    </main>
+    <aside class="qs-side" aria-label="Research workspace">
+      <div class="qs-sidehead"><span><i data-lucide="compass" aria-hidden="true"></i> Research</span><span class="qs-muted">Illustrative</span></div>
+      <div class="qs-switch" role="group" aria-label="Research mode">
+        <button type="button" data-qs-mode="ask" aria-pressed="true">Ask</button>
+        <button type="button" data-qs-mode="sources" aria-pressed="false">Sources</button>
+        <button type="button" data-qs-mode="review" aria-pressed="false">Review</button>
+      </div>
+      <section data-qs-panel="ask" aria-label="Ask research">
+        <span class="qs-muted">Using your selected passage</span>
+        <div class="qs-context">An unfamiliar perspective can help us notice the assumptions in our own argument.</div>
+        <label class="qs-label" for="qs-question">What would you like to explore?</label>
+        <textarea id="qs-question">What evidence could support or qualify this idea?</textarea>
+        <button type="button" class="qs-primary" data-qs-answer>Explore evidence <i data-lucide="arrow-up-right" aria-hidden="true"></i></button>
+        <div data-qs-response hidden><p>A useful next step is to distinguish considering an opposing view from changing one's beliefs.</p><button type="button" data-qs-show-sources>See example source</button></div>
+        <p class="qs-muted">Web + your library · Selected text only</p>
+      </section>
+      <section data-qs-panel="sources" aria-label="Saved sources" hidden>
+        <p class="qs-muted">An example of a passage you could inspect before citing.</p>
+        <div class="qs-source"><span class="qs-muted">Example reading · p. 14</span><h3>Notes on considering other views</h3><blockquote>Start by asking what the other person means, before deciding whether you agree.</blockquote><p class="qs-muted">Illustrative excerpt · not a real quotation</p><button type="button" data-qs-insert>Insert citation <i data-lucide="plus" aria-hidden="true"></i></button></div>
+        <p>Full details and original passage stay attached to the citation.</p>
+      </section>
+      <section data-qs-panel="review" aria-label="Essay review" hidden>
+        <div class="qs-source"><span class="qs-muted">Selected claim · needs evidence</span><h3>Specify what “help” means</h3><p>Does the sentence concern understanding an argument, recognizing an assumption, or changing a belief?</p><p class="qs-context">Considering another perspective may reveal assumptions worth examining.</p><button type="button" data-qs-review-source>Find evidence</button></div>
+        <p class="qs-muted">Suggested wording · your essay stays under your control.</p>
+      </section>
+    </aside>
+  </div>
+  <footer class="qs-footer"><span>Draft · private</span><span>MLA</span><span role="status" aria-live="polite">Design preview</span></footer>
+  <script>
+    (() => {
+      const root = document.getElementById('an-quiet-study');
+      const side = root.querySelector('.qs-side');
+      const status = root.querySelector('[role="status"]');
+      const focus = root.querySelector('[data-qs-focus]');
+      function show(mode) {
+        side.hidden = false;
+        root.classList.remove('qs-focus');
+        focus.setAttribute('aria-pressed','false');
+        status.textContent = 'Design preview';
+        root.querySelectorAll('[data-qs-mode]').forEach(b => b.setAttribute('aria-pressed',String(b.dataset.qsMode === mode)));
+        root.querySelectorAll('[data-qs-panel]').forEach(p => p.hidden = p.dataset.qsPanel !== mode);
+      }
+      root.querySelectorAll('[data-qs-mode]').forEach(b => b.addEventListener('click',() => show(b.dataset.qsMode)));
+      root.querySelector('[data-qs-open]').addEventListener('click',() => show('ask'));
+      root.querySelector('[data-qs-selected]').addEventListener('click',() => { show('ask'); root.querySelector('#qs-question').focus(); });
+      focus.addEventListener('click',() => { const active = !side.hidden; side.hidden = active; root.classList.toggle('qs-focus',active); focus.setAttribute('aria-pressed',String(active)); status.textContent = active ? 'Focus mode' : 'Design preview'; });
+      root.querySelector('[data-qs-answer]').addEventListener('click',() => { root.querySelector('[data-qs-response]').hidden = false; status.textContent = 'Illustrative answer'; });
+      root.querySelector('[data-qs-show-sources]').addEventListener('click',() => show('sources'));
+      root.querySelector('[data-qs-review-source]').addEventListener('click',() => show('sources'));
+      root.querySelector('[data-qs-insert]').addEventListener('click',() => { root.querySelector('[data-qs-citation]').hidden = false; status.textContent = 'Citation shown in preview'; });
+    })();
+  </script>
+</div>

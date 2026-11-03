@@ -18,7 +18,7 @@ Route::get('users/showAuthors', [UserController::class, 'showAuthors']);
 Route::get('posts/show/{id}', [PostController::class, 'show']);
 
 Route::middleware(['api'])->group(function () {
-    Route::post('/register', [JWTController::class, 'register']);
+    Route::post('/register', [JWTController::class, 'register'])->name('register');
     Route::post('/login', [JWTController::class, 'login']);
     Route::post('/logout', [JWTController::class, 'logout']);
     Route::post('/refresh', [JWTController::class, 'refresh']);
@@ -30,8 +30,8 @@ Route::middleware(['api'])->group(function () {
     Route::post('citations/assignChapters', [CitationController::class, 'assignChapters']);
     Route::resource('citations', CitationController::class);
     Route::get('/posts/', [PostController::class, 'index']);
-    Route::get('/posts/getUserPosts', [PostController::class, 'getUserPosts']);
-    Route::get('/posts/getPostAndDecendants', [PostController::class, 'getPostAndDecendants']);
+    Route::get('/posts/getUserPosts', [PostController::class, 'getUserPosts'])->name('getUserPosts');
+    Route::get('/posts/getPostAndDecendants', [PostController::class, 'getPostAndDecendants'])->name('getPostAndDecendants');
     Route::resource('posts', PostController::class);
     Route::get('/books/searchByTitle', [BookController::class, 'searchByTitle']);
     Route::get('/books/showUserBooks', [BookController::class, 'showUserBooks']);
