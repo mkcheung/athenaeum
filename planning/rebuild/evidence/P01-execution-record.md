@@ -1,6 +1,6 @@
 # P01 execution record: legacy retirement
 
-Executed November 3, 2026 on branch `rebuild` (base commit `3af4fe9`). This records what was done and observed. It contains no credentials, no row contents and no private text. **It is a disposal record, not a backup.** Acceptance remains with the user (see the P01 exit checklist).
+Executed November 3, 2026 on branch `rebuild` (base commit `3af4fe9`). This records what was done and observed. It contains no credentials, no row contents and no private text. **It is a disposal record, not a backup.** The user accepted P01 on November 3, 2026, after the commit (`8bbb15a`).
 
 **Self-attestation caveat.** The server-identity check (version and data directory compared before the drop) and the user's confirmation happened inside the executing session and were not captured as separate artifacts. An independent review on November 3 confirmed the resulting filesystem and database state, the staged renames, the ignore rules and the dump hashes, but cannot re-verify those two in-process steps.
 
@@ -47,9 +47,9 @@ Tables and exact row counts of `journeyman` immediately before the drop:
 
 - **Method.** `git mv` for every top-level entry holding tracked files; plain `mv` for entries that were entirely ignored (`.env`, `vendor/`, `node_modules/`, `dbBackups/`, caches, `.DS_Store`).
 - **Manifest.** Before the move, 53,504 legacy files were hashed (path and SHA-256; most are in `node_modules/` at 45,566 and `vendor/` at 7,495). After the move the same 53,504 files hash identically under `retired/`. The manifest SHA-256 is `96ef38b5b146d287f7c4f0ae57380cdf04459b792b6c8b3aeba67aa67661f89b` (kept in the session scratchpad, not committed, because it lists ignored secret-bearing paths).
-- **Staged result.** 185 pure renames (all R100, similarity 100%), a modified root `.gitignore`, and an added `retired/.gitignore` (the legacy rules). Nothing is committed yet.
+- **Staged result.** 185 pure renames (all R100, similarity 100%), a modified root `.gitignore`, and an added `retired/.gitignore` (the legacy rules). Committed afterwards as `8bbb15a`.
 - **Root.** `.git`, `.gitignore`, `design-explorations/`, `planning/`, `PROJECT_REVIEW.md`, `REBUILD_PLAN.md`, `RESEARCH_WRITING_REDESIGN.md`, `retired/`, `VERIFICATION_DESIGN.md`. All relative links in `REBUILD_PLAN.md` and `planning/` resolve (0 broken).
-- **History caveat.** `git log --follow` cannot show history across a move until the move is committed. Before the commit, the staged R100 renames of the sampled files (`app/Models/Category.php`, `routes/api.php`, `resources/js/components/Home/Dashboard.js`) are the evidence. Re-run `git log --follow` on them after committing.
+- **History.** Before the commit, staged R100 renames and a throwaway unreferenced commit object showed history following the move. After commit `8bbb15a`, `git log --follow` on `retired/app/Models/Category.php`, `retired/routes/api.php`, `retired/resources/js/components/Home/Dashboard.js` and `retired/composer.json` traces through 3, 16, 12 and 4 commits, including those from before the move.
 
 ## Secrets and dumps (P01-AC05)
 

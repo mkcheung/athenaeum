@@ -2,8 +2,8 @@
 
 ## Status
 
-**EXECUTED NOVEMBER 3, 2026 · MOVE STAGED, NOT COMMITTED · AWAITING INDEPENDENT REVIEW AND USER ACCEPTANCE.**
-Round 13 replaced the earlier preservation/sibling-repository plan with this in-place retirement. The user authorized execution (`/goal`) and confirmed the exact drop in-session. Evidence: [P01 execution record](evidence/P01-execution-record.md). The phase's own checks were run by the executing agent, not an independent reviewer.
+**COMPLETE — EXECUTED AND ACCEPTED NOVEMBER 3, 2026 · COMMITTED AS `8bbb15a`.**
+Round 13 replaced the earlier preservation/sibling-repository plan with this in-place retirement. The user authorized execution (`/goal`) and confirmed the exact drop in-session. Evidence: [P01 execution record](evidence/P01-execution-record.md). The phase's checks were run by the executing agent and then independently re-checked by a separate read-only reviewer (see the execution record).
 
 ## Objective
 
@@ -104,7 +104,7 @@ Out of scope: deleting any file (including the 2022 dumps, `vendor/` or `node_mo
 
 - [x] **P01-AC01 — Exact targets and server identity:** the record names the literal repository path, branch/commit, keep-list, move-list and legacy database identity (connection type, host, port, database name `journeyman`), with no credentials printed. Before any drop, the live connection reports the native server's `@@version` (8.0.13) and `@@datadir` (`/usr/local/mysql/data`). A non-local host, a different server (such as a Docker MySQL container on port 3306), an unexpected database name or an ambiguous path stops the phase before any move or drop.
 - [x] **P01-AC02 — Branch and uncommitted work honored:** retirement runs on the `rebuild` branch, which contains the `establishUnitTests` history and the committed planning files. Any uncommitted changes present at execution (the earlier `Category.php`/`PostTest.php` edits are gone unless restored) end up exactly as the user chose; P01 work never silently commits, reverts or discards them.
-- [ ] **P01-AC03 — History-preserving move:** tracked legacy files move by `git mv`, and history follows the move: staged renames of sampled files show R100 before the commit, and `git log --follow` traces them into `retired/` after the commit (it cannot show anything across an uncommitted move). A before/after manifest (relative path, size, SHA-256) of the whole legacy tree, ignored files included, matches with only the `retired/` prefix added. *Status: manifest match and R100 renames verified; the `git log --follow` check awaits the commit.*
+- [x] **P01-AC03 — History-preserving move:** tracked legacy files move by `git mv`, and history follows the move: staged renames of sampled files show R100 before the commit, and `git log --follow` traces them into `retired/` after the commit (it cannot show anything across an uncommitted move). A before/after manifest (relative path, size, SHA-256) of the whole legacy tree, ignored files included, matches with only the `retired/` prefix added. *Verified: manifest match, R100 renames, and `git log --follow` after commit `8bbb15a` traces sampled files through 3, 16, 12 and 4 commits.*
 - [x] **P01-AC04 — Clean root:** the root holds only the agreed keep-list. Relative links in `REBUILD_PLAN.md` and `planning/` still resolve.
 - [x] **P01-AC05 — Secrets and dumps stay ignored:** `git check-ignore` confirms that `retired/.env`, `retired/dbBackups/*`, `retired/vendor/` and `retired/node_modules/` are ignored. No secret or dump appears in `git status`, a staged change or a commit. Reports never print `.env` contents.
 - [x] **P01-AC06 — Disposal record:** before the drop, table names and row counts of the exact target are recorded, with no row contents, credentials or private text, and labeled as a disposal record rather than a backup.
@@ -129,8 +129,8 @@ Never print `.env`, database credentials, row contents or dump bodies. Do not ru
 
 A mismatched manifest, a newly unignored secret, an unexpected database target or a drop that touches anything else stops the phase. File-move problems can be reversed with Git and the manifest. **A completed drop cannot be undone:** data after April 2022 is gone by the user's decision, and the 2022 dumps are the only remaining copy of earlier data.
 
-- [ ] Every criterion has actual evidence and discrepancies are resolved. *(AC01–AC02 and AC04–AC10 have evidence; AC03 awaits the commit.)*
-- [ ] The user accepts the retirement and the drop result.
-- [ ] P02 receives the root location, the `retired/` exclusion rule and the no-import scope.
+- [x] Every criterion has actual evidence and discrepancies are resolved.
+- [x] The user accepts the retirement and the drop result. *(Accepted by the user, November 3, 2026, after the commit.)*
+- [x] P02 receives the root location, the `retired/` exclusion rule and the no-import scope.
 
 Next: [P02 — Isolated foundation](02-isolated-foundation.md).
