@@ -1,0 +1,251 @@
+<div id="an-writing-walkthrough">
+  <div class="viz-controls" aria-label="Walkthrough playback">
+    <button class="btn btn-primary" type="button" data-wd-play>Play walkthrough</button>
+    <button class="btn" type="button" data-wd-back disabled>Previous</button>
+    <button class="btn" type="button" data-wd-next>Next</button>
+    <button class="btn btn-ghost" type="button" data-wd-replay>Replay</button>
+    <span data-wd-step role="status" aria-live="polite">1 / 8 · Write a sentence</span>
+  </div>
+  <p class="text-small text-muted">Scripted demonstration · real source · simulated research timing</p>
+  <div id="an-writing-demo">
+    <style>
+      #an-writing-demo { --wd-page:light-dark(#fbf9f3,#252723); --wd-panel:light-dark(#f0f2eb,#20251f); --wd-ink:light-dark(#29372d,#e0e8de); --wd-muted:light-dark(#596452,#b2bfae); --wd-line:light-dark(#d9dfd2,#424c3e); --wd-accent:light-dark(#385841,#b7d0aa); --wd-tint:light-dark(#e0e8d6,#34432e); --wd-contrast:light-dark(#ffffff,#1b291b); --wd-warn:light-dark(#f4e6bd,#504427); position:relative; color:var(--wd-ink); font-family:system-ui,sans-serif; background:var(--wd-page); border:1px solid var(--wd-line); border-radius:16px; overflow:clip; }
+      #an-writing-demo * { box-sizing:border-box; }
+      #an-writing-demo [hidden] { display:none !important; }
+      #an-writing-demo button, #an-writing-demo textarea { font:inherit; }
+      #an-writing-demo button { color:inherit; cursor:pointer; background:var(--wd-page); border:1px solid var(--wd-line); border-radius:8px; padding:8px 11px; display:inline-flex; gap:7px; align-items:center; justify-content:center; }
+      #an-writing-demo button:hover { background:var(--wd-tint); }
+      #an-writing-demo button:focus-visible, #an-writing-demo a:focus-visible { outline:2px solid var(--wd-accent); outline-offset:3px; }
+      #an-writing-demo a { color:var(--wd-accent); text-underline-offset:3px; overflow-wrap:anywhere; }
+      #an-writing-demo .wd-top { display:flex; align-items:center; flex-wrap:wrap; gap:12px; padding:14px 20px; border-bottom:1px solid var(--wd-line); }
+      #an-writing-demo .wd-brand { font-family:Georgia,serif; font-weight:500; display:flex; align-items:center; gap:8px; }
+      #an-writing-demo .wd-spacer { flex:1; }
+      #an-writing-demo .wd-muted { color:var(--wd-muted); }
+      #an-writing-demo .wd-work { display:grid; grid-template-columns:minmax(0,1fr) 335px; align-items:stretch; min-height:565px; }
+      #an-writing-demo .wd-paper { padding:32px clamp(20px,4%,46px) 24px; min-width:0; }
+      #an-writing-demo .wd-prose { max-width:65ch; margin:0 auto; font-family:Georgia,serif; }
+      #an-writing-demo .wd-prose h1 { font-weight:400; margin:14px 0 12px; }
+      #an-writing-demo .wd-prose p { margin:0 0 19px; }
+      #an-writing-demo .wd-kicker { font-family:system-ui,sans-serif; color:var(--wd-muted); letter-spacing:.04em; }
+      #an-writing-demo .wd-deck { color:var(--wd-muted); font-style:italic; }
+      #an-writing-demo .wd-toolbar { display:flex; gap:16px; flex-wrap:wrap; width:fit-content; padding:10px 14px; margin:23px 0; border:1px solid var(--wd-line); border-radius:10px; font-family:system-ui,sans-serif; }
+      #an-writing-demo .wd-claim { background:transparent; color:inherit; border-radius:3px; padding:2px 0; transition:background-color .35s; }
+      #an-writing-demo .wd-claim.wd-selected { background:var(--wd-tint); }
+      #an-writing-demo .wd-claim.wd-revised { background:var(--wd-tint); }
+      #an-writing-demo .wd-caret { display:inline-block; height:1em; border-left:2px solid var(--wd-accent); margin:0 2px -2px; }
+      #an-writing-demo .wd-inline-action { margin:-4px 0 19px; font-family:system-ui,sans-serif; color:var(--wd-accent); }
+      #an-writing-demo .wd-context-line { color:var(--wd-muted); }
+      #an-writing-demo .wd-works { border-top:1px solid var(--wd-line); margin-top:23px; padding-top:16px; font-family:system-ui,sans-serif; }
+      #an-writing-demo .wd-works p { margin:9px 0 0; overflow-wrap:anywhere; }
+      #an-writing-demo .wd-citation { color:var(--wd-accent); white-space:nowrap; }
+      #an-writing-demo .wd-side { background:var(--wd-panel); border-left:1px solid var(--wd-line); padding:20px; min-width:0; }
+      #an-writing-demo .wd-sidehead { display:flex; justify-content:space-between; align-items:center; gap:7px; margin-bottom:16px; }
+      #an-writing-demo .wd-sidehead > span:first-child { display:inline-flex; align-items:center; gap:7px; }
+      #an-writing-demo .wd-modes { display:flex; gap:3px; padding:4px; border:1px solid var(--wd-line); border-radius:11px; margin-bottom:18px; }
+      #an-writing-demo .wd-modes button { flex:1; padding:7px 8px; background:transparent; border-color:transparent; }
+      #an-writing-demo .wd-modes button[aria-pressed="true"] { background:var(--wd-page); border-color:var(--wd-line); color:var(--wd-accent); }
+      #an-writing-demo .wd-context { padding:11px; border-left:2px solid var(--wd-accent); background:var(--wd-page); margin:10px 0 16px; border-radius:0 7px 7px 0; font-family:Georgia,serif; }
+      #an-writing-demo .wd-side p { margin:10px 0 14px; }
+      #an-writing-demo .wd-side h2, #an-writing-demo .wd-side h3 { font:inherit; font-weight:500; margin:14px 0 10px; }
+      #an-writing-demo .wd-empty { padding:36px 4px; color:var(--wd-muted); }
+      #an-writing-demo .wd-label { display:block; margin:15px 0 8px; }
+      #an-writing-demo textarea { display:block; color:var(--wd-ink); background:var(--wd-page); border:1px solid var(--wd-line); border-radius:9px; width:100%; resize:none; min-height:86px; padding:11px; }
+      #an-writing-demo .wd-primary { background:var(--wd-accent); color:var(--wd-contrast); }
+      #an-writing-demo .wd-primary:hover { background:var(--wd-accent); }
+      #an-writing-demo .wd-send { margin-top:11px; width:100%; }
+      #an-writing-demo .wd-loading { padding:14px 0; }
+      #an-writing-demo .wd-loading ol { list-style:none; margin:14px 0 20px; padding:0; }
+      #an-writing-demo .wd-loading li { display:flex; gap:10px; align-items:center; margin:16px 0; color:var(--wd-muted); }
+      #an-writing-demo .wd-jobmark { display:inline-flex; width:22px; height:22px; align-items:center; justify-content:center; background:var(--wd-page); border-radius:50%; }
+      #an-writing-demo .wd-done { color:var(--wd-accent); }
+      #an-writing-demo .wd-answer { border-left:2px solid var(--wd-accent); padding-left:12px; margin:15px 0; }
+      #an-writing-demo .wd-source { background:var(--wd-page); border:1px solid var(--wd-line); border-radius:10px; padding:14px; margin:14px 0; }
+      #an-writing-demo .wd-source p { margin:10px 0; }
+      #an-writing-demo .wd-actions { display:flex; flex-wrap:wrap; gap:8px; margin:13px 0 0; }
+      #an-writing-demo .wd-limitation { background:var(--wd-warn); border-radius:6px; padding:9px; margin:12px 0; }
+      #an-writing-demo .wd-review-original { color:var(--wd-muted); padding:10px 0; border-bottom:1px solid var(--wd-line); }
+      #an-writing-demo .wd-review-proposed { padding:11px; background:var(--wd-page); border-left:2px solid var(--wd-accent); font-family:Georgia,serif; margin:12px 0; }
+      #an-writing-demo .wd-footer { border-top:1px solid var(--wd-line); padding:11px 20px; display:flex; flex-wrap:wrap; gap:12px; color:var(--wd-muted); }
+      #an-writing-demo .wd-footer span:last-child { margin-left:auto; }
+      #an-writing-demo .wd-pointer { position:absolute; top:0; left:0; display:flex; gap:4px; align-items:flex-start; pointer-events:none; z-index:5; color:var(--wd-accent); transition:transform .65s cubic-bezier(.2,.7,.2,1); }
+      #an-writing-demo .wd-pointer > span { background:var(--wd-accent); color:var(--wd-contrast); border-radius:4px; padding:2px 6px; margin-top:15px; font-style:normal; }
+      #an-writing-demo .wd-click-target { box-shadow:0 0 0 3px var(--wd-tint); }
+      @media (max-width:760px) { #an-writing-demo .wd-work { grid-template-columns:minmax(0,1fr); min-height:0; } #an-writing-demo .wd-side { border-left:0; border-top:1px solid var(--wd-line); } #an-writing-demo .wd-paper { padding:23px 20px; } #an-writing-demo .wd-top { padding:12px; gap:7px; } #an-writing-demo.wd-research-active .wd-intro, #an-writing-demo.wd-research-active .wd-deck, #an-writing-demo.wd-research-active .wd-toolbar, #an-writing-demo.wd-research-active .wd-context-line { display:none; } #an-writing-demo .wd-pointer { display:none; } }
+      @media (prefers-reduced-motion:reduce) { #an-writing-demo .wd-pointer { display:none; } #an-writing-demo * { transition:none !important; } }
+      @media (pointer:coarse) { #an-writing-demo button { min-height:44px; } }
+    </style>
+    <header class="wd-top"><span class="wd-brand"><i data-lucide="feather" aria-hidden="true"></i> Athenaeum</span><span class="wd-muted">/ Essay in progress</span><span class="wd-spacer"></span><span class="wd-muted" data-wd-save>Draft · private</span></header>
+    <div class="wd-work">
+      <main class="wd-paper"><article class="wd-prose" aria-label="Essay being written">
+        <div class="wd-kicker">SCIENCE · EVERYDAY LIFE</div>
+        <h1>Room to breathe</h1>
+        <p class="wd-deck">A place for nature in an ordinary week.</p>
+        <div class="wd-toolbar" aria-label="Formatting preview"><span>Paragraph</span><span aria-hidden="true">│</span><span>B</span><em>I</em><span>Link</span><span>Quote</span></div>
+        <p class="wd-intro">I keep returning to a simple question: what do we lose when our days leave no room for the outdoors?</p>
+        <p><mark class="wd-claim" data-wd-claim>Spending two hours in nature</mark><a class="wd-citation" data-wd-citation href="https://doi.org/10.1038/s41598-019-44097-3" target="_blank" rel="noopener noreferrer" hidden> (White et al.)</a><span data-wd-period hidden>.</span><span class="wd-caret" data-wd-caret-one aria-hidden="true"></span></p>
+        <button type="button" class="wd-inline-action" data-wd-open hidden><i data-lucide="sparkles" aria-hidden="true"></i> Ask about this</button>
+        <p class="wd-context-line" data-wd-midline hidden><span data-wd-midtext></span><span class="wd-caret" data-wd-caret-two aria-hidden="true"></span></p>
+        <p data-wd-continuation hidden><span data-wd-endtext></span><span class="wd-caret" data-wd-caret-three aria-hidden="true"></span></p>
+        <section class="wd-works" data-wd-works hidden aria-label="Works cited"><span class="wd-muted">WORKS CITED · MLA</span><p>White, Mathew P., et al. “Spending at Least 120 Minutes a Week in Nature Is Associated with Good Health and Wellbeing.” <em>Scientific Reports</em>, vol. 9, 13 June 2019, article 7730. <a href="https://doi.org/10.1038/s41598-019-44097-3" target="_blank" rel="noopener noreferrer">doi:10.1038/s41598-019-44097-3</a>.</p></section>
+      </article></main>
+      <aside class="wd-side" aria-label="Research alongside the essay">
+        <div class="wd-sidehead"><span><i data-lucide="compass" aria-hidden="true"></i> Research</span><span class="wd-muted">Scripted preview</span></div>
+        <div class="wd-modes" role="group" aria-label="Research mode"><button type="button" data-wd-mode="ask" aria-pressed="true">Ask</button><button type="button" data-wd-mode="sources" aria-pressed="false">Sources</button><button type="button" data-wd-mode="review" aria-pressed="false">Review</button></div>
+        <section data-wd-pane="idle"><div class="wd-empty"><i data-lucide="book-open" aria-hidden="true"></i><h2>A question can stay a question.</h2><p>Select a sentence when you want to check its evidence.</p></div></section>
+        <section data-wd-pane="question" hidden aria-label="Question about the selected sentence"><span class="wd-muted">Selected sentence · only this claim</span><div class="wd-context">Spending two hours in nature every week improves mental health.</div><label class="wd-label" for="wd-question">Your question</label><textarea id="wd-question" readonly aria-label="Research question"></textarea><button type="button" class="wd-primary wd-send" data-wd-send>Find evidence <i data-lucide="arrow-up-right" aria-hidden="true"></i></button><p class="wd-muted">Web research · selected text attached</p></section>
+        <section data-wd-pane="research" hidden aria-label="Research progress"><span class="wd-muted">Checking your selected claim</span><div class="wd-loading"><h2>Researching your question</h2><ol><li><span class="wd-jobmark" data-wd-job="0">1</span><span>Finding source links</span></li><li><span class="wd-jobmark" data-wd-job="1">2</span><span>Reading the available abstract</span></li><li><span class="wd-jobmark" data-wd-job="2">3</span><span>Checking the wording</span></li></ol><p class="wd-muted">You can keep writing while research runs.</p></div></section>
+        <section data-wd-pane="answer" hidden aria-label="Research answer"><span class="wd-muted">About your selected claim</span><h2>The wording needs a qualification</h2><div class="wd-answer"><p data-wd-answer-text></p></div><div class="wd-source"><span class="wd-muted">Source 1 · abstract available</span><h3>White et al. · Scientific Reports</h3><p>2019 · adults in England</p><a href="https://doi.org/10.1038/s41598-019-44097-3" target="_blank" rel="noopener noreferrer">Open original study ↗</a><div class="wd-actions"><button type="button" data-wd-inspect>Inspect source</button></div></div><p class="wd-muted">One example source, rather than a complete literature review.</p></section>
+        <section data-wd-pane="source" hidden aria-label="Inspect the source"><span class="wd-muted">Saved evidence · source 1</span><div class="wd-source"><h3>White et al. · Scientific Reports</h3><p>13 June 2019 · article 7730</p><p><a href="https://doi.org/10.1038/s41598-019-44097-3" target="_blank" rel="noopener noreferrer">Original study ↗</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/31197192/" target="_blank" rel="noopener noreferrer">PubMed abstract ↗</a></p><h3>Abstract summary</h3><p>The survey found an association between at least 120 minutes of weekly recreational nature contact and favorable self-reported health and wellbeing.</p><div class="wd-limitation">Observational evidence · does not establish cause and effect.</div><p class="wd-muted">Paraphrase, not a quotation. Source coverage: abstract.</p><div class="wd-actions"><button type="button" data-wd-review>Review my sentence</button><button type="button" class="wd-primary" data-wd-insert>Insert citation</button></div></div></section>
+        <section data-wd-pane="revision" hidden aria-label="Proposed sentence revision"><span class="wd-muted">Review · selected sentence</span><h2>Keep the finding in its proper scope</h2><div class="wd-review-original">Original: Spending two hours in nature every week improves mental health.</div><p>Suggested wording</p><div class="wd-review-proposed" data-wd-proposal>A 2019 analysis of survey responses from adults in England linked at least 120 minutes of weekly recreational nature contact with better self-reported health and well-being.</div><button type="button" class="wd-primary" data-wd-use>Use this wording</button><p class="wd-muted" data-wd-approved hidden>You chose the revision. Add its citation next.</p></section>
+      </aside>
+    </div>
+    <footer class="wd-footer"><span>MLA · citation style</span><span data-wd-footer>Writing your draft</span></footer>
+    <div class="wd-pointer" data-wd-pointer aria-hidden="true" hidden><i data-lucide="mouse-pointer-2" aria-hidden="true"></i><span>You</span></div>
+  </div>
+  <script>
+    (() => {
+      const root = document.getElementById('an-writing-walkthrough');
+      const app = root.querySelector('#an-writing-demo');
+      const play = root.querySelector('[data-wd-play]');
+      const back = root.querySelector('[data-wd-back]');
+      const next = root.querySelector('[data-wd-next]');
+      const step = root.querySelector('[data-wd-step]');
+      const pointer = app.querySelector('[data-wd-pointer]');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const claim = 'Spending two hours in nature every week improves mental health.';
+      const revised = 'A 2019 analysis of survey responses from adults in England linked at least 120 minutes of weekly recreational nature contact with better self-reported health and well-being.';
+      const question = 'Does the evidence support this? Is it causal, or just an association?';
+      const answer = 'Your sentence is stronger than this study supports. It found an association with self-reported health and wellbeing; it did not establish that two hours causes better mental health.';
+      const midline = 'I need to distinguish a useful association from a promise.';
+      const continuation = 'That gives me a more careful starting point, with room for questions about cause and effect.';
+      const scenes = [
+        { label:'Write a sentence', duration:6000 },
+        { label:'Select the claim you are unsure about', duration:4000 },
+        { label:'Ask a question without leaving the essay', duration:6000 },
+        { label:'Research runs while you keep writing', duration:6000 },
+        { label:'Read the answer and its linked source', duration:7000 },
+        { label:'Inspect the evidence and its limits', duration:6000 },
+        { label:'Choose a more careful sentence', duration:6000 },
+        { label:'Insert a citation and keep writing', duration:7000 }
+      ];
+      let scene = 0;
+      let localTime = 0;
+      let playing = false;
+      let started = false;
+      let manualPreview = false;
+      let timer = null;
+      let lastTick = 0;
+      let targetSelector = '';
+      let mode = 'ask';
+      const show = (selector,visible) => { app.querySelector(selector).hidden = !visible; };
+      const text = (selector,value) => { const el=app.querySelector(selector); if(el.textContent!==value) el.textContent=value; };
+      const typed = (value,time,speed=38,initial=0) => reducedMotion.matches || manualPreview ? value : value.slice(0,Math.min(value.length,Math.max(initial,Math.floor(Math.max(0,time)/speed)+initial)));
+      function pointAt(selector) {
+        if(!selector || reducedMotion.matches || !started || scene===0) { pointer.hidden=true; targetSelector=''; return; }
+        const target=app.querySelector(selector);
+        if(!target || target.hidden || !target.getClientRects().length) { pointer.hidden=true; return; }
+        pointer.hidden=false;
+        if(targetSelector!==selector) {
+          app.querySelectorAll('.wd-click-target').forEach(el=>el.classList.remove('wd-click-target'));
+          target.classList.add('wd-click-target');
+          targetSelector=selector;
+        }
+        const a=app.getBoundingClientRect();
+        const b=target.getBoundingClientRect();
+        const x=Math.min(a.width-78,Math.max(8,b.left-a.left+b.width*.68));
+        const y=Math.max(8,b.top-a.top+Math.min(18,b.height/2));
+        pointer.style.transform='translate('+Math.round(x)+'px,'+Math.round(y)+'px)';
+      }
+      function pane(name) {
+        app.querySelectorAll('[data-wd-pane]').forEach(el=>el.hidden=el.dataset.wdPane!==name);
+        app.querySelectorAll('[data-wd-mode]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.wdMode===mode)));
+      }
+      function controls() {
+        play.disabled=reducedMotion.matches;
+        play.textContent=reducedMotion.matches ? 'Step-by-step mode' : playing ? 'Pause' : scene===7&&localTime>=scenes[7].duration ? 'Play again' : started ? 'Continue' : 'Play walkthrough';
+        back.disabled=scene===0;
+        next.disabled=scene===7;
+        const label=(scene+1)+' / 8 · '+scenes[scene].label;
+        if(step.textContent!==label) step.textContent=label;
+      }
+      function render() {
+        const approved=scene>6 || (scene===6 && localTime>=2500 && !reducedMotion.matches);
+        const cited=scene===7 && (localTime>=2200 || reducedMotion.matches);
+        const t=reducedMotion.matches ? scenes[scene].duration : localTime;
+        app.classList.toggle('wd-research-active',scene>=2);
+        const body=approved ? revised : scene===0 ? typed(claim,t,62,claim.indexOf(' every')) : claim;
+        text('[data-wd-claim]',cited ? body.replace(/\.$/,'') : body);
+        app.querySelector('[data-wd-claim]').classList.toggle('wd-selected',scene>=1&&!approved);
+        app.querySelector('[data-wd-claim]').classList.toggle('wd-revised',approved);
+        show('[data-wd-caret-one]',scene===0);
+        show('[data-wd-open]',scene===1);
+        show('[data-wd-midline]',scene>=3);
+        text('[data-wd-midtext]',scene===3 ? typed(midline,t-1800,52) : midline);
+        show('[data-wd-caret-two]',scene===3);
+        show('[data-wd-citation]',cited);
+        show('[data-wd-period]',cited);
+        show('[data-wd-works]',cited);
+        show('[data-wd-continuation]',scene===7&&t>=3400);
+        text('[data-wd-endtext]',scene===7 ? typed(continuation,t-3400,35) : '');
+        show('[data-wd-caret-three]',scene===7&&t>=3400);
+        show('[data-wd-approved]',approved);
+        show('[data-wd-insert]',scene===7);
+        show('[data-wd-review]',scene!==7);
+        text('[data-wd-use]',approved ? 'Wording updated' : 'Use this wording');
+        text('[data-wd-insert]',cited ? 'Citation inserted' : 'Insert citation');
+        text('[data-wd-save]',playing&&(scene===0||scene===3||scene===7) ? 'Saving…' : 'Draft saved · private');
+        const footer=['Writing your draft','Your sentence stays selected','Only this passage is attached','Keep writing; research runs beside you','Inspect before you cite','Original links stay with the source','You choose what changes',cited ? 'Citation and reference added · back to writing' : 'Choose where to cite'][scene];
+        text('[data-wd-footer]',footer);
+        if(scene<2) { mode='ask'; pane('idle'); pointAt(scene===1?'[data-wd-open]':''); }
+        if(scene===2) {
+          mode='ask'; pane('question');
+          app.querySelector('#wd-question').value=typed(question,t-700,40);
+          pointAt(t>=3800?'[data-wd-send]':'#wd-question');
+        }
+        if(scene===3) {
+          mode='ask'; pane('research');
+          app.querySelectorAll('[data-wd-job]').forEach((el,i)=>{ const done=t>=(i+1)*1500; el.textContent=done?'✓':String(i+1); el.classList.toggle('wd-done',done); });
+          pointAt(t>1800?'[data-wd-midline]':'[data-wd-claim]');
+        }
+        if(scene===4) { mode='ask'; pane('answer'); text('[data-wd-answer-text]',typed(answer,t,20)); pointAt(t>3200?'[data-wd-inspect]':'[data-wd-answer-text]'); }
+        if(scene===5) { mode='sources'; pane('source'); pointAt(t>3300?'[data-wd-review]':'.wd-source a'); }
+        if(scene===6) { mode='review'; pane('revision'); pointAt('[data-wd-use]'); }
+        if(scene===7) { mode='sources'; pane('source'); pointAt(cited?'[data-wd-continuation]':'[data-wd-insert]'); }
+        controls();
+      }
+      function stop() { playing=false; if(timer!==null) clearInterval(timer); timer=null; controls(); }
+      function jump(index,time=0) { stop(); started=true; manualPreview=true; scene=Math.max(0,Math.min(7,index)); localTime=time; targetSelector=''; render(); }
+      function tick() {
+        if(!root.isConnected) { stop(); return; }
+        const now=performance.now();
+        localTime+=now-lastTick;
+        lastTick=now;
+        while(localTime>=scenes[scene].duration && scene<7) { localTime-=scenes[scene].duration; scene++; targetSelector=''; }
+        if(scene===7&&localTime>=scenes[scene].duration) { localTime=scenes[scene].duration; stop(); }
+        render();
+      }
+      function start() {
+        if(reducedMotion.matches) return;
+        if(scene===7&&localTime>=scenes[scene].duration) { scene=0; localTime=0; targetSelector=''; }
+        playing=true; started=true; manualPreview=false; lastTick=performance.now();
+        render();
+        if(timer===null) timer=setInterval(tick,65);
+      }
+      play.addEventListener('click',()=>playing?stop():start());
+      back.addEventListener('click',()=>jump(scene-1));
+      next.addEventListener('click',()=>jump(scene+1));
+      root.querySelector('[data-wd-replay]').addEventListener('click',()=>{ jump(0); if(!reducedMotion.matches) start(); });
+      app.querySelector('[data-wd-open]').addEventListener('click',()=>jump(2));
+      app.querySelector('[data-wd-send]').addEventListener('click',()=>{ jump(3); if(!reducedMotion.matches) start(); });
+      app.querySelector('[data-wd-inspect]').addEventListener('click',()=>jump(5));
+      app.querySelector('[data-wd-review]').addEventListener('click',()=>jump(6));
+      app.querySelector('[data-wd-use]').addEventListener('click',()=>jump(7));
+      app.querySelector('[data-wd-insert]').addEventListener('click',()=>{ jump(7,3400); if(!reducedMotion.matches) start(); });
+      app.querySelectorAll('[data-wd-mode]').forEach(button=>button.addEventListener('click',()=>jump({ask:2,sources:5,review:6}[button.dataset.wdMode])));
+      app.querySelectorAll('a').forEach(link=>link.addEventListener('click',stop));
+      reducedMotion.addEventListener('change',()=>{ stop(); render(); });
+      new ResizeObserver(()=>{ if(targetSelector) pointAt(targetSelector); }).observe(app);
+      render();
+    })();
+  </script>
+</div>

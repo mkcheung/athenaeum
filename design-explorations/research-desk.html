@@ -1,0 +1,93 @@
+<div id="an-research-desk">
+  <style>
+    #an-research-desk { --rd-bg:light-dark(#eef1f5,#1d242d); --rd-page:light-dark(#ffffff,#252e38); --rd-ink:light-dark(#27354a,#e4eaf4); --rd-muted:light-dark(#55647a,#b1bed0); --rd-line:light-dark(#d8e0eb,#425269); --rd-accent:light-dark(#315baf,#b7ccff); --rd-tint:light-dark(#eaf0fe,#314569); --rd-contrast:light-dark(#ffffff,#182e57); --rd-warning:light-dark(#fff0cf,#4c3e23); color:var(--rd-ink); background:var(--rd-bg); font-family:system-ui,sans-serif; border:1px solid var(--rd-line); border-radius:12px; overflow:clip; }
+    #an-research-desk * { box-sizing:border-box; }
+    #an-research-desk [hidden] { display:none !important; }
+    #an-research-desk button { font:inherit; color:inherit; border:1px solid transparent; background:none; padding:8px 10px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; gap:7px; cursor:pointer; }
+    #an-research-desk button:hover { background:var(--rd-tint); }
+    #an-research-desk button:focus-visible { outline:2px solid var(--rd-accent); outline-offset:3px; }
+    #an-research-desk .rd-header { background:var(--rd-page); padding:13px 18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; border-bottom:1px solid var(--rd-line); }
+    #an-research-desk .rd-brand { display:flex; align-items:center; gap:8px; font-weight:500; }
+    #an-research-desk .rd-grow { flex:1; }
+    #an-research-desk .rd-subtle { color:var(--rd-muted); }
+    #an-research-desk .rd-header button { border-color:var(--rd-line); }
+    #an-research-desk .rd-layout { display:grid; grid-template-columns:136px minmax(0,1fr) 325px; }
+    #an-research-desk.rd-focused .rd-layout { grid-template-columns:minmax(0,1fr); }
+    #an-research-desk .rd-outline { padding:23px 13px; border-right:1px solid var(--rd-line); }
+    #an-research-desk .rd-outline p { margin:0 0 17px; padding:0 7px; }
+    #an-research-desk .rd-outline a { display:block; color:var(--rd-muted); text-decoration:none; padding:10px 7px; margin-bottom:6px; border-radius:6px; }
+    #an-research-desk .rd-outline a:first-of-type { background:var(--rd-tint); color:var(--rd-accent); }
+    #an-research-desk .rd-canvas { min-width:0; padding:20px; }
+    #an-research-desk .rd-paper { background:var(--rd-page); border:1px solid var(--rd-line); border-radius:4px; padding:26px; max-width:74ch; margin:auto; }
+    #an-research-desk .rd-toolbar { padding-bottom:14px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; border-bottom:1px solid var(--rd-line); color:var(--rd-muted); }
+    #an-research-desk article { font-family:Georgia,serif; }
+    #an-research-desk article h1 { margin:27px 0 14px; font-weight:400; }
+    #an-research-desk article h2 { margin:25px 0 12px; font-weight:400; }
+    #an-research-desk article p { margin:0 0 20px; }
+    #an-research-desk .rd-claim { background:var(--rd-warning); padding:2px 0; }
+    #an-research-desk .rd-citation { color:var(--rd-accent); font-family:system-ui,sans-serif; }
+    #an-research-desk .rd-source-note { border-top:1px solid var(--rd-line); padding-top:13px; margin-top:24px; font-family:system-ui,sans-serif; }
+    #an-research-desk .rd-side { min-width:0; background:var(--rd-page); border-left:1px solid var(--rd-line); padding:19px; }
+    #an-research-desk .rd-side-title { display:flex; align-items:center; justify-content:space-between; margin:0 0 17px; }
+    #an-research-desk .rd-modes { display:flex; gap:2px; border-bottom:1px solid var(--rd-line); padding-bottom:7px; margin-bottom:16px; }
+    #an-research-desk .rd-modes button { flex:1; }
+    #an-research-desk .rd-modes button[aria-pressed="true"] { background:var(--rd-tint); color:var(--rd-accent); }
+    #an-research-desk .rd-context { border-left:2px solid var(--rd-accent); padding:9px 11px; background:var(--rd-bg); margin:12px 0; }
+    #an-research-desk .rd-finding { border:1px solid var(--rd-line); border-radius:8px; margin:12px 0; padding:14px; }
+    #an-research-desk .rd-finding h3 { font:inherit; font-weight:500; margin:8px 0; }
+    #an-research-desk .rd-finding p { margin:10px 0; }
+    #an-research-desk .rd-flag { display:inline-flex; padding:4px 7px; border-radius:5px; background:var(--rd-warning); }
+    #an-research-desk .rd-evidence-tag { color:var(--rd-accent); }
+    #an-research-desk .rd-primary { background:var(--rd-accent); color:var(--rd-contrast); }
+    #an-research-desk .rd-primary:hover { background:var(--rd-accent); }
+    #an-research-desk label { display:block; margin:16px 0 8px; }
+    #an-research-desk textarea { width:100%; min-height:80px; resize:vertical; border:1px solid var(--rd-line); border-radius:7px; padding:11px; background:var(--rd-bg); color:var(--rd-ink); font:inherit; }
+    #an-research-desk .rd-actions { display:flex; gap:7px; flex-wrap:wrap; margin:12px 0; }
+    #an-research-desk .rd-actions button { border-color:var(--rd-line); }
+    #an-research-desk .rd-bottom { display:flex; flex-wrap:wrap; gap:14px; padding:11px 18px; color:var(--rd-muted); border-top:1px solid var(--rd-line); background:var(--rd-page); }
+    #an-research-desk .rd-bottom [role="status"] { margin-left:auto; }
+    @media(max-width:940px) { #an-research-desk .rd-layout { grid-template-columns:minmax(0,1fr) 310px; } #an-research-desk .rd-outline { display:none; } #an-research-desk .rd-paper { padding:22px; } }
+    @media(max-width:760px) { #an-research-desk .rd-layout { grid-template-columns:minmax(0,1fr); } #an-research-desk .rd-side { border-left:0; border-top:1px solid var(--rd-line); } #an-research-desk .rd-canvas { padding:12px; } #an-research-desk .rd-header { padding:12px; gap:7px; } }
+    @media(pointer:coarse) { #an-research-desk button { min-height:44px; } #an-research-desk textarea { font-size:16px; } }
+  </style>
+  <header class="rd-header"><span class="rd-brand"><i data-lucide="panels-top-left" aria-hidden="true"></i> Athenaeum</span><span class="rd-subtle">Room to think</span><span class="rd-grow"></span><button type="button" data-rd-focus aria-pressed="false">Focus</button><button type="button" data-rd-show-review><i data-lucide="scan-text" aria-hidden="true"></i> Review essay</button></header>
+  <div class="rd-layout">
+    <nav class="rd-outline" aria-label="Essay outline"><p class="rd-subtle">OUTLINE</p><a href="#rd-opening">Opening</a><a href="#rd-question">A useful question</a><a href="#rd-references">References</a></nav>
+    <main class="rd-canvas"><div class="rd-paper">
+      <div class="rd-toolbar" aria-label="Formatting preview"><span>Paragraph</span><b>B</b><em>I</em><span>Link</span><span>Quote</span><span class="rd-grow"></span><span>MLA</span></div>
+      <article aria-label="Essay design preview"><h1 id="rd-opening">Room to think</h1><p class="rd-subtle"><em>On leaving a little space between an idea and a certainty.</em></p><p>I want a place to think in public without confusing confidence with understanding. A useful essay should leave room for its own revision.</p><p><span class="rd-claim" data-rd-claim>An unfamiliar perspective always makes an argument stronger.</span><sup class="rd-citation" data-rd-cite hidden> [1]</sup> That sounds persuasive. I should ask whether it is too broad.</p><h2 id="rd-question">A more useful question</h2><p>What would count as a counterexample? I want to follow the evidence even when it makes the next paragraph harder to write.</p></article>
+      <div class="rd-source-note" id="rd-references"><span class="rd-subtle">REFERENCES</span><p data-rd-ref>No citations inserted in this preview.</p></div>
+    </div></main>
+    <aside class="rd-side" aria-label="Research desk">
+      <div class="rd-side-title"><span>Research desk</span><span class="rd-subtle">Illustrative</span></div>
+      <div class="rd-modes" role="group" aria-label="Research mode"><button type="button" data-rd-mode="ask" aria-pressed="false">Ask</button><button type="button" data-rd-mode="sources" aria-pressed="false">Sources</button><button type="button" data-rd-mode="review" aria-pressed="true">Review</button></div>
+      <section data-rd-panel="ask" hidden aria-label="Ask research"><span class="rd-subtle">Attached to selected sentence</span><div class="rd-context">An unfamiliar perspective always makes an argument stronger.</div><label for="rd-question-input">Research question</label><textarea id="rd-question-input">When might another perspective help, and when might it not?</textarea><div class="rd-actions"><button type="button" class="rd-primary" data-rd-ask>Explore evidence</button></div><p data-rd-answer hidden>Separate the benefits of understanding a view from the quality of that view's evidence.</p><p class="rd-subtle">Web + library · claim context</p></section>
+      <section data-rd-panel="sources" hidden aria-label="Sources"><p class="rd-subtle">Saved to this essay</p><div class="rd-finding"><span class="rd-evidence-tag">Context · example reading</span><h3>Considering another view</h3><p>Example reading · p. 14</p><p>A passage would appear here with enough context to inspect its meaning.</p><div class="rd-actions"><button type="button" data-rd-insert>Insert citation</button><button type="button" data-rd-open>View passage</button></div><p data-rd-passage hidden>Illustrative passage: Begin by understanding the view before judging its conclusion. This is sample text, not an attributed quotation.</p></div><div class="rd-finding"><span class="rd-subtle">Saved article · section 2</span><h3>A different interpretation</h3><p>A second example source would show limitations or a competing argument.</p></div></section>
+      <section data-rd-panel="review" aria-label="Claim review"><span class="rd-subtle">Selected finding · draft revision</span><div class="rd-finding"><span class="rd-flag">Overstatement</span><h3>“Always” needs stronger evidence</h3><p>Your claim covers every unfamiliar perspective. Consider specifying when or how a perspective helps.</p><div class="rd-context">An unfamiliar perspective may reveal assumptions in our argument.</div><div class="rd-actions"><button type="button" class="rd-primary" data-rd-apply>Try narrower wording</button><button type="button" data-rd-evidence>See evidence</button></div></div><p class="rd-subtle">A suggestion, not a verdict. You decide what changes.</p></section>
+    </aside>
+  </div>
+  <footer class="rd-bottom"><span>Draft · private</span><span>Research stays beside your writing</span><span role="status" aria-live="polite">Design preview</span></footer>
+  <script>
+    (() => {
+      const root = document.getElementById('an-research-desk');
+      const side = root.querySelector('.rd-side');
+      const outline = root.querySelector('.rd-outline');
+      const focus = root.querySelector('[data-rd-focus]');
+      const status = root.querySelector('[role="status"]');
+      function show(mode) {
+        side.hidden = false; outline.hidden = false; root.classList.remove('rd-focused'); focus.setAttribute('aria-pressed','false');
+        status.textContent = 'Design preview';
+        root.querySelectorAll('[data-rd-mode]').forEach(b => b.setAttribute('aria-pressed',String(b.dataset.rdMode === mode)));
+        root.querySelectorAll('[data-rd-panel]').forEach(p => p.hidden = p.dataset.rdPanel !== mode);
+      }
+      root.querySelectorAll('[data-rd-mode]').forEach(b => b.addEventListener('click',() => show(b.dataset.rdMode)));
+      focus.addEventListener('click',() => { const active = !side.hidden; side.hidden = active; outline.hidden = active; root.classList.toggle('rd-focused',active); focus.setAttribute('aria-pressed',String(active)); status.textContent = active ? 'Focus mode' : 'Design preview'; });
+      root.querySelector('[data-rd-show-review]').addEventListener('click',() => show('review'));
+      root.querySelector('[data-rd-evidence]').addEventListener('click',() => show('sources'));
+      root.querySelector('[data-rd-ask]').addEventListener('click',() => { root.querySelector('[data-rd-answer]').hidden = false; status.textContent = 'Illustrative answer'; });
+      root.querySelector('[data-rd-open]').addEventListener('click',() => { root.querySelector('[data-rd-passage]').hidden = false; });
+      root.querySelector('[data-rd-apply]').addEventListener('click',() => { root.querySelector('[data-rd-claim]').textContent = 'An unfamiliar perspective may reveal assumptions in our argument.'; status.textContent = 'Preview wording changed'; });
+      root.querySelector('[data-rd-insert]').addEventListener('click',() => { root.querySelector('[data-rd-cite]').hidden = false; root.querySelector('[data-rd-ref]').textContent = '[1] Example reading. p. 14. Illustrative source only.'; status.textContent = 'Citation shown in preview'; });
+    })();
+  </script>
+</div>

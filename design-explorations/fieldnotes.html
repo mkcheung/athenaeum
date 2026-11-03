@@ -1,0 +1,168 @@
+<style>
+#an-fieldnotes {
+  --fn-bg: light-dark(#f5f1f7, #211d26);
+  --fn-paper: light-dark(#fffdfd, #2b2630);
+  --fn-ink: light-dark(#352c3c, #eee7f2);
+  --fn-muted: light-dark(#736579, #bdb0c5);
+  --fn-line: light-dark(#e3dce8, #4c4055);
+  --fn-accent: light-dark(#79578a, #ccb0df);
+  --fn-soft: light-dark(#ede4f2, #46354f);
+  --fn-mark: light-dark(#f5e8cd, #55462c);
+  --fn-shadow: light-dark(#3f28401a, #00000033);
+  color: var(--fn-ink);
+  background: var(--fn-bg);
+  border-radius: 18px;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  overflow-wrap: anywhere;
+}
+#an-fieldnotes, #an-fieldnotes * { box-sizing: border-box; }
+#an-fieldnotes button, #an-fieldnotes textarea { font: inherit; color: inherit; }
+#an-fieldnotes button { cursor: pointer; }
+#an-fieldnotes button:focus-visible, #an-fieldnotes textarea:focus-visible { outline: 2px solid var(--fn-accent); outline-offset: 3px; }
+#an-fieldnotes [hidden] { display: none !important; }
+#an-fieldnotes .fn-header { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; padding: 18px 24px; border-bottom: 1px solid var(--fn-line); }
+#an-fieldnotes .fn-brand, #an-fieldnotes .fn-header-actions, #an-fieldnotes .fn-icon-text { display: flex; align-items: center; gap: 9px; }
+#an-fieldnotes .fn-brand { font-weight: 500; }
+#an-fieldnotes .fn-logo { padding: 8px; border-radius: 11px; background: var(--fn-soft); color: var(--fn-accent); display: inline-flex; }
+#an-fieldnotes .fn-header-actions { flex-wrap: wrap; }
+#an-fieldnotes .fn-muted { color: var(--fn-muted); }
+#an-fieldnotes .fn-button { border: 1px solid var(--fn-line); border-radius: 9px; background: var(--fn-paper); padding: 8px 12px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; }
+#an-fieldnotes .fn-button.fn-primary { background: var(--fn-accent); border-color: var(--fn-accent); color: var(--fn-paper); }
+#an-fieldnotes .fn-button.fn-primary { color: light-dark(#ffffff, #24172c); }
+#an-fieldnotes .fn-button[aria-pressed="true"] { background: var(--fn-soft); border-color: var(--fn-accent); }
+#an-fieldnotes .fn-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 310px); gap: 22px; padding: 26px; align-items: start; }
+#an-fieldnotes.fn-focus .fn-main { grid-template-columns: minmax(0, 1fr); }
+#an-fieldnotes .fn-notebook { background: var(--fn-paper); border-radius: 14px; padding: 29px 32px 24px; box-shadow: 0 8px 30px var(--fn-shadow); min-width: 0; }
+#an-fieldnotes .fn-crumb { color: var(--fn-muted); display: flex; gap: 8px; flex-wrap: wrap; }
+#an-fieldnotes .fn-label { display: inline-flex; align-items: center; gap: 6px; color: var(--fn-accent); background: var(--fn-soft); border-radius: 7px; padding: 4px 8px; }
+#an-fieldnotes h1, #an-fieldnotes h2, #an-fieldnotes h3 { font-weight: 500; }
+#an-fieldnotes h1 { font-family: Georgia, "Times New Roman", serif; margin: 24px 0 10px; }
+#an-fieldnotes .fn-subtitle { margin: 0 0 26px; color: var(--fn-muted); }
+#an-fieldnotes .fn-block { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 8px; margin: 18px 0; }
+#an-fieldnotes .fn-handle { color: var(--fn-line); padding-top: 3px; }
+#an-fieldnotes .fn-prose { font-family: Georgia, "Times New Roman", serif; }
+#an-fieldnotes .fn-prose p { margin: 0 0 19px; }
+#an-fieldnotes .fn-prose h2 { margin: 0 0 13px; }
+#an-fieldnotes mark { background: var(--fn-mark); color: var(--fn-ink); border-radius: 3px; padding: 2px 0; }
+#an-fieldnotes .fn-note { background: var(--fn-soft); border-radius: 10px; padding: 16px; display: flex; align-items: start; gap: 10px; margin: 8px 0 23px 28px; }
+#an-fieldnotes .fn-note p { margin: 0; }
+#an-fieldnotes .fn-bibliography { border-top: 1px solid var(--fn-line); padding-top: 14px; margin-left: 28px; color: var(--fn-muted); }
+#an-fieldnotes .fn-bibliography p { margin: 7px 0 0; }
+#an-fieldnotes .fn-tray { background: var(--fn-paper); border: 1px solid var(--fn-line); border-radius: 15px; box-shadow: 0 12px 32px var(--fn-shadow); min-width: 0; }
+#an-fieldnotes .fn-tray-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 17px 12px; }
+#an-fieldnotes .fn-tabs { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 4px; padding: 0 10px 10px; border-bottom: 1px solid var(--fn-line); }
+#an-fieldnotes .fn-tab { background: var(--fn-paper); border: 0; border-radius: 8px; padding: 9px 4px; }
+#an-fieldnotes .fn-tab[aria-pressed="true"] { background: var(--fn-soft); color: var(--fn-accent); font-weight: 500; }
+#an-fieldnotes .fn-pane { padding: 17px; }
+#an-fieldnotes .fn-pane h3 { margin: 0 0 9px; }
+#an-fieldnotes .fn-pane p { margin: 9px 0 13px; }
+#an-fieldnotes .fn-source { border: 1px solid var(--fn-line); border-radius: 10px; margin-top: 13px; padding: 13px; }
+#an-fieldnotes .fn-source-title { display: flex; gap: 9px; align-items: start; }
+#an-fieldnotes .fn-source .fn-button { margin-top: 8px; }
+#an-fieldnotes details { margin: 12px 0; }
+#an-fieldnotes summary { cursor: pointer; color: var(--fn-accent); }
+#an-fieldnotes .fn-attached { border-left: 3px solid var(--fn-accent); padding: 2px 0 2px 11px; color: var(--fn-muted); margin: 15px 0; }
+#an-fieldnotes textarea { display: block; width: 100%; resize: vertical; min-height: 82px; background: var(--fn-bg); border: 1px solid var(--fn-line); border-radius: 10px; padding: 11px; margin: 9px 0; }
+#an-fieldnotes .fn-review-item { border-left: 3px solid var(--fn-accent); padding-left: 12px; margin: 17px 0; }
+#an-fieldnotes .fn-dock-row { display: flex; justify-content: center; padding: 0 24px 24px; }
+#an-fieldnotes .fn-dock { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; padding: 8px 10px 8px 16px; border-radius: 14px; background: var(--fn-paper); border: 1px solid var(--fn-line); box-shadow: 0 5px 18px var(--fn-shadow); }
+#an-fieldnotes .fn-status { margin: 0; color: var(--fn-muted); }
+@media (max-width: 820px) {
+  #an-fieldnotes .fn-main { grid-template-columns: minmax(0,1fr); padding: 20px; }
+  #an-fieldnotes .fn-tray { max-width: none; }
+  #an-fieldnotes .fn-notebook { padding: 24px; }
+}
+@media (max-width: 440px) {
+  #an-fieldnotes .fn-header { padding: 15px; gap: 12px; }
+  #an-fieldnotes .fn-header-actions { width: 100%; justify-content: space-between; }
+  #an-fieldnotes .fn-main { padding: 12px; gap: 16px; }
+  #an-fieldnotes .fn-notebook { padding: 20px 15px; }
+  #an-fieldnotes .fn-block { grid-template-columns: 14px minmax(0,1fr); gap: 6px; }
+  #an-fieldnotes .fn-note, #an-fieldnotes .fn-bibliography { margin-left: 20px; }
+  #an-fieldnotes .fn-dock-row { padding: 0 12px 15px; }
+}
+@media (pointer: coarse) {
+  #an-fieldnotes button, #an-fieldnotes summary { min-height: 44px; }
+  #an-fieldnotes textarea { font-size: 16px; }
+}
+</style>
+<div id="an-fieldnotes">
+  <header class="fn-header">
+    <div class="fn-brand"><span class="fn-logo"><i data-lucide="notebook-pen" aria-hidden="true"></i></span> Athenaeum <span class="fn-muted">/ Fieldnotes</span></div>
+    <div class="fn-header-actions"><span class="fn-muted fn-icon-text"><i data-lucide="check" aria-hidden="true"></i> Saved</span><button class="fn-button" type="button" data-fn-focus aria-pressed="false"><i data-lucide="scan" aria-hidden="true"></i> Focus</button></div>
+  </header>
+  <div class="fn-main">
+    <article class="fn-notebook" aria-label="Example essay">
+      <div class="fn-crumb"><span>Ideas</span><span>/</span><span>Essays in progress</span></div>
+      <h1>Room to think</h1>
+      <p class="fn-subtitle">An essay about keeping our ideas open.</p>
+      <span class="fn-label"><i data-lucide="sprout" aria-hidden="true"></i> Philosophy</span>
+      <div class="fn-block"><span class="fn-handle" aria-hidden="true"><i data-lucide="grip-vertical"></i></span><div class="fn-prose"><p>I want to leave a little space between an idea and my attachment to it. A thought can matter to me without becoming the last word.</p></div></div>
+      <div class="fn-block"><span class="fn-handle" aria-hidden="true"><i data-lucide="grip-vertical"></i></span><div class="fn-prose"><h2>A useful kind of doubt</h2><p><mark data-fn-claim>Certainty makes us careless.</mark><sup data-fn-citation hidden> [1]</sup> That is the sentence I wrote first. On reflection, it asks more of the evidence than I have shown.</p><p>Perhaps the more interesting question is what helps us notice when an explanation has stopped working.</p></div></div>
+      <aside class="fn-note"><i data-lucide="lightbulb" aria-hidden="true"></i><p>Keep this question nearby: what would make me change my mind?</p></aside>
+      <div class="fn-bibliography" data-fn-reference hidden><span>Reference added</span><p>[1] Example reading, p. 14. Illustrative source.</p></div>
+    </article>
+    <aside class="fn-tray" data-fn-tray aria-label="Research notebook">
+      <div class="fn-tray-heading"><span class="fn-icon-text"><i data-lucide="sparkles" aria-hidden="true"></i> Research notebook</span></div>
+      <div class="fn-tabs" aria-label="Research mode">
+        <button class="fn-tab" type="button" data-fn-mode="ask" aria-pressed="false" aria-controls="fn-ask">Ask</button>
+        <button class="fn-tab" type="button" data-fn-mode="sources" aria-pressed="true" aria-controls="fn-sources">Sources</button>
+        <button class="fn-tab" type="button" data-fn-mode="review" aria-pressed="false" aria-controls="fn-review">Review</button>
+      </div>
+      <section class="fn-pane" id="fn-sources" data-fn-pane="sources">
+        <span class="fn-muted">Illustrative research</span>
+        <h3>Collected for this essay</h3>
+        <div class="fn-source"><div class="fn-source-title"><i data-lucide="book-open" aria-hidden="true"></i><div><span>Example reading</span><br><span class="fn-muted">Book passage · p. 14</span></div></div><p>A passage about holding an idea provisionally.</p><details><summary>View passage</summary><p>We can take an idea seriously while leaving room to revise it.</p><span class="fn-muted">Sample text for this design.</span></details><button class="fn-button" type="button" data-fn-insert><i data-lucide="corner-down-left" aria-hidden="true"></i> Insert citation</button></div>
+        <div class="fn-source"><div class="fn-source-title"><i data-lucide="file-text" aria-hidden="true"></i><div><span>Saved article</span><br><span class="fn-muted">Example source · section 2</span></div></div><p>A different perspective on conviction and doubt.</p><details><summary>View passage</summary><p>Conviction may guide action even when some questions remain unsettled.</p><span class="fn-muted">Sample text for this design.</span></details></div>
+      </section>
+      <section class="fn-pane" id="fn-ask" data-fn-pane="ask" hidden>
+        <span class="fn-muted">Illustrative research</span>
+        <h3>Follow your curiosity</h3>
+        <div class="fn-attached">Attached: “Certainty makes us careless.”</div>
+        <label for="fn-question">Your question</label><textarea id="fn-question" rows="3">What would challenge this argument?</textarea>
+        <button class="fn-button fn-primary" type="button" data-fn-ask>Explore question <i data-lucide="arrow-up-right" aria-hidden="true"></i></button>
+        <div data-fn-answer hidden><p>Try separating confidence in an idea from unwillingness to reconsider it. Then look for evidence about the narrower behavior.</p><button class="fn-button" type="button" data-fn-open-sources>See example sources</button></div>
+      </section>
+      <section class="fn-pane" id="fn-review" data-fn-pane="review" hidden>
+        <span class="fn-muted">Illustrative research</span><h3>One thought to revisit</h3>
+        <div class="fn-review-item"><span class="fn-label">Needs qualification</span><p>“Certainty makes us careless.”</p><p class="fn-muted">This reads as a universal claim. Consider a narrower statement.</p></div>
+        <p>Suggested wording</p><p class="fn-prose">Certainty can make us less willing to revisit an idea.</p><button class="fn-button fn-primary" type="button" data-fn-revise>Try this wording</button>
+      </section>
+    </aside>
+  </div>
+  <div class="fn-dock-row"><div class="fn-dock"><p class="fn-status" data-fn-status aria-live="polite">A little room for your next idea.</p><button class="fn-button" type="button" data-fn-open><i data-lucide="panel-right" aria-hidden="true"></i> Research</button></div></div>
+</div>
+<script>
+(() => {
+  const root = document.getElementById('an-fieldnotes');
+  const tray = root.querySelector('[data-fn-tray]');
+  const focusButton = root.querySelector('[data-fn-focus]');
+  const status = root.querySelector('[data-fn-status]');
+  const setFocus = active => {
+    root.classList.toggle('fn-focus', active);
+    tray.hidden = active;
+    focusButton.setAttribute('aria-pressed', String(active));
+  };
+  const setMode = mode => {
+    setFocus(false);
+    root.querySelectorAll('[data-fn-mode]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.fnMode === mode)));
+    root.querySelectorAll('[data-fn-pane]').forEach(pane => pane.hidden = pane.dataset.fnPane !== mode);
+  };
+  root.querySelectorAll('[data-fn-mode]').forEach(button => button.addEventListener('click', () => setMode(button.dataset.fnMode)));
+  focusButton.addEventListener('click', () => setFocus(!root.classList.contains('fn-focus')));
+  root.querySelector('[data-fn-open]').addEventListener('click', () => { setFocus(false); status.textContent = 'Research stays beside your writing.'; });
+  root.querySelector('[data-fn-open-sources]').addEventListener('click', () => setMode('sources'));
+  root.querySelector('[data-fn-ask]').addEventListener('click', () => { root.querySelector('[data-fn-answer]').hidden = false; status.textContent = 'Showing an illustrative research response.'; });
+  root.querySelector('[data-fn-insert]').addEventListener('click', event => {
+    root.querySelector('[data-fn-citation]').hidden = false;
+    root.querySelector('[data-fn-reference]').hidden = false;
+    event.currentTarget.textContent = 'Citation added';
+    status.textContent = 'Example citation added beside the selected sentence.';
+  });
+  root.querySelector('[data-fn-revise]').addEventListener('click', event => {
+    root.querySelector('[data-fn-claim]').textContent = 'Certainty can make us less willing to revisit an idea.';
+    event.currentTarget.textContent = 'Wording updated';
+    status.textContent = 'Suggested wording applied in this example.';
+  });
+})();
+</script>
