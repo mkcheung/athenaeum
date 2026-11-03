@@ -141,6 +141,6 @@ P00's foundational design choices are accepted. A later material architecture ch
 
 - [x] Required P00 decisions and criteria have design evidence; no application feature is marked passed.
 - [x] Independent design review and explicit user architecture acceptance are recorded.
-- [x] P01 is the next planned phase and remains NOT STARTED; none of its actions is authorized by this design acceptance.
+- [x] P01 was the next planned phase at acceptance and none of its actions was authorized by this design acceptance. *(Historical: P01 was later executed on November 3 under separate authorization; see [the P01 execution record](evidence/P01-execution-record.md).)*
 
 Next: [P01 — Legacy retirement](01-legacy-retirement.md).
